@@ -1,41 +1,58 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-25T21:48:00+02:00",
-  "source": "ChatGPT — Rozwijaj bazę klientów i dostawców",
-  "title": "Baza L&M Technic Energy — 25.08.2026, wieczorny przegląd",
-  "brief": "Baza L&M Technic Energy — 25.08.2026, wieczorny przegląd\n\nDzisiejsze świeże wyszukiwanie nie przyniosło nowego europejskiego kontrahenta, którego warto dopisywać na siłę do aktywnej bazy. Wyniki prowadzą przede wszystkim do firm już znanych: CT Pelety, Pelety Velkoobchod, PW ATEX, TRAK Garbatka, ENVITECH i HRANEX — bez dublowania rekordów.\n\nHRANEX: świeża informacja cenowa z 20.08.2026 — ENplus A1, worek 15 kg, 70 worków = 1050 kg/paleta, 11 690 CZK brutto/paleta = 167 CZK/worek. Rekord oznaczamy jako BENCHMARK CZECHY, cena aktualna od 20.08.2026.\n\nPW ATEX: pełne auta od 24 t, ENplus A1, 15 kg, indywidualna wycena zależna od wolumenu i lokalizacji oraz 50 PLN/t rabatu przy odbiorze własnym w Pilchowicach. Następny kontakt: tabela cen dla 1 / 5 / 10 samochodów miesięcznie, osobno z dostawą i FCA/odbiorem własnym.\n\nCT pelety s.r.o.: model 24 palety ≈ 23,8 t = 1584 worki × 15 kg i indywidualne warunki przy powtarzalnych dostawach. Następny kontakt: aktualna cena pełnego samochodu oraz cena kontraktowa przy 5 i 10 autach miesięcznie.\n\nDecyzja CRM: przy rekordach prowadzić OSTATNIA WERYFIKACJA CENY, CENA WAŻNA DO, BRAKUJĄCA INFORMACJA i NASTĘPNY KONTAKT. Priorytet mają leady, którym brakuje już tylko jednej liczby potrzebnej do policzenia transakcji. Najważniejszy cel: pierwsza kompletna para DOSTAWCA FCA → TRANSPORT → ODBIORCA DAP.",
+  "updatedAt": "2026-08-30T21:55:00+02:00",
+  "source": "ChatGPT — Raport handlowy L&M Technic Energy 30.08.2026",
+  "title": "L&M Technic Energy — raport handlowy 30.08.2026",
+  "brief": "CZECHY — PRIORYTET SPRZEDAŻOWY.\n\nPelety Velkoobchod: aktualny benchmark pełnego samochodu ENplus A1: 23 760 kg za 222 395 CZK netto, bez transportu, czyli ok. 9,36 CZK/kg. 24 palety × 990 kg, 66 worków × 15 kg na palecie. Benchmark do kalkulatora — porównywać z kosztem L&M po transporcie i wymaganej marży.\n\nPALIVOS s.r.o.: potencjalny odbiorca/dystrybutor CZ, PRIORYTET A, DO KONTAKTU. Zainteresowanie: worki 15 kg, pełne palety, pełny samochód. Następny kontakt 31.08.2026: poprosić o target DAP dla 1 / 2 / 4 aut miesięcznie, bez podawania minimalnej ceny L&M jako pierwszej.\n\nUhelné sklady Buťa: potencjalny odbiorca CZ, PRIORYTET A. Sygnał: BRAK TOWARU / SEZONOWE ZAPOTRZEBOWANIE; zamówienia na październik 2026. Kontakt sprzedażowy na dostawy wrzesień–październik; zapytać o target DAP 1 / 2 / 4 aut miesięcznie.\n\nANPOL: dostawca obserwowany / benchmark PL. Od 01.08.2026: ENplus A1, worek 15 kg 35 PLN, paleta 975 kg za 2099 PLN przy odbiorze własnym. Nie jako podstawowe źródło hurtowe, lecz benchmark krajowy i dostawca awaryjny.\n\nLOGIKA PALET — obowiązkowa do kalkulatora i CRM: nie zakładać jednej stałej palety. Przechowywać: liczba_workow, kg_worka, kg_palety, liczba_palet. Obsługiwane przykłady: 65×15=975 kg, 66×15=990 kg, L&M 68×15=1020 kg, 70×15=1050 kg.",
   "updates": [
     {
-      "id": "hranex-cz",
+      "id": "pelety-velkoobchod-cz",
       "patch": {
-        "priceDate": "2026-08-20",
-        "validFrom": "2026-08-20",
-        "nextFollowUp": "Uzyskać cenę FCA pełnego auta oraz wariant 5 i 10 aut/mies.",
-        "missingInfo": "Cena FCA 1/5/10 aut, transport, płatność i ważność ceny",
+        "priority": "A",
+        "priceDate": "2026-08-30",
+        "nextFollowUp": "Używać jako aktualnego benchmarku CZ dla pełnego samochodu ENplus A1.",
         "notes": [
-          "OSTATNIA WERYFIKACJA CENY: 20.08.2026",
-          "BENCHMARK CZECHY — 11 690 CZK brutto / 1050 kg; 167 CZK / worek."
-        ]
-      }
-    },
-    {
-      "id": "pw-atex-pl",
-      "patch": {
-        "nextFollowUp": "Tabela cen 1 / 5 / 10 aut miesięcznie: dostawa oraz FCA/odbiór własny.",
-        "notes": [
-          "Priorytet A — brakuje porównywalnej ceny transakcyjnej."
-        ]
-      }
-    },
-    {
-      "id": "ct-pelety-cz",
-      "patch": {
-        "nextFollowUp": "Aktualna cena pełnego auta oraz cena kontraktowa przy 5 i 10 autach miesięcznie.",
-        "notes": [
-          "Priorytet A — domknąć cenę pełnego auta."
+          "BENCHMARK CZ 30.08.2026 — 23 760 kg / 222 395 CZK netto / bez transportu / ok. 9,36 CZK/kg.",
+          "Konfiguracja: 24 palety × 990 kg; 66 worków × 15 kg/paleta."
         ]
       }
     }
   ],
-  "records": []
-}
+  "records": [
+    {
+      "id": "palivos-cz",
+      "name": "PALIVOS s.r.o.",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "ODBIORCA / DYSTRYBUTOR",
+      "role": "KLIENT",
+      "roles": ["KLIENT", "DYSTRYBUTOR"],
+      "priority": "A",
+      "availability": "DO KONTAKTU",
+      "certificate": "ENplus A1 — rynek/oferta detaliczna do weryfikacji zakupu B2B",
+      "priceDate": "2026-08-30",
+      "nextFollowUp": "31.08.2026 — zapytać o oczekiwaną cenę zakupu DAP dla 1 / 2 / 4 pełnych aut miesięcznie.",
+      "missingInfo": "Target DAP, regularny wolumen miesięczny, warunki płatności, preferowana konfiguracja palety.",
+      "notes": [
+        "PRIORYTET A — potencjalny odbiorca/dystrybutor.",
+        "Zainteresowanie: 15 kg / pełne palety / pełny samochód.",
+        "Benchmark detaliczny: Stora Enso ENplus A1 ok. 12 CZK/kg; REKORD PREMIUM DE001 ok. 14 CZK/kg.",
+        "Nie podawać minimalnej ceny L&M jako pierwszej — najpierw pozyskać target zakupowy."
+      ],
+      "addedAt": "2026-08-30T21:55:00+02:00",
+      "sourceLabel": "Raport handlowy L&M 30.08.2026",
+      "sourceDate": "2026-08-30"
+    },
+    {
+      "id": "uhelne-sklady-buta-cz",
+      "name": "Uhelné sklady Buťa",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "ODBIORCA / SKŁAD",
+      "role": "KLIENT",
+      "roles": ["KLIENT", "DYSTRYBUTOR"],
+      "priority": "A",
+      "availability": "BRAK TOWARU / SEZONOWE ZAPOTRZEBOWANIE",
+      "certificate": "ENplus A1 — oferta rynkowa",
+      "priceDate": "2026-08-30",
+      "nextFollowUp": "31.08.2026 — oferta dostaw wrzesień–październik; zapytać o target DAP dla 1 / 2 / 4 aut miesię
