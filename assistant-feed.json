@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-25T21:48:00+02:00",
+  "source": "ChatGPT — Rozwijaj bazę klientów i dostawców",
+  "title": "Baza L&M Technic Energy — 25.08.2026, wieczorny przegląd",
+  "brief": "Baza L&M Technic Energy — 25.08.2026, wieczorny przegląd\n\nDzisiejsze świeże wyszukiwanie nie przyniosło nowego europejskiego kontrahenta, którego warto dopisywać na siłę do aktywnej bazy. Wyniki prowadzą przede wszystkim do firm już znanych: CT Pelety, Pelety Velkoobchod, PW ATEX, TRAK Garbatka, ENVITECH i HRANEX — bez dublowania rekordów.\n\nHRANEX: świeża informacja cenowa z 20.08.2026 — ENplus A1, worek 15 kg, 70 worków = 1050 kg/paleta, 11 690 CZK brutto/paleta = 167 CZK/worek. Rekord oznaczamy jako BENCHMARK CZECHY, cena aktualna od 20.08.2026.\n\nPW ATEX: pełne auta od 24 t, ENplus A1, 15 kg, indywidualna wycena zależna od wolumenu i lokalizacji oraz 50 PLN/t rabatu przy odbiorze własnym w Pilchowicach. Następny kontakt: tabela cen dla 1 / 5 / 10 samochodów miesięcznie, osobno z dostawą i FCA/odbiorem własnym.\n\nCT pelety s.r.o.: model 24 palety ≈ 23,8 t = 1584 worki × 15 kg i indywidualne warunki przy powtarzalnych dostawach. Następny kontakt: aktualna cena pełnego samochodu oraz cena kontraktowa przy 5 i 10 autach miesięcznie.\n\nDecyzja CRM: przy rekordach prowadzić OSTATNIA WERYFIKACJA CENY, CENA WAŻNA DO, BRAKUJĄCA INFORMACJA i NASTĘPNY KONTAKT. Priorytet mają leady, którym brakuje już tylko jednej liczby potrzebnej do policzenia transakcji. Najważniejszy cel: pierwsza kompletna para DOSTAWCA FCA → TRANSPORT → ODBIORCA DAP.",
+  "updates": [
+    {
+      "id": "hranex-cz",
+      "patch": {
+        "priceDate": "2026-08-20",
+        "validFrom": "2026-08-20",
+        "nextFollowUp": "Uzyskać cenę FCA pełnego auta oraz wariant 5 i 10 aut/mies.",
+        "missingInfo": "Cena FCA 1/5/10 aut, transport, płatność i ważność ceny",
+        "notes": [
+          "OSTATNIA WERYFIKACJA CENY: 20.08.2026",
+          "BENCHMARK CZECHY — 11 690 CZK brutto / 1050 kg; 167 CZK / worek."
+        ]
+      }
+    },
+    {
+      "id": "pw-atex-pl",
+      "patch": {
+        "nextFollowUp": "Tabela cen 1 / 5 / 10 aut miesięcznie: dostawa oraz FCA/odbiór własny.",
+        "notes": [
+          "Priorytet A — brakuje porównywalnej ceny transakcyjnej."
+        ]
+      }
+    },
+    {
+      "id": "ct-pelety-cz",
+      "patch": {
+        "nextFollowUp": "Aktualna cena pełnego auta oraz cena kontraktowa przy 5 i 10 autach miesięcznie.",
+        "notes": [
+          "Priorytet A — domknąć cenę pełnego auta."
+        ]
+      }
+    }
+  ],
+  "records": []
+}
