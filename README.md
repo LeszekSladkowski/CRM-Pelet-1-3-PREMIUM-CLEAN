@@ -1,16 +1,26 @@
 # CRM Pelet 1.3 PREMIUM — CLEAN MASTER
 
-Czysta paczka wdrożeniowa przygotowana z repozytorium `CRM-Pelet-1.3-PREMIUM-main`.
 
-## Zasada tej paczki
-- zachowany bieżący interfejs i pliki MASTER,
-- zachowane bieżące pliki danych CRM,
-- jeden aktywny Service Worker: `sw.js`, zgodny z rejestracją w `index.html`,
-- usunięte historyczne backupy, README kolejnych poprawek, CHECKSUMS kolejnych wydań, pliki TEST oraz nieużywane równoległe silniki/Service Workery,
-- brak zmian wizualnych w zatwierdzonych grafikach MASTER.
+Czyste, aktywne repozytorium produkcyjne CRM Pelet 1.3 PREMIUM — L&M Technic Energy.
+
+## Status
+- repozytorium CLEAN,
+- aktywna baza robocza,
+- GitHub Pages uruchomione,
+- PWA działa z nowego adresu CLEAN,
+- stare repozytorium zostało usunięte,
+- dalsze poprawki wykonywane wyłącznie w tym repozytorium.
+
+## Zasada pracy
+Jedna aktywna baza → jedna poprawka → test → zatwierdzenie → następna poprawka.
+
+Nie dokładamy starych patchy, historycznych backupów ani równoległych wersji kodu.
+
+## Backup
+W aplikacji pozostawiony jest tylko bezpieczny punkt powrotu R38 MEGA STABLE.
 
 ## GitHub Pages
-Publikuj z gałęzi `main` / katalogu `/ (root)`.
+Publikacja z gałęzi głównej / katalogu `/ (root)`.
 
 ## Ważne
-Paczka nie zeruje `crm-data.json`, `assistant-feed.json` ani `backup-catalog.json`; zachowuje je z paczki źródłowej.
+To repozytorium jest obecnym punktem bazowym do dalszego rozwoju CRM Pelet 1.3 PREMIUM.
