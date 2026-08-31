@@ -1,15 +1,15 @@
 {
-  "version": "1.3.0-master-r50-r38-final-polish",
-  "release": "R50 R38 FINAL POLISH",
+  "version": "1.3.0-master-r51-r38-final-frame-fit",
+  "release": "R51 R38 FINAL FRAME FIT",
   "buildDate": "31.08.2026",
-  "buildTime": "12:45",
-  "base": "R49 R38 FINAL TWO FIXES + geometria R48 + gesty R47",
+  "buildTime": "13:22",
+  "base": "R50 R38 FINAL POLISH — funkcje i gesty zamrożone",
   "notes": [
-    "RYNKI EU KARTA 1: zachowane bez zmian wszystkie elementy uznane za perfekcyjne w R49.",
-    "Usunięty zielony owal spod przycisku SYNCHRONIZUJ przez czarną maskę ochronną wokół dynamicznego koła, bez zmiany jego geometrii 1:1.",
-    "Usunięty minimalny zielony półowal na samej górnej krawędzi rastra.",
-    "Powiększony wyłącznie niewidzialny obszar dotyku złotej strzałki POWRÓT i podniesiony jej priorytet dotyku; wygląd strzałki pozostaje bez zmian.",
-    "Przewijanie góra/dół, pinch-to-zoom, LIVE, filtry, napisy, flagi, ramki i synchronizacja pozostają bez zmian.",
-    "Kandydat do ostatecznego zamrożenia gałęzi RYNKI EU jako FINAL MASTER po weryfikacji na Samsung Galaxy S24 Ultra SM-S928B."
+    "RYNKI EU KARTA 1: wszystkie funkcje R50 pozostają bez zmian — POWRÓT, SYNCHRONIZUJ, LIVE, filtry, przewijanie góra/dół i pinch-to-zoom są zamrożone.",
+    "Chirurgicznie skorygowany wyłącznie pionowy kadr rastra: górny crop zmniejszony z 80 do 50 px źródłowych, aby pokazać całe logo CRM Pelet PREMIUM bez paska statusu Samsunga.",
+    "Dolny crop zmniejszony z 105 do 55 px źródłowych, aby pokazać cały banner L&M, pryzmat peletu i pełne zakończenie złotej ramki bez dolnego paska nawigacyjnego Samsunga.",
+    "Wysokość kontenera została zwiększona proporcjonalnie, aby zachować dotychczasową skalę i geometrię środkowej części karty bez rozciągania.",
+    "Maska górnego artefaktu została zredukowana do minimalnego pasa na samej krawędzi, aby nie przykrywać logo CRM.",
+    "Kandydat do ostatecznego werdyktu FINAL MASTER i zamrożenia gałęzi RYNKI EU."
   ]
 }
