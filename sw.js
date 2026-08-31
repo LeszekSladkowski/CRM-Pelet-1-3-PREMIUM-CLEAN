@@ -1,18 +1,18 @@
-/* R55 — cienka nakładka bezpieczeństwa na zachowany rdzeń R54.
-   KARTA 1 FINAL MASTER pozostaje nietknięta. */
-importScripts('./sw-r54-core.js?v=R55-final-top-1649');
+/* R56 — chirurgiczna korekta wyłącznie maski KARTY 2.
+   KARTA 1 FINAL MASTER pozostaje bezwzględnie nietknięta. */
+importScripts('./sw-r54-core.js?v=R56-mask-off-1700');
 
-const r55BasePatchIndexHtml = r48PatchIndexHtml;
+const r56BasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
-  let out = r55BasePatchIndexHtml(text);
+  let out = r56BasePatchIndexHtml(text);
 
-  out = out.replaceAll('1.3.0-master-r54-waluty-karta2-raster-restore','1.3.0-master-r55-waluty-karta2-final-top');
-  out = out.replaceAll('R54 WALUTY KARTA 2 RASTER RESTORE','R55 WALUTY KARTA 2 FINAL TOP');
-  out = out.replace("const BUILD_TIME = '16:15';","const BUILD_TIME = '16:49';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R54-waluty-karta2-raster-restore-1615'","navigator.serviceWorker.register('./sw.js?v=R55-waluty-karta2-final-top-1649'");
+  out = out.replaceAll('1.3.0-master-r54-waluty-karta2-raster-restore','1.3.0-master-r56-waluty-karta2-mask-off');
+  out = out.replaceAll('R54 WALUTY KARTA 2 RASTER RESTORE','R56 WALUTY KARTA 2 MASK OFF');
+  out = out.replace("const BUILD_TIME = '16:15';","const BUILD_TIME = '17:00';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R54-waluty-karta2-raster-restore-1615'","navigator.serviceWorker.register('./sw.js?v=R56-waluty-karta2-mask-off-1700'");
 
-  const r55Style = `<style id="r55-waluty-karta2-final-top">
-/* R55 — wyłącznie ostatnie kilka pikseli KARTY 2. */
+  const r56Style = `<style id="r56-waluty-karta2-mask-off">
+/* R56 — zero zmian geometrii KARTY 2; wyłączona tylko maska przecinająca raster LIVE. */
 .wm-page[data-card="2"]{
   position:relative!important;
   overflow:hidden!important;
@@ -23,17 +23,13 @@ r48PatchIndexHtml = function(text){
   overflow:visible!important;
 }
 .wm-page[data-card="2"]::before{
-  content:"";
-  position:absolute;
-  z-index:29;
-  left:0;
-  top:0;
-  width:100%;
-  height:min(45px,5.282vw);
-  background:#000;
-  pointer-events:none;
+  content:none!important;
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  background:transparent!important;
+  pointer-events:none!important;
 }
-/* Pełny zielony okrąg LIVE ponad maską; raster i dane LIVE pozostają 1:1. */
 .wm-page[data-card="2"] .wm-live-ring{
   z-index:31!important;
 }
@@ -45,6 +41,6 @@ r48PatchIndexHtml = function(text){
 }
 </style>`;
 
-  out = out.replace(/<style id="r54-waluty-karta2-raster-restore">[\s\S]*?<\/style>/, r55Style);
+  out = out.replace(/<style id="r54-waluty-karta2-raster-restore">[\s\S]*?<\/style>/, r56Style);
   return out;
 };
