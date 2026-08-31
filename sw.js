@@ -1,12 +1,116 @@
-const CACHE='crm-pelet-1-3-r43-waluty-live-hard-fix';
+const CACHE='crm-pelet-1-3-r44-r38-live-stats-fix';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json','./backup-catalog.json','./crm-data.json','./assistant-feed.json',
   './master-pulpit.png','./master-rynki-karta1.png','./master-rynki-klienci.png','./master-rynki-dostawcy.png','./master-niemcy-karta2.png','./master-firma-koniec.png','./master-country-header.png','./master-country-footer.png',
   './flag-pl-master.png','./flag-de-master.png','./flag-cz-master.png','./flag-sk-master.png','./flag-at-master.png','./flag-ch-master.png','./flag-lt-master.png','./flag-it-master.png','./flag-fr-master.png','./flag-nl-master.png','./flag-be-master.png','./flag-dk-master.png','./flag-lv-master.png',
   './icon-192.png','./icon-512.png','./icon-maskable-512.png','./master-waluty-karta1.png','./master-waluty-karta2.png','./master-waluty-karta3.png','./master-waluty-karta4.png'
 ];
+
+const R44_APP_VERSION='1.3.0-master-r44-r38-live-stats-fix';
+const R44_RELEASE='R44 R38 LIVE STATS FIX';
+const R44_BUILD_DATE='31.08.2026';
+const R44_BUILD_TIME='11:00';
+
+function r44PatchIndexHtml(text){
+  if(typeof text!=='string'||!text)return text;
+  let out=text;
+  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R44 R38 LIVE STATS FIX</title>');
+  out=out.replace("const APP_VERSION = '1.3.0-master-r43-waluty-live-hard-fix';",`const APP_VERSION = '${R44_APP_VERSION}';`);
+  out=out.replace("const APP_RELEASE = 'R43 WALUTY LIVE HARD FIX';",`const APP_RELEASE = '${R44_RELEASE}';`);
+  out=out.replace("const BUILD_DATE = '26.08.2026';",`const BUILD_DATE = '${R44_BUILD_DATE}';`);
+  out=out.replace("const BUILD_TIME = '17:05';",`const BUILD_TIME = '${R44_BUILD_TIME}';`);
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R44-r38-live-stats-fix-1100'");
+
+  const callMarker="    s.classList.add('r38-markets-final');";
+  if(out.includes(callMarker)&&!out.includes('r44R38LiveStats(s);')){
+    out=out.replace(callMarker,callMarker+"\n    r44R38LiveStats(s);");
+  }
+
+  const helperMarker='  renderMarkets=renderMarketsR38;';
+  if(out.includes(helperMarker)&&!out.includes('function r44R38LiveStats(parent)')){
+    const helper=`
+
+  /* ===== R44 — LIVE STATS dla zatwierdzonego rastra R38, bez zmiany MASTER ===== */
+  function r44R38VisibleCodes(){return Object.keys(R38_ALL_RECTS)}
+  function r44R38RoleMatch(c){
+    if(state.marketFilter==='KLIENCI')return marketRolesFor(c).includes('KLIENT');
+    if(state.marketFilter==='DOSTAWCY')return marketRolesFor(c).includes('DOSTAWCA');
+    return true;
+  }
+  function r44R38VisibleCompanies(){
+    const codes=new Set(r44R38VisibleCodes());
+    return r15AllCompanies().filter(c=>codes.has(c.countryCode)&&r44R38RoleMatch(c));
+  }
+  function r44R38Recent(days=7){
+    const codes=new Set(r44R38VisibleCodes()),cut=Date.now()-days*86400000;
+    return getLiveRecords().filter(r=>codes.has(r.countryCode)&&Date.parse(r.addedAt||'')>=cut).length;
+  }
+  function r44R38Today(){
+    const codes=new Set(r44R38VisibleCodes()),d=new Date(),y=d.getFullYear(),m=d.getMonth(),day=d.getDate();
+    return getLiveRecords().filter(r=>{if(!codes.has(r.countryCode))return false;const t=new Date(r.addedAt||0);return !Number.isNaN(t.valueOf())&&t.getFullYear()===y&&t.getMonth()===m&&t.getDate()===day}).length;
+  }
+  function r44R38Kpi(parent,x,w,value,small){
+    const d=document.createElement('div');d.className='r44-r38-kpi-live';
+    Object.assign(d.style,{position:'absolute',zIndex:'190',left:pct(x,941),top:pct(394,1672),width:pct(w,941),height:pct(78,1672),background:'#020302',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',pointerEvents:'none',overflow:'hidden',boxSizing:'border-box'});
+    d.innerHTML=\`<b style="color:#ffe063;font-size:clamp(15px,4.6vw,25px);line-height:1.02;font-weight:950;white-space:nowrap">\${r13Esc(String(value))}</b><small style="color:#bdbdbd;font-size:clamp(6.5px,1.75vw,10px);line-height:1.05;margin-top:5px;white-space:nowrap">\${r13Esc(String(small))}</small>\`;
+    parent.append(d);
+  }
+  function r44R38CardLive(parent,code,rect,roleFilter='WSZYSCY'){
+    const [x,y,w,h]=rect;
+    let arr=r15CountryCompanies(code);
+    if(roleFilter==='KLIENCI')arr=arr.filter(c=>marketRolesFor(c).includes('KLIENT'));
+    if(roleFilter==='DOSTAWCY')arr=arr.filter(c=>marketRolesFor(c).includes('DOSTAWCA'));
+    const fresh=arr.filter(r=>Date.parse(r.addedAt||'')>=Date.now()-7*86400000).length;
+    const d=document.createElement('div');d.className='r44-r38-card-live';
+    Object.assign(d.style,{position:'absolute',zIndex:'191',left:pct(x+150,941),top:pct(y+58,1672),width:pct(Math.min(190,w-190),941),height:pct(Math.min(82,h-62),1672),background:'#020302',display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:'flex-start',padding:'2px 4px',pointerEvents:'none',overflow:'hidden',boxSizing:'border-box'});
+    d.innerHTML=\`<small style="display:block;color:#e4e4e4;font-size:clamp(8px,2.1vw,12px);line-height:1.08;white-space:nowrap">\${r16CountText(arr.length)}</small>\${fresh?\`<span style="display:inline-block;margin-top:5px;border:1px solid #b98700;border-radius:999px;color:#ffd43b;padding:2px 6px;font-size:clamp(6px,1.4vw,8px);line-height:1;white-space:nowrap">NOWE \${fresh}</span>\`:''}\`;
+    parent.append(d);
+  }
+  function r44R38LiveStats(parent){
+    const all=r44R38VisibleCompanies();
+    const active=new Set(all.map(c=>c.countryCode).filter(Boolean));
+    r44R38Kpi(parent,31,211,active.size,'z danymi w bazie');
+    r44R38Kpi(parent,244,211,all.length,'rekordów LIVE');
+    r44R38Kpi(parent,458,205,r44R38Today(),\`ostatnie 7 dni: \${r44R38Recent(7)}\`);
+    r44R38Kpi(parent,666,217,dateOnlyPL(lastSyncDate()),state.syncing?'TRWA SYNCHRONIZACJA':'CRM LIVE');
+    if(state.marketFilter==='WSZYSCY'){
+      Object.entries(R38_ALL_RECTS).forEach(([code,rect])=>r44R38CardLive(parent,code,rect,'WSZYSCY'));
+    }else{
+      (R38_FILTER_RECTS[state.marketFilter]||[]).forEach(([code,rect])=>r44R38CardLive(parent,code,rect,state.marketFilter));
+    }
+  }
+`;
+    out=out.replace(helperMarker,helperMarker+helper);
+  }
+  return out;
+}
+
+async function r44PatchIndexResponse(response){
+  try{
+    const text=await response.text();
+    const patched=r44PatchIndexHtml(text);
+    const headers=new Headers(response.headers);
+    headers.delete('content-length');
+    headers.delete('content-encoding');
+    headers.set('content-type','text/html; charset=utf-8');
+    return new Response(patched,{status:response.status,statusText:response.statusText,headers});
+  }catch{return response;}
+}
+
 self.addEventListener('message',e=>{if(e.data&&e.data.type==='SKIP_WAITING')self.skipWaiting();});
-self.addEventListener('install',e=>{e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(ASSETS);await self.skipWaiting();})());});
+self.addEventListener('install',e=>{e.waitUntil((async()=>{
+  const c=await caches.open(CACHE);
+  await c.addAll(ASSETS);
+  try{
+    const raw=await fetch('./index.html',{cache:'no-store'});
+    if(raw&&raw.ok){
+      const patched=await r44PatchIndexResponse(raw);
+      await c.put('./index.html',patched.clone());
+      await c.put('./',patched.clone());
+    }
+  }catch{}
+  await self.skipWaiting();
+})());});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k!==CACHE&&k.startsWith('crm-pelet-')).map(k=>caches.delete(k)));await self.clients.claim();})());});
 
 async function fetchFresh(req){
@@ -19,10 +123,10 @@ self.addEventListener('fetch',e=>{
   if(e.request.method!=='GET')return;
   const url=new URL(e.request.url);
   if(e.request.mode==='navigate'){
-    // R43: NETWORK FIRST — wymusza finalne grafiki WALUTY MASTER i usuwa stare R39/R40/R41 z cache.
+    // R44: NETWORK FIRST + runtime injection LIVE do właściwego renderera R38.
     e.respondWith((async()=>{
       const fresh=await fetchFresh(e.request);
-      if(fresh&&fresh.ok){await cachePut('./index.html',fresh);return fresh;}
+      if(fresh&&fresh.ok){const patched=await r44PatchIndexResponse(fresh);await cachePut('./index.html',patched.clone());return patched;}
       return (await caches.match('./index.html'))||(await caches.match('./'))||Response.error();
     })());
     return;
