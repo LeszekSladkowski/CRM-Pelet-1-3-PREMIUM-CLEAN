@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r56-waluty-karta2-mask-off",
-  "release": "R56 WALUTY KARTA 2 MASK OFF",
+  "version": "1.3.0-master-r57-waluty-k1-press-fit-k2-ring-clean",
+  "release": "R57 WALUTY K1 PRESS FIT + K2 RING CLEAN",
   "buildDate": "31.08.2026",
-  "buildTime": "17:00",
-  "base": "R55 WALUTY KARTA 2 FINAL TOP — KARTA 1 FINAL MASTER nietknięta",
+  "buildTime": "19:08",
+  "base": "R56 WALUTY KARTA 2 MASK OFF — KARTA 1 MASTER z autoryzowaną korektą wyłącznie efektu naciśnięcia",
   "notes": [
-    "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 2: usunięta wyłącznie czarna maska CSS przecinająca górną część zielonego efektu LIVE.",
-    "Pozycja rastra KARTY 2 pozostaje jak w R55: przesunięcie -60 px; nie ruszono tabeli, kursów ani dolnej części karty.",
-    "Dynamiczne koło LIVE i spinner pozostają aktywne ponad rasterem.",
+    "WALUTY KARTA 1: raster MASTER, POWRÓT, LIVE/SYNCHRONIZUJ i dolna nawigacja pozostają bez zmian.",
+    "WALUTY KARTA 1: chirurgicznie skorygowano wyłącznie geometrię pięciu pól dotykowych menu, aby zielony efekt naciśnięcia trafiał równo we właściwe złote ramki.",
+    "WALUTY KARTA 2: zachowano układ R56 i przesunięcie rastra -60 px.",
+    "WALUTY KARTA 2: całkowicie wyłączono wyłącznie pasywny pulsujący wm-live-ring znajdujący się pod poprawnym przyciskiem LIVE; aktywny spinner synchronizacji pozostaje bez zmian.",
     "KARTY WALUTY 1/3 i 1/4 nie zostały zmienione.",
     "Gałąź RYNKI EU FINAL MASTER pozostaje zamrożona i nietknięta."
   ]
