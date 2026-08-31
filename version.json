@@ -1,16 +1,15 @@
 {
-  "version": "1.3.0-master-r52-waluty-karta1-master-candidate",
-  "release": "R52 WALUTY KARTA 1 MASTER CANDIDATE",
+  "version": "1.3.0-master-r53-waluty-karta2-clean-top",
+  "release": "R53 WALUTY KARTA 2 CLEAN TOP",
   "buildDate": "31.08.2026",
-  "buildTime": "15:04",
-  "base": "R51 R38 FINAL FRAME FIT — gałąź RYNKI EU pozostaje zamrożona",
+  "buildTime": "15:45",
+  "base": "R52 WALUTY KARTA 1 MASTER — KARTA 1 zamrożona i nietknięta",
   "notes": [
-    "WALUTY KARTA 1: zmieniona wyłącznie nakładka LIVE / synchronizacji.",
-    "Przycisk LIVE ma wymuszoną proporcję 1:1, idealne koło, spokojny równy zielony blask i chirurgiczne centrowanie.",
-    "Podczas synchronizacji spinner również zachowuje idealną proporcję 1:1 i centralne położenie.",
-    "Powiększony został wyłącznie niewidzialny obszar dotyku LIVE na KARCIE 1 dla pewniejszej reakcji.",
-    "Raster master-waluty-karta1.png, pozycje kafli, dolne menu i wszystkie pozostałe elementy KARTY 1 pozostają bez zmian.",
-    "KARTY WALUTY 1/2, 1/3 i 1/4 nie zostały zmienione.",
-    "Gałąź RYNKI EU FINAL MASTER pozostaje nietknięta."
+    "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
+    "WALUTY KARTA 2: wgrana zatwierdzona grafika MASTER CANDIDATE bez systemowego paska Samsunga u góry.",
+    "Całkowicie usunięta linia zegara, ikon sieci, baterii i pozostałych elementów systemowych z rastra KARTY 2.",
+    "Zachowany układ KURSY LIVE, kursy walut, źródło NBP, ostatnia aktualizacja, STATUS, ODŚWIEŻ KURSY oraz dolna nawigacja.",
+    "KARTY WALUTY 1/3 i 1/4 nie zostały zmienione.",
+    "Gałąź RYNKI EU FINAL MASTER pozostaje zamrożona i nietknięta."
   ]
 }
