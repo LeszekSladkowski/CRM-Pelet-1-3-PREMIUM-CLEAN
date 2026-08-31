@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r53-waluty-karta2-clean-top",
-  "release": "R53 WALUTY KARTA 2 CLEAN TOP",
+  "version": "1.3.0-master-r54-waluty-karta2-raster-restore",
+  "release": "R54 WALUTY KARTA 2 RASTER RESTORE",
   "buildDate": "31.08.2026",
-  "buildTime": "15:45",
-  "base": "R52 WALUTY KARTA 1 MASTER — KARTA 1 zamrożona i nietknięta",
+  "buildTime": "16:15",
+  "base": "R53 WALUTY KARTA 2 CLEAN TOP — KARTA 1 FINAL MASTER pozostaje zamrożona",
   "notes": [
-    "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 2: wgrana zatwierdzona grafika MASTER CANDIDATE bez systemowego paska Samsunga u góry.",
-    "Całkowicie usunięta linia zegara, ikon sieci, baterii i pozostałych elementów systemowych z rastra KARTY 2.",
-    "Zachowany układ KURSY LIVE, kursy walut, źródło NBP, ostatnia aktualizacja, STATUS, ODŚWIEŻ KURSY oraz dolna nawigacja.",
+    "WALUTY KARTA 1: FINAL MASTER — bezwzględnie bez zmian.",
+    "WALUTY KARTA 2: przywrócono ostatni zdrowy raster MASTER sprzed wadliwej podmiany R53.",
+    "Systemowy pasek Samsunga u góry jest usuwany chirurgicznie przez kadr wyświetlania, bez destrukcyjnej przebudowy grafiki KARTY 2.",
+    "Kursy LIVE, zmiany 24H, źródło NBP, ostatnia aktualizacja, STATUS, ODŚWIEŻ KURSY i dolna nawigacja pozostają aktywne i zachowują dotychczasową geometrię.",
     "KARTY WALUTY 1/3 i 1/4 nie zostały zmienione.",
     "Gałąź RYNKI EU FINAL MASTER pozostaje zamrożona i nietknięta."
   ]
