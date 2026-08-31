@@ -1,13 +1,13 @@
 {
-  "version": "1.3.0-master-r44-r38-live-stats-fix",
-  "release": "R44 R38 LIVE STATS FIX",
+  "version": "1.3.0-master-r45-r38-card-layout-fix",
+  "release": "R45 R38 CARD LAYOUT FIX",
   "buildDate": "31.08.2026",
-  "buildTime": "11:00",
-  "base": "R43 WALUTY LIVE HARD FIX + R38 RYNKI EU MASTER",
+  "buildTime": "11:17",
+  "base": "R44 R38 LIVE STATS FIX + R38 RYNKI EU MASTER",
   "notes": [
-    "RYNKI EU KARTA 1: przywrócone dynamiczne statystyki LIVE bez zmiany zatwierdzonego rastra MASTER.",
-    "Po synchronizacji odświeżają się liczba państw z danymi, liczba firm, nowe rekordy, ostatnie 7 dni i data synchronizacji.",
-    "Liczby przy państwach są aktualizowane z bazy CRM LIVE; ramki, flagi, układ, filtry i wygląd MASTER pozostają bez zmian.",
+    "RYNKI EU KARTA 1: zachowane działające statystyki LIVE z R44.",
+    "Naprawione pozycjonowanie nazw państw, liczników kontrahentów i znaczników NOWE — bez nachodzenia i ucinania tekstu.",
+    "Ramki, flagi, hotspoty, filtry i cały zatwierdzony raster MASTER pozostają bez zmian.",
     "WALUTY R43 oraz pozostałe zatwierdzone gałęzie pozostają bez zmian."
   ]
 }
