@@ -1,4 +1,4 @@
-const CACHE='crm-pelet-1-3-r50-r38-final-polish';
+const CACHE='crm-pelet-1-3-r51-r38-final-frame-fit';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json','./backup-catalog.json','./crm-data.json','./assistant-feed.json',
   './master-pulpit.png','./master-rynki-karta1.png','./master-rynki-klienci.png','./master-rynki-dostawcy.png','./master-niemcy-karta2.png','./master-firma-koniec.png','./master-country-header.png','./master-country-footer.png',
@@ -6,20 +6,20 @@ const ASSETS=[
   './icon-192.png','./icon-512.png','./icon-maskable-512.png','./master-waluty-karta1.png','./master-waluty-karta2.png','./master-waluty-karta3.png','./master-waluty-karta4.png'
 ];
 
-const R48_APP_VERSION='1.3.0-master-r50-r38-final-polish';
-const R48_RELEASE='R50 R38 FINAL POLISH';
+const R48_APP_VERSION='1.3.0-master-r51-r38-final-frame-fit';
+const R48_RELEASE='R51 R38 FINAL FRAME FIT';
 const R48_BUILD_DATE='31.08.2026';
-const R48_BUILD_TIME='12:45';
+const R48_BUILD_TIME='13:22';
 
 function r48PatchIndexHtml(text){
   if(typeof text!=='string'||!text)return text;
   let out=text;
-  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R50 R38 FINAL POLISH</title>');
+  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R51 R38 FINAL FRAME FIT</title>');
   out=out.replace("const APP_VERSION = '1.3.0-master-r43-waluty-live-hard-fix';",`const APP_VERSION = '${R48_APP_VERSION}';`);
   out=out.replace("const APP_RELEASE = 'R43 WALUTY LIVE HARD FIX';",`const APP_RELEASE = '${R48_RELEASE}';`);
   out=out.replace("const BUILD_DATE = '26.08.2026';",`const BUILD_DATE = '${R48_BUILD_DATE}';`);
   out=out.replace("const BUILD_TIME = '17:05';",`const BUILD_TIME = '${R48_BUILD_TIME}';`);
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R50-r38-final-polish-1245'");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R51-r38-final-frame-fit-1322'");
   out=out.replace("s.append(hotspot({x:28,y:82,w:118,h:118,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:200,baseW:941,baseH:1672}));","s.append(hotspot({x:8,y:58,w:166,h:166,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:260,baseW:941,baseH:1672}));");
 
   const callMarker="    s.classList.add('r38-markets-final');";
@@ -31,7 +31,7 @@ function r48PatchIndexHtml(text){
   if(out.includes(helperMarker)&&!out.includes('function r48R38LiveStats(parent)')){
     const helper=`
 
-  /* ===== R50 — FINAL POLISH na bazie perfekcyjnego R49 ===== */
+  /* ===== R51 — FINAL FRAME FIT: chirurgiczny header/footer, funkcje R50 zamrożone ===== */
   function r48R38VisibleCodes(){return Object.keys(R38_ALL_RECTS)}
   function r48R38RoleMatch(c){
     if(state.marketFilter==='KLIENCI')return marketRolesFor(c).includes('KLIENT');
@@ -85,16 +85,17 @@ function r48PatchIndexHtml(text){
   function r48R38Viewport(parent){
     if(!parent||parent.dataset.r48Viewport==='1')return;
     parent.dataset.r48Viewport='1';
-    const SOURCE_H=1672,CROP_TOP=80,CROP_BOTTOM=105,CONTENT_H=SOURCE_H-CROP_TOP-CROP_BOTTOM;
+    const SOURCE_H=1672,CROP_TOP=50,CROP_BOTTOM=55,CONTENT_H=SOURCE_H-CROP_TOP-CROP_BOTTOM;
     const remapTop=p=>((p/100*SOURCE_H-CROP_TOP)/CONTENT_H*100);
     const remapSize=p=>(p/100*SOURCE_H/CONTENT_H*100);
 
+    /* R51: zwiększamy wyłącznie pionowe pole widzenia. Skala środkowej części pozostaje jak w R50. */
     parent.style.setProperty('width','min(100vw,720px)','important');
     parent.style.setProperty('max-width','100vw','important');
     parent.style.setProperty('height','auto','important');
     parent.style.setProperty('min-height','0','important');
     parent.style.setProperty('max-height','none','important');
-    parent.style.setProperty('aspect-ratio','10032 / 19331','important');
+    parent.style.setProperty('aspect-ratio','941 / 1911','important');
     parent.style.setProperty('margin','0 auto','important');
     parent.style.setProperty('overflow','hidden','important');
     parent.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');
@@ -144,10 +145,10 @@ function r48PatchIndexHtml(text){
       }
     });
 
-    /* R50: czysta maska minimalnego półowalu na samej górnej krawędzi rastra. */
+    /* R51: mikromaska tylko na samej krawędzi; nie wchodzi już na logo CRM. */
     const topOvalMask=document.createElement('div');
-    topOvalMask.className='r50-r38-top-oval-mask';
-    Object.assign(topOvalMask.style,{position:'absolute',zIndex:'199',left:'41.5%',top:'0',width:'17%',height:'2.3%',background:'#000',pointerEvents:'none'});
+    topOvalMask.className='r51-r38-top-edge-mask';
+    Object.assign(topOvalMask.style,{position:'absolute',zIndex:'199',left:'47%',top:'0',width:'6%',height:'.55%',background:'#000',pointerEvents:'none'});
     parent.append(topOvalMask);
 
     const app=document.getElementById('app'),body=document.body,html=document.documentElement;
