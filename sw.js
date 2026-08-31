@@ -1,4 +1,4 @@
-const CACHE='crm-pelet-1-3-r52-waluty-karta1-master-candidate';
+const CACHE='crm-pelet-1-3-r53-waluty-karta2-clean-top';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json','./backup-catalog.json','./crm-data.json','./assistant-feed.json',
   './master-pulpit.png','./master-rynki-karta1.png','./master-rynki-klienci.png','./master-rynki-dostawcy.png','./master-niemcy-karta2.png','./master-firma-koniec.png','./master-country-header.png','./master-country-footer.png',
@@ -6,20 +6,20 @@ const ASSETS=[
   './icon-192.png','./icon-512.png','./icon-maskable-512.png','./master-waluty-karta1.png','./master-waluty-karta2.png','./master-waluty-karta3.png','./master-waluty-karta4.png'
 ];
 
-const R48_APP_VERSION='1.3.0-master-r52-waluty-karta1-master-candidate';
-const R48_RELEASE='R52 WALUTY KARTA 1 MASTER CANDIDATE';
+const R48_APP_VERSION='1.3.0-master-r53-waluty-karta2-clean-top';
+const R48_RELEASE='R53 WALUTY KARTA 2 CLEAN TOP';
 const R48_BUILD_DATE='31.08.2026';
-const R48_BUILD_TIME='15:04';
+const R48_BUILD_TIME='15:45';
 
 function r48PatchIndexHtml(text){
   if(typeof text!=='string'||!text)return text;
   let out=text;
-  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R52 WALUTY KARTA 1 MASTER CANDIDATE</title>');
+  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R53 WALUTY KARTA 2 CLEAN TOP</title>');
   out=out.replace("const APP_VERSION = '1.3.0-master-r43-waluty-live-hard-fix';",`const APP_VERSION = '${R48_APP_VERSION}';`);
   out=out.replace("const APP_RELEASE = 'R43 WALUTY LIVE HARD FIX';",`const APP_RELEASE = '${R48_RELEASE}';`);
   out=out.replace("const BUILD_DATE = '26.08.2026';",`const BUILD_DATE = '${R48_BUILD_DATE}';`);
   out=out.replace("const BUILD_TIME = '17:05';",`const BUILD_TIME = '${R48_BUILD_TIME}';`);
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R52-waluty-karta1-master-1504'");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R53-waluty-karta2-clean-top-1545'");
   out=out.replace("s.append(hotspot({x:28,y:82,w:118,h:118,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:200,baseW:941,baseH:1672}));","s.append(hotspot({x:8,y:58,w:166,h:166,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:260,baseW:941,baseH:1672}));");
 
   /* R52 WALUTY KARTA 1 — wyłącznie chirurgiczna geometria LIVE.
