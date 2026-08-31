@@ -4,6 +4,11 @@
    wszystkie wartości są rysowane dokładnie raz jako dane LIVE. */
 importScripts('./sw-r54-core.js?v=R57-press-fit-ring-clean-1908');
 
+/* R59: nowy, czysty MASTER KARTY 3 musi być częścią cache offline. */
+if(Array.isArray(ASSETS) && !ASSETS.includes('./master-waluty-karta3-r59-clean.svg')){
+  ASSETS.push('./master-waluty-karta3-r59-clean.svg');
+}
+
 /* ===== R57 FINAL MASTER — KARTA 1 + KARTA 2, BEZ ZMIAN ===== */
 const r57BasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
@@ -69,50 +74,51 @@ r48PatchIndexHtml = function(text){
   /* Spójna wersja / updater. */
   out = out.replaceAll('1.3.0-master-r57-waluty-k1-press-fit-k2-ring-clean','1.3.0-master-r59-waluty-karta3-clean-live');
   out = out.replaceAll('R57 WALUTY K1 PRESS FIT + K2 RING CLEAN','R59 WALUTY KARTA 3 CLEAN LIVE');
-  out = out.replace("const BUILD_TIME = '19:08';","const BUILD_TIME = '22:13';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R57-waluty-k1-press-fit-k2-ring-clean-1908'","navigator.serviceWorker.register('./sw.js?v=R59-waluty-karta3-clean-live-2213'");
+  out = out.replace("const BUILD_DATE = '31.08.2026';","const BUILD_DATE = '01.09.2026';");
+  out = out.replace("const BUILD_TIME = '19:08';","const BUILD_TIME = '00:34';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R57-waluty-k1-press-fit-k2-ring-clean-1908'","navigator.serviceWorker.register('./sw.js?v=R59-waluty-karta3-clean-live-0034'");
 
   /* Tylko KARTA 3 dostaje czysty MASTER bez wypalonych przykładowych danych. K1/K2/K4 bez zmian. */
   out = out.replace(
     "img.src=`master-waluty-karta${card}.png?v=R43-LIVE-HARD-FIX`;",
-    "img.src=card===3?'master-waluty-karta3-r59-clean.svg?v=R59-2213':`master-waluty-karta${card}.png?v=R43-LIVE-HARD-FIX`;"
+    "img.src=card===3?'master-waluty-karta3-r59-clean.svg?v=R59-0034':`master-waluty-karta${card}.png?v=R43-LIVE-HARD-FIX`;"
   );
 
   /* KARTA 3 — jedna, jedyna warstwa danych LIVE. Zero dublowania statycznych wartości z rastra. */
   out = out.replace(
     "    const amountChanged=Math.abs(currencyState.calcAmount-currencyDefaults.calcAmount)>.00001;\n    if(amountChanged)wmEdit(root,[82,395,420,110],currencyState.calcAmount,v=>currencyState.calcAmount=v,'big');else{const hit=wmHot(root,[55,375,470,145],()=>{} ,'Kwota');hit.addEventListener('click',()=>{hit.remove();wmEdit(root,[82,395,420,110],currencyState.calcAmount,v=>currencyState.calcAmount=v,'big').focus()},{once:true})}",
-    "    wmEdit(root,[82,438,420,92],currencyState.calcAmount,v=>currencyState.calcAmount=v,'big r59-amount');"
+    "    wmEdit(root,[76,438,400,92],currencyState.calcAmount,v=>currencyState.calcAmount=v,'big r59-amount');"
   );
 
   out = out.replace(
     "    wmSelect(root,[535,375,260,145],currencyState.calcFrom,c=>currencyState.calcFrom=c);if(currencyState.calcFrom!==currencyDefaults.calcFrom)wmDyn(root,[585,405,175,80],`${CURRENCY_FLAGS[currencyState.calcFrom]} ${currencyState.calcFrom}`,'gold med');",
-    "    wmSelect(root,[538,417,259,136],currencyState.calcFrom,c=>currencyState.calcFrom=c);wmDyn(root,[566,448,170,78],`${CURRENCY_FLAGS[currencyState.calcFrom]} ${currencyState.calcFrom}`,'gold med r59-source');"
+    "    wmSelect(root,[527,419,252,133],currencyState.calcFrom,c=>currencyState.calcFrom=c);wmDyn(root,[552,450,178,72],`${CURRENCY_FLAGS[currencyState.calcFrom]} ${currencyState.calcFrom}`,'gold med r59-source');"
   );
 
   out = out.replace(
     "    wmSelect(root,[50,590,750,140],currencyState.calcTo,c=>currencyState.calcTo=c);if(currencyState.calcTo!==currencyDefaults.calcTo)wmDyn(root,[100,620,610,82],`${CURRENCY_FLAGS[currencyState.calcTo]} ${currencyState.calcTo} — ${CURRENCY_NAMES[currencyState.calcTo]}`,'gold med');",
-    "    wmSelect(root,[52,647,745,131],currencyState.calcTo,c=>currencyState.calcTo=c);wmDyn(root,[82,669,610,82],`${CURRENCY_FLAGS[currencyState.calcTo]} ${currencyState.calcTo} — ${CURRENCY_NAMES[currencyState.calcTo]}`,'gold med r59-target');"
+    "    wmSelect(root,[52,648,727,128],currencyState.calcTo,c=>currencyState.calcTo=c);wmDyn(root,[80,672,610,76],`${CURRENCY_FLAGS[currencyState.calcTo]} ${currencyState.calcTo} — ${CURRENCY_NAMES[currencyState.calcTo]}`,'gold med r59-target');"
   );
 
   out = out.replace(
     "    [[52,760,230,100,1000],[300,760,230,100,5000],[548,760,230,100,10000]].forEach(([x,y,w,h,v])=>wmHot(root,[x,y,w,h],()=>{currencyState.calcAmount=v;curPersist();render()},String(v)));",
-    "    [[53,812,230,101,1000],[305,812,221,101,5000],[549,812,248,101,10000]].forEach(([x,y,w,h,v])=>wmHot(root,[x,y,w,h],()=>{currencyState.calcAmount=v;curPersist();render()},String(v)));"
+    "    [[54,812,228,100,1000],[306,812,219,100,5000],[550,812,246,100,10000]].forEach(([x,y,w,h,v])=>wmHot(root,[x,y,w,h],()=>{currencyState.calcAmount=v;curPersist();render()},String(v)));"
   );
 
   out = out.replace(
     "    const v=curCalc();wmDyn(root,[195,992,465,90],`${curFmt(v.gross,2)} ${currencyState.calcTo}`,'green big');wmDyn(root,[112,1165,300,78],`1 ${currencyState.calcFrom} = ${curFmt(curConvert(1,currencyState.calcFrom,currencyState.calcTo),6)} ${currencyState.calcTo}`,'gold small');wmDyn(root,[445,1168,295,75],`${curFmt(currencyState.spreadPct,2)}% • ${curFmt(v.commission,2)} ${currencyState.calcTo}`,'gold small');wmDyn(root,[195,1304,500,75],`DO ROZLICZENIA: ${curFmt(v.settle,2)} ${currencyState.calcTo}`,'green small');",
-    "    const v=curCalc();wmDyn(root,[180,1024,500,108],`${curFmt(v.gross,2)} ${currencyState.calcTo}`,'green big r59-result');wmDyn(root,[98,1218,300,94],`1 ${currencyState.calcFrom} = ${curFmt(curConvert(1,currencyState.calcFrom,currencyState.calcTo),6)} ${currencyState.calcTo}`,'gold small r59-cross');wmDyn(root,[442,1218,292,94],`${curFmt(currencyState.spreadPct,2)}% • ${curFmt(v.commission,2)} ${currencyState.calcTo}`,'gold small r59-spread');wmDyn(root,[158,1328,538,90],`DO ROZLICZENIA: ${curFmt(v.settle,2)} ${currencyState.calcTo}`,'green small r59-settle');"
+    "    const v=curCalc();wmDyn(root,[160,1018,532,108],`${curFmt(v.gross,2)} ${currencyState.calcTo}`,'green big r59-result');wmDyn(root,[90,1210,310,90],`1 ${currencyState.calcFrom} = ${curFmt(curConvert(1,currencyState.calcFrom,currencyState.calcTo),6)} ${currencyState.calcTo}`,'gold small r59-cross');wmDyn(root,[420,1210,330,90],`${curFmt(currencyState.spreadPct,2)}% • ${curFmt(v.commission,2)} ${currencyState.calcTo}`,'gold small r59-spread');wmDyn(root,[150,1330,555,80],`DO ROZLICZENIA: ${curFmt(v.settle,2)} ${currencyState.calcTo}`,'green small r59-settle');"
   );
 
   out = out.replace(
     "    wmHot(root,[52,1405,750,145],()=>{curPersist();render();toast('✓ PRZELICZONO')},'Przelicz');wmBottom(root,3);return page}",
-    "    wmHot(root,[53,1486,744,133],()=>{curPersist();render();toast('✓ PRZELICZONO')},'Przelicz');wmBottom(root,3);return page}"
+    "    wmHot(root,[54,1486,742,132],()=>{curPersist();render();toast('✓ PRZELICZONO')},'Przelicz');wmBottom(root,3);return page}"
   );
 
-  /* Dolna nawigacja K3 zaczyna się dopiero pod zatwierdzonym przyciskiem PRZELICZ. */
+  /* Dolna nawigacja K3 zaczyna się dokładnie na górnej linii jej własnego paska — nigdy pod PRZELICZ. */
   out = out.replace(
     "const y=card===4?1652:1580,h=card===4?180:210,w=WM_W/5;",
-    "const y=card===4?1652:card===3?1630:1580,h=card===4?180:card===3?200:210,w=WM_W/5;"
+    "const y=card===4?1652:card===3?1655:1580,h=card===4?180:card===3?191:210,w=WM_W/5;"
   );
 
   const r59Style = `<style id="r59-waluty-karta3-clean-live">
