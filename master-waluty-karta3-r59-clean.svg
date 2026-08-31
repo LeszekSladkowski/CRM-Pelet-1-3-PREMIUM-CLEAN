@@ -1,18 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="852" height="1846" viewBox="0 0 852 1846" preserveAspectRatio="none">
-  <!-- R59: zatwierdzony raster MASTER KARTY 3, oczyszczony wyłącznie z wypalonych przykładowych danych. -->
+  <!-- R59 FINAL TEST: oryginalny MASTER KARTY 3 pozostaje bazą 1:1. Usuwamy tylko wypalone przykładowe dane. -->
   <image href="master-waluty-karta3.png" x="0" y="0" width="852" height="1846" preserveAspectRatio="none"/>
-  <!-- KWOTA: usuń wyłącznie wypalone 1000. -->
-  <rect x="70" y="445" width="165" height="82" rx="4" fill="#010101"/>
-  <!-- WALUTA ŹRÓDŁOWA: usuń wyłącznie wypaloną flagę + PLN; zachowaj strzałkę i ramkę. -->
-  <rect x="552" y="450" width="180" height="72" rx="4" fill="#010101"/>
-  <!-- WALUTA DOCELOWA: usuń wyłącznie wypaloną flagę + EUR — Euro; zachowaj strzałkę i ramkę. -->
-  <rect x="70" y="675" width="330" height="78" rx="4" fill="#010101"/>
-  <!-- WYNIK: usuń wyłącznie wypaloną wartość przykładową. -->
-  <rect x="180" y="1026" width="505" height="105" rx="4" fill="#010101"/>
-  <!-- KURS KRZYŻOWY: usuń wyłącznie wypaloną wartość. -->
-  <rect x="92" y="1220" width="310" height="92" rx="4" fill="#010101"/>
-  <!-- SPREAD / PROWIZJA: usuń wyłącznie wypalone wartości. -->
-  <rect x="438" y="1218" width="300" height="110" rx="4" fill="#010101"/>
-  <!-- DO ROZLICZENIA: usuń wyłącznie wypaloną wartość przykładową. -->
-  <rect x="150" y="1330" width="555" height="88" rx="4" fill="#010101"/>
+
+  <!-- Pola wewnętrzne w MASTER-ze są praktycznie #010101; wypełnienia nie dotykają ramek ani etykiet. -->
+  <!-- KWOTA -->
+  <rect x="68" y="440" width="195" height="86" rx="3" fill="#010101"/>
+  <!-- WALUTA ŹRÓDŁOWA: flaga + kod, strzałka i ramka pozostają z MASTER-a -->
+  <rect x="548" y="444" width="184" height="82" rx="3" fill="#010101"/>
+  <!-- WALUTA DOCELOWA: flaga + opis; strzałka i ramka pozostają z MASTER-a -->
+  <rect x="70" y="666" width="420" height="86" rx="3" fill="#010101"/>
+  <!-- WYNIK -->
+  <rect x="145" y="1018" width="560" height="112" rx="3" fill="#010101"/>
+  <!-- KURS KRZYŻOWY — tylko wartość, etykieta pozostaje -->
+  <rect x="88" y="1206" width="316" height="96" rx="3" fill="#010101"/>
+  <!-- SPREAD / PROWIZJA — tylko wartości, etykieta pozostaje -->
+  <rect x="432" y="1206" width="316" height="104" rx="3" fill="#010101"/>
+  <!-- DO ROZLICZENIA -->
+  <rect x="142" y="1322" width="568" height="94" rx="3" fill="#010101"/>
 </svg>
