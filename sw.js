@@ -1,4 +1,4 @@
-const CACHE='crm-pelet-1-3-r48-r38-surgical-fit';
+const CACHE='crm-pelet-1-3-r49-r38-final-two-fixes';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json','./backup-catalog.json','./crm-data.json','./assistant-feed.json',
   './master-pulpit.png','./master-rynki-karta1.png','./master-rynki-klienci.png','./master-rynki-dostawcy.png','./master-niemcy-karta2.png','./master-firma-koniec.png','./master-country-header.png','./master-country-footer.png',
@@ -6,20 +6,20 @@ const ASSETS=[
   './icon-192.png','./icon-512.png','./icon-maskable-512.png','./master-waluty-karta1.png','./master-waluty-karta2.png','./master-waluty-karta3.png','./master-waluty-karta4.png'
 ];
 
-const R48_APP_VERSION='1.3.0-master-r48-r38-surgical-fit';
-const R48_RELEASE='R48 R38 SURGICAL FIT';
+const R48_APP_VERSION='1.3.0-master-r49-r38-final-two-fixes';
+const R48_RELEASE='R49 R38 FINAL TWO FIXES';
 const R48_BUILD_DATE='31.08.2026';
-const R48_BUILD_TIME='12:20';
+const R48_BUILD_TIME='12:30';
 
 function r48PatchIndexHtml(text){
   if(typeof text!=='string'||!text)return text;
   let out=text;
-  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R48 R38 SURGICAL FIT</title>');
+  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R49 R38 FINAL TWO FIXES</title>');
   out=out.replace("const APP_VERSION = '1.3.0-master-r43-waluty-live-hard-fix';",`const APP_VERSION = '${R48_APP_VERSION}';`);
   out=out.replace("const APP_RELEASE = 'R43 WALUTY LIVE HARD FIX';",`const APP_RELEASE = '${R48_RELEASE}';`);
   out=out.replace("const BUILD_DATE = '26.08.2026';",`const BUILD_DATE = '${R48_BUILD_DATE}';`);
   out=out.replace("const BUILD_TIME = '17:05';",`const BUILD_TIME = '${R48_BUILD_TIME}';`);
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R48-r38-surgical-fit-1220'");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R49-r38-final-two-fixes-1230'");
 
   const callMarker="    s.classList.add('r38-markets-final');";
   if(out.includes(callMarker)&&!out.includes('r48R38LiveStats(s);')){
@@ -30,7 +30,7 @@ function r48PatchIndexHtml(text){
   if(out.includes(helperMarker)&&!out.includes('function r48R38LiveStats(parent)')){
     const helper=`
 
-  /* ===== R48 — SURGICAL FIT: LIVE + gesty + geometria MASTER bez rozciągania ===== */
+  /* ===== R49 — FINAL TWO FIXES na bazie chirurgicznego R48 ===== */
   function r48R38VisibleCodes(){return Object.keys(R38_ALL_RECTS)}
   function r48R38RoleMatch(c){
     if(state.marketFilter==='KLIENCI')return marketRolesFor(c).includes('KLIENT');
@@ -88,8 +88,6 @@ function r48PatchIndexHtml(text){
     const remapTop=p=>((p/100*SOURCE_H-CROP_TOP)/CONTENT_H*100);
     const remapSize=p=>(p/100*SOURCE_H/CONTENT_H*100);
 
-    /* Klucz R48: zachowujemy fizyczną skalę starego rastra 6/13 i tylko go kadrujemy.
-       Nie rozciągamy już wysokości do 100dvh, więc koła pozostają kołami, a tekst nie pływa. */
     parent.style.setProperty('width','min(100vw,720px)','important');
     parent.style.setProperty('max-width','100vw','important');
     parent.style.setProperty('height','auto','important');
@@ -137,11 +135,18 @@ function r48PatchIndexHtml(text){
       if(el.classList.contains('hotspot'))el.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');
     });
 
+    /* R49 FIX 1: przykrywamy wyłącznie zbędny zielony półowal z górnej krawędzi rastra. */
+    const topOvalMask=document.createElement('div');
+    topOvalMask.className='r49-r38-top-oval-mask';
+    Object.assign(topOvalMask.style,{position:'absolute',zIndex:'199',left:'45.1%',top:'0',width:'9.8%',height:'1.25%',background:'#000',pointerEvents:'none'});
+    parent.append(topOvalMask);
+
     const app=document.getElementById('app'),body=document.body,html=document.documentElement;
     const saved={bodyOverflowY:body.style.overflowY,bodyOverflowX:body.style.overflowX,bodyTouch:body.style.touchAction,htmlOverflowY:html.style.overflowY,htmlOverflowX:html.style.overflowX,htmlTouch:html.style.touchAction,appMinHeight:app?.style.minHeight||'',appOverflow:app?.style.overflow||'',appTouch:app?.style.touchAction||'',appPadding:app?.style.paddingBottom||''};
     body.style.setProperty('overflow-y','auto','important');body.style.setProperty('overflow-x','hidden','important');body.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');
     html.style.setProperty('overflow-y','auto','important');html.style.setProperty('overflow-x','hidden','important');html.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');
-    if(app){app.style.setProperty('min-height','100dvh','important');app.style.setProperty('overflow','visible','important');app.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');app.style.setProperty('padding-bottom','118px','important');}
+    /* R49 FIX 2: dokładnie przywrócony zapas przewijania z R47 — bez zmiany geometrii karty R48. */
+    if(app){app.style.setProperty('min-height','calc(100dvh + 112px)','important');app.style.setProperty('overflow','visible','important');app.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');app.style.setProperty('padding-bottom','112px','important');}
     const restore=()=>{
       body.style.overflowY=saved.bodyOverflowY;body.style.overflowX=saved.bodyOverflowX;body.style.touchAction=saved.bodyTouch;
       html.style.overflowY=saved.htmlOverflowY;html.style.overflowX=saved.htmlOverflowX;html.style.touchAction=saved.htmlTouch;
