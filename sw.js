@@ -1,4 +1,4 @@
-const CACHE='crm-pelet-1-3-r53-waluty-karta2-clean-top';
+const CACHE='crm-pelet-1-3-r54-waluty-karta2-raster-restore';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json','./backup-catalog.json','./crm-data.json','./assistant-feed.json',
   './master-pulpit.png','./master-rynki-karta1.png','./master-rynki-klienci.png','./master-rynki-dostawcy.png','./master-niemcy-karta2.png','./master-firma-koniec.png','./master-country-header.png','./master-country-footer.png',
@@ -6,27 +6,34 @@ const ASSETS=[
   './icon-192.png','./icon-512.png','./icon-maskable-512.png','./master-waluty-karta1.png','./master-waluty-karta2.png','./master-waluty-karta3.png','./master-waluty-karta4.png'
 ];
 
-const R48_APP_VERSION='1.3.0-master-r53-waluty-karta2-clean-top';
-const R48_RELEASE='R53 WALUTY KARTA 2 CLEAN TOP';
+const R48_APP_VERSION='1.3.0-master-r54-waluty-karta2-raster-restore';
+const R48_RELEASE='R54 WALUTY KARTA 2 RASTER RESTORE';
 const R48_BUILD_DATE='31.08.2026';
-const R48_BUILD_TIME='15:45';
+const R48_BUILD_TIME='16:15';
 
 function r48PatchIndexHtml(text){
   if(typeof text!=='string'||!text)return text;
   let out=text;
-  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R53 WALUTY KARTA 2 CLEAN TOP</title>');
+  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R54 WALUTY KARTA 2 RASTER RESTORE</title>');
   out=out.replace("const APP_VERSION = '1.3.0-master-r43-waluty-live-hard-fix';",`const APP_VERSION = '${R48_APP_VERSION}';`);
   out=out.replace("const APP_RELEASE = 'R43 WALUTY LIVE HARD FIX';",`const APP_RELEASE = '${R48_RELEASE}';`);
   out=out.replace("const BUILD_DATE = '26.08.2026';",`const BUILD_DATE = '${R48_BUILD_DATE}';`);
   out=out.replace("const BUILD_TIME = '17:05';",`const BUILD_TIME = '${R48_BUILD_TIME}';`);
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R53-waluty-karta2-clean-top-1545'");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R54-waluty-karta2-raster-restore-1615'");
   out=out.replace("s.append(hotspot({x:28,y:82,w:118,h:118,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:200,baseW:941,baseH:1672}));","s.append(hotspot({x:8,y:58,w:166,h:166,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:260,baseW:941,baseH:1672}));");
 
-  /* R52 WALUTY KARTA 1 — wyłącznie chirurgiczna geometria LIVE.
-     Raster MASTER, menu, hotspoty kart 1/2–1/4 i cała zamrożona gałąź RYNKI EU pozostają nietknięte. */
+  /* R52 WALUTY KARTA 1 — FINAL MASTER. Bezwzględnie bez zmian. */
   if(!out.includes('id="r52-waluty-karta1-surgical"')){
     const r52Style=`\n<style id="r52-waluty-karta1-surgical">\n.wm-page[data-card="1"] .wm-live-ring{\n  left:82.159624%!important;top:3.792004%!important;width:11.737089%!important;height:auto!important;aspect-ratio:1/1!important;\n  border:2px solid rgba(118,255,0,.72)!important;border-radius:50%!important;background:transparent!important;\n  box-shadow:0 0 0 2px rgba(0,0,0,.92),0 0 12px rgba(105,255,24,.58),inset 0 0 8px rgba(105,255,24,.12)!important;\n  animation:none!important;transform:none!important;box-sizing:border-box!important;\n}\n.wm-page[data-card="1"] .wm-live-spinner{\n  left:81.455399%!important;top:3.4670%!important;width:13.14554%!important;height:auto!important;aspect-ratio:1/1!important;\n  border-radius:50%!important;box-sizing:border-box!important;display:grid!important;place-items:center!important;\n}\n.wm-page[data-card="1"] .wm-live-spinner span{display:block!important;line-height:1!important;transform-origin:50% 50%!important;margin:auto!important;}\n.wm-page[data-card="1"] .wm-hot[aria-label="LIVE — synchronizuj kursy"]{\n  left:75.117371%!important;top:1.083424%!important;width:23.474178%!important;height:11.105092%!important;\n  z-index:80!important;touch-action:manipulation!important;\n}\n</style>\n`;
     out=out.replace('</head>',r52Style+'</head>');
+  }
+
+  /* R54 WALUTY KARTA 2 — przywrócony zdrowy raster sprzed R53.
+     Cały raster i wszystkie nakładki LIVE przesuwamy razem, więc geometria kursów pozostaje 1:1.
+     Z góry usuwamy wyłącznie wypalony pasek Samsunga. */
+  if(!out.includes('id="r54-waluty-karta2-raster-restore"')){
+    const r54Style=`\n<style id="r54-waluty-karta2-raster-restore">\n.wm-page[data-card="2"]{position:relative!important;overflow:hidden!important;background:#000!important;}\n.wm-page[data-card="2"] .wm-canvas{margin-top:max(-75px,-8.803vw)!important;overflow:visible!important;}\n.wm-page[data-card="2"]::before{content:"";position:absolute;z-index:29;left:0;top:0;width:100%;height:min(45px,5.282vw);background:#000;pointer-events:none;}\n.wm-page[data-card="2"] .wm-hot{touch-action:manipulation!important;}\n</style>\n`;
+    out=out.replace('</head>',r54Style+'</head>');
   }
 
   const callMarker="    s.classList.add('r38-markets-final');";
@@ -95,8 +102,6 @@ function r48PatchIndexHtml(text){
     const SOURCE_H=1672,CROP_TOP=50,CROP_BOTTOM=55,CONTENT_H=SOURCE_H-CROP_TOP-CROP_BOTTOM;
     const remapTop=p=>((p/100*SOURCE_H-CROP_TOP)/CONTENT_H*100);
     const remapSize=p=>(p/100*SOURCE_H/CONTENT_H*100);
-
-    /* R51: zwiększamy wyłącznie pionowe pole widzenia. Skala środkowej części pozostaje jak w R50. */
     parent.style.setProperty('width','min(100vw,720px)','important');
     parent.style.setProperty('max-width','100vw','important');
     parent.style.setProperty('height','auto','important');
@@ -107,7 +112,6 @@ function r48PatchIndexHtml(text){
     parent.style.setProperty('overflow','hidden','important');
     parent.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');
     parent.style.setProperty('overscroll-behavior','auto','important');
-
     const master=parent.querySelector(':scope > img.master');
     if(master){
       master.style.setProperty('top',(-CROP_TOP/CONTENT_H*100)+'%','important');
@@ -117,7 +121,6 @@ function r48PatchIndexHtml(text){
       master.style.setProperty('bottom','auto','important');
       master.style.setProperty('object-fit','fill','important');
     }
-
     [...parent.children].forEach(el=>{
       if(el===master)return;
       if(el.classList.contains('r38-sync-glyph')){
@@ -151,13 +154,10 @@ function r48PatchIndexHtml(text){
         }
       }
     });
-
-    /* R51: mikromaska tylko na samej krawędzi; nie wchodzi już na logo CRM. */
     const topOvalMask=document.createElement('div');
     topOvalMask.className='r51-r38-top-edge-mask';
     Object.assign(topOvalMask.style,{position:'absolute',zIndex:'199',left:'47%',top:'0',width:'6%',height:'.55%',background:'#000',pointerEvents:'none'});
     parent.append(topOvalMask);
-
     const app=document.getElementById('app'),body=document.body,html=document.documentElement;
     const saved={bodyOverflowY:body.style.overflowY,bodyOverflowX:body.style.overflowX,bodyTouch:body.style.touchAction,htmlOverflowY:html.style.overflowY,htmlOverflowX:html.style.overflowX,htmlTouch:html.style.touchAction,appMinHeight:app?.style.minHeight||'',appOverflow:app?.style.overflow||'',appTouch:app?.style.touchAction||'',appPadding:app?.style.paddingBottom||''};
     body.style.setProperty('overflow-y','auto','important');body.style.setProperty('overflow-x','hidden','important');body.style.setProperty('touch-action','pan-x pan-y pinch-zoom','important');
