@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r46-r38-fullscreen-master-candidate",
-  "release": "R46 R38 FULLSCREEN MASTER CANDIDATE",
+  "version": "1.3.0-master-r47-r38-gestures-live-labels",
+  "release": "R47 R38 GESTURES + LIVE LABELS",
   "buildDate": "31.08.2026",
-  "buildTime": "11:24",
-  "base": "R45 R38 CARD LAYOUT FIX + R44 R38 LIVE STATS FIX + R38 RYNKI EU MASTER",
+  "buildTime": "11:36",
+  "base": "R46 R38 FULLSCREEN MASTER CANDIDATE + R45 R38 CARD LAYOUT FIX + R44 R38 LIVE STATS FIX",
   "notes": [
-    "RYNKI EU KARTA 1: zachowane działające statystyki LIVE i poprawny układ opisów z R45.",
-    "Widok R38 dopasowany pionowo do pełnego użytecznego obszaru Samsung Galaxy S24 Ultra.",
-    "Usunięte z rastra zbędne wewnętrzne górne i dolne paski systemowe Android/Samsung; pozostaje wyłącznie właściwy interfejs CRM.",
-    "Ramki, flagi, hotspoty, filtry, SYNCHRONIZUJ i zatwierdzona stylistyka MASTER pozostają bez zmian funkcjonalnych.",
-    "Po akceptacji wizualnej użytkownika ta wersja może zostać zamrożona jako finalny MASTER gałęzi RYNKI EU."
+    "RYNKI EU KARTA 1: zachowane pełne dopasowanie do Samsung Galaxy S24 Ultra i usunięte wewnętrzne paski systemowe z rastra.",
+    "Przywrócone natywne przewijanie góra/dół oraz gest pinch-to-zoom na ekranie RYNKI EU.",
+    "Stare statyczne znaczniki NOWE z grafiki MASTER są całkowicie przykrywane; dynamiczny znacznik NOWE pojawia się tylko wtedy, gdy baza LIVE rzeczywiście ma świeże rekordy.",
+    "Statystyki LIVE, ramki, flagi, hotspoty, filtry i SYNCHRONIZUJ pozostają bez zmian funkcjonalnych.",
+    "To jest wersja testowa przed ostatecznym zamrożeniem gałęzi RYNKI EU jako FINAL MASTER."
   ]
 }
