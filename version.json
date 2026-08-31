@@ -1,16 +1,13 @@
 {
-  "version": "1.3.0-master-r43-waluty-live-hard-fix",
-  "release": "R43 WALUTY LIVE HARD FIX",
-  "buildDate": "26.08.2026",
-  "buildTime": "17:05",
-  "base": "R38 MEGA STABLE + R42 WALUTY MASTER",
+  "version": "1.3.0-master-r44-r38-live-stats-fix",
+  "release": "R44 R38 LIVE STATS FIX",
+  "buildDate": "31.08.2026",
+  "buildTime": "11:00",
+  "base": "R43 WALUTY LIVE HARD FIX + R38 RYNKI EU MASTER",
   "notes": [
-    "KARTA 1/1: zachowany MASTER 1:1; aktywny LIVE z animacją i realnym odświeżeniem NBP.",
-    "KARTA 1/2: aktywny LIVE, aktywny ODŚWIEŻ KURSY, czytelne dolne pola źródła i aktualizacji bez dublowania tekstu.",
-    "KARTA 1/3: zachowany MASTER; kalkulator i PRZELICZ pozostają aktywne.",
-    "KARTA 1/4: dodany zatwierdzony duży zielony PRZELICZ, aktywny spread/prowizja i LIVE z animacją.",
-    "USTAWIENIA WALUT: poprawione ramki; ZAPISZ, ODŚWIEŻ KURSY, WRÓĆ DO KARTY i ZAMKNIJ są aktywne.",
-    "HISTORIA KURSÓW pozostaje bez zmian.",
-    "Przewijanie góra/dół oraz pinch-to-zoom pozostają aktywne."
+    "RYNKI EU KARTA 1: przywrócone dynamiczne statystyki LIVE bez zmiany zatwierdzonego rastra MASTER.",
+    "Po synchronizacji odświeżają się liczba państw z danymi, liczba firm, nowe rekordy, ostatnie 7 dni i data synchronizacji.",
+    "Liczby przy państwach są aktualizowane z bazy CRM LIVE; ramki, flagi, układ, filtry i wygląd MASTER pozostają bez zmian.",
+    "WALUTY R43 oraz pozostałe zatwierdzone gałęzie pozostają bez zmian."
   ]
 }
