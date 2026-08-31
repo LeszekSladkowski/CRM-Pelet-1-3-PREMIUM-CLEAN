@@ -1,4 +1,4 @@
-const CACHE='crm-pelet-1-3-r51-r38-final-frame-fit';
+const CACHE='crm-pelet-1-3-r52-waluty-karta1-master-candidate';
 const ASSETS=[
   './','./index.html','./manifest.webmanifest','./version.json','./backup-catalog.json','./crm-data.json','./assistant-feed.json',
   './master-pulpit.png','./master-rynki-karta1.png','./master-rynki-klienci.png','./master-rynki-dostawcy.png','./master-niemcy-karta2.png','./master-firma-koniec.png','./master-country-header.png','./master-country-footer.png',
@@ -6,21 +6,28 @@ const ASSETS=[
   './icon-192.png','./icon-512.png','./icon-maskable-512.png','./master-waluty-karta1.png','./master-waluty-karta2.png','./master-waluty-karta3.png','./master-waluty-karta4.png'
 ];
 
-const R48_APP_VERSION='1.3.0-master-r51-r38-final-frame-fit';
-const R48_RELEASE='R51 R38 FINAL FRAME FIT';
+const R48_APP_VERSION='1.3.0-master-r52-waluty-karta1-master-candidate';
+const R48_RELEASE='R52 WALUTY KARTA 1 MASTER CANDIDATE';
 const R48_BUILD_DATE='31.08.2026';
-const R48_BUILD_TIME='13:22';
+const R48_BUILD_TIME='15:04';
 
 function r48PatchIndexHtml(text){
   if(typeof text!=='string'||!text)return text;
   let out=text;
-  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R51 R38 FINAL FRAME FIT</title>');
+  out=out.replace('<title>CRM Pelet Premium 1.3 — R43 WALUTY LIVE HARD FIX</title>','<title>CRM Pelet Premium 1.3 — R52 WALUTY KARTA 1 MASTER CANDIDATE</title>');
   out=out.replace("const APP_VERSION = '1.3.0-master-r43-waluty-live-hard-fix';",`const APP_VERSION = '${R48_APP_VERSION}';`);
   out=out.replace("const APP_RELEASE = 'R43 WALUTY LIVE HARD FIX';",`const APP_RELEASE = '${R48_RELEASE}';`);
   out=out.replace("const BUILD_DATE = '26.08.2026';",`const BUILD_DATE = '${R48_BUILD_DATE}';`);
   out=out.replace("const BUILD_TIME = '17:05';",`const BUILD_TIME = '${R48_BUILD_TIME}';`);
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R51-r38-final-frame-fit-1322'");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R43-waluty-live-hard-fix-1705'","navigator.serviceWorker.register('./sw.js?v=R52-waluty-karta1-master-1504'");
   out=out.replace("s.append(hotspot({x:28,y:82,w:118,h:118,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:200,baseW:941,baseH:1672}));","s.append(hotspot({x:8,y:58,w:166,h:166,label:'Wstecz do pulpitu',onClick:()=>go('home'),z:260,baseW:941,baseH:1672}));");
+
+  /* R52 WALUTY KARTA 1 — wyłącznie chirurgiczna geometria LIVE.
+     Raster MASTER, menu, hotspoty kart 1/2–1/4 i cała zamrożona gałąź RYNKI EU pozostają nietknięte. */
+  if(!out.includes('id="r52-waluty-karta1-surgical"')){
+    const r52Style=`\n<style id="r52-waluty-karta1-surgical">\n.wm-page[data-card="1"] .wm-live-ring{\n  left:82.159624%!important;top:3.792004%!important;width:11.737089%!important;height:auto!important;aspect-ratio:1/1!important;\n  border:2px solid rgba(118,255,0,.72)!important;border-radius:50%!important;background:transparent!important;\n  box-shadow:0 0 0 2px rgba(0,0,0,.92),0 0 12px rgba(105,255,24,.58),inset 0 0 8px rgba(105,255,24,.12)!important;\n  animation:none!important;transform:none!important;box-sizing:border-box!important;\n}\n.wm-page[data-card="1"] .wm-live-spinner{\n  left:81.455399%!important;top:3.4670%!important;width:13.14554%!important;height:auto!important;aspect-ratio:1/1!important;\n  border-radius:50%!important;box-sizing:border-box!important;display:grid!important;place-items:center!important;\n}\n.wm-page[data-card="1"] .wm-live-spinner span{display:block!important;line-height:1!important;transform-origin:50% 50%!important;margin:auto!important;}\n.wm-page[data-card="1"] .wm-hot[aria-label="LIVE — synchronizuj kursy"]{\n  left:75.117371%!important;top:1.083424%!important;width:23.474178%!important;height:11.105092%!important;\n  z-index:80!important;touch-action:manipulation!important;\n}\n</style>\n`;
+    out=out.replace('</head>',r52Style+'</head>');
+  }
 
   const callMarker="    s.classList.add('r38-markets-final');";
   if(out.includes(callMarker)&&!out.includes('r48R38LiveStats(s);')){
