@@ -1,15 +1,14 @@
 {
-  "version": "1.3.0-master-r48-r38-surgical-fit",
-  "release": "R48 R38 SURGICAL FIT",
+  "version": "1.3.0-master-r49-r38-final-two-fixes",
+  "release": "R49 R38 FINAL TWO FIXES",
   "buildDate": "31.08.2026",
-  "buildTime": "12:20",
-  "base": "R47 R38 GESTURES + LIVE LABELS + R45 CARD LAYOUT + R44 LIVE STATS",
+  "buildTime": "12:30",
+  "base": "R48 R38 SURGICAL FIT + perfekcyjne gesty R47",
   "notes": [
-    "RYNKI EU KARTA 1: zachowane perfekcyjne przewijanie góra/dół i pinch-to-zoom z R47.",
-    "Usunięte zniekształcenie pionowe: raster jest kadrowany bez rozciągania, z zachowaniem geometrii i proporcji MASTER.",
-    "SYNCHRONIZUJ otrzymuje wymuszoną geometrię 1:1, border-radius 50% i chirurgicznie wycentrowane strzałki.",
-    "Opisy krajów i liczniki są rysowane w stałych polach bez zasłaniania; etykieta NOWE jest zawsze czytelna jako dynamiczne NOWE 0/1/2... zgodne z LIVE.",
-    "Statystyki LIVE, filtry, hotspoty, flagi i logika synchronizacji pozostają bez zmian.",
-    "Wersja testowa przed finalnym zamrożeniem gałęzi RYNKI EU jako MASTER."
+    "RYNKI EU KARTA 1: zachowana w całości geometria, statystyki LIVE, napisy, filtry i chirurgicznie okrągły SYNCHRONIZUJ z R48.",
+    "Usunięty wyłącznie zbędny zielony półowal widoczny na górnej krawędzi KARTY 1.",
+    "Przywrócone przewijanie góra/dół dokładnie przez zapas przewijania sprawdzony w R47, bez zmiany wymiarów i proporcji karty R48.",
+    "Pinch-to-zoom pozostaje bez zmian.",
+    "To kandydat do ostatecznego zamrożenia gałęzi RYNKI EU jako FINAL MASTER po weryfikacji na Samsung Galaxy S24 Ultra SM-S928B."
   ]
 }
