@@ -1,0 +1,78 @@
+name: R68 K4 Final Surgical Cleanup
+
+on:
+  push:
+    paths:
+      - '.github/workflows/r68-k4-final-surgical.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply final K4 surgical patch
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          p = Path('sw.js')
+          s = p.read_text(encoding='utf-8')
+
+          replacements = [
+            ('1.3.0-master-r67-waluty-karta4-surgical-test','1.3.0-master-r68-waluty-karta4-final-surgical-candidate'),
+            ('R67 WALUTY KARTA 4 SURGICAL TEST','R68 WALUTY KARTA 4 FINAL SURGICAL CANDIDATE'),
+            ("const BUILD_TIME = '16:58';","const BUILD_TIME = '18:03';"),
+            ("navigator.serviceWorker.register('./sw.js?v=R67-waluty-karta4-surgical-test-hotfix-1708'","navigator.serviceWorker.register('./sw.js?v=R68-waluty-karta4-final-surgical-1803'"),
+            ("darkBox(400,666,230,82);darkBox(630,662,160,95);darkBox(400,765,230,82);","darkBox(400,666,230,82);darkBox(630,662,160,95);darkBox(392,752,246,112);"),
+            ("darkBox(434,894,200,88);darkBox(434,994,200,88);darkBox(72,1212,292,248);","darkBox(420,882,232,112);darkBox(420,982,232,112);darkBox(58,1190,325,300);"),
+            ("darkBox(268,67,320,82);\n      ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='700 44px Arial';ctx.fillStyle='#f0c457';ctx.shadowColor='rgba(255,194,55,.35)';ctx.shadowBlur=4;ctx.fillText('WALUTY 4/4',428,104);ctx.restore();",
+             "darkBox(185,54,486,142);\n      ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f0c457';ctx.shadowColor='rgba(255,194,55,.35)';ctx.shadowBlur=4;ctx.font='700 42px Arial';ctx.fillText('WALUTY 4/4',428,94);ctx.font='700 31px Arial';ctx.fillText('PREMIUM',428,151);ctx.shadowBlur=0;ctx.strokeStyle='rgba(224,176,55,.88)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(260,151);ctx.lineTo(335,151);ctx.moveTo(521,151);ctx.lineTo(596,151);ctx.stroke();ctx.restore();"),
+            ("ctx.save();ctx.strokeStyle='#020302';ctx.lineWidth=17;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(731,1380);ctx.stroke();ctx.restore();",
+             "ctx.save();ctx.strokeStyle='#020302';ctx.lineWidth=40;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(746,1352);ctx.stroke();ctx.restore();")
+          ]
+
+          for old, new in replacements:
+            if old not in s:
+              raise SystemExit('R68 patch target not found: ' + old[:120])
+            s = s.replace(old, new, 1)
+
+          p.write_text(s, encoding='utf-8')
+
+          version = {
+            'version': '1.3.0-master-r68-waluty-karta4-final-surgical-candidate',
+            'release': 'R68 WALUTY KARTA 4 FINAL SURGICAL CANDIDATE',
+            'buildDate': '01.09.2026',
+            'buildTime': '18:03',
+            'base': 'R66 KARTY 1-3 FINAL MASTER; R68 dotyczy wyłącznie ostatniego chirurgicznego czyszczenia KARTY 4.',
+            'notes': [
+              'WALUTY KARTA 1: FINAL MASTER — bez zmian.',
+              'WALUTY KARTA 2: FINAL MASTER — bez zmian.',
+              'WALUTY KARTA 3: FINAL MASTER — bez zmian.',
+              'WALUTY KARTA 4: wymiar/viewport pozostaje dokładnie zatwierdzony — bez zmian.',
+              'WALUTY KARTA 4: wyczyszczono resztki starego nagłówka i odtworzono czyste WALUTY 4/4 PREMIUM.',
+              'WALUTY KARTA 4: poszerzono chirurgiczne czyszczenie pola SPREAD/PROWIZJA oraz pól KOSZT KOŃCOWY i ZYSK.',
+              'WALUTY KARTA 4: wyczyszczono pozostałości pod MARŻA i OPŁACALNE/NIEOPŁACALNE.',
+              'WALUTY KARTA 4: usunięto starą statyczną wskazówkę szerszym czyszczeniem; pozostaje wyłącznie dynamiczna wskazówka wyniku.',
+              'WALUTY KARTA 4: LIVE pozostaje bez obcych nakładek; obracają się tylko istniejące zielone strzałki przez czas synchronizacji około 2,4 s.',
+              'Status: FINAL SURGICAL CANDIDATE — MASTER dopiero po teście użytkownika.'
+            ]
+          }
+          Path('version.json').write_text(json.dumps(version, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          wf = Path('.github/workflows/r68-k4-final-surgical.yml')
+          if wf.exists():
+            wf.unlink()
+          PY
+
+          git config user.name 'LESZEK ŚLADKOWSKI'
+          git config user.email 'tellechkielce@gmail.com'
+          git add sw.js version.json .github/workflows/r68-k4-final-surgical.yml
+          git commit -m 'R68 WALUTY K4 final surgical cleanup'
+          git push origin main
