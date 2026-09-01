@@ -1,16 +1,17 @@
 {
-  "version": "1.3.0-master-r64-waluty-karta3-emergency-live",
-  "release": "R64 WALUTY KARTA 3 EMERGENCY LIVE",
+  "version": "1.3.0-master-r65-waluty-karta3-master-functional",
+  "release": "R65 WALUTY KARTA 3 MASTER FUNCTIONAL",
   "buildDate": "01.09.2026",
-  "buildTime": "13:48",
-  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R64 dotyczy wyłącznie KARTY 3",
+  "buildTime": "14:45",
+  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R65 dotyczy wyłącznie funkcjonalności KARTY 3 na zatwierdzonej grafice MASTER 1:1",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "RYNKI EU: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: awaryjna pełna odbudowa z jednego samodzielnego rastra 852x1846.",
-    "WALUTY KARTA 3: bez SVG wrapperów, bez czarnych masek, bez KURSU KRZYŻOWEGO i bez SPREAD / PROWIZJA.",
-    "WALUTY KARTA 3: aktywne KWOTA, obie waluty, 1000/5000/10000, PRZELICZ, LIVE, POWRÓT i dolna nawigacja.",
+    "WALUTY KARTA 3: grafika MASTER pozostaje 100% bez zmian.",
+    "WALUTY KARTA 3: LIVE otrzymał aktywną animację obrotu zgodnie z ruchem wskazówek zegara podczas synchronizacji.",
+    "WALUTY KARTA 3: zielona ramka 1000/5000/10000 została chirurgicznie dopasowana do złotych ramek i nie jest elipsą.",
+    "WALUTY KARTA 3: PRZELICZ jest aktywny, odświeża wynik po ręcznej zmianie kwoty i daje widoczne potwierdzenie naciśnięcia.",
     "WALUTY KARTA 4: bez zmian."
   ]
 }
