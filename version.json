@@ -1,17 +1,18 @@
 {
-  "version": "1.3.0-master-r65-waluty-karta3-master-functional",
-  "release": "R65 WALUTY KARTA 3 MASTER FUNCTIONAL",
+  "version": "1.3.0-master-r66-waluty-karta3-final-surgical",
+  "release": "R66 WALUTY KARTA 3 FINAL SURGICAL",
   "buildDate": "01.09.2026",
-  "buildTime": "14:45",
-  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R65 dotyczy wyłącznie funkcjonalności KARTY 3 na zatwierdzonej grafice MASTER 1:1",
+  "buildTime": "16:28",
+  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R66 dotyczy wyłącznie finalnego domknięcia KARTY 3 na zatwierdzonym MASTER 1:1",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "RYNKI EU: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: grafika MASTER pozostaje 100% bez zmian.",
-    "WALUTY KARTA 3: LIVE otrzymał aktywną animację obrotu zgodnie z ruchem wskazówek zegara podczas synchronizacji.",
-    "WALUTY KARTA 3: zielona ramka 1000/5000/10000 została chirurgicznie dopasowana do złotych ramek i nie jest elipsą.",
-    "WALUTY KARTA 3: PRZELICZ jest aktywny, odświeża wynik po ręcznej zmianie kwoty i daje widoczne potwierdzenie naciśnięcia.",
+    "WALUTY KARTA 3: grafika MASTER pozostaje bez zmian; finalny viewport-fit 98% + ograniczenie wysokością widoku zapobiega ucinaniu góry lub dołu.",
+    "WALUTY KARTA 3: geometrie i zielone obwódki 1000 / 5000 / 10000 są FINAL MASTER i zostały zamrożone bez dalszych zmian.",
+    "WALUTY KARTA 3: PRZELICZ ma hotspot dopasowany chirurgicznie do istniejącej zielonej ramki MASTER; usunięto drugą/dodatkową ramkę, pozostaje wyłącznie poświata podczas aktywacji.",
+    "WALUTY KARTA 3: LIVE nie używa obcej ikony ani spinnera; obracane są wyłącznie zielone piksele dwóch istniejących strzałek z zatwierdzonego MASTER-a, zgodnie z ruchem wskazówek zegara.",
+    "WALUTY KARTA 3: synchronizacja LIVE jest utrzymywana widocznie około 2,4 s, aby animacja trwała od naciśnięcia do zakończenia aktualizacji.",
     "WALUTY KARTA 4: bez zmian."
   ]
 }
