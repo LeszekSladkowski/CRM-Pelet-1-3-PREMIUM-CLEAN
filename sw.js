@@ -60,9 +60,9 @@ r48PatchIndexHtml = function(text){
 
     const amount=wmEdit(root,[76,470,415,88],currencyState.calcAmount,v=>{currencyState.calcAmount=v;currencyState.k3QuickSelected=0},'big r64-amount');
     wmSelect(root,[530,451,255,132],currencyState.calcFrom,c=>currencyState.calcFrom=c);
-    wmDyn(root,[556,478,190,75],\`${CURRENCY_FLAGS[currencyState.calcFrom]} ${currencyState.calcFrom}\`,'gold med r64-source');
+    wmDyn(root,[556,478,190,75],\`\${CURRENCY_FLAGS[currencyState.calcFrom]} \${currencyState.calcFrom}\`,'gold med r64-source');
     wmSelect(root,[52,684,748,132],currencyState.calcTo,c=>currencyState.calcTo=c);
-    wmDyn(root,[82,709,625,80],\`${CURRENCY_FLAGS[currencyState.calcTo]} ${currencyState.calcTo} — ${CURRENCY_NAMES[currencyState.calcTo]}\`,'gold med r64-target');
+    wmDyn(root,[82,709,625,80],\`\${CURRENCY_FLAGS[currencyState.calcTo]} \${currencyState.calcTo} — \${CURRENCY_NAMES[currencyState.calcTo]}\`,'gold med r64-target');
 
     [[50,850,237,116,1000],[300,850,237,116,5000],[550,850,237,116,10000]].forEach(([x,y,w,h,val])=>{
       const b=wmHot(root,[x,y,w,h],()=>{currencyState.calcAmount=val;currencyState.k3QuickSelected=val;curPersist();render()},String(val));
@@ -70,8 +70,8 @@ r48PatchIndexHtml = function(text){
     });
 
     const v=curCalc();
-    wmDyn(root,[92,1178,668,132],\`${curFmt(v.gross,2)} ${currencyState.calcTo}\`,'green r64-result');
-    wmDyn(root,[171,1408,584,72],\`DO ROZLICZENIA: ${curFmt(v.settle,2)} ${currencyState.calcTo}\`,'green r64-settle');
+    wmDyn(root,[92,1178,668,132],\`\${curFmt(v.gross,2)} \${currencyState.calcTo}\`,'green r64-result');
+    wmDyn(root,[171,1408,584,72],\`DO ROZLICZENIA: \${curFmt(v.settle,2)} \${currencyState.calcTo}\`,'green r64-settle');
 
     wmHot(root,[50,1548,738,124],()=>{amount.blur();curPersist();render();toast('✓ PRZELICZONO')},'Przelicz');
     wmBottom(root,3);return page}
