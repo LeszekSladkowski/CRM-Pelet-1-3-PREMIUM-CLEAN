@@ -1,0 +1,145 @@
+import base64, glob, hashlib, json, pathlib, re, shutil
+
+EXPECTED = 'f882a35ec480a4ab894b83afa71e6cee93ac2ed25f352a45e0ef84ec1e182657'
+parts = sorted(glob.glob('r64-upload/p*.txt'))
+if len(parts) != 19:
+    raise SystemExit(f'R64: expected 19 image parts, got {len(parts)}')
+payload = ''.join(pathlib.Path(p).read_text(encoding='ascii').strip() for p in parts)
+raw = base64.b64decode(payload, validate=True)
+sha = hashlib.sha256(raw).hexdigest()
+if sha != EXPECTED:
+    raise SystemExit(f'R64 image SHA mismatch: {sha}')
+pathlib.Path('master-waluty-karta3-r64-clean.webp').write_bytes(raw)
+
+sw_path = pathlib.Path('sw.js')
+sw = sw_path.read_text(encoding='utf-8')
+sw = re.sub(
+    r'/\* R63 — WALUTY KARTA 3 CLEAN LIVE MASTER\.[\s\S]*?\*/\n',
+    '/* R64 — WALUTY KARTA 3 EMERGENCY CLEAN LIVE.\n'
+    '   KARTA 1 i KARTA 2 FINAL MASTER pozostają bezwzględnie nietknięte.\n'
+    '   KARTA 3 używa jednego samodzielnego rastra 852×1846; bez SVG wrapperów, bez masek i bez czarnych łat. */\n',
+    sw,
+    count=1,
+)
+sw = sw.replace(
+    "const R63_K3_ASSETS=['./master-waluty-karta3-r63-clean.svg'];\n"
+    "if(Array.isArray(ASSETS))R63_K3_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});",
+    "const R64_K3_ASSETS=['./master-waluty-karta3-r64-clean.webp'];\n"
+    "if(Array.isArray(ASSETS))R64_K3_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});",
+)
+
+marker = '/* ===== R63 — WYŁĄCZNIE KARTA 3 ===== */'
+if marker not in sw:
+    raise SystemExit('R64: R63 KARTA 3 marker missing in sw.js')
+prefix = sw.split(marker, 1)[0].rstrip()
+
+r64_block = r'''/* ===== R64 — WYŁĄCZNIE KARTA 3: EMERGENCY CLEAN LIVE ===== */
+const r64BasePatchIndexHtml = r48PatchIndexHtml;
+r48PatchIndexHtml = function(text){
+  let out = r64BasePatchIndexHtml(text);
+
+  out = out.replaceAll('1.3.0-master-r57-waluty-k1-press-fit-k2-ring-clean','1.3.0-master-r64-waluty-karta3-emergency-live');
+  out = out.replaceAll('R57 WALUTY K1 PRESS FIT + K2 RING CLEAN','R64 WALUTY KARTA 3 EMERGENCY LIVE');
+  out = out.replace("const BUILD_DATE = '31.08.2026';","const BUILD_DATE = '01.09.2026';");
+  out = out.replace("const BUILD_TIME = '19:08';","const BUILD_TIME = '13:48';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R57-waluty-k1-press-fit-k2-ring-clean-1908'","navigator.serviceWorker.register('./sw.js?v=R64-waluty-karta3-emergency-live-1348'");
+
+  out = out.replace(
+    "img.src=`master-waluty-karta${card}.png?v=R43-LIVE-HARD-FIX`;",
+    "img.src=card===3?'master-waluty-karta3-r64-clean.webp?v=R64-1348':`master-waluty-karta${card}.png?v=R43-LIVE-HARD-FIX`;"
+  );
+
+  out = out.replace(
+    /  function renderCurrency3\(\)\{[\s\S]*?\n  function curProfit\(\)\{/,
+`  function renderCurrency3(){const {page,root}=wmBase(3);
+    wmHot(root,[28,20,155,165],()=>currencyGo(2),'Powrót');
+    wmHot(root,[650,20,190,190],()=>currencyRefresh(true),'LIVE — synchronizuj kursy');
+
+    const amount=wmEdit(root,[76,470,415,88],currencyState.calcAmount,v=>{currencyState.calcAmount=v;currencyState.k3QuickSelected=0},'big r64-amount');
+    wmSelect(root,[530,451,255,132],currencyState.calcFrom,c=>currencyState.calcFrom=c);
+    wmDyn(root,[556,478,190,75],\`${CURRENCY_FLAGS[currencyState.calcFrom]} ${currencyState.calcFrom}\`,'gold med r64-source');
+    wmSelect(root,[52,684,748,132],currencyState.calcTo,c=>currencyState.calcTo=c);
+    wmDyn(root,[82,709,625,80],\`${CURRENCY_FLAGS[currencyState.calcTo]} ${currencyState.calcTo} — ${CURRENCY_NAMES[currencyState.calcTo]}\`,'gold med r64-target');
+
+    [[50,850,237,116,1000],[300,850,237,116,5000],[550,850,237,116,10000]].forEach(([x,y,w,h,val])=>{
+      const b=wmHot(root,[x,y,w,h],()=>{currencyState.calcAmount=val;currencyState.k3QuickSelected=val;curPersist();render()},String(val));
+      if(currencyState.k3QuickSelected===val)b.classList.add('r64-selected');
+    });
+
+    const v=curCalc();
+    wmDyn(root,[92,1178,668,132],\`${curFmt(v.gross,2)} ${currencyState.calcTo}\`,'green r64-result');
+    wmDyn(root,[171,1408,584,72],\`DO ROZLICZENIA: ${curFmt(v.settle,2)} ${currencyState.calcTo}\`,'green r64-settle');
+
+    wmHot(root,[50,1548,738,124],()=>{amount.blur();curPersist();render();toast('✓ PRZELICZONO')},'Przelicz');
+    wmBottom(root,3);return page}
+
+  function curProfit(){`
+  );
+
+  out = out.replace(
+    "const y=card===4?1652:1580,h=card===4?180:210,w=WM_W/5;",
+    "const y=card===4?1652:card===3?1690:1580,h=card===4?180:card===3?156:210,w=WM_W/5;"
+  );
+
+  const r64Style = `<style id="r64-waluty-karta3-emergency-live">
+.wm-page[data-card="3"]{position:relative!important;width:100%!important;overflow:hidden!important;background:#000!important;}
+.wm-page[data-card="3"] .wm-canvas{position:relative!important;width:min(100vw,852px)!important;max-width:852px!important;margin:0 auto!important;overflow:hidden!important;background:#000!important;}
+.wm-page[data-card="3"] .wm-master{width:100%!important;height:auto!important;display:block!important;object-fit:fill!important;}
+.wm-page[data-card="3"] .wm-edit,.wm-page[data-card="3"] .wm-dyn{z-index:24!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;font-family:"Arial Narrow","Roboto Condensed",system-ui,sans-serif!important;font-variant-numeric:tabular-nums!important;}
+.wm-page[data-card="3"] .wm-edit{padding:0!important;text-align:left!important;color:#fff!important;font-weight:900!important;}
+.wm-page[data-card="3"] .wm-edit:focus{outline:0!important;box-shadow:none!important;}
+.wm-page[data-card="3"] .r64-amount{font-size:clamp(23px,6.4vw,49px)!important;}
+.wm-page[data-card="3"] .r64-source,.wm-page[data-card="3"] .r64-target{justify-content:flex-start!important;color:#ffd34c!important;font-size:clamp(17px,4.6vw,34px)!important;line-height:1!important;}
+.wm-page[data-card="3"] .r64-result{justify-content:center!important;text-align:center!important;color:#78ff00!important;font-size:clamp(32px,8.5vw,70px)!important;line-height:1!important;text-shadow:0 0 12px rgba(118,255,0,.60)!important;}
+.wm-page[data-card="3"] .r64-settle{justify-content:center!important;text-align:center!important;color:#76ff00!important;font-size:clamp(13px,3.7vw,29px)!important;line-height:1!important;}
+.wm-page[data-card="3"] .wm-hot{z-index:36!important;background:transparent!important;box-shadow:none!important;}
+.wm-page[data-card="3"] .wm-select{z-index:38!important;}
+.wm-page[data-card="3"] .wm-hot::before,.wm-page[data-card="3"] .wm-hot::after{content:none!important;display:none!important;}
+.wm-page[data-card="3"] .wm-hot.r64-selected{border:2px solid #76ff00!important;border-radius:22px!important;background:rgba(118,255,0,.018)!important;box-shadow:inset 0 0 0 1px rgba(118,255,0,.80),0 0 15px rgba(118,255,0,.65)!important;}
+</style>`;
+
+  out = out.replace('</head>',r64Style+'\n</head>');
+  return out;
+};
+'''
+
+sw_path.write_text(prefix + '\n\n' + r64_block + '\n', encoding='utf-8')
+
+version = {
+    'version': '1.3.0-master-r64-waluty-karta3-emergency-live',
+    'release': 'R64 WALUTY KARTA 3 EMERGENCY LIVE',
+    'buildDate': '01.09.2026',
+    'buildTime': '13:48',
+    'base': 'R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R64 dotyczy wyłącznie KARTY 3',
+    'notes': [
+        'WALUTY KARTA 1: FINAL MASTER — bez zmian.',
+        'WALUTY KARTA 2: FINAL MASTER — bez zmian.',
+        'RYNKI EU: FINAL MASTER — bez zmian.',
+        'WALUTY KARTA 3: awaryjna pełna odbudowa z jednego samodzielnego rastra 852x1846.',
+        'WALUTY KARTA 3: bez SVG wrapperów, bez czarnych masek, bez KURSU KRZYŻOWEGO i bez SPREAD / PROWIZJA.',
+        'WALUTY KARTA 3: aktywne KWOTA, obie waluty, 1000/5000/10000, PRZELICZ, LIVE, POWRÓT i dolna nawigacja.',
+        'WALUTY KARTA 4: bez zmian.',
+    ],
+}
+pathlib.Path('version.json').write_text(json.dumps(version, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+pathlib.Path('WALUTY_KARTA3_GRAPHIC_MASTER_LOCK.md').write_text(
+    '# WALUTY — KARTA 3 — GRAPHIC MASTER LOCK\n\n'
+    'Grafika KARTY 3 zatwierdzona 01.09.2026 jako 100% bezwzględny MASTER.\n'
+    'Nie wolno jej przeprojektowywać ani zmieniać bez wyraźnego polecenia użytkownika.\n'
+    'R64 uruchamia wyłącznie warstwę funkcjonalną na jednym czystym rastrze 852×1846.\n',
+    encoding='utf-8',
+)
+
+shutil.rmtree('r64-upload', ignore_errors=True)
+shutil.rmtree('k3-upload', ignore_errors=True)
+for p in [
+    '.github/workflows/r64-k3-emergency.yml',
+    '.github/workflows/temp-locate-k3.yml',
+    '.github/workflows/inspect-k3.yml',
+    '.github/workflows/r63-k3-master-assemble.yml',
+    '.github/r64-patch.py',
+]:
+    pathlib.Path(p).unlink(missing_ok=True)
+
+print('R64 READY', sha, len(raw))
