@@ -1,19 +1,19 @@
 {
-  "version": "1.3.0-master-r62-waluty-karta3-master-1to1",
-  "release": "R62 WALUTY KARTA 3 MASTER 1:1",
+  "version": "1.3.0-master-r63-waluty-karta3-clean-live",
+  "release": "R63 WALUTY KARTA 3 CLEAN LIVE",
   "buildDate": "01.09.2026",
-  "buildTime": "08:32",
-  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R62 dotyczy wyłącznie KARTY 3",
+  "buildTime": "11:23",
+  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R63 dotyczy wyłącznie KARTY 3",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "RYNKI EU: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: przywrócono zatwierdzony wygląd MASTER 1:1 z dokładnymi fragmentami rastra zaakceptowanej grafiki 852x1846.",
-    "WALUTY KARTA 3: KWOTA, waluta źródłowa, waluta docelowa, WYNIK, KURS KRZYŻOWY, SPREAD / PROWIZJA i DO ROZLICZENIA mają tylko jedną warstwę danych LIVE bez dublowania.",
-    "WALUTY KARTA 3: pola 1 000 / 5 000 / 10 000 i PRZELICZ zostały chirurgicznie dopasowane do zatwierdzonych ramek.",
-    "WALUTY KARTA 3: ostatnio wybrana szybka kwota otrzymuje zielone podświetlenie dokładnie w obrębie własnego kafla; ręczna zmiana kwoty czyści wybór.",
-    "WALUTY KARTA 3: pojedynczy przycisk LIVE pozostaje w grafice MASTER; drugi pasywny ring jest wyłączony, a podczas synchronizacji działa pojedyncza animacja.",
-    "WALUTY KARTA 3: dolna nawigacja i przycisk PRZELICZ są ustawione zgodnie z zatwierdzonym wzorcem.",
+    "WALUTY KARTA 3: całkowicie usunięto poprzednią konstrukcję R62 z fragmentami rastra i czarnymi maskami DOM.",
+    "WALUTY KARTA 3: bazą jest zatwierdzony MASTER 852x1846; czysty wariant SVG usuwa wyłącznie wypalone wartości zmienne i nie przesuwa ramek ani grafiki.",
+    "WALUTY KARTA 3: usunięto z widoku KURS KRZYŻOWY oraz SPREAD / PROWIZJA zgodnie z zatwierdzoną grafiką MASTER.",
+    "WALUTY KARTA 3: KWOTA, waluta źródłowa, waluta docelowa, WYNIK i DO ROZLICZENIA są jedną warstwą LIVE bez dublowania tekstu.",
+    "WALUTY KARTA 3: przyciski 1 000 / 5 000 / 10 000 są przezroczystymi polami aktywnymi; zielone podświetlenie pojawia się dopiero po wyborze.",
+    "WALUTY KARTA 3: PRZELICZ, LIVE, POWRÓT i dolna nawigacja pozostają aktywne bez widocznych nakładek.",
     "WALUTY KARTA 4: bez zmian."
   ]
 }
