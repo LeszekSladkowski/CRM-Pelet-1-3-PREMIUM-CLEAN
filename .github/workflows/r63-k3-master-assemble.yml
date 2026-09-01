@@ -22,8 +22,8 @@ jobs:
           python - <<'PY'
           import base64, glob, hashlib, sys
           parts=sorted(glob.glob('k3-upload/chunk*.txt'))
-          if len(parts)!=12:
-              print(f'Waiting for 12 chunks, have {len(parts)}')
+          if len(parts)!=19:
+              print(f'Waiting for 19 chunks, have {len(parts)}')
               sys.exit(0)
           payload=''.join(''.join(open(p,encoding='ascii').read().split()) for p in parts)
           raw=base64.b64decode(payload,validate=True)
