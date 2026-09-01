@@ -1,0 +1,15 @@
+name: TEMP locate K3
+on:
+  push:
+    paths:
+      - '.github/workflows/temp-locate-k3.yml'
+permissions:
+  contents: read
+jobs:
+  locate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Locate
+        run: |
+          grep -nE 'renderCurrency3|curCalc|currencyRefresh|wmBase|wmHot|wmDyn|master-waluty-karta3-r63-clean' index.html | head -120
