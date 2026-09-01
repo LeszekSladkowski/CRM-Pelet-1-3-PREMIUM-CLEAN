@@ -12,4 +12,4 @@ jobs:
       - uses: actions/checkout@v4
       - name: Locate
         run: |
-          grep -nE 'renderCurrency3|curCalc|currencyRefresh|wmBase|wmHot|wmDyn|master-waluty-karta3-r63-clean' index.html | head -120
+          grep -nE '\.wm-(page|canvas|master|hot|dyn|edit|select|live-ring|pressed)|wm-refresh-busy' index.html | head -180
