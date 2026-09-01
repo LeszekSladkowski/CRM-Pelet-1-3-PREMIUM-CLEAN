@@ -1,0 +1,46 @@
+name: R63 K3 MASTER assemble
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'k3-upload/**'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Assemble pixel-identical MASTER
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, glob, hashlib, os, sys
+          parts=sorted(glob.glob('k3-upload/chunk*.txt'))
+          if len(parts)!=15:
+              print(f'Waiting for 15 chunks, have {len(parts)}')
+              sys.exit(0)
+          payload=''.join(open(p,encoding='ascii').read().strip() for p in parts)
+          raw=base64.b64decode(payload,validate=True)
+          expected='6ce395996032fc935274ec006c2d301bea6a7ffbb98f6516542bd226366871d0'
+          got=hashlib.sha256(raw).hexdigest()
+          if got!=expected:
+              raise SystemExit(f'SHA256 mismatch: {got}')
+          open('master-waluty-karta3-final-master.webp','wb').write(raw)
+          print('MASTER bytes:',len(raw),'SHA256:',got)
+          PY
+          if [ ! -f master-waluty-karta3-final-master.webp ]; then
+            exit 0
+          fi
+          rm -rf k3-upload
+          rm -f .github/workflows/r63-k3-master-assemble.yml
+          git config user.name "L&M CRM Builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "R63 WALUTY KARTA 3: wgraj FINAL MASTER 852x1846 pixel-identyczny" || exit 0
+          git push
