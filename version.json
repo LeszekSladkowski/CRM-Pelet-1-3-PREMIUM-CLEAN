@@ -1,20 +1,19 @@
 {
-  "version": "1.3.0-master-r67-waluty-karta4-surgical-test",
-  "release": "R67 WALUTY KARTA 4 SURGICAL TEST",
+  "version": "1.3.0-master-r68-waluty-karta4-final-surgical-candidate",
+  "release": "R68 WALUTY KARTA 4 FINAL SURGICAL CANDIDATE",
   "buildDate": "01.09.2026",
-  "buildTime": "16:58",
-  "base": "R66 WALUTY — KARTY 1, 2 i 3 FINAL MASTER zamrożone; R67 dotyczy wyłącznie chirurgicznej naprawy KARTY 4 przed testem i ewentualnym nadaniem MASTER",
+  "buildTime": "18:03",
+  "base": "R66 KARTY 1-3 FINAL MASTER; R68 dotyczy wyłącznie ostatniego chirurgicznego czyszczenia KARTY 4.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: FINAL MASTER / PEŁEN SUKCES — bez zmian.",
-    "WALUTY KARTA 4: zastosowano dokładnie ten sam viewport-fit co w zatwierdzonej KARCIE 3, aby cała karta mieściła się na ekranie bez ucinania góry i dołu.",
-    "WALUTY KARTA 4: usunięto stały wm-live-ring, wm-live-spinner i pseudo-poświatę LIVE pozostającą na podkładzie.",
-    "WALUTY KARTA 4: podczas synchronizacji obracają się zgodnie z ruchem wskazówek zegara wyłącznie dwie istniejące zielone strzałki z oryginalnej ikony LIVE; czas synchronizacji pozostaje około 2,4 s.",
-    "WALUTY KARTA 4: usunięto wypalone stare wartości oraz starą flagę UE z pola WALUTA ZAKUPU na jednej powierzchni canvas — bez widocznych HTML-owych czarnych masek.",
-    "WALUTY KARTA 4: KOSZT KOŃCOWY, ZYSK, MARŻA i status są wyświetlane wyłącznie z danych dynamicznych; usunięto zdublowane 32,70%.",
-    "WALUTY KARTA 4: wskazówka OPŁACALNOŚĆ jest dynamiczna; skala -20..+20, wartości poza zakresem zatrzymują wskazówkę na skrajnym czerwonym lub zielonym polu.",
-    "WALUTY KARTA 4: usunięto stałą pseudo-animację wm-profit-recalc z przycisku PRZELICZ; przycisk ma aktywny hotspot i tylko chwilową poświatę podczas naciśnięcia.",
-    "WALUTY KARTA 4: status pozostaje TEST — nie jest jeszcze MASTER do czasu testu użytkownika na Samsung Galaxy S24 Ultra."
+    "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
+    "WALUTY KARTA 4: wymiar/viewport pozostaje dokładnie zatwierdzony — bez zmian.",
+    "WALUTY KARTA 4: wyczyszczono resztki starego nagłówka i odtworzono czyste WALUTY 4/4 PREMIUM.",
+    "WALUTY KARTA 4: poszerzono chirurgiczne czyszczenie pola SPREAD/PROWIZJA oraz pól KOSZT KOŃCOWY i ZYSK.",
+    "WALUTY KARTA 4: wyczyszczono pozostałości pod MARŻA i OPŁACALNE/NIEOPŁACALNE.",
+    "WALUTY KARTA 4: usunięto starą statyczną wskazówkę szerszym czyszczeniem; pozostaje wyłącznie dynamiczna wskazówka wyniku.",
+    "WALUTY KARTA 4: LIVE pozostaje bez obcych nakładek; obracają się tylko istniejące zielone strzałki przez czas synchronizacji około 2,4 s.",
+    "Status: FINAL SURGICAL CANDIDATE — MASTER dopiero po teście użytkownika."
   ]
 }

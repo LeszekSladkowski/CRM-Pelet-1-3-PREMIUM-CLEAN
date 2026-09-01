@@ -7,10 +7,10 @@ const r67BasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
   let out = r67BasePatchIndexHtml(text);
 
-  out = out.replaceAll('1.3.0-master-r66-waluty-karta3-final-surgical','1.3.0-master-r67-waluty-karta4-surgical-test');
-  out = out.replaceAll('R66 WALUTY KARTA 3 FINAL SURGICAL','R67 WALUTY KARTA 4 SURGICAL TEST');
-  out = out.replace("const BUILD_TIME = '16:28';","const BUILD_TIME = '16:58';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R66-waluty-karta3-final-surgical-1628'","navigator.serviceWorker.register('./sw.js?v=R67-waluty-karta4-surgical-test-hotfix-1708'");
+  out = out.replaceAll('1.3.0-master-r66-waluty-karta3-final-surgical','1.3.0-master-r68-waluty-karta4-final-surgical-candidate');
+  out = out.replaceAll('R66 WALUTY KARTA 3 FINAL SURGICAL','R68 WALUTY KARTA 4 FINAL SURGICAL CANDIDATE');
+  out = out.replace("const BUILD_TIME = '16:28';","const BUILD_TIME = '18:03';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R66-waluty-karta3-final-surgical-1628'","navigator.serviceWorker.register('./sw.js?v=R68-waluty-karta4-final-surgical-1803'");
 
   const k4 = String.raw`  function renderCurrency4(){const {page,root}=wmBase(4);
     wmHot(root,[28,20,155,180],()=>currencyGo(3),'Powrót');
@@ -37,13 +37,13 @@ r48PatchIndexHtml = function(text){
       /* Wyczyść wyłącznie wypalone dane i starą flagę, bez widocznych warstw HTML. */
       darkBox(400,380,230,82);darkBox(630,370,160,95);darkBox(395,470,398,92);
       darkBox(400,570,230,82);darkBox(630,565,160,95);
-      darkBox(400,666,230,82);darkBox(630,662,160,95);darkBox(400,765,230,82);
-      darkBox(434,894,200,88);darkBox(434,994,200,88);darkBox(72,1212,292,248);
+      darkBox(400,666,230,82);darkBox(630,662,160,95);darkBox(392,752,246,112);
+      darkBox(420,882,232,112);darkBox(420,982,232,112);darkBox(58,1190,325,300);
       ctx.strokeStyle='rgba(214,166,40,.82)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(110,1366);ctx.lineTo(330,1366);ctx.stroke();
 
       /* Popraw numerację nagłówka 1/4 -> 4/4 bez przebudowy grafiki. */
-      darkBox(268,67,320,82);
-      ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='700 44px Arial';ctx.fillStyle='#f0c457';ctx.shadowColor='rgba(255,194,55,.35)';ctx.shadowBlur=4;ctx.fillText('WALUTY 4/4',428,104);ctx.restore();
+      darkBox(185,54,486,142);
+      ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#f0c457';ctx.shadowColor='rgba(255,194,55,.35)';ctx.shadowBlur=4;ctx.font='700 42px Arial';ctx.fillText('WALUTY 4/4',428,94);ctx.font='700 31px Arial';ctx.fillText('PREMIUM',428,151);ctx.shadowBlur=0;ctx.strokeStyle='rgba(224,176,55,.88)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(260,151);ctx.lineTo(335,151);ctx.moveTo(521,151);ctx.lineTo(596,151);ctx.stroke();ctx.restore();
 
       /* Usuń stałą pseudo-poświatę LIVE poza właściwą ikoną i napisem. */
       try{
@@ -63,7 +63,7 @@ r48PatchIndexHtml = function(text){
 
       /* Dynamiczna wskazówka OPŁACALNOŚĆ; wartości poza skalą zatrzymują się na skraju. */
       const cx=607,cy=1480;
-      ctx.save();ctx.strokeStyle='#020302';ctx.lineWidth=17;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(731,1380);ctx.stroke();ctx.restore();
+      ctx.save();ctx.strokeStyle='#020302';ctx.lineWidth=40;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(746,1352);ctx.stroke();ctx.restore();
       const m=Math.max(-20,Math.min(20,Number(v.margin)||0));
       const ratio=(m+20)/40,angle=Math.PI+ratio*Math.PI,len=132;
       const ex=cx+Math.cos(angle)*len,ey=cy+Math.sin(angle)*len;
