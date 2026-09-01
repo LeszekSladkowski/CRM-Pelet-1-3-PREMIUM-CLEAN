@@ -1,0 +1,21 @@
+name: Inspect K3 source
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/inspect-k3.yml'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Metadata
+        run: |
+          file master-waluty-karta3.png
+          sha256sum master-waluty-karta3.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: current-k3-master
+          path: master-waluty-karta3.png
