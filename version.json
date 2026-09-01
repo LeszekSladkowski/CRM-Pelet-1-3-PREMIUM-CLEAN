@@ -1,19 +1,18 @@
 {
-  "version": "1.3.0-master-r59-waluty-karta3-clean-live",
-  "release": "R59 WALUTY KARTA 3 CLEAN LIVE",
+  "version": "1.3.0-master-r60-waluty-karta3-master-raster-fix",
+  "release": "R60 WALUTY KARTA 3 MASTER RASTER FIX",
   "buildDate": "01.09.2026",
-  "buildTime": "00:34",
-  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R59 dotyczy wyłącznie KARTY 3",
+  "buildTime": "06:44",
+  "base": "R57 WALUTY — KARTA 1 i KARTA 2 FINAL MASTER zamrożone; R60 dotyczy wyłącznie KARTY 3",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "RYNKI EU: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: zachowano MASTER 852x1846; usunięto wyłącznie wypalone przykładowe dane z wnętrza pól bez naruszania ramek, etykiet i ikon.",
-    "WALUTY KARTA 3: KWOTA, waluta źródłowa, waluta docelowa, WYNIK, KURS KRZYŻOWY, SPREAD / PROWIZJA i DO ROZLICZENIA są rysowane dokładnie raz jako dane LIVE.",
-    "WALUTY KARTA 3: usunięto czarne nakładki DOM oraz pasywny dodatkowy ring LIVE.",
-    "WALUTY KARTA 3: pola dotykowe 1 000 / 5 000 / 10 000 oraz PRZELICZ dopasowano do zatwierdzonych ramek MASTER.",
-    "WALUTY KARTA 3: dolna nawigacja zaczyna się poniżej PRZELICZ i nie nachodzi na przycisk.",
-    "WALUTY KARTA 3: nowy czysty MASTER jest dodany do cache offline PWA.",
+    "WALUTY KARTA 3: usunięto pośredni SVG, który na Samsung Galaxy S24 Ultra / Chrome PWA powodował czarny ekran.",
+    "WALUTY KARTA 3: przywrócono bezpośredni raster master-waluty-karta3.png.",
+    "WALUTY KARTA 3: zatwierdzony wygląd 852x1846 jest odtwarzany bezstratnymi fragmentami WEBP pobranymi 1:1 z zaakceptowanej grafiki MASTER.",
+    "WALUTY KARTA 3: zachowano jedną warstwę danych LIVE; KWOTA, waluty, WYNIK, KURS KRZYŻOWY, SPREAD / PROWIZJA i DO ROZLICZENIA nie są dublowane.",
+    "WALUTY KARTA 3: zachowano zatwierdzony pojedynczy przycisk LIVE oraz pola dotykowe 1 000 / 5 000 / 10 000 i PRZELICZ.",
     "WALUTY KARTA 4: bez zmian."
   ]
 }
