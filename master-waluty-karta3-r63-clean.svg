@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="852" height="1846" viewBox="0 0 852 1846" preserveAspectRatio="none">
+  <!-- R63 CLEAN LIVE: dokładnie ten sam MASTER 852x1846; usunięte są wyłącznie wypalone wartości zmienne. -->
+  <image href="master-waluty-karta3.png" x="0" y="0" width="852" height="1846" preserveAspectRatio="none"/>
+
+  <!-- KWOTA: tekst 10000 -->
+  <rect x="78" y="480" width="205" height="84" rx="4" fill="#050605"/>
+
+  <!-- WALUTA ŹRÓDŁOWA: flaga + kod; ramka i strzałka zostają z MASTER-a -->
+  <rect x="548" y="478" width="185" height="84" rx="4" fill="#050605"/>
+
+  <!-- WALUTA DOCELOWA: flaga + nazwa; ramka i strzałka zostają z MASTER-a -->
+  <rect x="76" y="708" width="335" height="86" rx="4" fill="#050605"/>
+
+  <!-- WYNIK: wyłącznie zielona wartość, bez naruszania napisu WYNIK, rombu i linii -->
+  <rect x="102" y="1158" width="650" height="154" rx="6" fill="#050605"/>
+
+  <!-- DO ROZLICZENIA: wyłącznie tekst, zielony znacznik po lewej pozostaje z MASTER-a -->
+  <rect x="190" y="1406" width="560" height="78" rx="6" fill="#050605"/>
+</svg>
