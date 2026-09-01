@@ -22,83 +22,70 @@ jobs:
           import cv2, numpy as np
           from PIL import Image, ImageDraw, ImageFont
 
-          src = cv2.imread('master-waluty-karta4.png', cv2.IMREAD_COLOR)
+          src=cv2.imread('master-waluty-karta4.png',cv2.IMREAD_COLOR)
           if src is None: raise SystemExit('missing master-waluty-karta4.png')
-          h,w = src.shape[:2]
+          h,w=src.shape[:2]
           if (w,h)!=(852,1846): raise SystemExit(f'unexpected size {w}x{h}')
-          mask = np.zeros((h,w), np.uint8)
 
-          def glyphs(x1,y1,x2,y2, allow=('white','gold','green','red','blue')):
-              roi=src[y1:y2,x1:x2]
-              b,g,r=cv2.split(roi)
-              cond=np.zeros(b.shape,bool)
-              if 'white' in allow:
-                  cond |= (r>125)&(g>125)&(b>125)
-              if 'gold' in allow:
-                  cond |= (r>105)&(g>65)&(r>g*1.05)&(g>b*1.15)
-              if 'green' in allow:
-                  cond |= (g>75)&(g>r*1.18)&(g>b*1.18)
-              if 'red' in allow:
-                  cond |= (r>95)&(r>g*1.28)&(r>b*1.15)
-              if 'blue' in allow:
-                  cond |= (b>65)&(b>g*1.12)&(b>r*1.10)
-              local=np.zeros(cond.shape,np.uint8); local[cond]=255
-              k=cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
-              local=cv2.dilate(local,k,iterations=1)
-              mask[y1:y2,x1:x2]=cv2.max(mask[y1:y2,x1:x2],local)
+          mask=np.zeros((h,w),np.uint8)
+          def chars(x1,y1,x2,y2,modes):
+              roi=src[y1:y2,x1:x2]; b,g,r=cv2.split(roi); c=np.zeros(b.shape,bool)
+              if 'white' in modes: c|=(r>85)&(g>85)&(b>85)&((np.maximum.reduce([r,g,b])-np.minimum.reduce([r,g,b]))<85)
+              if 'gold' in modes: c|=(r>70)&(g>42)&(r>g*1.03)&(g>b*1.05)
+              if 'green' in modes: c|=(g>38)&(g>r*1.10)&(g>b*1.12)
+              if 'red' in modes: c|=(r>55)&(r>g*1.15)&(r>b*1.08)
+              if 'blue' in modes: c|=(b>45)&(b>g*1.05)&(b>r*1.05)
+              lm=np.zeros(c.shape,np.uint8); lm[c]=255
+              lm=cv2.dilate(lm,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(9,9)),iterations=1)
+              mask[y1:y2,x1:x2]=cv2.max(mask[y1:y2,x1:x2],lm)
 
-          # Header: erase only old 1/4 glyph pixels.
-          glyphs(500,62,610,130,('gold',))
+          # card number only
+          chars(500,62,608,130,('gold',))
 
-          # Editable/dynamic fields: erase only baked glyph/flag pixels, never whole boxes.
-          glyphs(402,376,565,451,('white',))
-          glyphs(640,372,770,448,('gold','white'))
-          glyphs(410,480,785,550,('white','gold','red','blue'))
-          glyphs(402,566,565,646,('white',))
-          glyphs(640,565,770,646,('gold','white'))
-          glyphs(402,662,555,744,('white',))
-          glyphs(640,660,770,744,('gold','white'))
-          glyphs(402,758,552,846,('white',))
+          # editable values; ROI stays well inside borders and away from arrows
+          chars(405,380,560,450,('white',))
+          chars(642,378,723,443,('gold','white'))
+          cv2.rectangle(mask,(414,486),(470,545),255,-1) # old flag block only
+          chars(468,483,720,548,('white','gold','red','blue'))
+          chars(405,572,560,644,('white',))
+          chars(642,570,723,642,('gold','white'))
+          chars(405,669,555,742,('white',))
+          chars(642,665,723,740,('gold','white'))
+          chars(405,766,550,842,('white',))
 
-          # Dynamic result blocks.
-          glyphs(420,886,638,978,('white','gold','green','red'))
-          glyphs(420,986,638,1080,('white','gold','green','red'))
-          glyphs(72,1210,350,1330,('white','gold','green','red'))
-          glyphs(68,1380,360,1482,('white','gold','green','red'))
+          # outputs and status, including their glow but no panel borders
+          chars(426,891,630,976,('white','gold','green','red'))
+          chars(426,991,630,1078,('white','gold','green','red'))
+          chars(76,1218,345,1328,('white','gold','green','red'))
+          chars(72,1382,355,1480,('white','gold','green','red'))
 
-          # Needle: only pixels belonging to the old diagonal metallic pointer.
-          corridor=np.zeros((h,w),np.uint8)
-          cv2.line(corridor,(611,1477),(739,1368),255,32,cv2.LINE_AA)
-          gray=cv2.cvtColor(src,cv2.COLOR_BGR2GRAY)
-          metallic=((gray>72)&(corridor>0)).astype(np.uint8)*255
-          metallic=cv2.dilate(metallic,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(7,7)),iterations=1)
-          cv2.circle(metallic,(611,1477),31,0,-1)  # preserve original hub
-          mask=cv2.max(mask,metallic)
-
-          # Remove tiny isolated mask noise so native texture is preserved.
+          # Remove isolated speckles, keep real character components.
           n,lab,stats,_=cv2.connectedComponentsWithStats((mask>0).astype(np.uint8),8)
-          cleaned_mask=np.zeros_like(mask)
+          textmask=np.zeros_like(mask)
           for i in range(1,n):
-              if stats[i,cv2.CC_STAT_AREA]>=8:
-                  cleaned_mask[lab==i]=255
-          mask=cleaned_mask
+              if stats[i,cv2.CC_STAT_AREA]>=12: textmask[lab==i]=255
+          textmask=cv2.dilate(textmask,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5)),iterations=1)
+          stage=cv2.inpaint(src,textmask,5,cv2.INPAINT_TELEA)
 
-          cleaned=cv2.inpaint(src,mask,3,cv2.INPAINT_NS)
-          cv2.imwrite('master-waluty-karta4-r69-clean-pre.png',cleaned,[cv2.IMWRITE_PNG_COMPRESSION,9])
+          # Needle is a separate pass: remove full old diagonal pointer corridor but preserve hub.
+          needle=np.zeros((h,w),np.uint8)
+          cv2.line(needle,(610,1475),(746,1354),255,44,cv2.LINE_AA)
+          cv2.circle(needle,(610,1475),35,0,-1)
+          stage=cv2.inpaint(stage,needle,9,cv2.INPAINT_TELEA)
 
-          # Restore only new card number as permanent raster content — not a runtime overlay.
+          # Permanent 4/4 on the raster; no runtime header patch.
+          cv2.imwrite('master-waluty-karta4-r69-clean-pre.png',stage,[cv2.IMWRITE_PNG_COMPRESSION,9])
           im=Image.open('master-waluty-karta4-r69-clean-pre.png').convert('RGB'); d=ImageDraw.Draw(im)
           fp='/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf'; font=ImageFont.truetype(fp,43)
-          text='4/4'; box=d.textbbox((0,0),text,font=font,stroke_width=1); tw=box[2]-box[0]; th=box[3]-box[1]
-          x=555-tw//2; y=95-th//2-4
-          d.text((x+1,y+2),text,font=font,fill=(76,52,10),stroke_width=1,stroke_fill=(19,14,4))
-          d.text((x,y),text,font=font,fill=(239,193,79),stroke_width=1,stroke_fill=(128,89,19))
+          t='4/4'; bb=d.textbbox((0,0),t,font=font,stroke_width=1); tw=bb[2]-bb[0]; th=bb[3]-bb[1]; x=555-tw//2; y=95-th//2-4
+          d.text((x+1,y+2),t,font=font,fill=(70,48,9),stroke_width=1,stroke_fill=(18,13,4))
+          d.text((x,y),t,font=font,fill=(239,193,79),stroke_width=1,stroke_fill=(128,89,19))
           im.save('master-waluty-karta4-r69-clean.png',optimize=True)
-          cv2.imwrite('r69-cleaning-mask.png',mask)
+          audit=cv2.max(textmask,needle); cv2.imwrite('r69-cleaning-mask.png',audit)
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: r69-k4-clean-preview-v2
+          name: r69-k4-clean-preview-v3
           path: |
             master-waluty-karta4-r69-clean.png
             r69-cleaning-mask.png
