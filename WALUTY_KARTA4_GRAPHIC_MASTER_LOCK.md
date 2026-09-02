@@ -4,7 +4,7 @@ Status: **MASTER BEZAPELACYJNY / 100% ZAMROŻONY**
 
 Data zatwierdzenia: 02.09.2026
 Urządzenie referencyjne: Samsung Galaxy S24 Ultra SM-S928B
-Raster MASTER aplikacji: `master-waluty-karta4-r69-master.webp`
+Raster MASTER aplikacji: `master-waluty-karta4.png`
 Wymiar referencyjny: **852 × 1846 px**
 
 ## BEZWZGLĘDNA BLOKADA GRAFIKI
@@ -37,6 +37,10 @@ Kategorycznie zabronione są:
 - dodatkowe ikony/spinnery LIVE,
 - druga ramka na PRZELICZ,
 - statyczne lub pseudoanimowane obiekty zasłaniające grafikę.
+
+## ZASADA ŹRÓDŁA GRAFIKI
+
+KARTA 4 ma ładować bezpośrednio zatwierdzony raster `master-waluty-karta4.png`. Plik `master-waluty-karta4-r69-master.webp` nie jest używany jako źródło ekranu MASTER.
 
 KARTY WALUTY 1, 2 i 3 pozostają oddzielnymi FINAL MASTER i nie wolno ich naruszać podczas prac nad KARTĄ 4.
 
