@@ -1,19 +1,19 @@
 {
-  "version": "1.3.0-master-r70-waluty-karta4-png-master-restore",
-  "release": "R70 WALUTY KARTA 4 PNG MASTER RESTORE",
+  "version": "1.3.0-master-r72-waluty-karta4-single-surface-surgical",
+  "release": "R72 WALUTY KARTA 4 SINGLE SURFACE SURGICAL",
   "buildDate": "02.09.2026",
-  "buildTime": "08:50",
-  "base": "R66 KARTY 1-3 FINAL MASTER + zatwierdzony raster KARTY 4 master-waluty-karta4.png 852x1846.",
+  "buildTime": "10:20",
+  "base": "R70 stabilny + R66 KARTY 1-3 FINAL MASTER; chirurgiczna przebudowa wyłącznie KARTY 4.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 4: naprawiono krytyczny błąd niewczytywania grafiki po R69.",
-    "WALUTY KARTA 4: źródłem ekranu jest ponownie zatwierdzony master-waluty-karta4.png 852x1846.",
-    "WALUTY KARTA 4: usunięto zależność runtime od master-waluty-karta4-r69-master.webp.",
-    "WALUTY KARTA 4: zachowano aktywne pola, selektory walut, obliczenia KOSZT / ZYSK / MARŻA, PRZELICZ oraz LIVE.",
-    "WALUTY KARTA 4: startowe wartości MASTER: zakup 1240 PLN, sprzedaż 2100 USD, transport 110 CZK, spread 1,2%, waluta wyniku PLN.",
-    "WALUTY KARTA 4: grafika pozostaje MASTER BEZAPELACYJNY; KARTY 1-3 nie zostały naruszone.",
-    "Status funkcjonalny: gotowe do testu użytkownika na Samsung Galaxy S24 Ultra."
+    "WALUTY KARTA 4: jeden aktywny canvas 852x1846 z zachowaniem grafiki MASTER.",
+    "WALUTY KARTA 4: usunięto wypalone wartości z pól, podwójne PLN oraz stare wartości marży/statusu.",
+    "WALUTY KARTA 4: usunięto statyczną wskazówkę; pozostaje dokładnie jedna wskazówka obliczana z bieżącej marży w zakresie skali -20%…+20%.",
+    "WALUTY KARTA 4: LIVE używa dokładnie dwóch zielonych strzałek MASTER i obraca je podczas synchronizacji.",
+    "WALUTY KARTA 4: pola zakupu, sprzedaży, transportu, spreadu, selektory walut, KOSZT, ZYSK, MARŻA i PRZELICZ pozostają aktywne.",
+    "Formuła: zakup i transport przeliczane do PLN po kursach LIVE, spread liczony od zakupu, koszt = zakup + transport + spread, zysk = sprzedaż - koszt, marża = zysk / sprzedaż × 100%.",
+    "Status: build testowy na osobnej gałęzi; main pozostaje R70 do czasu odbioru użytkownika."
   ]
 }
