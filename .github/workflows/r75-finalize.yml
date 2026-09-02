@@ -1,0 +1,99 @@
+name: R75 Finalize K4 Needle Clean
+
+on:
+  push:
+    branches:
+      - r75-waluty-k4-final-clean
+    paths:
+      - '.github/workflows/r75-finalize.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: r75-waluty-k4-final-clean
+      - name: Install image tooling
+        run: python -m pip install --quiet opencv-python-headless numpy
+      - name: Surgical cleanup and version bump
+        run: |
+          python - <<'PY'
+          import cv2, numpy as np, json
+
+          runtime='master-waluty-karta4-r74-runtime-clean.png'
+          master='master-waluty-karta4.png'
+          clean=cv2.imread(runtime)
+          orig=cv2.imread(master)
+          if clean is None or orig is None or clean.shape[:2]!=(1846,852) or orig.shape[:2]!=(1846,852):
+              raise SystemExit('K4 runtime/master missing or wrong dimensions')
+
+          h,w=clean.shape[:2]; cx,cy=592,1440
+          Y,X=np.mgrid[0:h,0:w]; dx=X-cx; dy=Y-cy
+          r=np.sqrt(dx*dx+dy*dy); ang=np.degrees(np.arctan2(dy,dx))
+
+          radial=np.zeros((181,3),np.float32)
+          for rr in range(181):
+              band=(r>=rr-.5)&(r<rr+.5)&~((ang>-70)&(ang<5))
+              pix=orig[band]
+              if len(pix)==0:
+                  radial[rr]=[8,10,9]; continue
+              mx=pix.max(axis=1); dark=pix[mx<75]
+              if len(dark)<10:
+                  dark=pix[np.argsort(mx)[:max(10,len(pix)//4)]]
+              radial[rr]=np.median(dark,axis=0)
+
+          ri=np.clip(np.rint(r).astype(int),0,180)
+          bg=radial[ri].astype(np.uint8)
+          out=clean.copy(); a0,a1=-62,-8
+          mask=((r>30)&(r<151)&(ang>a0)&(ang<a1)).astype(np.float32)
+          mask=cv2.GaussianBlur(mask,(0,0),3)[:,:,None]
+          out=(bg.astype(np.float32)*mask+out.astype(np.float32)*(1-mask)).astype(np.uint8)
+
+          outer=((r>=148)&(r<180)&(ang>a0)&(ang<a1)).astype(np.float32)
+          outer=cv2.GaussianBlur(outer,(0,0),1.5)[:,:,None]
+          out=(orig.astype(np.float32)*outer+out.astype(np.float32)*(1-outer)).astype(np.uint8)
+
+          hub=(r<32)[:,:,None]
+          out=np.where(hub,clean,out)
+          if not cv2.imwrite(runtime,out):
+              raise SystemExit('failed to overwrite K4 runtime')
+
+          p='sw.js'
+          s=open(p,encoding='utf-8').read()
+          s=s.replace('/* R74 — WALUTY KARTA 4 FINAL SURGICAL CANDIDATE.','/* R75 — WALUTY KARTA 4 NEEDLE CLEAN CANDIDATE.')
+          s=s.replace('R74_K4_ASSETS','R75_K4_ASSETS')
+          s=s.replace('1.3.0-master-r74-waluty-karta4-final-surgical','1.3.0-master-r75-waluty-karta4-needle-clean')
+          s=s.replace('R74 WALUTY KARTA 4 FINAL SURGICAL','R75 WALUTY KARTA 4 NEEDLE CLEAN')
+          s=s.replace("const BUILD_TIME = '16:13';","const BUILD_TIME = '16:45';")
+          s=s.replace("navigator.serviceWorker.register('./sw.js?v=R74-waluty-karta4-final-surgical-1613'","navigator.serviceWorker.register('./sw.js?v=R75-waluty-karta4-needle-clean-1645'")
+          s=s.replace('?v=R74-final-1613','?v=R75-final-1645')
+          open(p,'w',encoding='utf-8').write(s)
+
+          vp='version.json'
+          v=json.load(open(vp,encoding='utf-8'))
+          v['version']='1.3.0-master-r75-waluty-karta4-needle-clean'
+          v['release']='R75 WALUTY KARTA 4 NEEDLE CLEAN'
+          v['buildDate']='02.09.2026'
+          v['buildTime']='16:45'
+          v['notes']=[
+            'WALUTY KARTA 1: FINAL MASTER — bez zmian.',
+            'WALUTY KARTA 2: FINAL MASTER — bez zmian.',
+            'WALUTY KARTA 3: FINAL MASTER — bez zmian.',
+            'WALUTY KARTA 4: zachowano działający R74 i usunięto wyłącznie pozostały statyczny artefakt drugiej wskazówki w tarczy OPŁACALNOŚĆ.',
+            'WALUTY KARTA 4: jedna dynamiczna wskazówka; LIVE, pola, selektory, obliczenia, MARŻA, status i PRZELICZ bez zmian funkcjonalnych.',
+            'Status: kandydat R75 do potwierdzenia na Samsung Galaxy S24 Ultra przed zamrożeniem gałęzi WALUTY.'
+          ]
+          open(vp,'w',encoding='utf-8').write(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - name: Remove one-shot workflow and commit only production files
+        run: |
+          rm -f .github/workflows/r75-finalize.yml
+          git config user.name 'LESZEK ŚLADKOWSKI'
+          git config user.email 'tellechkielce@gmail.com'
+          git add master-waluty-karta4-r74-runtime-clean.png sw.js version.json .github/workflows/r75-finalize.yml
+          git commit -m 'R75: K4 remove remaining second needle artifact'
+          git push origin HEAD:r75-waluty-k4-final-clean
