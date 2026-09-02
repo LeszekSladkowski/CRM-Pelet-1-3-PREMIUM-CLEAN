@@ -1,0 +1,22 @@
+name: R73 Inspect K4 Master
+on:
+  push:
+    branches:
+      - r73-waluty-k4-final-freeze-candidate
+    paths:
+      - '.github/workflows/r73-inspect-master.yml'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify master
+        run: |
+          file master-waluty-karta4.png
+          sha256sum master-waluty-karta4.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r73-k4-master-inspect
+          path: master-waluty-karta4.png
