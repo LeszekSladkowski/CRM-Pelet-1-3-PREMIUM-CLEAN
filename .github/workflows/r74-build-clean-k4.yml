@@ -1,0 +1,86 @@
+name: R74 Build Clean K4 Runtime
+
+on:
+  push:
+    branches:
+      - r74-waluty-k4-final-surgical
+    paths:
+      - '.github/workflows/r74-build-clean-k4.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-clean-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: r74-waluty-k4-final-surgical
+      - name: Install image tooling
+        run: python -m pip install --quiet opencv-python-headless numpy
+      - name: Build clean runtime strictly from approved MASTER
+        run: |
+          python - <<'PY'
+          import cv2, numpy as np, math
+          src='master-waluty-karta4.png'
+          out='master-waluty-karta4-r74-runtime-clean.png'
+          im=cv2.imread(src)
+          if im is None or im.shape[1]!=852 or im.shape[0]!=1846:
+              raise SystemExit('MASTER K4 missing or wrong dimensions')
+          work=im.copy(); H,W=work.shape[:2]
+          def texture_fill(dst_rect, src_rect, feather=5):
+              x1,y1,x2,y2=dst_rect; sx1,sy1,sx2,sy2=src_rect
+              srcp=im[sy1:sy2,sx1:sx2].copy()
+              dh,dw=y2-y1,x2-x1; sh,sw=srcp.shape[:2]
+              patch=np.tile(srcp,((dh+sh-1)//sh,(dw+sw-1)//sw,1))[:dh,:dw]
+              yy=np.minimum(np.arange(dh),np.arange(dh)[::-1]); xx=np.minimum(np.arange(dw),np.arange(dw)[::-1])
+              edge=np.minimum(yy[:,None],xx[None,:]).astype(np.float32)
+              a=np.clip(edge/max(feather,1),0,1); a=cv2.GaussianBlur(a,(0,0),1.1)[:,:,None]
+              base=work[y1:y2,x1:x2].astype(np.float32)
+              work[y1:y2,x1:x2]=(patch.astype(np.float32)*a+base*(1-a)).astype(np.uint8)
+          field_src=(520,395,595,450); texture_src=(80,1240,370,1275); header_bg=(480,72,498,124); gauge_src=(525,1345,575,1405)
+          for dst in [(394,384,542,466),(394,591,542,676),(394,697,542,783),(394,803,538,889)]: texture_fill(dst,field_src,5)
+          for dst in [(620,380,739,468),(620,589,739,678),(620,696,739,785),(620,914,739,997),(620,1016,739,1101)]: texture_fill(dst,field_src,5)
+          texture_fill((392,478,739,557),field_src,7)
+          for dst in [(418,912,635,998),(418,1013,635,1102)]: texture_fill(dst,texture_src,8)
+          texture_fill((68,1230,394,1370),texture_src,10)
+          texture_fill((68,1400,394,1498),texture_src,10)
+          texture_fill((499,78,526,124),header_bg,4)
+          src4=im[82:120,549:577].copy(); hsv=cv2.cvtColor(src4,cv2.COLOR_BGR2HSV)
+          m=((hsv[:,:,2]>120)&(hsv[:,:,1]>25)).astype(np.uint8)*255
+          dx,dy=497,82; sub=work[dy:dy+src4.shape[0],dx:dx+src4.shape[1]]
+          for c in range(3): sub[:,:,c][m>0]=src4[:,:,c][m>0]
+          cx,cy,R=748,99,47
+          samples=[]
+          for y in range(cy-52,cy+53):
+              for x in range(cx-52,cx+53):
+                  r=((x-cx)**2+(y-cy)**2)**0.5
+                  if 48<=r<=51:
+                      p=im[y,x]
+                      if p.max()<130: samples.append(p)
+          edge=np.median(np.array(samples),axis=0) if samples else np.array([6,38,6]); center=np.array([2.,10.,2.]); base=work.copy()
+          for y in range(cy-R,cy+R+1):
+              for x in range(cx-R,cx+R+1):
+                  r=((x-cx)**2+(y-cy)**2)**0.5
+                  if r<R:
+                      t=(r/R)**1.25; col=center*(1-t)+edge*t; a=1.0 if r<R-3 else (R-r)/3
+                      work[y,x]=(col*a+base[y,x]*(1-a)).astype(np.uint8)
+          mask=np.zeros((H,W),np.float32)
+          poly=np.array([[598,1404],[618,1448],[738,1352],[722,1316]],np.int32)
+          cv2.fillConvexPoly(mask,poly,1.0); cv2.line(mask,(605,1428),(732,1336),1.0,56); mask=cv2.GaussianBlur(mask,(0,0),6)
+          bx1,by1,bx2,by2=584,1303,744,1454; srcp=im[gauge_src[1]:gauge_src[3],gauge_src[0]:gauge_src[2]]
+          dh,dw=by2-by1,bx2-bx1; sh,sw=srcp.shape[:2]; patch=np.tile(srcp,((dh+sh-1)//sh,(dw+sw-1)//sw,1))[:dh,:dw]
+          mm=mask[by1:by2,bx1:bx2][:,:,None]; bb=work[by1:by2,bx1:bx2].astype(np.float32)
+          work[by1:by2,bx1:bx2]=(patch.astype(np.float32)*mm+bb*(1-mm)).astype(np.uint8)
+          sm=np.zeros((H,W),np.uint8); cv2.line(sm,(608,1426),(728,1338),255,26); work=cv2.inpaint(work,sm,3,cv2.INPAINT_NS)
+          if not cv2.imwrite(out,work): raise SystemExit('failed to write clean K4')
+          print(out, work.shape)
+          PY
+      - name: Commit generated runtime asset
+        run: |
+          git config user.name 'LESZEK ŚLADKOWSKI'
+          git config user.email 'tellechkielce@gmail.com'
+          git add master-waluty-karta4-r74-runtime-clean.png
+          git commit -m 'R74: add clean runtime K4 asset from approved MASTER'
+          git push origin HEAD:r74-waluty-k4-final-surgical
