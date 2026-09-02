@@ -20,11 +20,12 @@ jobs:
           mkdir -p audit
           cp master-waluty-karta4.png audit/master-waluty-karta4.png
           cp master-waluty-wariant-a-reference.png audit/master-waluty-wariant-a-reference.png
+          cp waluty-k4-r72-live-arrows.png audit/waluty-k4-r72-live-arrows.png
           base64 -d master-waluty-karta4-r69-master.webp > audit/master-waluty-karta4-r69-decoded.webp || true
           file audit/*
           sha256sum audit/*
       - uses: actions/upload-artifact@v4
         with:
-          name: r74-k4-existing-assets
+          name: r74-k4-existing-assets-v2
           path: audit/
           if-no-files-found: error
