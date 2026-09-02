@@ -1,19 +1,18 @@
 {
-  "version": "1.3.0-master-r72-waluty-karta4-single-surface-surgical",
-  "release": "R72 WALUTY KARTA 4 SINGLE SURFACE SURGICAL",
+  "version": "1.3.0-master-r73-waluty-karta4-final-freeze-candidate",
+  "release": "R73 WALUTY KARTA 4 FINAL FREEZE CANDIDATE",
   "buildDate": "02.09.2026",
-  "buildTime": "10:20",
-  "base": "R70 stabilny + R66 KARTY 1-3 FINAL MASTER; chirurgiczna przebudowa wyłącznie KARTY 4.",
+  "buildTime": "14:05",
+  "base": "R70 stabilny + R66 KARTY 1-3 FINAL MASTER; chirurgiczna poprawka wyłącznie KARTY 4.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 4: jeden aktywny canvas 852x1846 z zachowaniem grafiki MASTER.",
-    "WALUTY KARTA 4: usunięto wypalone wartości z pól, podwójne PLN oraz stare wartości marży/statusu.",
-    "WALUTY KARTA 4: usunięto statyczną wskazówkę; pozostaje dokładnie jedna wskazówka obliczana z bieżącej marży w zakresie skali -20%…+20%.",
-    "WALUTY KARTA 4: LIVE używa dokładnie dwóch zielonych strzałek MASTER i obraca je podczas synchronizacji.",
-    "WALUTY KARTA 4: pola zakupu, sprzedaży, transportu, spreadu, selektory walut, KOSZT, ZYSK, MARŻA i PRZELICZ pozostają aktywne.",
-    "Formuła: zakup i transport przeliczane do PLN po kursach LIVE, spread liczony od zakupu, koszt = zakup + transport + spread, zysk = sprzedaż - koszt, marża = zysk / sprzedaż × 100%.",
-    "Status: build testowy na osobnej gałęzi; main pozostaje R70 do czasu odbioru użytkownika."
+    "WALUTY KARTA 4: czysty runtime bez canvas-mask i czarnych prostokątów.",
+    "WALUTY KARTA 4: WALUTY 4/4, aktywne pola zakupu/sprzedaży/transportu/spreadu i selektory walut.",
+    "WALUTY KARTA 4: dokładnie jedna dynamiczna wskazówka opłacalności.",
+    "WALUTY KARTA 4: dwie zielone strzałki LIVE obracają się podczas synchronizacji bez dodatkowego podkładu.",
+    "WALUTY KARTA 4: PRZELICZ pozostaje aktywny; marża i status dopasowują rozmiar do pola.",
+    "Status: kandydat do finalnego testu przed zamrożeniem całej gałęzi WALUTY."
   ]
 }
