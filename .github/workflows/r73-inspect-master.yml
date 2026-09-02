@@ -12,11 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify master
+      - name: Verify existing WALUTY sources
         run: |
           file master-waluty-karta4.png
-          sha256sum master-waluty-karta4.png
+          file master-waluty-wariant-a-reference.png
+          sha256sum master-waluty-karta4.png master-waluty-wariant-a-reference.png
       - uses: actions/upload-artifact@v4
         with:
-          name: r73-k4-master-inspect
-          path: master-waluty-karta4.png
+          name: r73-waluty-source-inspect
+          path: |
+            master-waluty-karta4.png
+            master-waluty-wariant-a-reference.png
