@@ -1,7 +1,9 @@
-name: R69 K4 Clean Raster Preview
+name: R74 K4 Existing Master Audit
 
 on:
   push:
+    branches:
+      - r74-k4-existing-master-audit
     paths:
       - '.github/workflows/r69-k4-clean-raster-preview.yml'
 
@@ -9,16 +11,20 @@ permissions:
   contents: read
 
 jobs:
-  build-preview:
+  audit-existing-assets:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Prepare original K4 for local surgical QA
+      - name: Collect existing K4 assets only
         run: |
-          test -f master-waluty-karta4.png
-          cp master-waluty-karta4.png master-waluty-karta4-original-qa.png
+          mkdir -p audit
+          cp master-waluty-karta4.png audit/master-waluty-karta4.png
+          cp master-waluty-wariant-a-reference.png audit/master-waluty-wariant-a-reference.png
+          base64 -d master-waluty-karta4-r69-master.webp > audit/master-waluty-karta4-r69-decoded.webp || true
+          file audit/*
+          sha256sum audit/*
       - uses: actions/upload-artifact@v4
         with:
-          name: r69-k4-original-qa
-          path: master-waluty-karta4-original-qa.png
+          name: r74-k4-existing-assets
+          path: audit/
           if-no-files-found: error
