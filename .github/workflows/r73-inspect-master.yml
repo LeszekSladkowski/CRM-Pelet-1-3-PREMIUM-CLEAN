@@ -12,14 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify existing WALUTY sources
+      - name: Decode historical R69 payload and verify existing sources
         run: |
-          file master-waluty-karta4.png
-          file master-waluty-wariant-a-reference.png
-          sha256sum master-waluty-karta4.png master-waluty-wariant-a-reference.png
+          base64 -d master-waluty-karta4-r69-master.webp > decoded-r69-k4.webp
+          file master-waluty-karta4.png master-waluty-wariant-a-reference.png decoded-r69-k4.webp
+          sha256sum master-waluty-karta4.png master-waluty-wariant-a-reference.png decoded-r69-k4.webp
       - uses: actions/upload-artifact@v4
         with:
-          name: r73-waluty-source-inspect
+          name: r73-waluty-source-inspect-r69-decoded
           path: |
             master-waluty-karta4.png
             master-waluty-wariant-a-reference.png
+            decoded-r69-k4.webp
