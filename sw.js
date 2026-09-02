@@ -1,23 +1,23 @@
-/* R74 — WALUTY KARTA 4 FINAL SURGICAL CANDIDATE.
+/* R75 — WALUTY KARTA 4 NEEDLE CLEAN CANDIDATE.
    BAZA: stabilny R70. KARTY 1, 2, 3 FINAL MASTER — bez zmian.
    KARTA 4: czysty runtime z zatwierdzonego MASTER-a, bez masek/canvasa.
    LIVE: dokładnie dwie zielone strzałki MASTER. OPŁACALNOŚĆ: jedna dynamiczna wskazówka. */
 importScripts('./sw-r70-stable.js?v=R70-stable-0850');
 
-const R74_K4_ASSETS=[
+const R75_K4_ASSETS=[
   './master-waluty-karta4-r74-runtime-clean.png',
   './waluty-k4-r72-live-arrows.png'
 ];
-if(Array.isArray(ASSETS))R74_K4_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
+if(Array.isArray(ASSETS))R75_K4_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
 
 const r74BasePatchIndexHtml=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
   let out=r74BasePatchIndexHtml(text);
 
-  out=out.replaceAll('1.3.0-master-r70-waluty-karta4-png-master-restore','1.3.0-master-r74-waluty-karta4-final-surgical');
-  out=out.replaceAll('R70 WALUTY KARTA 4 PNG MASTER RESTORE','R74 WALUTY KARTA 4 FINAL SURGICAL');
-  out=out.replace("const BUILD_TIME = '08:50';","const BUILD_TIME = '16:13';");
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R70-waluty-karta4-png-master-restore-0850'","navigator.serviceWorker.register('./sw.js?v=R74-waluty-karta4-final-surgical-1613'");
+  out=out.replaceAll('1.3.0-master-r70-waluty-karta4-png-master-restore','1.3.0-master-r75-waluty-karta4-needle-clean');
+  out=out.replaceAll('R70 WALUTY KARTA 4 PNG MASTER RESTORE','R75 WALUTY KARTA 4 NEEDLE CLEAN');
+  out=out.replace("const BUILD_TIME = '08:50';","const BUILD_TIME = '16:45';");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R70-waluty-karta4-png-master-restore-0850'","navigator.serviceWorker.register('./sw.js?v=R75-waluty-karta4-needle-clean-1645'");
 
   const k4=String.raw`  function renderCurrency4(){const {page,root}=wmBase(4);
     wmHot(root,[30,25,145,155],()=>currencyGo(3),'Powrót');
@@ -37,11 +37,11 @@ r48PatchIndexHtml=function(text){
     const outCost=curConvert(v.cost,'PLN',outCur),outProfit=curConvert(v.profit,'PLN',outCur);
 
     const masterImg=root.querySelector('.wm-master');
-    if(masterImg)masterImg.src='master-waluty-karta4-r74-runtime-clean.png?v=R74-final-1613';
+    if(masterImg)masterImg.src='master-waluty-karta4-r74-runtime-clean.png?v=R75-final-1645';
 
     const arrows=document.createElement('img');
     arrows.className='r74-k4-live-arrows'+(currencyState.loading?' is-spinning':'');
-    arrows.src='waluty-k4-r72-live-arrows.png?v=R74-final-1613';
+    arrows.src='waluty-k4-r72-live-arrows.png?v=R75-final-1645';
     arrows.alt='';arrows.setAttribute('aria-hidden','true');root.appendChild(arrows);
 
     const cx=592,cy=1440,marg=Math.max(-20,Math.min(20,Number(v.margin)||0));

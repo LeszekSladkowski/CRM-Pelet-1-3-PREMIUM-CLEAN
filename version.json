@@ -1,19 +1,15 @@
 {
-  "version": "1.3.0-master-r74-waluty-karta4-final-surgical",
-  "release": "R74 WALUTY KARTA 4 FINAL SURGICAL",
+  "version": "1.3.0-master-r75-waluty-karta4-needle-clean",
+  "release": "R75 WALUTY KARTA 4 NEEDLE CLEAN",
   "buildDate": "02.09.2026",
-  "buildTime": "16:13",
+  "buildTime": "16:45",
   "base": "R70 stabilny + R66 KARTY 1-3 FINAL MASTER; chirurgiczna poprawka wyłącznie KARTY 4.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 4: czysty runtime 852x1846 zbudowany z zatwierdzonego MASTER-a, bez czarnych masek i bez canvasa maskującego.",
-    "WALUTY KARTA 4: usunięto wypalone stare wartości, resztki PLN/EUR/CHF, starą flagę UE w polu zakupu oraz statyczną wskazówkę.",
-    "WALUTY KARTA 4: pozostaje dokładnie jedna dynamiczna wskazówka OPŁACALNOŚCI.",
-    "WALUTY KARTA 4: LIVE używa dokładnie dwóch istniejących zielonych strzałek na przezroczystym tle i obraca je podczas synchronizacji.",
-    "WALUTY KARTA 4: pola zakupu, sprzedaży, transportu, spreadu, selektory walut, KOSZT, ZYSK, MARŻA i PRZELICZ pozostają aktywne.",
-    "WALUTY KARTA 4: poprawiono dopasowanie MARŻY i pełnego statusu OPŁACALNE / NIEOPŁACALNE do zatwierdzonej geometrii.",
-    "Status: kandydat testowy R74 na osobnej gałęzi; main pozostaje bez zmian do odbioru."
+    "WALUTY KARTA 4: zachowano działający R74 i usunięto wyłącznie pozostały statyczny artefakt drugiej wskazówki w tarczy OPŁACALNOŚĆ.",
+    "WALUTY KARTA 4: jedna dynamiczna wskazówka; LIVE, pola, selektory, obliczenia, MARŻA, status i PRZELICZ bez zmian funkcjonalnych.",
+    "Status: kandydat R75 do potwierdzenia na Samsung Galaxy S24 Ultra przed zamrożeniem gałęzi WALUTY."
   ]
 }
