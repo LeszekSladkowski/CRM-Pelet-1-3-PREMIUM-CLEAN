@@ -1,19 +1,22 @@
 {
-  "version": "1.3.0-master-r68-waluty-karta4-final-surgical-candidate",
-  "release": "R68 WALUTY KARTA 4 FINAL SURGICAL CANDIDATE",
-  "buildDate": "01.09.2026",
-  "buildTime": "18:03",
-  "base": "R66 KARTY 1-3 FINAL MASTER; R68 dotyczy wyłącznie ostatniego chirurgicznego czyszczenia KARTY 4.",
+  "version": "1.3.0-master-r69-waluty-karta4-master-live",
+  "release": "R69 WALUTY KARTA 4 MASTER LIVE",
+  "buildDate": "02.09.2026",
+  "buildTime": "05:12",
+  "base": "R66 KARTY 1-3 FINAL MASTER + zatwierdzona grafika MASTER KARTY 4 852x1846.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 4: wymiar/viewport pozostaje dokładnie zatwierdzony — bez zmian.",
-    "WALUTY KARTA 4: wyczyszczono resztki starego nagłówka i odtworzono czyste WALUTY 4/4 PREMIUM.",
-    "WALUTY KARTA 4: poszerzono chirurgiczne czyszczenie pola SPREAD/PROWIZJA oraz pól KOSZT KOŃCOWY i ZYSK.",
-    "WALUTY KARTA 4: wyczyszczono pozostałości pod MARŻA i OPŁACALNE/NIEOPŁACALNE.",
-    "WALUTY KARTA 4: usunięto starą statyczną wskazówkę szerszym czyszczeniem; pozostaje wyłącznie dynamiczna wskazówka wyniku.",
-    "WALUTY KARTA 4: LIVE pozostaje bez obcych nakładek; obracają się tylko istniejące zielone strzałki przez czas synchronizacji około 2,4 s.",
-    "Status: FINAL SURGICAL CANDIDATE — MASTER dopiero po teście użytkownika."
+    "WALUTY KARTA 3: FINAL MASTER / PEŁEN SUKCES — bez zmian.",
+    "WALUTY KARTA 4: zatwierdzony raster MASTER 852x1846 został podpięty 1:1 jako osobny asset.",
+    "WALUTY KARTA 4: ten sam finalny viewport-fit co KARTA 3 — bez ucinania góry i dołu.",
+    "WALUTY KARTA 4: usunięto metodę darkBox i wszystkie widoczne czarne maski/nakładki.",
+    "WALUTY KARTA 4: dane przykładowe rastra są oczyszczane wyłącznie pikselowo wewnątrz glifów, z lokalnym odtworzeniem naturalnej tekstury tła.",
+    "WALUTY KARTA 4: aktywne pola ZAKUP, WALUTA ZAKUPU, SPRZEDAŻ, TRANSPORT, SPREAD/PROWIZJA oraz waluta wyniku.",
+    "WALUTY KARTA 4: KOSZT KOŃCOWY, ZYSK, MARŻA i status są liczone dynamicznie.",
+    "WALUTY KARTA 4: pozostaje dokładnie jedna dynamiczna wskazówka OPŁACALNOŚCI, skala -20..+20 z zatrzymaniem na skrajach.",
+    "WALUTY KARTA 4: PRZELICZ jest aktywny i ma tylko krótkie podświetlenie istniejącej ramki — bez drugiej obwódki.",
+    "WALUTY KARTA 4: LIVE nie używa spinnera ani dodatkowej ikony; obracają się zgodnie z ruchem wskazówek zegara wyłącznie dwa istniejące zielone glify strzałek z MASTER-a przez czas synchronizacji ok. 2,4 s.",
+    "Status grafiki KARTA 4: MASTER BEZAPELACYJNY / ZAMROŻONY. Status funkcjonalny: do finalnego testu użytkownika na Samsung Galaxy S24 Ultra."
   ]
 }
