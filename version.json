@@ -1,15 +1,16 @@
 {
-  "version": "1.3.0-master-r75-waluty-karta4-needle-clean",
-  "release": "R75 WALUTY KARTA 4 NEEDLE CLEAN",
+  "version": "1.3.0-master-r76-waluty-karta4-surgical-gauge-clean",
+  "release": "R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN",
   "buildDate": "02.09.2026",
-  "buildTime": "16:45",
-  "base": "R70 stabilny + R66 KARTY 1-3 FINAL MASTER; chirurgiczna poprawka wyłącznie KARTY 4.",
+  "buildTime": "17:58",
+  "base": "R75 + chirurgiczna korekta wyłącznie rastra runtime KARTY 4 w obszarze prawego ducha starej wskazówki.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 4: zachowano działający R74 i usunięto wyłącznie pozostały statyczny artefakt drugiej wskazówki w tarczy OPŁACALNOŚĆ.",
-    "WALUTY KARTA 4: jedna dynamiczna wskazówka; LIVE, pola, selektory, obliczenia, MARŻA, status i PRZELICZ bez zmian funkcjonalnych.",
-    "Status: kandydat R75 do potwierdzenia na Samsung Galaxy S24 Ultra przed zamrożeniem gałęzi WALUTY."
+    "WALUTY KARTA 4: usunięto wyłącznie pozostały wypalony ciemny artefakt starej wskazówki po prawej stronie tarczy.",
+    "WALUTY KARTA 4: piasta, łuk, podziałka, LIVE, pola, selektory, obliczenia, MARŻA, status i PRZELICZ bez zmian.",
+    "WALUTY KARTA 4: aktywna pozostaje jedna dynamiczna wskazówka.",
+    "Status: kandydat R76 do testu na Samsung Galaxy S24 Ultra; bez statusu FINAL do potwierdzenia użytkownika."
   ]
 }
