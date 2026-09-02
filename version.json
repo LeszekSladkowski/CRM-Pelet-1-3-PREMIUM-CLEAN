@@ -1,22 +1,19 @@
 {
-  "version": "1.3.0-master-r69-waluty-karta4-master-live",
-  "release": "R69 WALUTY KARTA 4 MASTER LIVE",
+  "version": "1.3.0-master-r70-waluty-karta4-png-master-restore",
+  "release": "R70 WALUTY KARTA 4 PNG MASTER RESTORE",
   "buildDate": "02.09.2026",
-  "buildTime": "05:12",
-  "base": "R66 KARTY 1-3 FINAL MASTER + zatwierdzona grafika MASTER KARTY 4 852x1846.",
+  "buildTime": "08:50",
+  "base": "R66 KARTY 1-3 FINAL MASTER + zatwierdzony raster KARTY 4 master-waluty-karta4.png 852x1846.",
   "notes": [
     "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
     "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: FINAL MASTER / PEŁEN SUKCES — bez zmian.",
-    "WALUTY KARTA 4: zatwierdzony raster MASTER 852x1846 został podpięty 1:1 jako osobny asset.",
-    "WALUTY KARTA 4: ten sam finalny viewport-fit co KARTA 3 — bez ucinania góry i dołu.",
-    "WALUTY KARTA 4: usunięto metodę darkBox i wszystkie widoczne czarne maski/nakładki.",
-    "WALUTY KARTA 4: dane przykładowe rastra są oczyszczane wyłącznie pikselowo wewnątrz glifów, z lokalnym odtworzeniem naturalnej tekstury tła.",
-    "WALUTY KARTA 4: aktywne pola ZAKUP, WALUTA ZAKUPU, SPRZEDAŻ, TRANSPORT, SPREAD/PROWIZJA oraz waluta wyniku.",
-    "WALUTY KARTA 4: KOSZT KOŃCOWY, ZYSK, MARŻA i status są liczone dynamicznie.",
-    "WALUTY KARTA 4: pozostaje dokładnie jedna dynamiczna wskazówka OPŁACALNOŚCI, skala -20..+20 z zatrzymaniem na skrajach.",
-    "WALUTY KARTA 4: PRZELICZ jest aktywny i ma tylko krótkie podświetlenie istniejącej ramki — bez drugiej obwódki.",
-    "WALUTY KARTA 4: LIVE nie używa spinnera ani dodatkowej ikony; obracają się zgodnie z ruchem wskazówek zegara wyłącznie dwa istniejące zielone glify strzałek z MASTER-a przez czas synchronizacji ok. 2,4 s.",
-    "Status grafiki KARTA 4: MASTER BEZAPELACYJNY / ZAMROŻONY. Status funkcjonalny: do finalnego testu użytkownika na Samsung Galaxy S24 Ultra."
+    "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
+    "WALUTY KARTA 4: naprawiono krytyczny błąd niewczytywania grafiki po R69.",
+    "WALUTY KARTA 4: źródłem ekranu jest ponownie zatwierdzony master-waluty-karta4.png 852x1846.",
+    "WALUTY KARTA 4: usunięto zależność runtime od master-waluty-karta4-r69-master.webp.",
+    "WALUTY KARTA 4: zachowano aktywne pola, selektory walut, obliczenia KOSZT / ZYSK / MARŻA, PRZELICZ oraz LIVE.",
+    "WALUTY KARTA 4: startowe wartości MASTER: zakup 1240 PLN, sprzedaż 2100 USD, transport 110 CZK, spread 1,2%, waluta wyniku PLN.",
+    "WALUTY KARTA 4: grafika pozostaje MASTER BEZAPELACYJNY; KARTY 1-3 nie zostały naruszone.",
+    "Status funkcjonalny: gotowe do testu użytkownika na Samsung Galaxy S24 Ultra."
   ]
 }
