@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "1.1",
-  "updatedAt": "2026-08-25T21:48:00+02:00",
-  "source": "ChatGPT — rozmowa/projekt: Rozwijaj bazę klientów i dostawców; dane przeniesione do jawnego feedu crm-data.json",
+  "schemaVersion": "1.2",
+  "updatedAt": "2026-09-04T07:45:00+02:00",
+  "source": "L&M Technic Energy — CRM LIVE RYNKI EU; baza scalona bez duplikatów",
   "records": [
     {
       "id": "tartak-olczyk",
@@ -11,9 +11,7 @@
       "city": "Krasocin",
       "type": "PRODUCENT",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "availability": "ENplus / A1 — do potwierdzenia przy kontakcie",
       "certificate": "ENplus",
@@ -24,11 +22,7 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Zapytanie o cenę netto dla 1 / 5 / 10 samochodów miesięcznie",
       "missingInfo": "Cena FCA/DAP, private label 15 kg, worki/paleta, termin płatności",
-      "notes": [
-        "Dostawy w całej Europie",
-        "Przy dużych zamówieniach możliwość worka z nadrukiem klienta",
-        "Zweryfikować aktualny ENplus ID i status"
-      ]
+      "notes": ["Dostawy w całej Europie","Przy dużych zamówieniach możliwość worka z nadrukiem klienta","Zweryfikować aktualny ENplus ID i status"]
     },
     {
       "id": "latgranula-lv",
@@ -37,9 +31,7 @@
       "countryName": "Łotwa",
       "type": "PRODUCENT",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "availability": "ENplus A1",
       "certificate": "ENplus A1",
@@ -52,10 +44,7 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Poprosić o EXW/FCA 24–26 t oraz 1 / 5 / 10 aut",
       "missingInfo": "Cena luzem, 15 kg, private label, aktualny certyfikat, płatność",
-      "notes": [
-        "Sprzedaż dla firm",
-        "Sprawdzić wariant workowany i luzem"
-      ]
+      "notes": ["Sprzedaż dla firm","Sprawdzić wariant workowany i luzem"]
     },
     {
       "id": "heizpellets24-berlin",
@@ -66,9 +55,7 @@
       "region": "Berlin",
       "type": "HURTOWNIA / SIEĆ PARTNERÓW",
       "role": "KLIENT",
-      "roles": [
-        "KLIENT"
-      ],
+      "roles": ["KLIENT"],
       "direction": "TYLKO KLIENT",
       "availability": "A1 — do ustalenia targetu",
       "phone": "+49 30 70171220",
@@ -79,10 +66,7 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Zdobyć osobę zakupową i TARGET DAP Berlin €/t",
       "missingInfo": "Miesięczny wolumen, target DAP, warunki płatności",
-      "notes": [
-        "Ponad 400 partnerów handlowych wg dziennego researchu",
-        "Formularz ma opcję Partnerhändler werden"
-      ]
+      "notes": ["Ponad 400 partnerów handlowych wg dziennego researchu","Formularz ma opcję Partnerhändler werden"]
     },
     {
       "id": "thomlux-berlin",
@@ -94,9 +78,7 @@
       "address": "Klärwerkstraße 1, 13597 Berlin",
       "type": "HURTOWNIA / SPRZEDAWCA",
       "role": "KLIENT",
-      "roles": [
-        "KLIENT"
-      ],
+      "roles": ["KLIENT"],
       "direction": "TYLKO KLIENT",
       "availability": "Pellet / brykiet / pellet słomiany",
       "phone": "+49 30 67460369",
@@ -116,10 +98,7 @@
       "address": "Južná trieda 74, Košice",
       "type": "HURTOWNIA / IMPORT-EXPORT",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA",
-        "KLIENT"
-      ],
+      "roles": ["DOSTAWCA","KLIENT"],
       "direction": "KUPUJE I SPRZEDAJE",
       "availability": "ENplus, worek 15 kg",
       "phone": "+421 903 463 452",
@@ -129,13 +108,8 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Równolegle zapytać o ofertę sprzedaży i TARGET DAP Košice",
       "missingInfo": "Cena zakupu 22–26 t / 5 / 10 aut oraz target DAP",
-      "logistics": {
-        "fullTruck": "21 palet × 1050 kg = 22,05 t"
-      },
-      "notes": [
-        "Obsługuje hurtowo Słowację i Czechy",
-        "Eksport obejmuje też Polskę, Węgry i Włochy"
-      ]
+      "logistics": {"fullTruck": "21 palet × 1050 kg = 22,05 t"},
+      "notes": ["Obsługuje hurtowo Słowację i Czechy","Eksport obejmuje też Polskę, Węgry i Włochy"]
     },
     {
       "id": "essmeister-at",
@@ -144,9 +118,7 @@
       "countryName": "Austria",
       "type": "HANDLOWIEC / DYSTRYBUTOR ENplus",
       "role": "KLIENT",
-      "roles": [
-        "KLIENT"
-      ],
+      "roles": ["KLIENT"],
       "direction": "TYLKO KLIENT",
       "availability": "ENplus AT 366 / worek 15 kg",
       "certificate": "ENplus",
@@ -160,15 +132,8 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Ustalić miesięczne zapotrzebowanie i TARGET DAP Austria",
       "missingInfo": "Target DAP, obecny producent, warunki płatności",
-      "logistics": {
-        "storageCapacity": "ok. 3000 t",
-        "dailyCapacity": "do ok. 250 t / 10 samochodów dziennie",
-        "ownFleet": "własna dystrybucja"
-      },
-      "notes": [
-        "Kontakt sprzedaż: Isabel Digruber +43 7412 52279-27",
-        "Kontakt sprzedaż: Verena Reiter +43 7412 52279-41"
-      ]
+      "logistics": {"storageCapacity":"ok. 3000 t","dailyCapacity":"do ok. 250 t / 10 samochodów dziennie","ownFleet":"własna dystrybucja"},
+      "notes": ["Kontakt sprzedaż: Isabel Digruber +43 7412 52279-27","Kontakt sprzedaż: Verena Reiter +43 7412 52279-41"]
     },
     {
       "id": "pellets-slovakia",
@@ -177,9 +142,7 @@
       "countryName": "Słowacja",
       "type": "DOSTAWCA / PRODUCENT",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "availability": "ENplus A1, 100% świerk, worek 15 kg",
       "certificate": "ENplus A1",
@@ -189,13 +152,8 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Zdobyć FCA oraz DAP Kielce dla 1 / 5 / 10 aut",
       "missingInfo": "Kontakt handlowy, cena, płatność, aktualny ENplus ID",
-      "logistics": {
-        "pallet": "70 worków × 15 kg = 1050 kg/paleta"
-      },
-      "notes": [
-        "Wartość opałowa podana w researchu: 17,53 MJ/kg",
-        "Własna organizacja dostaw samochodowych"
-      ]
+      "logistics": {"pallet":"70 worków × 15 kg = 1050 kg/paleta"},
+      "notes": ["Wartość opałowa podana w researchu: 17,53 MJ/kg","Własna organizacja dostaw samochodowych"]
     },
     {
       "id": "calor-lignorum-sk",
@@ -205,9 +163,7 @@
       "city": "Bratysława",
       "type": "DYSTRYBUTOR / PARTNER",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "DOSTAWCA / PARTNER DYSTRYBUCYJNY",
       "availability": "Deklarowany ENplus — do weryfikacji",
       "certificate": "ENplus — do weryfikacji",
@@ -218,10 +174,7 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Zweryfikować ENplus ID i ofertę samochodową",
       "missingInfo": "ENplus ID, specyfikacja, cena samochodowa, płatność",
-      "notes": [
-        "Kontakt ogólny: info@calorlignorum.com",
-        "Firma aktywnie poszukuje dealerów wg dziennego researchu"
-      ]
+      "notes": ["Kontakt ogólny: info@calorlignorum.com","Firma aktywnie poszukuje dealerów wg dziennego researchu"]
     },
     {
       "id": "hellmuth-energie-de",
@@ -231,9 +184,7 @@
       "region": "Saksonia",
       "type": "DYSTRYBUTOR / HURTOWNIA",
       "role": "KLIENT",
-      "roles": [
-        "KLIENT"
-      ],
+      "roles": ["KLIENT"],
       "direction": "TYLKO KLIENT",
       "availability": "Pellet luzem, workowany i pełne palety",
       "priority": "A",
@@ -242,10 +193,7 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców",
       "nextFollowUp": "Zdobyć osobę odpowiedzialną za zakupy i TARGET DAP Saksonia",
       "missingInfo": "Telefon/mail zakupów, target DAP, wolumen 26/130/260 t, płatność",
-      "notes": [
-        "Działa również w Turyngii, Saksonii-Anhalt i Brandenburgii",
-        "Logistycznie korzystny kierunek dla dostaw z Polski"
-      ]
+      "notes": ["Działa również w Turyngii, Saksonii-Anhalt i Brandenburgii","Logistycznie korzystny kierunek dla dostaw z Polski"]
     },
     {
       "id": "hranex-cz",
@@ -254,9 +202,7 @@
       "countryName": "Czechy",
       "type": "PRODUCENT",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "availability": "ENplus A1 6 mm, worek 15 kg",
       "certificate": "ENplus A1",
@@ -272,15 +218,8 @@
       "priceDate": "2026-08-20",
       "nextFollowUp": "Uzyskać cenę FCA pełnego auta oraz wariant 5 i 10 aut/mies.",
       "missingInfo": "Cena FCA 1/5/10 aut, koszt/dostępność transportu, termin płatności, ważność ceny",
-      "logistics": {
-        "pallet": "70 worków × 15 kg = 1050 kg/paleta"
-      },
-      "notes": [
-        "Zamówienia pelletu: +420 724 354 022, pelety@hranex.cz",
-        "Wartość opałowa 17,48 MJ/kg, popiół do 0,33% wg dziennego researchu",
-        "OSTATNIA WERYFIKACJA CENY: 20.08.2026",
-        "Cena traktowana jako benchmark Czechy, nie jako oferta samochodowa."
-      ],
+      "logistics": {"pallet":"70 worków × 15 kg = 1050 kg/paleta"},
+      "notes": ["Zamówienia pelletu: +420 724 354 022, pelety@hranex.cz","Wartość opałowa 17,48 MJ/kg, popiół do 0,33% wg dziennego researchu","OSTATNIA WERYFIKACJA CENY: 20.08.2026","Cena traktowana jako benchmark Czechy, nie jako oferta samochodowa."],
       "validFrom": "2026-08-20"
     },
     {
@@ -291,9 +230,7 @@
       "city": "Poznań",
       "type": "HURTOWNIA / DOSTAWCA",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "availability": "Pellet świerkowy — benchmark",
       "phone": "+48 61 875 07 15",
@@ -316,9 +253,7 @@
       "city": "Pilchowice",
       "type": "HURTOWNIA",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "availability": "Pełne auta od 24 t; ENplus A1; worki 15 kg",
       "certificate": "ENplus A1",
@@ -330,10 +265,7 @@
       "priceType": "OFERTA INDYWIDUALNA",
       "nextFollowUp": "Poprosić o tabelę cen 1 / 5 / 10 aut miesięcznie: osobno dostawa i FCA/odbiór własny.",
       "missingInfo": "Porównywalna cena dla 1/5/10 aut, DAP i FCA/odbiór własny, ważność ceny, płatność",
-      "notes": [
-        "Pełne samochody od 24 t.",
-        "Odbiór własny w Pilchowicach: deklarowany rabat 50 PLN/t."
-      ]
+      "notes": ["Pełne samochody od 24 t.","Odbiór własny w Pilchowicach: deklarowany rabat 50 PLN/t."]
     },
     {
       "id": "ct-pelety-cz",
@@ -342,9 +274,7 @@
       "countryName": "Czechy",
       "type": "HURTOWNIA",
       "role": "DOSTAWCA",
-      "roles": [
-        "DOSTAWCA"
-      ],
+      "roles": ["DOSTAWCA"],
       "direction": "TYLKO DOSTAWCA",
       "priority": "A",
       "availability": "Model pełnego auta: 24 palety ≈ 23,8 t = 1584 worki × 15 kg; indywidualne warunki przy powtarzalnych dostawach",
@@ -353,13 +283,132 @@
       "sourceLabel": "ChatGPT — Rozwijaj bazę klientów i dostawców — wieczorny przegląd 25.08.2026",
       "nextFollowUp": "Uzyskać aktualną cenę pełnego samochodu oraz cenę kontraktową przy 5 i 10 autach miesięcznie.",
       "missingInfo": "Cena pełnego auta, cena kontraktowa 5/10 aut, incoterm/dostawa, ważność ceny i płatność",
-      "logistics": {
-        "truck": "24 palety ≈ 23,8 t",
-        "bags": "1584 × 15 kg"
-      },
-      "notes": [
-        "Przy powtarzalnych dostawach deklarowane są indywidualne warunki."
-      ]
+      "logistics": {"truck":"24 palety ≈ 23,8 t","bags":"1584 × 15 kg"},
+      "notes": ["Przy powtarzalnych dostawach deklarowane są indywidualne warunki."]
+    },
+    {
+      "id": "krol-pelletu-pl",
+      "name": "Król Pelletu",
+      "countryCode": "PL",
+      "countryName": "Polska",
+      "type": "PRODUCENT / DOSTAWCA",
+      "role": "DOSTAWCA",
+      "roles": ["DOSTAWCA"],
+      "direction": "TYLKO DOSTAWCA",
+      "availability": "Pellet ENplus A1 15 kg — warunki hurtowe do potwierdzenia",
+      "certificate": "ENplus A1 — deklarowane; ID do weryfikacji",
+      "priority": "A",
+      "addedAt": "2026-09-04T07:30:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — kandydat handlowy",
+      "nextFollowUp": "Pozyskać pisemną ofertę 24 / 48 / 96 t oraz EXW i DAP Kielce",
+      "missingInfo": "ENplus ID, masa palety, cena netto/t, MOQ, płatność, ważność ceny",
+      "notes": ["Nie używać ceny internetowej jako kosztu zakupu bez potwierdzenia B2B."]
+    },
+    {
+      "id": "mp-ekopaliva-cz",
+      "name": "MP-Ekopaliva",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "DYSTRYBUTOR / SPRZEDAWCA",
+      "role": "KLIENT",
+      "roles": ["KLIENT"],
+      "direction": "TYLKO KLIENT",
+      "availability": "Pellet ENplus A1 15 kg; kanał detal/hurt",
+      "priority": "A",
+      "addedAt": "2026-09-04T07:31:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — potencjalny odbiorca",
+      "nextFollowUp": "Zdobyć TARGET DAP CZK/t dla 1 / 2 / 4 samochodów miesięcznie",
+      "missingInfo": "Osoba zakupowa, target DAP, miesięczny wolumen, płatność",
+      "logistics": {"pallet":"65 × 15 kg = 975 kg — do ponownego potwierdzenia"}
+    },
+    {
+      "id": "stark-cz",
+      "name": "ŠTARK s.r.o.",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "SPRZEDAWCA / DYSTRYBUTOR",
+      "role": "KLIENT",
+      "roles": ["KLIENT"],
+      "direction": "TYLKO KLIENT",
+      "availability": "Sygnał braku magazynowego pelletu A1 — wymaga ponownej weryfikacji",
+      "priority": "A+",
+      "addedAt": "2026-09-04T07:32:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — sygnał presji zakupowej",
+      "nextFollowUp": "Pilnie ustalić zapotrzebowanie i TARGET DAP dla pełnego auta",
+      "missingInfo": "Aktualny stan magazynu, target DAP, wolumen, osoba zakupowa, płatność",
+      "notes": ["Priorytet wynika z sygnału braku towaru; potwierdzić telefonicznie przed ofertą."]
+    },
+    {
+      "id": "pecka-pelety-cz",
+      "name": "Pecka Pelety",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "SPRZEDAWCA / SKŁAD",
+      "role": "KLIENT",
+      "roles": ["KLIENT"],
+      "direction": "TYLKO KLIENT",
+      "availability": "Sygnał braku magazynowego A1 Premium — do ponownej weryfikacji",
+      "priority": "A",
+      "addedAt": "2026-09-04T07:33:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — potencjalny odbiorca",
+      "nextFollowUp": "Ustalić pilne zapotrzebowanie i TARGET DAP CZK/t",
+      "missingInfo": "Wolumen, target DAP, osoba zakupowa, termin płatności"
+    },
+    {
+      "id": "doprava-slavik-cz",
+      "name": "Doprava Slavík",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "DYSTRYBUTOR / LOGISTYKA",
+      "role": "KLIENT",
+      "roles": ["KLIENT"],
+      "direction": "TYLKO KLIENT",
+      "availability": "Aktywny obrót pelletem; potencjalny kanał B2B",
+      "priority": "B",
+      "addedAt": "2026-09-04T07:34:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — potencjalny odbiorca",
+      "nextFollowUp": "Pozyskać target DAP i miesięczny wolumen",
+      "missingInfo": "Osoba zakupowa, target DAP, wolumen, płatność"
+    },
+    {
+      "id": "paliva-drevosrot-cz",
+      "name": "Paliva Dřevošrot",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "DYSTRYBUTOR / SKŁAD",
+      "role": "KLIENT",
+      "roles": ["KLIENT"],
+      "direction": "TYLKO KLIENT",
+      "availability": "Pellet workowany / Big Bag / luzem; potencjalny odbiorca B2B",
+      "priority": "A",
+      "addedAt": "2026-09-04T07:35:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — potencjalny odbiorca",
+      "nextFollowUp": "Zdobyć TARGET DAP dla pełnego auta 23–24 t i wolumen miesięczny",
+      "missingInfo": "Osoba zakupowa, target DAP, wolumen, płatność"
+    },
+    {
+      "id": "pelety-novy-bor-cz",
+      "name": "Pelety Nový Bor",
+      "countryCode": "CZ",
+      "countryName": "Czechy",
+      "type": "DYSTRYBUTOR / SPRZEDAWCA",
+      "role": "KLIENT",
+      "roles": ["KLIENT"],
+      "direction": "TYLKO KLIENT",
+      "availability": "Aktywny kanał sprzedaży pelletu importowanego; potencjalny odbiorca polskiego A1",
+      "priority": "A",
+      "addedAt": "2026-09-04T07:36:00+02:00",
+      "sourceDate": "2026-09-04",
+      "sourceLabel": "Dzienne rozwijanie bazy L&M — potencjalny odbiorca",
+      "nextFollowUp": "Pozyskać TARGET DAP i wolumen 1 / 2 / 4 auta miesięcznie",
+      "missingInfo": "Osoba zakupowa, target DAP, wolumen, płatność",
+      "logistics": {"pallet":"70 × 15 kg = 1050 kg — do ponownego potwierdzenia"}
     }
   ]
 }
