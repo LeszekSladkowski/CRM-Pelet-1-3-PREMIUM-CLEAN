@@ -1,14 +1,13 @@
 {
-  "version": "1.3.0-master-r84-clean-base",
-  "release": "R84 CLEAN BASE",
+  "version": "1.3.0-master-r85-clean-base-hard-prune",
+  "release": "R85 CLEAN BASE HARD PRUNE",
   "buildDate": "04.09.2026",
-  "buildTime": "13:35",
-  "base": "Stabilna baza R76 + aktualne crm-data.json i assistant-feed.json. Eksperymentalne runtime/bridge R79-R83 wyłączone.",
+  "buildTime": "13:52",
+  "base": "Stabilna baza R76 + aktualne crm-data.json i assistant-feed.json.",
   "notes": [
-    "Chirurgiczny porządek po nieudanych eksperymentach R79-R83.",
-    "Runtime wrócił do ostatniej stabilnej bazy R76 przed przebudową końcowych kart RYNKI EU.",
-    "Zachowano aktualną bazę kontrahentów i feed asystenta.",
-    "Magazyn backupów jest automatycznie ograniczany do R38 MEGA STABLE + 2 najnowszych lokalnych kopii.",
-    "Dalsza przebudowa RYNKI EU będzie wykonywana po jednej karcie, testowanej i zatwierdzanej przed rozpoczęciem następnej."
+    "Naprawiono nieskuteczne czyszczenie magazynu backupow z R84.",
+    "R85 porzadkuje bezposrednio IndexedDB crm_pelet_13_backups_v1.",
+    "Pozostaje R38 MEGA STABLE z katalogu oraz maksymalnie 2 najnowsze lokalne kopie.",
+    "Dalsza przebudowa RYNKI EU bedzie wykonywana po jednej karcie."
   ]
 }
