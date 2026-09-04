@@ -1,16 +1,15 @@
 {
-  "version": "1.3.0-master-r76-waluty-karta4-surgical-gauge-clean",
-  "release": "R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN",
-  "buildDate": "02.09.2026",
-  "buildTime": "17:58",
-  "base": "R75 + chirurgiczna korekta wyłącznie rastra runtime KARTY 4 w obszarze prawego ducha starej wskazówki.",
+  "version": "1.3.0-master-r79-rynki-eu-live-company-branch",
+  "release": "R79 RYNKI EU LIVE COMPANY BRANCH",
+  "buildDate": "04.09.2026",
+  "buildTime": "11:32",
+  "base": "R78 baza CRM + zamrożony runtime R76; chirurgiczne dołączenie 4 końcowych okien firmy w gałęzi RYNKI EU.",
   "notes": [
-    "WALUTY KARTA 1: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 2: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 3: FINAL MASTER — bez zmian.",
-    "WALUTY KARTA 4: usunięto wyłącznie pozostały wypalony ciemny artefakt starej wskazówki po prawej stronie tarczy.",
-    "WALUTY KARTA 4: piasta, łuk, podziałka, LIVE, pola, selektory, obliczenia, MARŻA, status i PRZELICZ bez zmian.",
-    "WALUTY KARTA 4: aktywna pozostaje jedna dynamiczna wskazówka.",
-    "Status: kandydat R76 do testu na Samsung Galaxy S24 Ultra; bez statusu FINAL do potwierdzenia użytkownika."
+    "DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS działają na jednym wspólnym rekordzie firmy.",
+    "Zmiana statusu, ceny, notatki lub zadania jest zapisywana lokalnie i natychmiast dostępna pomiędzy czterema oknami.",
+    "SYNCHRONIZUJ zachowuje istniejący mechanizm poboru crm-data.json i assistant-feed.json.",
+    "GENERUJ OFERTĘ przekazuje bieżącego kontrahenta do kontekstu modułu OFERTY.",
+    "Wcześniejsze zatwierdzone karty RYNKI EU i WALUTY pozostają bez zmian.",
+    "Przygotowany kontrakt danych pod dalsze zasilanie wspólnego CRM 1.3 przez stronę i sklep; zewnętrzny zapis zwrotny wymaga osobnego uwierzytelnionego endpointu."
   ]
 }

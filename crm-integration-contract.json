@@ -1,0 +1,22 @@
+{
+  "schema": "LM_TECHNIC_CRM_1_3_INTEGRATION_V1",
+  "updatedAt": "2026-09-04T11:32:00+02:00",
+  "systemOfRecord": "CRM Pelet 1.3",
+  "sources": ["crm-data.json", "assistant-feed.json", "website", "shop"],
+  "entityKey": "company.id",
+  "sharedDomains": {
+    "company": ["name","countryCode","countryName","city","region","address","type","role","roles","direction","phone","email","contactPerson","website","nip"],
+    "commercial": ["priceText","priceType","priceDate","validFrom","validTo","incoterm","payment","availability","logistics","lastOfferDate","priceHistory"],
+    "crm": ["status","statusHistory","priority","nextFollowUp","tasks","notesHistory","aiSummary","updatedAt","updatedBy"],
+    "web": ["leadSource","utmSource","utmCampaign","consent","inquiryType","message"],
+    "shop": ["customerId","orderId","cartId","productId","quantity","unit","deliveryPostcode","deliveryCountry","orderStatus","paymentStatus"]
+  },
+  "eventTypes": ["COMPANY_UPDATED","PRICE_UPDATED","STATUS_UPDATED","NOTE_ADDED","TASK_ADDED","LEAD_CREATED","QUOTE_REQUESTED","ORDER_CREATED","ORDER_STATUS_CHANGED"],
+  "rules": [
+    "Nigdy nie twórz duplikatu, jeśli istnieje company.id lub jednoznaczne dopasowanie NIP/VAT/email.",
+    "Każda zmiana zachowuje updatedAt, updatedBy i historię pola handlowego/statusu.",
+    "Dane strony i sklepu mają zasilać ten sam rekord CRM, a nie osobne katalogi.",
+    "Cena benchmarkowa nie może nadpisać ceny potwierdzonej handlowo bez jawnego typu i źródła.",
+    "Zapis z urządzenia do centralnego repozytorium wymaga uwierzytelnionego endpointu; nie umieszczaj tokenu GitHub w kodzie klienta."
+  ]
+}

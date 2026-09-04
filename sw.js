@@ -1,124 +1,64 @@
-/* R76 — WALUTY KARTA 4 SURGICAL GAUGE CLEAN CANDIDATE.
-   BAZA: stabilny R70. KARTY 1, 2, 3 FINAL MASTER — bez zmian.
-   KARTA 4: czysty runtime z zatwierdzonego MASTER-a, bez masek/canvasa.
-   LIVE: dokładnie dwie zielone strzałki MASTER. OPŁACALNOŚĆ: jedna dynamiczna wskazówka. */
-importScripts('./sw-r70-stable.js?v=R70-stable-0850');
+/* R79 — RYNKI EU: 4 ostatnie okna firmy jako żywe karty 1:1 na wspólnym rekordzie CRM.
+   BAZA: R76 bez zmian. R79 dodaje wyłącznie końcówkę gałęzi RYNKI EU.
+   DANE FIRMY ↔ CENY I OFERTA ↔ NOTATKI ASYSTENTA ↔ AKCJE I STATUS.
+   Jedno źródło stanu per firma: crm13_r79_company_state. */
+importScripts('./sw-r76-stable.js?v=R76-frozen');
 
-const R76_K4_ASSETS=[
-  './master-waluty-karta4-r74-runtime-clean.png',
-  './waluty-k4-r72-live-arrows.png'
-];
-if(Array.isArray(ASSETS))R76_K4_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
+const R79_ASSETS=['./r79-dane-firmy-master.jpg','./r79-ceny-oferta-master.jpg','./r79-notatki-master.jpg','./r79-akcje-status-master.jpg'];
+if(Array.isArray(ASSETS))R79_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
 
-const r74BasePatchIndexHtml=r48PatchIndexHtml;
+const r79BasePatchIndexHtml=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
-  let out=r74BasePatchIndexHtml(text);
+  let out=r79BasePatchIndexHtml(text);
+  out=out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r79-rynki-eu-live-company-branch');
+  out=out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R79 RYNKI EU LIVE COMPANY BRANCH');
+  out=out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '04.09.2026';");
+  out=out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '11:32';");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R79-rynki-eu-live-company-1132'");
 
-  out=out.replaceAll('1.3.0-master-r70-waluty-karta4-png-master-restore','1.3.0-master-r76-waluty-karta4-surgical-gauge-clean');
-  out=out.replaceAll('R70 WALUTY KARTA 4 PNG MASTER RESTORE','R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN');
-  out=out.replace("const BUILD_TIME = '08:50';","const BUILD_TIME = '17:58';");
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R70-waluty-karta4-png-master-restore-0850'","navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'");
-
-  const k4=String.raw`  function renderCurrency4(){const {page,root}=wmBase(4);
-    wmHot(root,[30,25,145,155],()=>currencyGo(3),'Powrót');
-    const liveBtn=wmHot(root,[660,25,170,165],()=>currencyRefresh(true),'LIVE — synchronizuj kursy');
-    liveBtn.classList.add('r74-k4-live-hot');
-
-    if(!localStorage.getItem('crm13_k4_r70_master_init')){
-      currencyState.buyPrice=1240;currencyState.buyCurrency='PLN';
-      currencyState.salePrice=2100;currencyState.saleCurrency='USD';
-      currencyState.transport=110;currencyState.transportCurrency='CZK';
-      currencyState.spreadPct=1.2;currencyState.profitCurrency='PLN';
-      curPersist();localStorage.setItem('crm13_k4_r70_master_init','1');
-    }
-    if(!currencyState.profitCurrency)currencyState.profitCurrency='PLN';
-
-    const v=curProfit(),good=v.profit>=0,outCur=currencyState.profitCurrency;
-    const outCost=curConvert(v.cost,'PLN',outCur),outProfit=curConvert(v.profit,'PLN',outCur);
-
-    const masterImg=root.querySelector('.wm-master');
-    if(masterImg)masterImg.src='master-waluty-karta4-r74-runtime-clean.png?v=R76-final-1758';
-
-    const arrows=document.createElement('img');
-    arrows.className='r74-k4-live-arrows'+(currencyState.loading?' is-spinning':'');
-    arrows.src='waluty-k4-r72-live-arrows.png?v=R76-final-1758';
-    arrows.alt='';arrows.setAttribute('aria-hidden','true');root.appendChild(arrows);
-
-    const cx=592,cy=1440,marg=Math.max(-20,Math.min(20,Number(v.margin)||0));
-    const ratio=(marg+20)/40,deg=192.6+(ratio*154.8);
-    const needle=document.createElement('div');
-    needle.className='r74-k4-needle';
-    needle.style.left=(cx/852*100)+'%';
-    needle.style.top=(cy/1846*100)+'%';
-    needle.style.width=(137/852*100)+'%';
-    needle.style.transform='translateY(-50%) rotate('+deg+'deg)';
-    needle.setAttribute('aria-hidden','true');
-    root.appendChild(needle);
-
-    const buy=wmEdit(root,[399,390,214,77],currencyState.buyPrice,n=>currencyState.buyPrice=n,'r74-k4-edit r74-k4-input');
-    wmSelect(root,[625,388,143,80],currencyState.buyCurrency,c=>currencyState.buyCurrency=c);
-    wmDyn(root,[642,399,96,58],currencyState.buyCurrency,'gold r74-k4-code');
-    wmSelect(root,[390,493,378,78],currencyState.buyCurrency,c=>currencyState.buyCurrency=c);
-    wmDyn(root,[405,503,330,58],CURRENCY_FLAGS[currencyState.buyCurrency]+' '+currencyState.buyCurrency+' — '+CURRENCY_NAMES[currencyState.buyCurrency],'gold r74-k4-buycurrency');
-
-    const sale=wmEdit(root,[399,597,214,78],currencyState.salePrice,n=>currencyState.salePrice=n,'r74-k4-edit r74-k4-input');
-    wmSelect(root,[625,597,143,80],currencyState.saleCurrency,c=>currencyState.saleCurrency=c);
-    wmDyn(root,[642,608,96,58],currencyState.saleCurrency,'gold r74-k4-code');
-
-    const transport=wmEdit(root,[399,703,214,78],currencyState.transport,n=>currencyState.transport=n,'r74-k4-edit r74-k4-input');
-    wmSelect(root,[625,703,143,80],currencyState.transportCurrency,c=>currencyState.transportCurrency=c);
-    wmDyn(root,[642,714,96,58],currencyState.transportCurrency,'gold r74-k4-code');
-
-    const spread=wmEdit(root,[399,809,214,78],currencyState.spreadPct,n=>currencyState.spreadPct=n,'r74-k4-edit r74-k4-input');
-    wmHot(root,[625,809,143,80],()=>{spread.focus();spread.select();toast('SPREAD / PROWIZJA — wpisz wartość w %')},'Spread / prowizja');
-
-    wmSelect(root,[625,941,143,79],outCur,c=>{currencyState.profitCurrency=c;render()});
-    wmDyn(root,[642,952,96,58],outCur,'gold r74-k4-code');
-    wmSelect(root,[625,1044,143,79],outCur,c=>{currencyState.profitCurrency=c;render()});
-    wmDyn(root,[642,1055,96,58],outCur,'gold r74-k4-code');
-
-    wmDyn(root,[418,944,217,70],curFmt(outCost,2),'gold r74-k4-cost');
-    wmDyn(root,[418,1047,217,70],curFmt(outProfit,2),good?'green r74-k4-profit':'red r74-k4-profit');
-    wmDyn(root,[74,1260,320,92],curFmt(v.margin,2)+'%',good?'green r74-k4-margin':'red r74-k4-margin');
-    wmDyn(root,[74,1408,320,78],good?'OPŁACALNE':'NIEOPŁACALNE',good?'green r74-k4-status':'red r74-k4-status');
-
-    const calcBtn=wmHot(root,[53,1534,746,128],()=>{
-      [buy,sale,transport,spread].forEach(i=>i.blur());curPersist();
-      calcBtn.classList.remove('r74-k4-calculated');void calcBtn.offsetWidth;calcBtn.classList.add('r74-k4-calculated');
-      setTimeout(()=>{calcBtn.classList.remove('r74-k4-calculated');render();toast('✓ OPŁACALNOŚĆ PRZELICZONA')},520);
-    },'Przelicz opłacalność');
-    calcBtn.classList.add('r74-k4-calc');
-    wmBottom(root,4);return page}
-  function renderCurrency(){`;
-
-  out=out.replace(/  function renderCurrency4\(\)\{[\s\S]*?\n  function renderCurrency\(\)\{/,k4);
-
-  const r74Style=String.raw`<style id="r74-waluty-karta4-final-surgical">
-@keyframes r74LiveSpin{to{transform:rotate(360deg)}}
-.wm-page[data-card="4"]{position:relative!important;width:100%!important;min-height:100dvh!important;overflow:visible!important;background:#000!important;display:flex!important;align-items:flex-start!important;justify-content:flex-start!important}
-.wm-page[data-card="4"] .wm-canvas{position:relative!important;width:min(98vw,calc((100dvh - 12px) * 852 / 1846),852px)!important;max-width:852px!important;margin:6px auto!important;overflow:hidden!important;background:#000!important}
-.wm-page[data-card="4"] .wm-master{width:100%!important;height:auto!important;display:block!important;object-fit:fill!important}
-.wm-page[data-card="4"] .wm-edit,.wm-page[data-card="4"] .wm-dyn{z-index:24!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;font-family:"Arial Narrow","Roboto Condensed",Arial,sans-serif!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important;overflow:visible!important}
-.wm-page[data-card="4"] .wm-edit{padding:0!important;text-align:left!important;color:#fff!important;font-weight:900!important;font-size:clamp(20px,5.5vw,43px)!important;line-height:1!important}
-.wm-page[data-card="4"] .wm-edit:focus{outline:0!important;box-shadow:none!important}
-.wm-page[data-card="4"] .r74-k4-code{justify-content:flex-start!important;color:#ffd34c!important;font-size:clamp(16px,4.15vw,32px)!important;font-weight:900!important;line-height:1!important}
-.wm-page[data-card="4"] .r74-k4-buycurrency{justify-content:flex-start!important;color:#ffd34c!important;font-size:clamp(11px,2.85vw,23px)!important;font-weight:850!important;line-height:1!important}
-.wm-page[data-card="4"] .r74-k4-cost,.wm-page[data-card="4"] .r74-k4-profit{justify-content:center!important;text-align:center!important;font-size:clamp(17px,4.45vw,35px)!important;font-weight:950!important;line-height:1!important}
-.wm-page[data-card="4"] .r74-k4-margin{justify-content:center!important;text-align:center!important;font-size:clamp(22px,6.0vw,48px)!important;font-weight:950!important;line-height:1!important}
-.wm-page[data-card="4"] .r74-k4-status{justify-content:center!important;text-align:center!important;font-size:clamp(14px,3.75vw,29px)!important;font-weight:950!important;line-height:1!important}
-.wm-page[data-card="4"] .green{color:#76ff00!important;text-shadow:0 0 10px rgba(118,255,0,.42)!important}
-.wm-page[data-card="4"] .red{color:#ff4239!important;text-shadow:0 0 9px rgba(255,42,30,.35)!important}
-.wm-page[data-card="4"] .gold{color:#ffd34c!important}
-.wm-page[data-card="4"] .wm-hot{z-index:36!important;background:transparent!important;box-shadow:none!important;touch-action:manipulation!important}
-.wm-page[data-card="4"] .wm-select{z-index:38!important}
-.wm-page[data-card="4"] .wm-live-ring,.wm-page[data-card="4"] .wm-live-spinner,.wm-page[data-card="4"] .wm-profit-recalc{display:none!important;visibility:hidden!important;opacity:0!important;animation:none!important;border:0!important;background:transparent!important;box-shadow:none!important}
-.wm-page[data-card="4"] .wm-hot::before,.wm-page[data-card="4"] .wm-hot::after{content:none!important;display:none!important}
-.wm-page[data-card="4"] .r74-k4-live-arrows{position:absolute!important;z-index:28!important;left:83.0986%!important;top:3.1961%!important;width:9.3897%!important;height:auto!important;pointer-events:none!important;transform-origin:50% 50%!important;background:transparent!important}
-.wm-page[data-card="4"] .r74-k4-live-arrows.is-spinning{animation:r74LiveSpin .82s linear infinite!important}
-.wm-page[data-card="4"] .r74-k4-needle{position:absolute!important;z-index:27!important;height:0.42%!important;min-height:4px!important;border-radius:999px!important;transform-origin:0 50%!important;pointer-events:none!important;background:linear-gradient(90deg,#777 0%,#eee9dc 58%,#fff9e9 100%)!important;box-shadow:0 0 0 3px rgba(15,15,15,.88),0 0 5px rgba(255,255,255,.24)!important}
-.wm-page[data-card="4"] .r74-k4-calc{border:0!important;border-radius:999px!important}
-.wm-page[data-card="4"] .r74-k4-calc.wm-pressed,.wm-page[data-card="4"] .r74-k4-calc.r74-k4-calculated{background:rgba(118,255,0,.012)!important;box-shadow:0 0 17px 4px rgba(118,255,0,.62),inset 0 0 11px rgba(118,255,0,.12)!important;transform:scale(.998)!important}
+  const css=String.raw`<style id="r79-company-live-css">
+.r79-company{position:relative;width:min(calc(100vw - 4px),852px)!important;height:auto!important;aspect-ratio:852/1846;background:#000;overflow:hidden;margin:0 auto}
+.r79-company .r79-master{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none}
+.r79-hit{position:absolute;z-index:40;border:0;background:transparent;padding:0;touch-action:manipulation}
+.r79-live{position:absolute;z-index:30;color:#fff;font-family:Arial,"Roboto Condensed",sans-serif;font-weight:800;line-height:1.12;overflow:hidden;text-shadow:0 1px 3px #000;background:rgba(0,0,0,.78);border-radius:5px;padding:2px 4px;display:flex;align-items:center}
+.r79-live.gold{color:#ffd13b}.r79-live.green{color:#72ff00}.r79-live.red{color:#ff4c43}.r79-live.blue{color:#4fc7ff}
+.r79-edit{position:absolute;z-index:45;background:rgba(2,8,8,.92);border:1px solid #967300;color:#fff;border-radius:7px;padding:4px 6px;font:800 clamp(11px,3vw,20px)/1.1 Arial,sans-serif;outline:none}
+.r79-edit:focus{border-color:#76ff00;box-shadow:0 0 9px rgba(118,255,0,.5)}
+.r79-sync-spin{position:absolute;z-index:32;left:84.3%;top:2.3%;width:9.2%;aspect-ratio:1;display:grid;place-items:center;color:#76ff00;font-size:clamp(28px,8vw,58px);font-weight:1000;text-shadow:0 0 10px #39ff00;pointer-events:none;opacity:0}
+.r79-company.syncing .r79-sync-spin{opacity:1;animation:r79spin .85s linear infinite}@keyframes r79spin{to{transform:rotate(360deg)}}
+.r79-toastmark{position:absolute;z-index:60;left:50%;top:9%;transform:translateX(-50%);background:#061006;border:1px solid #76ff00;color:#8cff4a;border-radius:999px;padding:7px 15px;font-weight:900;box-shadow:0 0 14px rgba(118,255,0,.45)}
 </style>`;
-  out=out.replace('</head>',r74Style+'\n</head>');
+
+  const js=String.raw`<script id="r79-company-live-js">
+(()=>{
+ const W=852,H=1846,KEY='crm13_r79_company_state';
+ const IMG={data:'r79-dane-firmy-master.jpg',offer:'r79-ceny-oferta-master.jpg',notes:'r79-notatki-master.jpg',status:'r79-akcje-status-master.jpg'};
+ const esc=v=>String(v??'').replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m]));
+ const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
+ const saveAll=m=>{localStorage.setItem(KEY,JSON.stringify(m));localStorage.setItem('crm13_r79_updated_at',new Date().toISOString())};
+ const baseRecord=()=>{try{return getCompanyById(state.selectedCompany)||r15AllCompanies?.().find(x=>x.id===state.selectedCompany)||null}catch{return null}};
+ function model(){const b=baseRecord();if(!b)return null;const all=load(),old=all[b.id]||{};return {...b,...old,id:b.id,_view:old._view||'data',tasks:Array.isArray(old.tasks)?old.tasks:[],notesHistory:Array.isArray(old.notesHistory)?old.notesHistory:[],priceHistory:Array.isArray(old.priceHistory)?old.priceHistory:[],statusHistory:Array.isArray(old.statusHistory)?old.statusHistory:[]}}
+ function persist(m,patch={},event='AKTUALIZACJA'){const all=load(),now=new Date().toISOString();const next={...(all[m.id]||{}),...patch,updatedAt:now,updatedBy:'L&M'};if(event==='STATUS'&&patch.status){next.statusHistory=[{at:now,value:patch.status},...(next.statusHistory||[])].slice(0,50)};all[m.id]=next;saveAll(all);try{localStorage.setItem('crm13_company_statuses',JSON.stringify({...r15StatusMap(),...(patch.status?{[m.id]:patch.status}:{})}))}catch{};return {...m,...next}}
+ const rect=(el,x,y,w,h)=>Object.assign(el.style,{left:x/W*100+'%',top:y/H*100+'%',width:w/W*100+'%',height:h/H*100+'%'});
+ function hit(root,r,label,fn){const b=document.createElement('button');b.className='r79-hit';b.type='button';b.setAttribute('aria-label',label);rect(b,...r);b.onclick=e=>{e.preventDefault();e.stopPropagation();fn()};root.append(b);return b}
+ function live(root,r,text,cls=''){const d=document.createElement('div');d.className='r79-live '+cls;d.textContent=text;rect(d,...r);root.append(d);return d}
+ function edit(root,r,value,onSave){const i=document.createElement('input');i.className='r79-edit';i.value=value||'';rect(i,...r);i.onchange=()=>onSave(i.value.trim());i.onkeydown=e=>{if(e.key==='Enter'){i.blur()}};root.append(i);return i}
+ function nav(root,m){hit(root,[18,18,120,120],'Wstecz',()=>{if(m._view==='data'){try{go('company')}catch{history.back()}}else show('data')});hit(root,[690,18,145,145],'Synchronizuj',async()=>{root.classList.add('syncing');try{await sync('✓ CRM i wiadomości zsynchronizowane')}finally{setTimeout(()=>{root.classList.remove('syncing');render()},250)}});const sp=document.createElement('div');sp.className='r79-sync-spin';sp.textContent='⟳';root.append(sp)}
+ function switchView(m,v){persist(m,{_view:v});show(v)}
+ function common(root,m){nav(root,m);live(root,[648,182,170,34],m.id||'', 'gold')}
+ function data(root,m){common(root,m);live(root,[180,215,430,48],m.name||'');live(root,[300,405,300,34],m.contactPerson||'Dział handlowy');live(root,[300,455,330,70],m.address||[m.city,m.countryName].filter(Boolean).join(', '));live(root,[300,548,310,34],m.phone||'brak danych');live(root,[300,598,310,34],m.mobile||'brak danych');live(root,[300,648,350,34],m.email||'brak danych');live(root,[300,698,350,34],m.website||'brak danych');live(root,[300,748,300,34],m.nip||'brak danych');live(root,[300,798,410,62],m.type||m.role||'KONTRAHENT');live(root,[120,925,600,70],m.products||m.availability||'Pellet drzewny — warunki do ustalenia');const st=m.status||r15GetStatus?.(m.id)||'NOWY';live(root,[240,1125,320,38],st,'green');live(root,[250,1245,430,58],m.nextFollowUp||'Ustalić następny kontakt');hit(root,[28,1450,365,105],'Aktualizuj dane',()=>{const val=prompt('Telefon / e-mail / adres — wpisz notatkę aktualizacyjną:','');if(val!=null){persist(m,{dataUpdateNote:val});toast('✓ Dane firmy zapisane we wspólnym rekordzie CRM.');render()}});hit(root,[414,1450,410,105],'Szukaj danych w Google',()=>window.open('https://www.google.com/search?q='+encodeURIComponent(m.name),'_blank','noopener'));hit(root,[24,1575,804,92],'Wróć do karty',()=>{try{go('company')}catch{history.back()}})}
+ function offer(root,m){common(root,m);live(root,[130,210,430,44],m.name||'');const price=m.priceText||(m.price?String(m.price):'—');live(root,[185,455,140,34],price,'gold');live(root,[500,455,170,34],m.priceDate||'—');live(root,[215,720,230,34],m.payment||'Do ustalenia');live(root,[215,770,230,34],m.leadTime||'Do ustalenia');live(root,[545,720,190,34],m.transport||'Do ustalenia');live(root,[545,770,190,34],m.incoterm||'Do ustalenia');live(root,[205,1000,450,40],m.lastOfferDate||'Brak danych');hit(root,[610,320,190,62],'Historia cen',()=>openModuleSheet('HISTORIA CEN — '+m.name,(m.priceHistory||[]).map(x=>x.at+' • '+x.value).join('<br>')||'Brak zapisanej historii cen.'));hit(root,[28,1438,370,112],'Aktualizuj ceny',()=>{const v=prompt('Nowa cena / opis ceny:',price==='—'?'':price);if(v!=null&&v.trim()){const now=new Date().toISOString(),hist=[{at:now,value:v.trim()},...(m.priceHistory||[])].slice(0,50);persist(m,{priceText:v.trim(),priceHistory:hist,lastOfferDate:now});toast('✓ Cena zapisana i dostępna w całej gałęzi CRM.');render()}});hit(root,[420,1438,404,112],'Generuj ofertę',()=>{try{sessionStorage.setItem('crm13_offer_company',JSON.stringify(model()));dashboardTiles['oferty'].action()}catch{openModuleSheet('OFERTA — '+m.name,'Kontrahent przekazany do modułu OFERTY.')}});hit(root,[24,1572,804,95],'Wróć do karty',()=>show('data'))}
+ function notes(root,m){common(root,m);live(root,[145,215,430,44],m.name||'');live(root,[52,355,740,105],m.aiSummary||r17NotesText?.(m)||'Brak podsumowania AI.');const open=(m.tasks||[]).filter(t=>!t.done).length;live(root,[650,510,140,34],open?'PRIORYTET: '+open:'BRAK PILNYCH','red');hit(root,[45,870,250,62],'Dodaj nowe zadanie',()=>{const t=prompt('Nowe zadanie:','');if(t&&t.trim()){persist(m,{tasks:[...(m.tasks||[]),{id:Date.now(),text:t.trim(),done:false,date:new Date().toISOString()}]});toast('✓ Zadanie zapisane.');render()}});hit(root,[585,900,210,62],'Dodaj notatkę',()=>{const n=prompt('Nowa notatka:','');if(n&&n.trim()){persist(m,{notesHistory:[{at:new Date().toISOString(),text:n.trim(),by:'L&M'},...(m.notesHistory||[])]});toast('✓ Notatka zapisana.');render()}});hit(root,[30,1460,370,105],'Zapisz zmiany',()=>{toast('✓ Wszystkie notatki i zadania są zapisane we wspólnym rekordzie.');render()});hit(root,[420,1460,400,105],'Dodaj raport PDF',()=>openModuleSheet('RAPORT PDF — '+m.name,'Dane tej firmy są przygotowane do przekazania do modułu RAPORTY / PDF.'));hit(root,[24,1580,804,92],'Wróć do karty',()=>show('data'))}
+ function status(root,m){common(root,m);live(root,[145,215,430,44],m.name||'');const st=m.status||r15GetStatus?.(m.id)||'NOWY';live(root,[80,405,250,52],st,'green');const statuses=[['NOWY',[25,785,145,155]],['NEGOCJACJE',[185,785,145,155]],['OFERTA_WYSLANA',[345,785,145,155]],['AKTYWNY',[505,785,145,155]],['NIEAKTYWNY',[665,785,145,155]]];statuses.forEach(([v,r])=>hit(root,r,v,()=>{persist(m,{status:v},'STATUS');toast('✓ Status '+v.replaceAll('_',' ')+' zapisany w całym CRM.');render()}));hit(root,[600,355,200,62],'Historia statusów',()=>openModuleSheet('HISTORIA STATUSÓW — '+m.name,(m.statusHistory||[]).map(x=>x.at+' • '+x.value).join('<br>')||'Brak historii.'));hit(root,[40,1000,230,62],'Dodaj akcję',()=>{const t=prompt('Nowa akcja / zadanie:','');if(t&&t.trim()){persist(m,{tasks:[...(m.tasks||[]),{id:Date.now(),text:t.trim(),done:false,date:new Date().toISOString()}]});toast('✓ Akcja dodana.');render()}});hit(root,[25,1505,390,105],'Przejdź do cen i oferty',()=>switchView(m,'offer'));hit(root,[435,1505,390,105],'Przejdź do notatek',()=>switchView(m,'notes'));hit(root,[24,1630,804,92],'Wróć do karty',()=>show('data'))}
+ function show(view){const m=model();if(!m)return;const v=view||m._view||'data';const root=document.createElement('section');root.className='screen r79-company';const img=document.createElement('img');img.className='r79-master';img.src=IMG[v]||IMG.data;img.alt='CRM Pelet Premium — '+v;root.append(img);if(v==='offer')offer(root,m);else if(v==='notes')notes(root,m);else if(v==='status')status(root,m);else data(root,m);app.replaceChildren(root);window.scrollTo({top:0,left:0,behavior:'auto'})}
+ const oldRenderCompany=renderCompany;
+ renderCompany=function(){const m=model();if(!m)return oldRenderCompany();const root=document.createElement('section');root.className='screen r79-company';const img=document.createElement('img');img.className='r79-master';img.src=IMG.data;root.append(img);data(root,m);return root};
+ // Przejmujemy cztery zatwierdzone sekcje na istniejącej karcie firmy bez zmiany wcześniejszych kart RYNKI EU.
+ document.addEventListener('click',e=>{const b=e.target.closest?.('[data-sec]');if(!b||state?.route!=='company')return;const v=b.dataset.sec;if(!['data','offer','notes','status'].includes(v))return;e.preventDefault();e.stopImmediatePropagation();show(v)},true);
+ window.r79CompanyShow=show;
+})();
+</script>`;
+  out=out.replace('</head>',css+'\n</head>');
+  out=out.replace('</body>',js+'\n</body>');
   return out;
 };

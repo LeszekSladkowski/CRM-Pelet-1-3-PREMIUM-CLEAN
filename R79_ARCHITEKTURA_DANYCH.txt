@@ -1,0 +1,16 @@
+R79 — zasada architektury danych L&M Technic Energy
+
+JEDEN KONTRAHENT = JEDEN REKORD CRM.
+
+Źródła wejściowe:
+- baza CRM LIVE (crm-data.json),
+- wiadomości asystenta (assistant-feed.json),
+- przyszłe formularze strony www,
+- przyszłe zamówienia i zapytania sklepu.
+
+Widoki końcowe RYNKI EU:
+DANE FIRMY -> CENY I OFERTA -> NOTATKI ASYSTENTA -> AKCJE I STATUS.
+
+Wszystkie widoki czytają i zapisują ten sam model firmy. Historia cen i statusów jest dopisywana, a nie nadpisywana bez śladu.
+
+Bezpieczeństwo: PWA nie może zawierać tokenu GitHub ani innego sekretu. Dwukierunkowa synchronizacja z telefonów, strony i sklepu wymaga serwerowego endpointu z uwierzytelnieniem.

@@ -1,0 +1,11 @@
+R79 smoke test checklist
+1. RYNKI EU -> kraj -> firma.
+2. DANE FIRMY: aktualizacja danych zapisuje się bez zmiany pozostałych kart.
+3. CENY I OFERTA: wpisana cena jest widoczna po powrocie i ponownym wejściu.
+4. NOTATKI: dodanie zadania/notatki pozostaje po przejściu do AKCJE I STATUS.
+5. AKCJE I STATUS: zmiana statusu pozostaje po przejściu do CENY/NOTATEK i po restarcie PWA.
+6. SYNCHRONIZUJ pobiera crm-data.json + assistant-feed.json i nie kasuje lokalnych zmian R79.
+7. GENERUJ OFERTĘ zapisuje kontekst firmy do sessionStorage crm13_offer_company.
+8. Pulpit, RYNKI EU wcześniejsze karty i WALUTY 1-4 bez regresji.
+9. Samsung Galaxy S24 Ultra: raster 852x1846 bez rozciągnięcia poza ekran, hotspoty trafiają w zatwierdzone przyciski.
+10. Integracja strona/sklep: crm-integration-contract.json jest kontraktem danych; centralny zapis zwrotny dopiero przez uwierzytelniony endpoint.
