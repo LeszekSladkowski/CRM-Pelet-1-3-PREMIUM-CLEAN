@@ -1,14 +1,15 @@
 {
-  "version": "1.3.0-master-r89-dane-firmy-universal-force",
-  "release": "R89 DANE FIRMY UNIVERSAL FORCE",
+  "version": "1.3.0-master-r90-dane-firmy-single-master-live",
+  "release": "R90 DANE FIRMY SINGLE MASTER LIVE",
   "buildDate": "04.09.2026",
-  "buildTime": "15:08",
+  "buildTime": "16:10",
   "base": "R85 CLEAN BASE HARD PRUNE + DANE FIRMY MASTER 1:1.",
   "notes": [
-    "Usunięto blokadę R87 dla ekranów SZCZEGÓŁY pozostałych firm.",
-    "Skład Opału Opole zachowuje zatwierdzoną kartę MASTER 1:1.",
-    "Pozostałe firmy otwierają żywą kartę firmy bez komunikatu HARD GATE.",
-    "Wymuszono natychmiastową aktywację i przejęcie nowego Service Workera.",
-    "Pozostałe silniki R85, backupy i WALUTY pozostają bez zmian."
+    "Całkowicie odłączono stare renderery i popupy DANE FIRMY od aktywnej trasy.",
+    "Każda wybrana firma otwiera ten sam renderer DANE FIRMY oparty na jednym MASTER-ze.",
+    "Dane firmy są nakładane dynamicznie na warstwę MASTER bez zmiany pozostałej grafiki.",
+    "Aktywne akcje: TELEFON, MAPA, E-MAIL, WWW, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE, SYNCHRONIZUJ i POWRÓT.",
+    "Ręczne aktualizacje są zapisywane per ID firmy w localStorage i po zapisie od razu odświeżają kartę.",
+    "Pozostałe moduły, backupy i WALUTY pozostają bez zmian."
   ]
 }
