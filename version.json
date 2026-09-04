@@ -1,13 +1,14 @@
 {
-  "version": "1.3.0-master-r82-rynki-eu-master-image-bridge",
-  "release": "R82 RYNKI EU MASTER IMAGE BRIDGE",
+  "version": "1.3.0-master-r83-rynki-eu-true-live-cards",
+  "release": "R83 RYNKI EU TRUE LIVE CARDS",
   "buildDate": "04.09.2026",
-  "buildTime": "12:56",
-  "base": "R81 zachowany jako rollback; R82 naprawia brak obrazu czterech zamrozonych kart MASTER przez wymuszenie cache'owanych sciezek JPG bez query string.",
+  "buildTime": "13:22",
+  "base": "R81 pozostaje rollbackiem routingu. R83 zastępuje wadliwe/prawie puste rastry R79 pełnymi żywymi kartami DOM/CSS.",
   "notes": [
-    "R81 prawidlowo przejmuje stare modale i otwiera pelne karty.",
-    "R82 naprawia warstwe wizualna: DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA i AKCJE I STATUS maja ponownie wyswietlac zamrozone grafiki MASTER.",
-    "Logika wspolnego rekordu firmy, ceny, statusy, notatki i zadania pozostaja bez zmian.",
-    "Nie zmieniono wczesniejszych kart RYNKI EU ani WALUTY."
+    "Usunięto zależność końcowych kart firmy od r79-dane-firmy-master.jpg, r79-ceny-oferta-master.jpg, r79-notatki-master.jpg i r79-akcje-status-master.jpg.",
+    "DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS są renderowane jako pełne czytelne karty na Samsung Galaxy S24 Ultra.",
+    "Zachowano jeden wspólny rekord firmy i ten sam magazyn stanu CRM dla cen, statusów, notatek, zadań i historii.",
+    "R81 bridge nadal przejmuje stare dolne modale i kieruje kliknięcia do nowego runtime R83.",
+    "Nie zmieniono wcześniejszych kart RYNKI EU ani gałęzi WALUTY."
   ]
 }
