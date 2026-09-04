@@ -1,0 +1,1 @@
+R91 plan: 1) replace master-firma-koniec.png with exact approved 709x1536 source (265333 B, SHA-256 5859c8ef9ac3f9585ef4e027bf00f1110be17ecb043355faca55eb282624992b); 2) correct R90 CSS class-selector mismatch that caused giant unstyled LIVE text; 3) keep one DANE FIRMY renderer and preserve other branches untouched.
