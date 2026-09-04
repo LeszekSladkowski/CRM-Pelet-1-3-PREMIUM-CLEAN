@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r83-rynki-eu-true-live-cards",
-  "release": "R83 RYNKI EU TRUE LIVE CARDS",
+  "version": "1.3.0-master-r84-clean-base",
+  "release": "R84 CLEAN BASE",
   "buildDate": "04.09.2026",
-  "buildTime": "13:22",
-  "base": "R81 pozostaje rollbackiem routingu. R83 zastępuje wadliwe/prawie puste rastry R79 pełnymi żywymi kartami DOM/CSS.",
+  "buildTime": "13:35",
+  "base": "Stabilna baza R76 + aktualne crm-data.json i assistant-feed.json. Eksperymentalne runtime/bridge R79-R83 wyłączone.",
   "notes": [
-    "Usunięto zależność końcowych kart firmy od r79-dane-firmy-master.jpg, r79-ceny-oferta-master.jpg, r79-notatki-master.jpg i r79-akcje-status-master.jpg.",
-    "DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS są renderowane jako pełne czytelne karty na Samsung Galaxy S24 Ultra.",
-    "Zachowano jeden wspólny rekord firmy i ten sam magazyn stanu CRM dla cen, statusów, notatek, zadań i historii.",
-    "R81 bridge nadal przejmuje stare dolne modale i kieruje kliknięcia do nowego runtime R83.",
-    "Nie zmieniono wcześniejszych kart RYNKI EU ani gałęzi WALUTY."
+    "Chirurgiczny porządek po nieudanych eksperymentach R79-R83.",
+    "Runtime wrócił do ostatniej stabilnej bazy R76 przed przebudową końcowych kart RYNKI EU.",
+    "Zachowano aktualną bazę kontrahentów i feed asystenta.",
+    "Magazyn backupów jest automatycznie ograniczany do R38 MEGA STABLE + 2 najnowszych lokalnych kopii.",
+    "Dalsza przebudowa RYNKI EU będzie wykonywana po jednej karcie, testowanej i zatwierdzanej przed rozpoczęciem następnej."
   ]
 }
