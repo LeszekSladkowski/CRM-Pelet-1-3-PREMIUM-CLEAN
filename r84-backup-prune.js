@@ -1,59 +1,59 @@
-/* R84 — CHIRURGICZNY PORZĄDEK MAGAZYNU BACKUPÓW
-   Cel: maksymalnie 3 widoczne pozycje w aplikacji:
-   1) R38 MEGA STABLE z backup-catalog.json
-   2) najnowszy lokalny backup danych
-   3) drugi najnowszy lokalny/importowany backup danych
-   Historia kodu pozostaje w GitHubie, a pełny stan R83 jest dodatkowo zabezpieczony na osobnej gałęzi backupowej.
+/* R85 — TWARDY CHIRURGICZNY PORZADEK MAGAZYNU BACKUPOW
+   Niezalezny od funkcji aplikacji. Bezposrednio porzadkuje IndexedDB.
+   Widoczne maja zostac: R38 z katalogu + maksymalnie 2 najnowsze lokalne kopie.
 */
 (()=>{
   'use strict';
-  const KEEP_LOCAL = 2;
-  const CLEAN_MARK = 'crm13_r84_backup_prune_done_v1';
+  const DB='crm_pelet_13_backups_v1';
+  const STORE='backups';
+  const KEEP=2;
 
-  async function pruneBackups(){
-    try{
-      if(typeof r20DbAll!=='function' || typeof r20DbDelete!=='function') return false;
-      const all = await r20DbAll();
-      const local = (all||[])
-        .filter(x=>x && (x.source==='local' || x.source==='import'))
-        .sort((a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0));
-      const stale = local.slice(KEEP_LOCAL);
-      for(const rec of stale){
-        if(rec && rec.id!=null) await r20DbDelete(rec.id);
-      }
-      localStorage.setItem(CLEAN_MARK, String(Date.now()));
-      return true;
-    }catch(e){
-      console.warn('R84 backup prune', e);
-      return false;
+  function openDb(){
+    return new Promise((resolve,reject)=>{
+      const q=indexedDB.open(DB,1);
+      q.onupgradeneeded=()=>{const db=q.result;if(!db.objectStoreNames.contains(STORE))db.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});};
+      q.onsuccess=()=>resolve(q.result);
+      q.onerror=()=>reject(q.error);
+    });
+  }
+
+  async function hardPrune(){
+    const db=await openDb();
+    const all=await new Promise((resolve,reject)=>{
+      const tx=db.transaction(STORE,'readonly');
+      const q=tx.objectStore(STORE).getAll();
+      q.onsuccess=()=>resolve(q.result||[]);
+      q.onerror=()=>reject(q.error);
+    });
+    const sorted=[...all].sort((a,b)=>(Number(b?.createdAt)||0)-(Number(a?.createdAt)||0));
+    const keepIds=new Set(sorted.slice(0,KEEP).map(x=>String(x.id)));
+    const stale=sorted.filter(x=>!keepIds.has(String(x.id)));
+    if(stale.length){
+      await new Promise((resolve,reject)=>{
+        const tx=db.transaction(STORE,'readwrite');
+        const os=tx.objectStore(STORE);
+        stale.forEach(x=>os.delete(x.id));
+        tx.oncomplete=()=>resolve();
+        tx.onerror=()=>reject(tx.error);
+        tx.onabort=()=>reject(tx.error);
+      });
     }
+    db.close();
+    localStorage.setItem('crm13_r85_hard_backup_prune',String(Date.now()));
+    return stale.length;
   }
 
   async function run(){
-    const ok = await pruneBackups();
-    if(ok && typeof r20RenderBackupList==='function' && document.getElementById('r20-backup-list')){
-      try{ await r20RenderBackupList(document); }catch{}
-    }
+    try{
+      const removed=await hardPrune();
+      if(removed>0){
+        const badge=document.getElementById('r20-backup-count');
+        if(badge) badge.textContent='Ilość wersji: 3';
+        if(location.hash.includes('settings') || document.getElementById('r20-backup-list')) setTimeout(()=>location.reload(),250);
+      }
+    }catch(e){console.warn('R85 hard backup prune',e);}
   }
 
-  // Jednorazowe sprzątanie po starcie nowej wersji.
-  setTimeout(run, 500);
-
-  // Każdy kolejny backup również utrzymuje limit 2 kopii lokalnych.
-  setTimeout(()=>{
-    try{
-      if(typeof r20CreateSnapshot==='function' && !r20CreateSnapshot.__r84Wrapped){
-        const original = r20CreateSnapshot;
-        const wrapped = async function(...args){
-          const rec = await original.apply(this,args);
-          await pruneBackups();
-          return rec;
-        };
-        wrapped.__r84Wrapped = true;
-        r20CreateSnapshot = wrapped;
-      }
-    }catch(e){console.warn('R84 snapshot wrap',e);}
-  },700);
-
-  document.documentElement.dataset.r84BackupPrune='active';
+  setTimeout(run,250);
+  document.documentElement.dataset.r85BackupPrune='active';
 })();
