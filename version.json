@@ -1,14 +1,13 @@
 {
-  "version": "1.3.0-master-r81-rynki-eu-surgical-bridge",
-  "release": "R81 RYNKI EU SURGICAL BRIDGE",
+  "version": "1.3.0-master-r82-rynki-eu-master-image-bridge",
+  "release": "R82 RYNKI EU MASTER IMAGE BRIDGE",
   "buildDate": "04.09.2026",
-  "buildTime": "12:18",
-  "base": "R80 zachowany jako bezpieczny punkt powrotu; R81 naprawia rzeczywistą przyczynę starych dolnych okien: lokalne funkcje r15OpenSection / r15OpenStatus / r17OpenOffer były poza zasięgiem zewnętrznego runtime.",
+  "buildTime": "12:56",
+  "base": "R81 zachowany jako rollback; R82 naprawia brak obrazu czterech zamrozonych kart MASTER przez wymuszenie cache'owanych sciezek JPG bez query string.",
   "notes": [
-    "R81 podmienia lokalne funkcje wewnątrz generowanego index.html i kieruje je do wspólnego window.r80CompanyOpen.",
-    "DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS mają otwierać pełne zatwierdzone karty MASTER zamiast starych dolnych modali.",
-    "Wspólny rekord company.id przenosi status, historię statusów, ceny, historię cen, notatki, zadania i datę aktualizacji pomiędzy czterema kartami.",
-    "R80 został zamrożony w sw-r80-stable.js jako rollback.",
-    "Pozostałe zatwierdzone gałęzie i WALUTY pozostają bez zmian."
+    "R81 prawidlowo przejmuje stare modale i otwiera pelne karty.",
+    "R82 naprawia warstwe wizualna: DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA i AKCJE I STATUS maja ponownie wyswietlac zamrozone grafiki MASTER.",
+    "Logika wspolnego rekordu firmy, ceny, statusy, notatki i zadania pozostaja bez zmian.",
+    "Nie zmieniono wczesniejszych kart RYNKI EU ani WALUTY."
   ]
 }
