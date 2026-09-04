@@ -1,0 +1,1 @@
+R90 diagnosis: approved DANE FIRMY MASTER source verified locally as 709x1536 JPEG/JFIF, 265333 B, SHA-256 5859c8ef9ac3f9585ef4e027bf00f1110be17ecb043355faca55eb282624992b. Runtime screenshot issue also exposed a CSS selector mismatch (.headtxt/.rowtxt etc created, while styles targeted .r90-headtxt/.r90-rowtxt). This note is temporary diagnostic evidence.
