@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r86-rynki-eu-dane-firmy-master",
-  "release": "R86 RYNKI EU DANE FIRMY MASTER",
+  "version": "1.3.0-master-r87-dane-firmy-hard-gate",
+  "release": "R87 DANE FIRMY HARD GATE",
   "buildDate": "04.09.2026",
-  "buildTime": "14:26",
-  "base": "R85 CLEAN BASE HARD PRUNE + zatwierdzony raster master-firma-koniec.png.",
+  "buildTime": "14:44",
+  "base": "R85 CLEAN BASE HARD PRUNE + DANE FIRMY MASTER 1:1.",
   "notes": [
-    "Wdrożono wyłącznie pierwszą kartę gałęzi RYNKI EU: DANE FIRMY.",
-    "Skład Opału Opole korzysta z zatwierdzonego rastra MASTER 1:1, bez rekonstrukcji wyglądu w CSS.",
-    "Aktywne są: POWRÓT, SYNCHRONIZUJ, POKAŻ NA MAPIE, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE i WRÓĆ DO KARTY.",
-    "Pozostałe firmy i pozostałe trzy karty nie zostały przebudowane — pozostają na stabilnej bazie do osobnego zatwierdzenia.",
-    "Zachowano chirurgiczne porządki magazynu backupów z R85."
+    "Usunięto błędny fallback do starych ekranów szczegółów firm.",
+    "Podczas testu KARTY DANE FIRMY aktywny jest wyłącznie zatwierdzony MASTER dla Skład Opału Opole.",
+    "Pozostałe firmy nie otwierają już starych niezatwierdzonych popupów DANE/CENY/NOTATKI/STATUS.",
+    "Poprawiono proporcję źródła MASTER na 709 × 1536 oraz datę buildu 04.09.2026.",
+    "Pozostałe silniki R85, backupy i WALUTY pozostają bez zmian."
   ]
 }
