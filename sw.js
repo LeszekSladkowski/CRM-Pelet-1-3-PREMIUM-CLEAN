@@ -1,21 +1,22 @@
-/* R83 — RYNKI EU TRUE LIVE COMPANY CARDS.
-   R82 zostaje jako rollback warstwy obrazowej. R83 omija wadliwe/prawie puste rastry JPG R79
-   i po R81 bridge przejmuje cztery końcowe widoki firmy pełnym runtime DOM/CSS.
-   Wspólny rekord CRM, statusy, ceny, notatki i zadania pozostają w tym samym storage. */
-importScripts('./sw-r81-stable.js?v=R81-stable-rollback');
+/* R84 — CLEAN BASE / CHIRURGICZNY PORZĄDEK
+   Baza wykonawcza wraca do ostatniej stabilnej gałęzi przed eksperymentami R79–R83: R76.
+   Zachowane: zatwierdzone RYNKI EU, WALUTY i aktualne pliki danych CRM.
+   Usunięte z runtime: R79/R80/R81/R82/R83 bridge/runtime oraz wadliwe rastry końcowych kart.
+   Dodatkowo magazyn backupów jest automatycznie ograniczany do R38 + 2 najnowszych kopii lokalnych.
+*/
+importScripts('./sw-r76-stable.js?v=R76-stable-clean-base');
 
-const R83_ASSETS=['./r83-company-runtime.js'];
-if(Array.isArray(ASSETS))R83_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
+if(Array.isArray(ASSETS) && !ASSETS.includes('./r84-backup-prune.js')) ASSETS.push('./r84-backup-prune.js');
 
-const r83BasePatchIndexHtml=r48PatchIndexHtml;
-r48PatchIndexHtml=function(text){
-  let out=r83BasePatchIndexHtml(text);
-  out=out.replaceAll('1.3.0-master-r81-rynki-eu-surgical-bridge','1.3.0-master-r83-rynki-eu-true-live-cards');
-  out=out.replaceAll('R81 RYNKI EU SURGICAL BRIDGE','R83 RYNKI EU TRUE LIVE CARDS');
-  out=out.replace("const BUILD_TIME = '12:18';","const BUILD_TIME = '13:22';");
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R81-rynki-eu-surgical-bridge-1218'","navigator.serviceWorker.register('./sw.js?v=R83-rynki-eu-true-live-cards-1322'");
-  if(!out.includes('r83-company-runtime.js')){
-    out=out.replace('</body>','<script src="./r83-company-runtime.js?v=R83-1322"></script>\n</body>');
+const r84BasePatchIndexHtml = r48PatchIndexHtml;
+r48PatchIndexHtml = function(text){
+  let out = r84BasePatchIndexHtml(text);
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r84-clean-base');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R84 CLEAN BASE');
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '13:35';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R84-clean-base-1335'");
+  if(!out.includes('r84-backup-prune.js')){
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R84-1335"></script>\n</body>');
   }
   return out;
 };
