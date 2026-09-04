@@ -1,9 +1,0 @@
-R82 — DIAGNOZA I NAPRAWA
-
-Objaw z testu R81: pelne karty juz sie otwieraly, ale raster MASTER nie byl widoczny; pozostawaly tylko dynamiczne napisy na czarnym tle.
-
-Przyczyna: r80-company-runtime.js dodawal do plikow JPG parametr ?v=R80-1158. Service Worker mial zamrozone obrazy w cache pod kluczami bez query string. Na telefonie request nie trafial w cache i obraz nie byl zaladowany.
-
-R82: r82-master-image-bridge.js po utworzeniu kazdej karty ustawia dokladna queryless sciezke zamrozonego JPG, przywraca display/visibility obrazu i nie dotyka logiki LIVE.
-
-Test: USTAWIENIA -> R82 -> RYNKI EU -> firma -> DANE FIRMY / CENY I OFERTA / NOTATKI ASYSTENTA / AKCJE I STATUS.
