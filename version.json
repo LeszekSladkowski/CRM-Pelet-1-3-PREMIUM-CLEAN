@@ -1,15 +1,14 @@
 {
-  "version": "1.3.0-master-r80-rynki-eu-hard-runtime",
-  "release": "R80 RYNKI EU HARD RUNTIME",
+  "version": "1.3.0-master-r81-rynki-eu-surgical-bridge",
+  "release": "R81 RYNKI EU SURGICAL BRIDGE",
   "buildDate": "04.09.2026",
-  "buildTime": "11:58",
-  "base": "R79 zachowany jako stabilna baza; R80 usuwa przejmowanie kliknięć przez stare dolne modale i ładuje cztery zatwierdzone karty jako aktywny runtime.",
+  "buildTime": "12:18",
+  "base": "R80 zachowany jako bezpieczny punkt powrotu; R81 naprawia rzeczywistą przyczynę starych dolnych okien: lokalne funkcje r15OpenSection / r15OpenStatus / r17OpenOffer były poza zasięgiem zewnętrznego runtime.",
   "notes": [
-    "DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS otwierają pełne karty zamiast starych dolnych okien.",
-    "Wspólny rekord company.id przenosi status, ceny, notatki, zadania i datę aktualizacji pomiędzy czterema kartami.",
-    "AKTUALIZUJ CENY zapisuje historię ceny; zmiana statusu zapisuje historię statusów.",
-    "GENERUJ OFERTĘ przekazuje bieżącego kontrahenta do modułu OFERTY.",
-    "SYNCHRONIZUJ zachowuje istniejący pobór crm-data.json i assistant-feed.json.",
-    "R79 został skopiowany do sw-r79-stable.js jako punkt bezpiecznego powrotu."
+    "R81 podmienia lokalne funkcje wewnątrz generowanego index.html i kieruje je do wspólnego window.r80CompanyOpen.",
+    "DANE FIRMY, CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS mają otwierać pełne zatwierdzone karty MASTER zamiast starych dolnych modali.",
+    "Wspólny rekord company.id przenosi status, historię statusów, ceny, historię cen, notatki, zadania i datę aktualizacji pomiędzy czterema kartami.",
+    "R80 został zamrożony w sw-r80-stable.js jako rollback.",
+    "Pozostałe zatwierdzone gałęzie i WALUTY pozostają bez zmian."
   ]
 }
