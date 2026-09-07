@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r103-rynki-eu-remove-dane-firmy-legacy-tile",
-  "release": "R103 RYNKI EU — REMOVE DANE FIRMY LEGACY TILE",
+  "version": "1.3.0-master-r104-rynki-eu-hard-delete-dane-firmy-legacy",
+  "release": "R104 RYNKI EU — HARD DELETE DANE FIRMY LEGACY",
   "buildDate": "07.09.2026",
-  "buildTime": "20:18",
-  "base": "Zweryfikowany R102 FINAL CLEAN MASTER / PUNKT 0 R92.",
+  "buildTime": "20:28",
+  "base": "R103 test na bazie zweryfikowanego R102 FINAL CLEAN MASTER / PUNKT 0 R92.",
   "notes": [
-    "Z aktywnej karty RYNKI EU -> kraj -> firma -> szczegóły usunięto wyłącznie stary kafel DANE FIRMY.",
-    "Usunięto aktywne wywołanie dolnego panelu DANE FIRMY z renderCompanyR15().",
-    "CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS pozostają bez zmian.",
-    "Górna karta firmy oraz TELEFON, MAPA, OFERTA i EMAIL pozostają bez zmian.",
+    "Korekta po teście S24 Ultra: R103 nie usunął aktywnego kafla DANE FIRMY.",
+    "R104 przejmuje aktywny renderCompany po renderCompanyR15 i fizycznie usuwa sekcję DANE FIRMY z gotowego DOM przed wyświetleniem.",
+    "Usunięcie elementu usuwa również jego aktywny listener wejścia do starego dolnego panelu DANE FIRMY.",
+    "CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.",
     "RYNKI EU KARTA 1, listy krajów i firm, WALUTY, dane CRM, backupy i grafiki MASTER pozostają bez zmian."
   ]
 }
