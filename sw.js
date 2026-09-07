@@ -1,63 +1,105 @@
-/* R104 — CRM 1.3 RYNKI EU COMPANY DETAILS — HARD DELETE DANE FIRMY LEGACY TILE
-   Baza funkcjonalna: R103 test na bazie zweryfikowanego R102 FINAL CLEAN MASTER / PUNKT 0 R92.
-   Korekta po teście S24 Ultra: R103 nie usunął aktywnego kafla DANE FIRMY.
-   R104 przejmuje aktywny renderCompany po przypisaniu renderCompanyR15 i fizycznie usuwa z gotowej karty sekcję DANE FIRMY przed wyświetleniem.
-   CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz górne akcje TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.
-   Ochrona backupów R101 i porządek katalogu R102 pozostają aktywne.
+/* R105 — CRM 1.3 RYNKI EU — DANE FIRMY FULL GRAPHIC CARD
+   Baza funkcjonalna: zweryfikowany R102 FINAL CLEAN MASTER / PUNKT 0 R92.
+   R103 i R104 były testami niezamrożonymi.
+   R105 przywraca widoczny kafel DANE FIRMY na KARCIE 3/3 i podmienia wyłącznie jego akcję:
+   zamiast starego dolnego panelu otwiera pełnoekranową grafikę template-pusty.png.
+   CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.
 */
-importScripts('./sw-r76-stable.js?v=R104-hard-delete-dane-firmy-legacy');
+importScripts('./sw-r76-stable.js?v=R105-dane-firmy-full-graphic-card');
 
 if(Array.isArray(ASSETS)){
-  const r104MaskableDuplicate='./icon-maskable-512.png';
-  const r104MaskableDuplicateIndex=ASSETS.indexOf(r104MaskableDuplicate);
-  if(r104MaskableDuplicateIndex>=0) ASSETS.splice(r104MaskableDuplicateIndex,1);
+  const r105MaskableDuplicate='./icon-maskable-512.png';
+  const r105MaskableDuplicateIndex=ASSETS.indexOf(r105MaskableDuplicate);
+  if(r105MaskableDuplicateIndex>=0) ASSETS.splice(r105MaskableDuplicateIndex,1);
   if(!ASSETS.includes('./r84-backup-prune.js')) ASSETS.push('./r84-backup-prune.js');
+  if(!ASSETS.includes('./grafiki/rynki-eu/dane-firmy/template-pusty.png')) ASSETS.push('./grafiki/rynki-eu/dane-firmy/template-pusty.png');
 }
 
-const r104BasePatchIndexHtml = r48PatchIndexHtml;
+const r105BasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
-  let out = r104BasePatchIndexHtml(text);
+  let out = r105BasePatchIndexHtml(text);
 
   /* R101 — ochrona lokalnych backupów. */
   out = out.replaceAll('await r38CleanBackupWarehouseOnce();','');
 
-  /* R102 — usunięcie historycznego oznaczania R38 jako aktualnej wersji. */
+  /* R102 — martwy katalog R38 nie jest oznaczany jako aktualny. */
   out = out.replaceAll("if(catalog[0]){catalog[0].current=true;catalog[0].description='MEGA STABILNY MASTER — oficjalny punkt powrotu R38.';}","");
   out = out.replaceAll(
     'Automatyczny backup danych jest tworzony przed aktualizacją. Punkty powrotu MASTER są przechowywane w pakiecie <b>backups/</b> i mogą zostać pobrane do przywrócenia.',
     'Automatyczny backup danych jest tworzony przed aktualizacją. Lokalne kopie danych pozostają w Magazynie Backupów, a zweryfikowane punkty MASTER są zabezpieczone w repozytorium GitHub.'
   );
 
-  /* R104 — HARD DELETE aktywnego kafla DANE FIRMY na KARCIE 3/3.
-     Usuwamy prawdziwy element DOM przed przekazaniem ekranu do render(), nie ukrywamy go CSS-em. */
-  const r104CompanyMarker='  renderCompany=renderCompanyR15;';
-  if(out.includes(r104CompanyMarker) && !out.includes('function r104RenderCompanyNoLegacyData')){
-    const r104CompanyPatch=`
+  /* R105 — pełnoekranowa karta graficzna DANE FIRMY. */
+  const r105CompanyMarker='  renderCompany=renderCompanyR15;';
+  if(out.includes(r105CompanyMarker) && !out.includes('function r105RenderCompanyDataGraphic')){
+    const r105Patch=`
 
-  const r104RenderCompanyBase=renderCompany;
-  function r104RenderCompanyNoLegacyData(){
-    const screen=r104RenderCompanyBase();
-    if(screen && screen.querySelectorAll){
+  function r105RenderCompanyDataGraphic(){
+    const s=document.createElement('section');
+    s.className='r105-data-graphic-page';
+    s.innerHTML='<img class="r105-data-graphic" src="./grafiki/rynki-eu/dane-firmy/template-pusty.png?v=R105" alt="DANE FIRMY">';
+
+    const hotspot=(cls,label,handler)=>{
+      const b=document.createElement('button');
+      b.type='button';b.className='r105-data-hot '+cls;b.setAttribute('aria-label',label);
+      b.addEventListener('click',handler);s.append(b);return b;
+    };
+    hotspot('r105-data-back-top','Wróć do karty',()=>{state.route='company';render()});
+    hotspot('r105-data-sync','Synchronizuj',()=>sync());
+    hotspot('r105-data-back-bottom','Wróć do karty',()=>{state.route='company';render()});
+    return s;
+  }
+
+  const r105RenderCompanyBase=renderCompany;
+  function r105RenderCompanyWithGraphicData(){
+    const screen=r105RenderCompanyBase();
+    if(screen&&screen.querySelectorAll){
       screen.querySelectorAll('.r15-section').forEach(section=>{
         const title=((section.querySelector('b')||{}).textContent||'').trim();
-        if(title==='DANE FIRMY') section.remove();
+        if(title==='DANE FIRMY'){
+          const clean=section.cloneNode(true);
+          clean.addEventListener('click',()=>{state.route='company-data-graphic';render()});
+          section.replaceWith(clean);
+        }
       });
     }
     return screen;
   }
-  renderCompany=r104RenderCompanyNoLegacyData;`;
-    out = out.replace(r104CompanyMarker,r104CompanyMarker+r104CompanyPatch);
+  renderCompany=r105RenderCompanyWithGraphicData;
+`;
+    out=out.replace(r105CompanyMarker,r105CompanyMarker+r105Patch);
   }
 
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r104-rynki-eu-hard-delete-dane-firmy-legacy');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R104 RYNKI EU — HARD DELETE DANE FIRMY LEGACY');
+  /* R105 — główny render zna nową trasę graficznej karty. */
+  out = out.replace(
+    "    else if(state.route==='company') view=renderCompany();",
+    "    else if(state.route==='company-data-graphic') view=r105RenderCompanyDataGraphic();\n    else if(state.route==='company') view=renderCompany();"
+  );
+
+  if(!out.includes('id="r105-data-graphic-style"')){
+    const r105Style=`
+<style id="r105-data-graphic-style">
+.r105-data-graphic-page{position:relative;width:min(100vw,720px);height:auto;aspect-ratio:889/1536;margin:0 auto;background:#000;overflow:hidden;touch-action:pan-y pinch-zoom;}
+.r105-data-graphic{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none;user-select:none;}
+.r105-data-hot{position:absolute;z-index:25;border:0;background:transparent;padding:0;margin:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.r105-data-back-top{left:1.5%;top:.5%;width:16%;height:8.5%;}
+.r105-data-sync{right:1%;top:.5%;width:18%;height:9%;}
+.r105-data-back-bottom{left:3%;bottom:1.2%;width:94%;height:6.7%;}
+body.debug .r105-data-hot{background:rgba(255,0,0,.15);outline:1px dashed red;}
+</style>
+`;
+    out=out.replace('</head>',r105Style+'</head>');
+  }
+
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r105-rynki-eu-dane-firmy-full-graphic');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R105 RYNKI EU — DANE FIRMY FULL GRAPHIC CARD');
   out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '07.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '20:28';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R104-rynki-eu-hard-delete-dane-firmy-legacy-2028'");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '20:46';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R105-rynki-eu-dane-firmy-full-graphic-2046'");
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R104-2028"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R105-2046"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R104-2028');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R105-2046');
   }
   return out;
 };
