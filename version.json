@@ -1,15 +1,16 @@
 {
-  "version": "1.3.0-master-r93-dane-firmy-master-1to1",
-  "release": "R93 DANE FIRMY MASTER 1:1",
+  "version": "1.3.0-master-r94-dane-firmy-exact-uploaded-master",
+  "release": "R94 DANE FIRMY EXACT UPLOADED MASTER",
   "buildDate": "07.09.2026",
-  "buildTime": "13:07",
-  "base": "Zamrożony R92 SURGICAL CLEAN BASELINE.",
+  "buildTime": "13:37",
+  "base": "R92 SURGICAL CLEAN BASELINE + zatwierdzone Rynki EU/Waluty; korekta po R93.",
   "notes": [
-    "Zmieniono wyłącznie zachowanie kafla DANE FIRMY w ostatnim oknie kontrahenta.",
-    "Po naciśnięciu DANE FIRMY otwierana jest pełna karta oparta na zatwierdzonym master-firma-koniec.png w proporcji 709x1536.",
-    "Skład Opału Opole pozostaje dokładnym rastrem MASTER 1:1; pozostałe rekordy korzystają z tej samej warstwy MASTER z dynamicznymi danymi osadzonymi tylko w polach zmiennych.",
-    "Aktywne: POWRÓT, SYNCHRONIZUJ, TELEFON, E-MAIL, WWW, MAPA, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE, WRÓĆ DO KARTY.",
-    "Karty CENY I OFERTA, NOTATKI ASYSTENTA i AKCJE I STATUS pozostają nietknięte.",
-    "R92 pozostaje osobno zamrożonym punktem powrotu MASTER."
+    "Zmieniono wyłącznie zachowanie kafla DANE FIRMY.",
+    "Karta otwiera dokładnie grafikę przesłaną do folderu 00_GRAFIKI_MASTER_DO_WGRANIA.",
+    "Usunięto wszystkie maski i dynamiczne warstwy tekstowe z widoku DANE FIRMY.",
+    "Grafika nie jest modyfikowana wizualnie; aktywność realizują wyłącznie niewidoczne hotspoty.",
+    "Aktywne hotspoty: POWRÓT, SYNCHRONIZUJ, MAPA, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE, WRÓĆ DO KARTY.",
+    "CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS pozostają nietknięte.",
+    "MASTER-R92-FROZEN-2026-09-07 pozostaje stałym punktem powrotu."
   ]
 }
