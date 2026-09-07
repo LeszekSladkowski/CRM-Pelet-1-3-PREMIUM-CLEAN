@@ -1,26 +1,36 @@
-/* R92 — CRM 1.3 SURGICAL CLEAN BASELINE
-   Baza wykonawcza: ostatnia stabilna gałąź R76.
-   Zachowane: zatwierdzone RYNKI EU, WALUTY, aktualne crm-data.json i assistant-feed.json.
-   Usunięte z aktywnego runtime: eksperymentalne warstwy DANE FIRMY R86–R91,
-   które nakładały dodatkowe maski/teksty na zatwierdzony MASTER.
-   Magazyn backupów pozostaje porządkowany przez sprawdzony mechanizm R85.
+/* R97 — DANE FIRMY CLEAN LIVE TEST — ANPOL ONLY
+   BAZA: STAN 0 / R92 SURGICAL CLEAN BASELINE.
+   ZMIANA: tylko jeden rekord testowy (anpol-pl) i tylko kafel DANE FIRMY.
 */
 importScripts('./sw-r76-stable.js?v=R76-stable-clean-base');
 
-if(Array.isArray(ASSETS) && !ASSETS.includes('./r84-backup-prune.js')) ASSETS.push('./r84-backup-prune.js');
+const R97_ASSETS=[
+  './r84-backup-prune.js',
+  './assets/masters/dane-firmy-clean-master.png',
+  './r97-dane-firmy-live.css',
+  './r97-dane-firmy-live.js'
+];
+if(Array.isArray(ASSETS))R97_ASSETS.forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
 
-const r92BasePatchIndexHtml = r48PatchIndexHtml;
+const r97BasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
-  let out = r92BasePatchIndexHtml(text);
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r92-surgical-clean-baseline');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R92 SURGICAL CLEAN BASELINE');
+  let out = r97BasePatchIndexHtml(text);
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r97-dane-firmy-clean-live-test');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R97 DANE FIRMY CLEAN LIVE TEST');
   out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '07.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '12:13';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R92-surgical-clean-baseline-1213'");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '15:03';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R97-dane-firmy-clean-live-test-1503'");
+
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R92-1213"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R97-1503"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R92-1213');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R97-1503');
+  }
+  if(!out.includes('r97-dane-firmy-live.css')){
+    out = out.replace('</head>','<link rel="stylesheet" href="./r97-dane-firmy-live.css?v=R97-1503">\n</head>');
+  }
+  if(!out.includes('r97-dane-firmy-live.js')){
+    out = out.replace('</body>','<script src="./r97-dane-firmy-live.js?v=R97-1503"></script>\n</body>');
   }
   return out;
 };
