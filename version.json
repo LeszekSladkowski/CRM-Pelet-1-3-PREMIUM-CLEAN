@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r94-surgical-clean-step2-r70-bypass",
-  "release": "R94 SURGICAL CLEAN STEP 2 — R70 BYPASS",
+  "version": "1.3.0-master-r95-surgical-clean-step3-r70-removed",
+  "release": "R95 SURGICAL CLEAN STEP 3 — R70 REMOVED",
   "buildDate": "07.09.2026",
-  "buildTime": "17:56",
-  "base": "Zweryfikowany R93 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
+  "buildTime": "18:21",
+  "base": "Zweryfikowany R94 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
   "notes": [
-    "Aktywny łańcuch Service Workera omija zbędną warstwę pośrednią R70.",
-    "Nowy aktywny łańcuch: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.",
+    "Fizycznie usunięto nieużywany plik sw-r70-stable.js po pozytywnym teście R94.",
+    "Aktywny łańcuch pozostaje: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.",
     "Karty RYNKI EU i WALUTY pozostają bez zmian wizualnych i funkcjonalnych.",
     "crm-data.json, assistant-feed.json oraz mechanizm backupów pozostają bez zmian.",
-    "sw-r70-stable.js pozostaje tymczasowo w repo jako bezpieczna kopia do czasu pozytywnego testu na Samsung Galaxy S24 Ultra."
+    "R95 jest kandydatem do testu po usunięciu warstwy R70."
   ]
 }
