@@ -1,23 +1,22 @@
-/* R105 — CRM 1.3 RYNKI EU — DANE FIRMY FULL GRAPHIC CARD
-   Baza funkcjonalna: zweryfikowany R102 FINAL CLEAN MASTER / PUNKT 0 R92.
-   R103 i R104 były testami niezamrożonymi.
-   R105 przywraca widoczny kafel DANE FIRMY na KARCIE 3/3 i podmienia wyłącznie jego akcję:
-   zamiast starego dolnego panelu otwiera pełnoekranową grafikę template-pusty.png.
-   CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.
+/* R106 — CRM 1.3 RYNKI EU — DANE FIRMY S24 ULTRA FULL SCREEN FIT
+   Baza funkcjonalna: R105 test na bazie zweryfikowanego R102 FINAL CLEAN MASTER / PUNKT 0 R92.
+   Zmiana chirurgiczna: wyłącznie viewport nowej graficznej karty DANE FIRMY.
+   Karta wypełnia cały ekran referencyjny Samsung Galaxy S24 Ultra bez pustego czarnego pola pod grafiką.
+   Logika kafla DANE FIRMY, powroty, SYNCHRONIZUJ i wszystkie pozostałe moduły pozostają bez zmian.
 */
-importScripts('./sw-r76-stable.js?v=R105-dane-firmy-full-graphic-card');
+importScripts('./sw-r76-stable.js?v=R106-dane-firmy-s24-full-screen-fit');
 
 if(Array.isArray(ASSETS)){
-  const r105MaskableDuplicate='./icon-maskable-512.png';
-  const r105MaskableDuplicateIndex=ASSETS.indexOf(r105MaskableDuplicate);
-  if(r105MaskableDuplicateIndex>=0) ASSETS.splice(r105MaskableDuplicateIndex,1);
+  const r106MaskableDuplicate='./icon-maskable-512.png';
+  const r106MaskableDuplicateIndex=ASSETS.indexOf(r106MaskableDuplicate);
+  if(r106MaskableDuplicateIndex>=0) ASSETS.splice(r106MaskableDuplicateIndex,1);
   if(!ASSETS.includes('./r84-backup-prune.js')) ASSETS.push('./r84-backup-prune.js');
   if(!ASSETS.includes('./grafiki/rynki-eu/dane-firmy/template-pusty.png')) ASSETS.push('./grafiki/rynki-eu/dane-firmy/template-pusty.png');
 }
 
-const r105BasePatchIndexHtml = r48PatchIndexHtml;
+const r106BasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
-  let out = r105BasePatchIndexHtml(text);
+  let out = r106BasePatchIndexHtml(text);
 
   /* R101 — ochrona lokalnych backupów. */
   out = out.replaceAll('await r38CleanBackupWarehouseOnce();','');
@@ -29,15 +28,15 @@ r48PatchIndexHtml = function(text){
     'Automatyczny backup danych jest tworzony przed aktualizacją. Lokalne kopie danych pozostają w Magazynie Backupów, a zweryfikowane punkty MASTER są zabezpieczone w repozytorium GitHub.'
   );
 
-  /* R105 — pełnoekranowa karta graficzna DANE FIRMY. */
-  const r105CompanyMarker='  renderCompany=renderCompanyR15;';
-  if(out.includes(r105CompanyMarker) && !out.includes('function r105RenderCompanyDataGraphic')){
-    const r105Patch=`
+  /* R105/R106 — pełnoekranowa karta graficzna DANE FIRMY. */
+  const r106CompanyMarker='  renderCompany=renderCompanyR15;';
+  if(out.includes(r106CompanyMarker) && !out.includes('function r105RenderCompanyDataGraphic')){
+    const r106Patch=`
 
   function r105RenderCompanyDataGraphic(){
     const s=document.createElement('section');
     s.className='r105-data-graphic-page';
-    s.innerHTML='<img class="r105-data-graphic" src="./grafiki/rynki-eu/dane-firmy/template-pusty.png?v=R105" alt="DANE FIRMY">';
+    s.innerHTML='<img class="r105-data-graphic" src="./grafiki/rynki-eu/dane-firmy/template-pusty.png?v=R106" alt="DANE FIRMY">';
 
     const hotspot=(cls,label,handler)=>{
       const b=document.createElement('button');
@@ -67,19 +66,21 @@ r48PatchIndexHtml = function(text){
   }
   renderCompany=r105RenderCompanyWithGraphicData;
 `;
-    out=out.replace(r105CompanyMarker,r105CompanyMarker+r105Patch);
+    out=out.replace(r106CompanyMarker,r106CompanyMarker+r106Patch);
   }
 
-  /* R105 — główny render zna nową trasę graficznej karty. */
+  /* Główny render zna trasę graficznej karty. */
   out = out.replace(
     "    else if(state.route==='company') view=renderCompany();",
     "    else if(state.route==='company-data-graphic') view=r105RenderCompanyDataGraphic();\n    else if(state.route==='company') view=renderCompany();"
   );
 
+  /* R106 MASTER RULE — Samsung Galaxy S24 Ultra: karta ma wypełniać cały viewport.
+     Nie kadrujemy grafiki; raster i hotspoty rozciągają się razem procentowo do 100vw x 100dvh. */
   if(!out.includes('id="r105-data-graphic-style"')){
-    const r105Style=`
+    const r106Style=`
 <style id="r105-data-graphic-style">
-.r105-data-graphic-page{position:relative;width:min(100vw,720px);height:auto;aspect-ratio:889/1536;margin:0 auto;background:#000;overflow:hidden;touch-action:pan-y pinch-zoom;}
+.r105-data-graphic-page{position:relative;width:100vw;max-width:720px;height:100dvh;min-height:100dvh;margin:0 auto;background:#000;overflow:hidden;touch-action:pan-y pinch-zoom;}
 .r105-data-graphic{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none;user-select:none;}
 .r105-data-hot{position:absolute;z-index:25;border:0;background:transparent;padding:0;margin:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .r105-data-back-top{left:1.5%;top:.5%;width:16%;height:8.5%;}
@@ -88,18 +89,18 @@ r48PatchIndexHtml = function(text){
 body.debug .r105-data-hot{background:rgba(255,0,0,.15);outline:1px dashed red;}
 </style>
 `;
-    out=out.replace('</head>',r105Style+'</head>');
+    out=out.replace('</head>',r106Style+'</head>');
   }
 
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r105-rynki-eu-dane-firmy-full-graphic');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R105 RYNKI EU — DANE FIRMY FULL GRAPHIC CARD');
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r106-rynki-eu-dane-firmy-s24-full-screen');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R106 RYNKI EU — DANE FIRMY S24 FULL SCREEN FIT');
   out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '07.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '20:46';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R105-rynki-eu-dane-firmy-full-graphic-2046'");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '20:57';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R106-rynki-eu-dane-firmy-s24-full-screen-2057'");
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R105-2046"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R106-2057"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R105-2046');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R106-2057');
   }
   return out;
 };
