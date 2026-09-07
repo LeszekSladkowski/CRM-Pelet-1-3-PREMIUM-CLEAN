@@ -1,14 +1,15 @@
 {
-  "version": "1.3.0-master-r110-dane-firmy-live-anpol-verified",
-  "release": "R110 RYNKI EU — DANE FIRMY LIVE ANPOL VERIFIED",
+  "version": "1.3.0-master-r111-dane-firmy-live-surgical-actions",
+  "release": "R111 RYNKI EU — DANE FIRMY LIVE SURGICAL ACTIONS",
   "buildDate": "07.09.2026",
-  "buildTime": "22:20",
-  "base": "Bezwzględny MASTER R109 — cztery pełnoekranowe karty S24 FULL SCREEN FIT.",
+  "buildTime": "22:55",
+  "base": "R110 DANE FIRMY LIVE ANPOL VERIFIED na bezwzględnym MASTER R109.",
   "notes": [
-    "Ożywiono wyłącznie kartę DANE FIRMY dla zweryfikowanego rekordu anpol-pl.",
-    "R110 korzysta z nowej warstwy crm-live-overrides.json: świeże dane są przypisywane po ID firmy, bez nadpisywania historycznego crm-data.json.",
-    "ANPOL zweryfikowano 07.09.2026 z oficjalnej strony producenta: pełna nazwa, adres, telefony, NIP/REGON, ENplus A1 PL030, konfiguracja 65 x 15 kg = 975 kg oraz aktualny benchmark detaliczny.",
-    "Pozostałe firmy nadal pokazują pusty MASTER DANE FIRMY do czasu osobnej weryfikacji.",
-    "CENY I OFERTA R107, NOTATKI ASYSTENTA R108 oraz AKCJE I STATUS R109 pozostają bez zmian."
+    "Poprawiono chirurgicznie geometrię żywych pól tekstowych karty DANE FIRMY na Samsung Galaxy S24 Ultra.",
+    "Niepuste dane otrzymują subtelne tło maskujące linie pustego szablonu; puste pola pozostają nietknięte.",
+    "Górny niebieski przycisk wraca do listy kraju; zielony otwiera mapę; żółty otwiera CENY I OFERTA; czerwony otwiera AKCJE I STATUS.",
+    "Aktywne są SYNCHRONIZUJ, Pokaż na mapie, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE oraz oba powroty.",
+    "UAKTUALNIJ DANE otwiera lokalny formularz edycji firmy; zapis ma pierwszeństwo prezentacyjne nad serwerową warstwą LIVE i nie nadpisuje historycznego crm-data.json.",
+    "CENY I OFERTA R107, NOTATKI ASYSTENTA R108, AKCJE I STATUS R109 oraz punkt przywracania R109 pozostają bez zmian."
   ]
 }
