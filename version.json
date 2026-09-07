@@ -1,14 +1,15 @@
 {
-  "version": "1.3.0-master-r104-rynki-eu-hard-delete-dane-firmy-legacy",
-  "release": "R104 RYNKI EU — HARD DELETE DANE FIRMY LEGACY",
+  "version": "1.3.0-master-r105-rynki-eu-dane-firmy-full-graphic",
+  "release": "R105 RYNKI EU — DANE FIRMY FULL GRAPHIC CARD",
   "buildDate": "07.09.2026",
-  "buildTime": "20:28",
-  "base": "R103 test na bazie zweryfikowanego R102 FINAL CLEAN MASTER / PUNKT 0 R92.",
+  "buildTime": "20:46",
+  "base": "Zweryfikowany R102 FINAL CLEAN MASTER. R103 i R104 były niezamrożonymi testami.",
   "notes": [
-    "Korekta po teście S24 Ultra: R103 nie usunął aktywnego kafla DANE FIRMY.",
-    "R104 przejmuje aktywny renderCompany po renderCompanyR15 i fizycznie usuwa sekcję DANE FIRMY z gotowego DOM przed wyświetleniem.",
-    "Usunięcie elementu usuwa również jego aktywny listener wejścia do starego dolnego panelu DANE FIRMY.",
+    "Przywrócono widoczny kafel DANE FIRMY na KARCIE 3/3 szczegółów firmy.",
+    "Klik DANE FIRMY nie otwiera już starego dolnego panelu; otwiera nową pełnoekranową kartę graficzną.",
+    "Nowa karta używa zatwierdzonego pustego szablonu grafiki: grafiki/rynki-eu/dane-firmy/template-pusty.png.",
+    "Na nowej karcie aktywne są powroty do karty firmy z górnej strzałki i dolnego przycisku Wróć do karty; SYNCHRONIZUJ pozostaje podpięty do wspólnego silnika synchronizacji.",
     "CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.",
-    "RYNKI EU KARTA 1, listy krajów i firm, WALUTY, dane CRM, backupy i grafiki MASTER pozostają bez zmian."
+    "RYNKI EU KARTA 1, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
   ]
 }
