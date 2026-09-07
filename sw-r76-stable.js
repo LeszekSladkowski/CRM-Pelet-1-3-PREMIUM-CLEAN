@@ -1,8 +1,9 @@
 /* R76 — WALUTY KARTA 4 SURGICAL GAUGE CLEAN CANDIDATE.
-   BAZA: stabilny R70. KARTY 1, 2, 3 FINAL MASTER — bez zmian.
+   BAZA: stabilny R66. KARTY 1, 2, 3 FINAL MASTER — bez zmian.
    KARTA 4: czysty runtime z zatwierdzonego MASTER-a, bez masek/canvasa.
-   LIVE: dokładnie dwie zielone strzałki MASTER. OPŁACALNOŚĆ: jedna dynamiczna wskazówka. */
-importScripts('./sw-r70-stable.js?v=R70-stable-0850');
+   LIVE: dokładnie dwie zielone strzałki MASTER. OPŁACALNOŚĆ: jedna dynamiczna wskazówka.
+   R94 STEP 2: pominięto zbędną warstwę pośrednią R70; wynik runtime pozostaje R76 1:1. */
+importScripts('./sw-r66-stable.js?v=R66-final-surgical-stable');
 
 const R76_K4_ASSETS=[
   './master-waluty-karta4-r74-runtime-clean.png',
@@ -14,10 +15,11 @@ const r74BasePatchIndexHtml=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
   let out=r74BasePatchIndexHtml(text);
 
-  out=out.replaceAll('1.3.0-master-r70-waluty-karta4-png-master-restore','1.3.0-master-r76-waluty-karta4-surgical-gauge-clean');
-  out=out.replaceAll('R70 WALUTY KARTA 4 PNG MASTER RESTORE','R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN');
-  out=out.replace("const BUILD_TIME = '08:50';","const BUILD_TIME = '17:58';");
-  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R70-waluty-karta4-png-master-restore-0850'","navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'");
+  out=out.replaceAll('1.3.0-master-r66-waluty-karta3-final-surgical','1.3.0-master-r76-waluty-karta4-surgical-gauge-clean');
+  out=out.replaceAll('R66 WALUTY KARTA 3 FINAL SURGICAL','R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN');
+  out=out.replace("const BUILD_DATE = '01.09.2026';","const BUILD_DATE = '02.09.2026';");
+  out=out.replace("const BUILD_TIME = '16:28';","const BUILD_TIME = '17:58';");
+  out=out.replace("navigator.serviceWorker.register('./sw.js?v=R66-waluty-karta3-final-surgical-1628'","navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'");
 
   const k4=String.raw`  function renderCurrency4(){const {page,root}=wmBase(4);
     wmHot(root,[30,25,145,155],()=>currencyGo(3),'Powrót');
