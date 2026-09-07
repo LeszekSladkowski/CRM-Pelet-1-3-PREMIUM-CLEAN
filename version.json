@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r92-surgical-clean-baseline",
-  "release": "R92 SURGICAL CLEAN BASELINE",
+  "version": "1.3.0-master-r94-surgical-clean-step2-r70-bypass",
+  "release": "R94 SURGICAL CLEAN STEP 2 — R70 BYPASS",
   "buildDate": "07.09.2026",
-  "buildTime": "12:13",
-  "base": "Stabilna baza R76 + aktualne crm-data.json i assistant-feed.json + mechanizm porządku backupów R85.",
+  "buildTime": "17:56",
+  "base": "Zweryfikowany R93 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
   "notes": [
-    "Usunięto z aktywnego runtime eksperymentalne warstwy DANE FIRMY R86–R91.",
-    "Przywrócono pojedynczą stabilną bazę wykonawczą R76 bez nakładek R90.",
-    "Zamrożone RYNKI EU i WALUTY pozostają bez zmian.",
-    "Aktualne pliki danych CRM pozostają bez zmian.",
-    "To kandydat na czysty punkt bazowy przed dalszymi poprawkami wykonywanymi po jednej karcie."
+    "Aktywny łańcuch Service Workera omija zbędną warstwę pośrednią R70.",
+    "Nowy aktywny łańcuch: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.",
+    "Karty RYNKI EU i WALUTY pozostają bez zmian wizualnych i funkcjonalnych.",
+    "crm-data.json, assistant-feed.json oraz mechanizm backupów pozostają bez zmian.",
+    "sw-r70-stable.js pozostaje tymczasowo w repo jako bezpieczna kopia do czasu pozytywnego testu na Samsung Galaxy S24 Ultra."
   ]
 }
