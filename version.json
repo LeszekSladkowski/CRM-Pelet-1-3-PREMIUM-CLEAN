@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r100-anpol-dane-firmy-direct-hook",
-  "release": "R100 ANPOL DANE FIRMY DIRECT HOOK",
+  "version": "1.3.0-master-r101-anpol-dane-firmy-click-hard-fix",
+  "release": "R101 ANPOL DANE FIRMY CLICK HARD FIX",
   "buildDate": "07.09.2026",
-  "buildTime": "16:00",
-  "base": "R99 / MASTER-R92-FROZEN-2026-09-07 — STAN 0.",
+  "buildTime": "16:37",
+  "base": "R100 / MASTER-R92-FROZEN-2026-09-07 — STAN 0.",
   "notes": [
-    "Naprawiono rzeczywistą przyczynę R99: poprzednia podmiana trafiała w wcześniejszy renderCompanyR13 zamiast w aktywną funkcję r15OpenSection.",
-    "R100 podmienia jednoznacznie całą aktywną funkcję r15OpenSection i przechwytuje tylko ANPOL (anpol-pl) + DANE FIRMY.",
-    "DANE FIRMY dla ANPOL otwiera zatwierdzoną czystą grafikę MASTER 1:1 z danymi LIVE i hotspotami.",
-    "Pozostałe firmy, państwa, CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS, RYNKI EU oraz WALUTY pozostają bez zmian.",
-    "Wersja testowa do kontroli na Samsung Galaxy S24 Ultra przed rozszerzeniem rozwiązania na kolejne rekordy."
+    "Naprawa dotyczy wyłącznie ANPOL -> DANE FIRMY.",
+    "R101 nie podmienia już aktywnej funkcji r15OpenSection; przechwytuje faktyczny klik na kaflu w fazie capture.",
+    "Najpierw uruchamiana jest pełna karta R100 z danymi LIVE; w razie błędu automatycznie otwierany jest bezpieczny CLEAN MASTER 1:1.",
+    "Pozostałe firmy, państwa, CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS, RYNKI EU, WALUTY i backupy pozostają bez zmian.",
+    "Wersja testowa do potwierdzenia samego otwierania kafla DANE FIRMY na Samsung Galaxy S24 Ultra."
   ]
 }
