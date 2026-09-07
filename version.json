@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r105-rynki-eu-dane-firmy-full-graphic",
-  "release": "R105 RYNKI EU — DANE FIRMY FULL GRAPHIC CARD",
+  "version": "1.3.0-master-r106-rynki-eu-dane-firmy-s24-full-screen",
+  "release": "R106 RYNKI EU — DANE FIRMY S24 FULL SCREEN FIT",
   "buildDate": "07.09.2026",
-  "buildTime": "20:46",
-  "base": "Zweryfikowany R102 FINAL CLEAN MASTER. R103 i R104 były niezamrożonymi testami.",
+  "buildTime": "20:57",
+  "base": "R105 test na bazie zweryfikowanego R102 FINAL CLEAN MASTER.",
   "notes": [
-    "Przywrócono widoczny kafel DANE FIRMY na KARCIE 3/3 szczegółów firmy.",
-    "Klik DANE FIRMY nie otwiera już starego dolnego panelu; otwiera nową pełnoekranową kartę graficzną.",
-    "Nowa karta używa zatwierdzonego pustego szablonu grafiki: grafiki/rynki-eu/dane-firmy/template-pusty.png.",
-    "Na nowej karcie aktywne są powroty do karty firmy z górnej strzałki i dolnego przycisku Wróć do karty; SYNCHRONIZUJ pozostaje podpięty do wspólnego silnika synchronizacji.",
+    "Zmiana wyłącznie w skali/viewport nowej graficznej karty DANE FIRMY.",
+    "Karta wypełnia cały viewport referencyjnego Samsung Galaxy S24 Ultra bez czarnego pustego pola pod grafiką.",
+    "Grafika nie jest kadrowana; raster i hotspoty skalują się razem procentowo do pełnego ekranu.",
+    "Kafel DANE FIRMY, powroty do karty oraz SYNCHRONIZUJ pozostają funkcjonalnie bez zmian względem R105.",
     "CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.",
     "RYNKI EU KARTA 1, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
   ]
