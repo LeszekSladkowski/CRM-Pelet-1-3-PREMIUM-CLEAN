@@ -1,15 +1,15 @@
 {
-  "version": "1.3.0-master-r106-rynki-eu-dane-firmy-s24-full-screen",
-  "release": "R106 RYNKI EU — DANE FIRMY S24 FULL SCREEN FIT",
+  "version": "1.3.0-master-r107-rynki-eu-ceny-oferta-full-graphic",
+  "release": "R107 RYNKI EU — CENY I OFERTA FULL GRAPHIC",
   "buildDate": "07.09.2026",
-  "buildTime": "20:57",
-  "base": "R105 test na bazie zweryfikowanego R102 FINAL CLEAN MASTER.",
+  "buildTime": "21:29",
+  "base": "Bezwzględny MASTER R106 DANE FIRMY S24 FULL SCREEN FIT.",
   "notes": [
-    "Zmiana wyłącznie w skali/viewport nowej graficznej karty DANE FIRMY.",
-    "Karta wypełnia cały viewport referencyjnego Samsung Galaxy S24 Ultra bez czarnego pustego pola pod grafiką.",
-    "Grafika nie jest kadrowana; raster i hotspoty skalują się razem procentowo do pełnego ekranu.",
-    "Kafel DANE FIRMY, powroty do karty oraz SYNCHRONIZUJ pozostają funkcjonalnie bez zmian względem R105.",
-    "CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS oraz TELEFON/MAPA/OFERTA/EMAIL pozostają bez zmian.",
-    "RYNKI EU KARTA 1, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
+    "Kafel CENY I OFERTA na KARCIE 3/3 pozostaje widoczny, ale nie otwiera już starego dolnego panelu.",
+    "Klik CENY I OFERTA otwiera nową pełnoekranową kartę graficzną z grafiki grafiki/rynki-eu/dane-firmy/template-ceny-oferta.png.",
+    "Nowa karta CENY I OFERTA stosuje ten sam standard Samsung Galaxy S24 Ultra FULL SCREEN FIT co MASTER R106 DANE FIRMY.",
+    "Na karcie aktywne są górny POWRÓT, SYNCHRONIZUJ, X oraz dolny Wróć do karty.",
+    "DANE FIRMY pozostaje bez zmian jako MASTER R106.",
+    "NOTATKI ASYSTENTA, AKCJE I STATUS, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
   ]
 }
