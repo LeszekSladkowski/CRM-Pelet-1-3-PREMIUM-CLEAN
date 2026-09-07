@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r102-final-clean-backup-catalog",
-  "release": "R102 FINAL CLEAN — BACKUP CATALOG CLEAN",
+  "version": "1.3.0-master-r103-rynki-eu-remove-dane-firmy-legacy-tile",
+  "release": "R103 RYNKI EU — REMOVE DANE FIRMY LEGACY TILE",
   "buildDate": "07.09.2026",
-  "buildTime": "20:00",
-  "base": "Zweryfikowany R101 / PUNKT 0 R92. Ostatni porządek katalogu backupów.",
+  "buildTime": "20:18",
+  "base": "Zweryfikowany R102 FINAL CLEAN MASTER / PUNKT 0 R92.",
   "notes": [
-    "Usunięto martwy wpis R38 MEGA STABLE prowadzący do nieistniejącego pakietu ZIP.",
-    "Magazyn Backupów nie oznacza już historycznego R38 jako AKTUALNA.",
-    "Ochrona lokalnych backupów z R101 pozostaje aktywna; lokalne kopie danych nie są kasowane przez mechanizm R38.",
-    "Opis Magazynu Backupów został zsynchronizowany z rzeczywistym stanem: lokalne kopie pozostają lokalnie, a zweryfikowane punkty MASTER są zabezpieczone w GitHub.",
-    "RYNKI EU, WALUTY, crm-data.json, assistant-feed.json, manifest PWA i grafiki MASTER pozostają bez zmian."
+    "Z aktywnej karty RYNKI EU -> kraj -> firma -> szczegóły usunięto wyłącznie stary kafel DANE FIRMY.",
+    "Usunięto aktywne wywołanie dolnego panelu DANE FIRMY z renderCompanyR15().",
+    "CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS pozostają bez zmian.",
+    "Górna karta firmy oraz TELEFON, MAPA, OFERTA i EMAIL pozostają bez zmian.",
+    "RYNKI EU KARTA 1, listy krajów i firm, WALUTY, dane CRM, backupy i grafiki MASTER pozostają bez zmian."
   ]
 }
