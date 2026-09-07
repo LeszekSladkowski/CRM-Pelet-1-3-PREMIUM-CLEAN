@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r99-surgical-clean-step7-icon-dedupe",
-  "release": "R99 SURGICAL CLEAN STEP 7 — ICON DEDUPE",
+  "version": "1.3.0-master-r100-surgical-clean-step8-pwa-start-url-clean",
+  "release": "R100 SURGICAL CLEAN STEP 8 — PWA START_URL CLEAN",
   "buildDate": "07.09.2026",
-  "buildTime": "19:26",
-  "base": "Zweryfikowany R98 / aplikacja R97 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
+  "buildTime": "19:38",
+  "base": "Zweryfikowany R99 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
   "notes": [
-    "Jeden wspólny plik icon-512.png obsługuje zwykłą ikonę 512x512 oraz wariant maskable.",
-    "Manifest PWA nie odwołuje się już do osobnego icon-maskable-512.png.",
-    "Z aktywnej listy cache Service Workera usunięto zbędny alias icon-maskable-512.png.",
-    "Wygląd ikony pozostaje identyczny, ponieważ oba wcześniejsze pliki były bajt w bajt takie same.",
+    "Usunięto historyczne parametry ?build=R51&screen=home z start_url manifestu PWA.",
+    "PWA startuje teraz z czystego adresu ./, a aplikacja nadal domyślnie otwiera pulpit HOME.",
+    "Deduplikacja ikony 512x512 z R99 pozostaje bez zmian.",
+    "Aktywny łańcuch pozostaje: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.",
     "RYNKI EU, WALUTY, dane CRM i silniki obliczeniowe pozostają bez zmian."
   ]
 }
