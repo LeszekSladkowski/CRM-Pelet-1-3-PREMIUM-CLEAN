@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r97-surgical-clean-step5-version-sync",
-  "release": "R97 SURGICAL CLEAN STEP 5 — VERSION SYNC",
+  "version": "1.3.0-master-r99-surgical-clean-step7-icon-dedupe",
+  "release": "R99 SURGICAL CLEAN STEP 7 — ICON DEDUPE",
   "buildDate": "07.09.2026",
-  "buildTime": "18:47",
-  "base": "Zweryfikowany R96 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
+  "buildTime": "19:26",
+  "base": "Zweryfikowany R98 / aplikacja R97 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
   "notes": [
-    "Zsynchronizowano metadane wersji po zakończonych i zweryfikowanych krokach R95–R96.",
-    "Aktywny łańcuch pozostaje: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.",
-    "Karty RYNKI EU i WALUTY pozostają bez zmian wizualnych i funkcjonalnych.",
-    "crm-data.json, assistant-feed.json oraz mechanizm backupów pozostają bez zmian.",
-    "R97 jest kandydatem do testu wyłącznie po synchronizacji numeru wersji i opisu wydania."
+    "Jeden wspólny plik icon-512.png obsługuje zwykłą ikonę 512x512 oraz wariant maskable.",
+    "Manifest PWA nie odwołuje się już do osobnego icon-maskable-512.png.",
+    "Z aktywnej listy cache Service Workera usunięto zbędny alias icon-maskable-512.png.",
+    "Wygląd ikony pozostaje identyczny, ponieważ oba wcześniejsze pliki były bajt w bajt takie same.",
+    "RYNKI EU, WALUTY, dane CRM i silniki obliczeniowe pozostają bez zmian."
   ]
 }
