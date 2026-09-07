@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r99-anpol-dane-firmy-step1",
-  "release": "R99 ANPOL DANE FIRMY STEP 1",
+  "version": "1.3.0-master-r100-anpol-dane-firmy-direct-hook",
+  "release": "R100 ANPOL DANE FIRMY DIRECT HOOK",
   "buildDate": "07.09.2026",
-  "buildTime": "15:33",
-  "base": "MASTER-R92-FROZEN-2026-09-07 / STAN 0.",
+  "buildTime": "16:00",
+  "base": "R99 / MASTER-R92-FROZEN-2026-09-07 — STAN 0.",
   "notes": [
-    "Zmiana wyłącznie dla rekordu ANPOL (anpol-pl) i kafla DANE FIRMY.",
-    "DANE FIRMY otwiera pełną kartę na bazie czystej grafiki MASTER, a dane są nakładane z bieżącego rekordu CRM.",
-    "Pozostałe firmy i państwa zachowują dotychczasowe zachowanie STANU 0.",
-    "CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS, RYNKI EU i WALUTY pozostają nietknięte.",
-    "Wersja testowa do kontroli na Samsung Galaxy S24 Ultra przed rozszerzeniem na kolejne rekordy."
+    "Naprawiono rzeczywistą przyczynę R99: poprzednia podmiana trafiała w wcześniejszy renderCompanyR13 zamiast w aktywną funkcję r15OpenSection.",
+    "R100 podmienia jednoznacznie całą aktywną funkcję r15OpenSection i przechwytuje tylko ANPOL (anpol-pl) + DANE FIRMY.",
+    "DANE FIRMY dla ANPOL otwiera zatwierdzoną czystą grafikę MASTER 1:1 z danymi LIVE i hotspotami.",
+    "Pozostałe firmy, państwa, CENY I OFERTA, NOTATKI ASYSTENTA, AKCJE I STATUS, RYNKI EU oraz WALUTY pozostają bez zmian.",
+    "Wersja testowa do kontroli na Samsung Galaxy S24 Ultra przed rozszerzeniem rozwiązania na kolejne rekordy."
   ]
 }
