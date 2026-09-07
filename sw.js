@@ -46,6 +46,8 @@ r48PatchIndexHtml = function(text){
   }
 
   function r101OpenAnpolDataHard(c){
+    var bodyBefore=document.body.style.overflow;
+    var appBefore=app&&app.style?app.style.overflow:'';
     try{
       if(typeof r100OpenAnpolCompanyData==='function'){
         r100OpenAnpolCompanyData(c);
@@ -53,8 +55,10 @@ r48PatchIndexHtml = function(text){
       }
     }catch(err){
       console.error('R101: pełna karta R100 nie wystartowała — uruchamiam bezpieczny MASTER',err);
-      var broken=document.querySelector('.r100-company-overlay');if(broken)broken.remove();
     }
+    var broken=document.querySelector('.r100-company-overlay');if(broken)broken.remove();
+    document.body.style.overflow=bodyBefore;
+    if(app&&app.style)app.style.overflow=appBefore;
     r101OpenAnpolSafeMaster(c);
   }
 
