@@ -1,15 +1,14 @@
 {
-  "version": "1.3.0-master-r97-dane-firmy-clean-live-test",
-  "release": "R97 DANE FIRMY CLEAN LIVE TEST",
+  "version": "1.3.0-master-r98-dane-firmy-in-scope-fix",
+  "release": "R98 DANE FIRMY IN-SCOPE FIX",
   "buildDate": "07.09.2026",
-  "buildTime": "15:03",
-  "base": "STAN 0 / R92 SURGICAL CLEAN BASELINE",
+  "buildTime": "15:28",
+  "base": "STAN 0 / R92 SURGICAL CLEAN BASELINE + raster CLEAN MASTER",
   "scope": "Tylko ANPOL (anpol-pl) + tylko kafel DANE FIRMY",
   "notes": [
-    "Czysta grafika DANE FIRMY została dodana jako nieruchomy MASTER.",
-    "Dane LIVE są nakładane wyłącznie dla jednego rekordu testowego ANPOL.",
-    "Pozostałe firmy i państwa pozostają dokładnie w zachowanym stanie R92.",
-    "CENY I OFERTA, NOTATKI ASYSTENTA i AKCJE I STATUS nie są modyfikowane.",
-    "Po PASS testu ANPOL mechanizm może zostać zamrożony przed rozszerzeniem na kolejne rekordy."
+    "Naprawiono błąd R97: zewnętrzny skrypt nie miał dostępu do prywatnego stanu głównego runtime CRM.",
+    "Logika karty DANE FIRMY jest teraz wstrzykiwana do tego samego zakresu co state, liveData i getCompanyById.",
+    "Kliknięcie DANE FIRMY dla ANPOL ma otwierać pełnoekranową kartę CLEAN MASTER, a nie stary dolny arkusz.",
+    "Pozostałe firmy, państwa i trzy pozostałe karty nie są modyfikowane."
   ]
 }
