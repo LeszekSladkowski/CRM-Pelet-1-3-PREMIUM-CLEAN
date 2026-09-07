@@ -1,16 +1,18 @@
 {
-  "version": "1.3.0-master-r94-dane-firmy-exact-uploaded-master",
-  "release": "R94 DANE FIRMY EXACT UPLOADED MASTER",
+  "version": "1.3.0-master-r96-dane-firmy-live-surgical",
+  "release": "R96 DANE FIRMY LIVE SURGICAL",
   "buildDate": "07.09.2026",
-  "buildTime": "13:37",
-  "base": "R92 SURGICAL CLEAN BASELINE + zatwierdzone Rynki EU/Waluty; korekta po R93.",
+  "buildTime": "14:08",
+  "base": "Zamrożony MASTER-R94-DANE-FIRMY-EXACT-2026-09-07.",
   "notes": [
-    "Zmieniono wyłącznie zachowanie kafla DANE FIRMY.",
-    "Karta otwiera dokładnie grafikę przesłaną do folderu 00_GRAFIKI_MASTER_DO_WGRANIA.",
-    "Usunięto wszystkie maski i dynamiczne warstwy tekstowe z widoku DANE FIRMY.",
-    "Grafika nie jest modyfikowana wizualnie; aktywność realizują wyłącznie niewidoczne hotspoty.",
-    "Aktywne hotspoty: POWRÓT, SYNCHRONIZUJ, MAPA, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE, WRÓĆ DO KARTY.",
-    "CENY I OFERTA, NOTATKI ASYSTENTA oraz AKCJE I STATUS pozostają nietknięte.",
-    "MASTER-R92-FROZEN-2026-09-07 pozostaje stałym punktem powrotu."
+    "R95 został odrzucony po teście telefonu z powodu nachodzących masek i tekstów.",
+    "R96 zmienia wyłącznie kartę DANE FIRMY.",
+    "Raster MASTER 709x1536 pozostaje bazą 1:1.",
+    "Dla innych firm podmieniane są chirurgicznie tylko wartości pól; etykiety, ramki, ikony i sekcje MASTER pozostają nietknięte.",
+    "Brakujące dane są pokazywane jako pojedynczy znak — zamiast dużych bloków 'brak danych'.",
+    "Daty techniczne ISO są formatowane do DD.MM.RRRR.",
+    "Aktywne strefy: POWRÓT, SYNCHRONIZUJ, TELEFON, TELEFON KOMÓRKOWY, E-MAIL, WWW, MAPA, UAKTUALNIJ DANE, SZUKAJ DANYCH W GOOGLE, WRÓĆ DO KARTY.",
+    "CENY I OFERTA, NOTATKI ASYSTENTA i AKCJE I STATUS nie są modyfikowane.",
+    "R94 pozostaje niezmiennym MASTER-em i stałym punktem powrotu."
   ]
 }
