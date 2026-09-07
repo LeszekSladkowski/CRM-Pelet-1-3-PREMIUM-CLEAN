@@ -1,15 +1,15 @@
 {
-  "version": "1.3.0-master-r107-rynki-eu-ceny-oferta-full-graphic",
-  "release": "R107 RYNKI EU — CENY I OFERTA FULL GRAPHIC",
+  "version": "1.3.0-master-r108-rynki-eu-notatki-asystenta-full-graphic",
+  "release": "R108 RYNKI EU — NOTATKI ASYSTENTA FULL GRAPHIC",
   "buildDate": "07.09.2026",
-  "buildTime": "21:29",
-  "base": "Bezwzględny MASTER R106 DANE FIRMY S24 FULL SCREEN FIT.",
+  "buildTime": "21:47",
+  "base": "Bezwzględny MASTER R107 CENY I OFERTA FULL GRAPHIC + R106 DANE FIRMY S24 FULL SCREEN FIT.",
   "notes": [
-    "Kafel CENY I OFERTA na KARCIE 3/3 pozostaje widoczny, ale nie otwiera już starego dolnego panelu.",
-    "Klik CENY I OFERTA otwiera nową pełnoekranową kartę graficzną z grafiki grafiki/rynki-eu/dane-firmy/template-ceny-oferta.png.",
-    "Nowa karta CENY I OFERTA stosuje ten sam standard Samsung Galaxy S24 Ultra FULL SCREEN FIT co MASTER R106 DANE FIRMY.",
-    "Na karcie aktywne są górny POWRÓT, SYNCHRONIZUJ, X oraz dolny Wróć do karty.",
-    "DANE FIRMY pozostaje bez zmian jako MASTER R106.",
-    "NOTATKI ASYSTENTA, AKCJE I STATUS, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
+    "Kafel NOTATKI ASYSTENTA na KARCIE 3/3 pozostaje widoczny, ale nie otwiera starego dolnego panelu.",
+    "Klik NOTATKI ASYSTENTA otwiera nową pełnoekranową kartę graficzną z grafiki grafiki/rynki-eu/dane-firmy/template-notatki-asystenta.jpg.",
+    "Nowa karta NOTATKI ASYSTENTA stosuje ten sam standard Samsung Galaxy S24 Ultra FULL SCREEN FIT co MASTER R106/R107.",
+    "Na karcie aktywne są górny POWRÓT, SYNCHRONIZUJ oraz dolny Wróć do karty.",
+    "DANE FIRMY MASTER R106 i CENY I OFERTA MASTER R107 pozostają bez zmian.",
+    "AKCJE I STATUS, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
   ]
 }
