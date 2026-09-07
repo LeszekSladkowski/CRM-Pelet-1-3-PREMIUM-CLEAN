@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r100-surgical-clean-step8-pwa-start-url-clean",
-  "release": "R100 SURGICAL CLEAN STEP 8 — PWA START_URL CLEAN",
+  "version": "1.3.0-master-r101-surgical-clean-step11-safe-local-backups",
+  "release": "R101 SURGICAL CLEAN STEP 11 — SAFE LOCAL BACKUPS",
   "buildDate": "07.09.2026",
-  "buildTime": "19:38",
-  "base": "Zweryfikowany R99 / PUNKT 0 R92. Funkcjonalnie bez zmian.",
+  "buildTime": "19:52",
+  "base": "Zweryfikowany R100 / PUNKT 0 R92. Funkcjonalnie bez zmian poza ochroną lokalnych backupów.",
   "notes": [
-    "Usunięto historyczne parametry ?build=R51&screen=home z start_url manifestu PWA.",
-    "PWA startuje teraz z czystego adresu ./, a aplikacja nadal domyślnie otwiera pulpit HOME.",
-    "Deduplikacja ikony 512x512 z R99 pozostaje bez zmian.",
+    "Wyłączono przestarzałe automatyczne czyszczenie całej lokalnej bazy backupów przez r38CleanBackupWarehouseOnce().",
+    "Lokalne backupy nie są już kasowane przez historyczny mechanizm R38 przy odświeżaniu Magazynu Backupów.",
+    "Martwy wpis katalogu R38 nie został jeszcze zmieniony — będzie sprawdzany osobno po teście tej poprawki.",
     "Aktywny łańcuch pozostaje: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.",
-    "RYNKI EU, WALUTY, dane CRM i silniki obliczeniowe pozostają bez zmian."
+    "RYNKI EU, WALUTY, crm-data.json, assistant-feed.json, manifest PWA i grafiki MASTER pozostają bez zmian."
   ]
 }
