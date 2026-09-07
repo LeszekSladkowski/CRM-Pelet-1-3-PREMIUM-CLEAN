@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-07T22:20:00+02:00",
+  "source": "L&M Technic Energy — zweryfikowane dane LIVE po ID firmy",
+  "records": [
+    {
+      "id": "anpol-pl",
+      "displayId": "PL-ANPOL",
+      "name": "ANPOL",
+      "legalName": "Przedsiębiorstwo Wielobranżowe ANPOL Rajmund Andrych",
+      "countryCode": "PL",
+      "countryName": "Polska",
+      "city": "Biskupice / Sieradz",
+      "address": "Biskupice 88, 98-200 Sieradz",
+      "type": "PRODUCENT / DOSTAWCA",
+      "role": "DOSTAWCA",
+      "roles": ["DOSTAWCA"],
+      "direction": "TYLKO DOSTAWCA",
+      "availability": "ENplus A1 PL030 • sprzedaż hurtowa i detaliczna",
+      "certificate": "ENplus A1",
+      "enplusId": "PL030",
+      "phone": "+48 43 822 65 01",
+      "mobile": "+48 698 896 877",
+      "website": "pelletanpol.pl",
+      "nip": "827-100-44-39",
+      "regon": "730193318",
+      "activity": "Produkcja i sprzedaż pelletu drzewnego ENplus A1",
+      "products": "Pellet ANPOL ENplus A1 • 6 mm • worki 15 kg • paleta 65 × 15 kg = 975 kg",
+      "priority": "B",
+      "status": "AKTYWNY / DO KONTAKTU",
+      "nextFollowUp": "Pozyskać cenę B2B 24/48/96 t, FCA/DAP i rabat wolumenowy",
+      "contactGoal": "Cena B2B 24/48/96 t • FCA/DAP • rabat wolumenowy",
+      "note": "Detal od 01.08.2026: 2 099 PLN brutto / 975 kg przy odbiorze własnym — benchmark, nie cena zakupowa L&M.",
+      "addedAt": "2026-08-30",
+      "sourceDate": "2026-09-07",
+      "lastVerified": "07.09.2026 22:20",
+      "updatedBy": "L&M",
+      "priceText": "2 099 PLN brutto / 975 kg — odbiór własny; obowiązuje od 01.08.2026",
+      "priceType": "BENCHMARK DETAL — NIE CENA ZAKUPOWA L&M",
+      "priceDate": "2026-08-01",
+      "logistics": {
+        "bagKg": 15,
+        "bagsPerPallet": 65,
+        "palletKg": 975,
+        "delivery": "odbiór osobisty / do 15 km / kurier cała Polska"
+      },
+      "verifiedSources": [
+        "https://pelletanpol.pl/",
+        "https://pelletanpol.pl/kontakt/",
+        "https://pelletanpol.pl/produkt/pellet-anpol-paleta/",
+        "https://pelletanpol.pl/pellet-workowany/"
+      ]
+    }
+  ]
+}
