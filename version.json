@@ -1,15 +1,15 @@
 {
-  "version": "1.3.0-master-r108-rynki-eu-notatki-asystenta-full-graphic",
-  "release": "R108 RYNKI EU — NOTATKI ASYSTENTA FULL GRAPHIC",
+  "version": "1.3.0-master-r109-rynki-eu-akcje-status-full-graphic",
+  "release": "R109 RYNKI EU — AKCJE I STATUS FULL GRAPHIC",
   "buildDate": "07.09.2026",
-  "buildTime": "21:47",
-  "base": "Bezwzględny MASTER R107 CENY I OFERTA FULL GRAPHIC + R106 DANE FIRMY S24 FULL SCREEN FIT.",
+  "buildTime": "22:06",
+  "base": "Bezwzględny MASTER R108 NOTATKI ASYSTENTA + R107 CENY I OFERTA + R106 DANE FIRMY.",
   "notes": [
-    "Kafel NOTATKI ASYSTENTA na KARCIE 3/3 pozostaje widoczny, ale nie otwiera starego dolnego panelu.",
-    "Klik NOTATKI ASYSTENTA otwiera nową pełnoekranową kartę graficzną z grafiki grafiki/rynki-eu/dane-firmy/template-notatki-asystenta.jpg.",
-    "Nowa karta NOTATKI ASYSTENTA stosuje ten sam standard Samsung Galaxy S24 Ultra FULL SCREEN FIT co MASTER R106/R107.",
+    "Kafel AKCJE I STATUS na KARCIE 3/3 pozostaje widoczny, ale nie otwiera starego dolnego panelu.",
+    "Klik AKCJE I STATUS otwiera nową pełnoekranową kartę graficzną z grafiki grafiki/rynki-eu/dane-firmy/template-akcje-status.png.",
+    "Nowa karta AKCJE I STATUS stosuje ten sam standard Samsung Galaxy S24 Ultra FULL SCREEN FIT co MASTER R106/R107/R108.",
     "Na karcie aktywne są górny POWRÓT, SYNCHRONIZUJ oraz dolny Wróć do karty.",
-    "DANE FIRMY MASTER R106 i CENY I OFERTA MASTER R107 pozostają bez zmian.",
-    "AKCJE I STATUS, listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
+    "DANE FIRMY MASTER R106, CENY I OFERTA MASTER R107 oraz NOTATKI ASYSTENTA MASTER R108 pozostają bez zmian.",
+    "Listy krajów i firm, WALUTY, dane CRM i backupy pozostają bez zmian."
   ]
 }
