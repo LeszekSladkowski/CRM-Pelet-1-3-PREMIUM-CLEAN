@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r113-clean-reset-r102-base",
-  "release": "R113 CLEAN RESET — R102 BASE",
+  "version": "1.3.0-master-r114-company-details-graphic-master",
+  "release": "R114 NOWE OKNO 3 — SZCZEGÓŁY FIRMY GRAPHIC MASTER",
   "buildDate": "08.09.2026",
-  "buildTime": "12:25",
-  "base": "Dokładnie zweryfikowany R102 FINAL CLEAN — bez eksperymentalnych kart R103-R111.",
+  "buildTime": "12:41",
+  "base": "Zweryfikowany MASTER R113 CLEAN RESET — R102 BASE.",
   "notes": [
-    "Czysta publikacja zweryfikowanego stanu R102 jako nowa aktualizacja dla urządzeń mających nowszy numer R111.",
-    "Brak nowych funkcji, brak nowych kart i brak nowych warstw UI.",
-    "Stare eksperymenty R103-R111 nie są częścią tej wersji.",
-    "RYNKI EU, WALUTY, dane CRM, backupy lokalne i zatwierdzone MASTER-y R102 pozostają zgodne z czystym baseline.",
-    "Nowe całkowicie przeprojektowane OKNO NR 3 i nowe karty będą budowane dopiero od tego czystego punktu."
+    "Stary widok KARTY NR 3 nie jest już renderowany.",
+    "W jego miejscu zainstalowano nową czystą grafikę MASTER SZCZEGÓŁY FIRMY w proporcji Samsung Galaxy S24 Ultra 852 x 1846.",
+    "Zachowano działające akcje POWRÓT, SYNCHRONIZUJ, TELEFON, MAPA, OFERTA i EMAIL.",
+    "Siedem nowych kafli pozostaje celowo bez docelowych modułów do czasu osobnego projektowania, testu i zamrożenia każdego z nich.",
+    "Pozostała funkcjonalność zweryfikowanego R113 pozostaje bez zmian."
   ]
 }
