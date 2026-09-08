@@ -1,14 +1,15 @@
 {
-  "version": "1.3.0-master-r120-dane-firmy-top-name-master-fix",
-  "release": "R120 DANE FIRMY — TOP NAME MASTER FIX",
+  "version": "1.3.0-master-r121-ceny-live-tile-activation",
+  "release": "R121 CENY — LIVE TILE ACTIVATION",
   "buildDate": "08.09.2026",
-  "buildTime": "15:44",
-  "base": "Działający R119 DANE FIRMY — SYNC STAY + CENTER MASTER na bezwzględnym MASTER R115.",
+  "buildTime": "17:59",
+  "base": "Zweryfikowany R120 DANE FIRMY — TOP NAME MASTER FIX + czysta grafika CENY MASTER wgrana do repozytorium.",
   "notes": [
-    "Jedyna zmiana R120: górna nazwa firmy została powiększona i optycznie wyśrodkowana na swojej linii MASTER.",
-    "Dla dłuższych nazw zastosowano automatyczne zmniejszenie czcionki, aby zachować układ MASTER we wszystkich firmach.",
-    "SYNCHRONIZUJ z R119 pozostaje bez zmian i pozostawia użytkownika w oknie DANE FIRMY.",
-    "Pozostałe pola, grafika MASTER, funkcje DANE FIRMY i pozostałe 6 kafli OKNA 3 pozostają bez zmian.",
-    "R115 pozostaje nietkniętym czystym punktem przywracania."
+    "Aktywowano wyłącznie kafel CENY w OKNIE 3 SZCZEGÓŁY FIRMY.",
+    "Kafel CENY otwiera czystą grafikę MASTER: grafiki/rynki-eu/szczegoly-firmy/file_00000000295481f4b17fe257ae1822eb.png.",
+    "Aktywne są: złota strzałka WSTECZ, zielony SYNCHRONIZUJ pozostający na karcie CENY, AKTUALIZUJ CENY, SZUKAJ CEN W GOOGLE oraz WRÓĆ DO KARTY.",
+    "R120 DANE FIRMY pozostaje chirurgicznie zachowany bez zmian.",
+    "Pozostałe kafle OKNA 3 pozostają nietknięte i nieaktywne do osobnych kroków MASTER.",
+    "Nie utworzono jeszcze nowej gałęzi MASTER — R121 wymaga testu Leszka na Samsung Galaxy S24 Ultra przed zamrożeniem."
   ]
 }
