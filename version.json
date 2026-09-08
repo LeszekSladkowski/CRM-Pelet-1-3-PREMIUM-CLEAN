@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r114-company-details-graphic-master",
-  "release": "R114 NOWE OKNO 3 — SZCZEGÓŁY FIRMY GRAPHIC MASTER",
+  "version": "1.3.0-master-r115-company-details-iife-fix",
+  "release": "R115 OKNO 3 — IIFE RENDER FIX",
   "buildDate": "08.09.2026",
-  "buildTime": "12:41",
-  "base": "Zweryfikowany MASTER R113 CLEAN RESET — R102 BASE.",
+  "buildTime": "12:58",
+  "base": "R114 na zweryfikowanym MASTER R113 CLEAN RESET — R102 BASE.",
   "notes": [
-    "Stary widok KARTY NR 3 nie jest już renderowany.",
-    "W jego miejscu zainstalowano nową czystą grafikę MASTER SZCZEGÓŁY FIRMY w proporcji Samsung Galaxy S24 Ultra 852 x 1846.",
-    "Zachowano działające akcje POWRÓT, SYNCHRONIZUJ, TELEFON, MAPA, OFERTA i EMAIL.",
-    "Siedem nowych kafli pozostaje celowo bez docelowych modułów do czasu osobnego projektowania, testu i zamrożenia każdego z nich.",
-    "Pozostała funkcjonalność zweryfikowanego R113 pozostaje bez zmian."
+    "Naprawiono krytyczny błąd R114: nowy renderer OKNA NR 3 jest teraz wstrzykiwany do głównego IIFE aplikacji i faktycznie zastępuje stary renderCompany().",
+    "Grafika MASTER SZCZEGÓŁY FIRMY pozostaje bez zmian.",
+    "Pozostałe ekrany i dane R113/R114 pozostają bez zmian.",
+    "Zachowano akcje POWRÓT, SYNCHRONIZUJ, TELEFON, MAPA, OFERTA i EMAIL.",
+    "Siedem nowych kafli nadal czeka na osobne projektowanie i ożywianie po pozytywnym teście R115 na Samsung Galaxy S24 Ultra."
   ]
 }
