@@ -1,171 +1,82 @@
-/* R122 — HISTORIA — LIVE NAVIGATION
-   Baza: zweryfikowany R121 CENY — LIVE TILE ACTIVATION.
-   Jedyna nowa funkcja: aktywacja kafla HISTORIA w OKNIE 3 oraz przejścia HISTORIA -> SZCZEGÓŁ HISTORII -> HISTORIA.
-   R120 DANE FIRMY, R121 CENY oraz pozostałe zamrożone MASTER-y pozostają bez zmian.
+/* R123 — OFERTA ENGINE PORT 1.2 -> CRM 1.3
+   Baza: R122 HISTORIA — LIVE NAVIGATION.
+   Jedyna nowa gałąź: OFERTA w OKNIE 3 otrzymuje żywy silnik ofert i generator LIVE
+   przeniesiony z Europejskiego Kalkulatora Peletu 1.2 PREMIUM.
+   R120 DANE FIRMY, R121 CENY, R122 HISTORIA i pozostałe MASTER-y pozostają bez zmian.
 */
-importScripts('./sw-r119-master.js?v=R122-historia-live-navigation');
+importScripts('./sw-r119-master.js?v=R123-offer-engine-port');
 
 if(Array.isArray(ASSETS)){
-  const r121PriceImg='./grafiki/rynki-eu/szczegoly-firmy/file_00000000295481f4b17fe257ae1822eb.png';
-  const r122HistoryImg='./grafiki/rynki-eu/szczegoly-firmy/file_00000000733881f48b17bd50042382ce.png';
-  const r122HistoryDetailImg='./grafiki/rynki-eu/szczegoly-firmy/file_00000000efd881f4967d7f1716195e44.png';
-  if(!ASSETS.includes(r121PriceImg)) ASSETS.push(r121PriceImg);
-  if(!ASSETS.includes(r122HistoryImg)) ASSETS.push(r122HistoryImg);
-  if(!ASSETS.includes(r122HistoryDetailImg)) ASSETS.push(r122HistoryDetailImg);
+  ['./grafiki/rynki-eu/szczegoly-firmy/file_00000000295481f4b17fe257ae1822eb.png','./grafiki/rynki-eu/szczegoly-firmy/file_00000000733881f48b17bd50042382ce.png','./grafiki/rynki-eu/szczegoly-firmy/file_00000000efd881f4967d7f1716195e44.png'].forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
 }
 
 const r119TopNameBasePatchIndexHtml = r48PatchIndexHtml;
 r48PatchIndexHtml = function(text){
   let out = r119TopNameBasePatchIndexHtml(text);
 
-  /* Zachowaj chirurgicznie R120 DANE FIRMY */
-  out = out.replaceAll('1.3.0-master-r119-dane-firmy-sync-center-master','1.3.0-master-r122-historia-live-navigation');
-  out = out.replaceAll('R119 DANE FIRMY — SYNC STAY + CENTER MASTER','R122 HISTORIA — LIVE NAVIGATION');
-  out = out.replace("const BUILD_TIME = '15:09';","const BUILD_TIME = '21:35';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R119-dane-firmy-sync-center-master-1509'","navigator.serviceWorker.register('./sw.js?v=R122-historia-live-navigation-2135'");
-  out = out.replace(/r84-backup-prune\.js\?v=R119-1509/g,'r84-backup-prune.js?v=R122-2135');
+  out = out.replaceAll('1.3.0-master-r119-dane-firmy-sync-center-master','1.3.0-master-r123-offer-engine-port');
+  out = out.replaceAll('R119 DANE FIRMY — SYNC STAY + CENTER MASTER','R123 OFERTA — ENGINE PORT 1.2');
+  out = out.replace("const BUILD_TIME = '15:09';","const BUILD_TIME = '22:45';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R119-dane-firmy-sync-center-master-1509'","navigator.serviceWorker.register('./sw.js?v=R123-offer-engine-port-2245'");
+  out = out.replace(/r84-backup-prune\.js\?v=R119-1509/g,'r84-backup-prune.js?v=R123-2245');
+  out = out.replace("r117Field(s,c.name,355,235,285,22,'#fff','900','center',true);","r117Field(s,c.name,405,226,310,(String(c.name||'').length<=10?30:String(c.name||'').length<=18?24:18),'#fff','900','center',true);");
 
-  out = out.replace(
-    "r117Field(s,c.name,355,235,285,22,'#fff','900','center',true);",
-    "r117Field(s,c.name,405,226,310,(String(c.name||'').length<=10?30:String(c.name||'').length<=18?24:18),'#fff','900','center',true);"
-  );
-
-  /* R122 — zachowaj CENY + aktywuj HISTORIĘ na czystych grafikach MASTER */
-  if(!out.includes('r122-history-live-navigation-inside-iife')){
-    const r122Inside = `
-  /* r122-history-live-navigation-inside-iife */
+  if(!out.includes('r123-offer-engine-port-inside-iife')){
+    const r123Inside = `
+  /* r123-offer-engine-port-inside-iife */
   const R121_PRICE_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_00000000295481f4b17fe257ae1822eb.png';
   const R122_HISTORY_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_00000000733881f48b17bd50042382ce.png';
   const R122_HISTORY_DETAIL_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_00000000efd881f4967d7f1716195e44.png';
 
-  function r121PriceGoogle(c){
-    const q=[c&&c.name,c&&c.city,c&&c.countryName,'pellet cena hurt'].filter(Boolean).join(' ');
-    openUrl('https://www.google.com/search?q='+encodeURIComponent(q||'pellet cena hurt'));
-  }
+  function r121PriceGoogle(c){const q=[c&&c.name,c&&c.city,c&&c.countryName,'pellet cena hurt'].filter(Boolean).join(' ');openUrl('https://www.google.com/search?q='+encodeURIComponent(q||'pellet cena hurt'));}
+  async function r121PriceSyncStay(c){const keepId=String((c&&c.id)||state.selectedCompany||'').trim();try{const result=sync();if(result&&typeof result.then==='function')await result;}catch(e){console.warn('R121 sync CENY',e)}finally{if(keepId)state.selectedCompany=keepId;setTimeout(()=>r121OpenCompanyPrices(getCompanyById(keepId)||c),120)}}
+  function r121OpenCompanyPrices(base){const c=base||getCompanyById(state.selectedCompany)||{};const s=document.createElement('section');s.className='screen r121-company-prices';s.style.position='relative';const img=document.createElement('img');img.className='master';img.src=R121_PRICE_IMG;img.alt='Ceny — MASTER';s.append(img);s.append(hotspot({x:0,y:0,w:140,h:145,label:'Wstecz',onClick:render,baseW:853,baseH:1844,z:30}));s.append(hotspot({x:690,y:0,w:163,h:155,label:'Synchronizuj',onClick:()=>r121PriceSyncStay(c),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:30,y:1550,w:380,h:105,label:'Aktualizuj ceny',onClick:()=>r121PriceSyncStay(c),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:420,y:1550,w:383,h:105,label:'Szukaj cen w Google',onClick:()=>r121PriceGoogle(c),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:30,y:1674,w:773,h:100,label:'Wróć do karty',onClick:render,baseW:853,baseH:1844,z:30}));app.replaceChildren(s);}
 
-  async function r121PriceSyncStay(c){
-    const keepId=String((c&&c.id)||state.selectedCompany||'').trim();
-    try{
-      const result=sync();
-      if(result&&typeof result.then==='function') await result;
-    }catch(e){
-      console.warn('R121 sync CENY',e);
-    }finally{
-      if(keepId) state.selectedCompany=keepId;
-      setTimeout(()=>r121OpenCompanyPrices(getCompanyById(keepId)||c),120);
-    }
-  }
+  async function r122HistorySyncStay(c,detail){const keepId=String((c&&c.id)||state.selectedCompany||'').trim();try{const result=sync();if(result&&typeof result.then==='function')await result;}catch(e){console.warn('R122 sync HISTORIA',e)}finally{if(keepId)state.selectedCompany=keepId;const keepCompany=getCompanyById(keepId)||c;setTimeout(()=>detail?r122OpenHistoryDetail(keepCompany):r122OpenCompanyHistory(keepCompany),120)}}
+  function r122HistoryFuture(label){toast(label+' — funkcja zostanie uruchomiona w kolejnym osobnym kroku MASTER');}
+  function r122OpenHistoryDetail(base){const c=base||getCompanyById(state.selectedCompany)||{};const s=document.createElement('section');s.className='screen r122-history-detail';s.style.position='relative';const img=document.createElement('img');img.className='master';img.src=R122_HISTORY_DETAIL_IMG;img.alt='Szczegół historii — MASTER';s.append(img);s.append(hotspot({x:0,y:0,w:140,h:145,label:'Wstecz do historii',onClick:()=>r122OpenCompanyHistory(c),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:690,y:0,w:163,h:155,label:'Synchronizuj',onClick:()=>r122HistorySyncStay(c,true),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:30,y:1505,w:255,h:115,label:'Edytuj wpis',onClick:()=>r122HistoryFuture('EDYTUJ WPIS'),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:295,y:1505,w:255,h:115,label:'Dodaj kolejny',onClick:()=>r122HistoryFuture('DODAJ KOLEJNY'),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:560,y:1505,w:263,h:115,label:'Zmień status',onClick:()=>r122HistoryFuture('ZMIEŃ STATUS'),baseW:853,baseH:1844,z:30}));s.append(hotspot({x:30,y:1645,w:773,h:110,label:'Wróć do historii',onClick:()=>r122OpenCompanyHistory(c),baseW:853,baseH:1844,z:30}));app.replaceChildren(s);}
+  function r122OpenCompanyHistory(base){const c=base||getCompanyById(state.selectedCompany)||{};const s=document.createElement('section');s.className='screen r122-company-history';s.style.position='relative';const img=document.createElement('img');img.className='master';img.src=R122_HISTORY_IMG;img.alt='Historia — MASTER';s.append(img);s.append(hotspot({x:0,y:0,w:140,h:145,label:'Wstecz',onClick:render,baseW:853,baseH:1844,z:30}));s.append(hotspot({x:690,y:0,w:163,h:155,label:'Synchronizuj',onClick:()=>r122HistorySyncStay(c,false),baseW:853,baseH:1844,z:30}));[['Wszystko',25],['Statusy',170],['Korespondencja',315],['Ceny',475],['Notatki',610]].forEach((a,i)=>s.append(hotspot({x:a[1],y:390,w:i===2?155:(i===4?210:140),h:125,label:a[0],onClick:()=>r122HistoryFuture('FILTR '+a[0].toUpperCase()),baseW:853,baseH:1844,z:30})));[[30,245,'Ostatnie 7 dni'],[285,245,'Ostatnie 30 dni'],[540,280,'Cała historia']].forEach(a=>s.append(hotspot({x:a[0],y:525,w:a[1],h:85,label:a[2],onClick:()=>r122HistoryFuture(a[2].toUpperCase()),baseW:853,baseH:1844,z:30})));[625,750,875,1000,1125,1250].forEach((y,i)=>s.append(hotspot({x:25,y,w:800,h:115,label:'Szczegół historii '+(i+1),onClick:()=>r122OpenHistoryDetail(c),baseW:853,baseH:1844,z:30})));[['Dodaj wpis',25,185],['Dodaj korespondencję',215,195],['Dodaj cenę',415,195],['Zmień status',615,210]].forEach(a=>s.append(hotspot({x:a[1],y:1450,w:a[2],h:110,label:a[0],onClick:()=>r122HistoryFuture(a[0].toUpperCase()),baseW:853,baseH:1844,z:30})));s.append(hotspot({x:30,y:1590,w:773,h:140,label:'Wróć do karty',onClick:render,baseW:853,baseH:1844,z:30}));app.replaceChildren(s);}
 
-  function r121OpenCompanyPrices(base){
-    const c=base||getCompanyById(state.selectedCompany)||{};
-    const s=document.createElement('section');
-    s.className='screen r121-company-prices';
-    s.style.position='relative';
+  const R123_OFFER_KEY='crm13_r123_offer_engine_v1';
+  const R123_GEN_KEY='crm13_r123_offer_generator_v1';
+  const R123_LANGS={
+    pl:{code:'PL',flag:'🇵🇱',title:'SUPER OFERTA',sub:'NA PELET DRZEWNY PREMIUM A1',palette:'PALETA',bags:'WORKI 15 KG',big:'BIG BAG',valid:'OFERTA WAŻNA',cta:'ZAMÓW JUŻ DZIŚ!',net:'netto'},
+    de:{code:'DE',flag:'🇩🇪',title:'SUPER ANGEBOT',sub:'HOLZPELLETS PREMIUM A1',palette:'PALETTE',bags:'SÄCKE 15 KG',big:'BIG BAG',valid:'ANGEBOT GÜLTIG',cta:'JETZT BESTELLEN!',net:'netto'},
+    en:{code:'EN',flag:'🇬🇧',title:'SUPER OFFER',sub:'PREMIUM A1 WOOD PELLETS',palette:'PALLET',bags:'15 KG BAGS',big:'BIG BAG',valid:'OFFER VALID',cta:'ORDER TODAY!',net:'net'},
+    cz:{code:'CZ',flag:'🇨🇿',title:'SUPER NABÍDKA',sub:'DŘEVĚNÉ PELETY PREMIUM A1',palette:'PALETA',bags:'PYTLE 15 KG',big:'BIG BAG',valid:'NABÍDKA PLATÍ',cta:'OBJEDNEJTE DNES!',net:'netto'},
+    sk:{code:'SK',flag:'🇸🇰',title:'SUPER PONUKA',sub:'DREVENÉ PELETY PREMIUM A1',palette:'PALETA',bags:'VRECIA 15 KG',big:'BIG BAG',valid:'PONUKA PLATÍ',cta:'OBJEDNAJTE DNES!',net:'netto'}
+  };
+  let R123_ACTIVE_LANG='pl';
+  function r123Esc(v){return String(v??'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));}
+  function r123Read(key){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(e){return {}}}
+  function r123Num(id){return Number(String(document.getElementById(id)?.value||'0').replace(',','.'))||0;}
+  function r123Fmt(n,d=2){return Number(n||0).toLocaleString('pl-PL',{minimumFractionDigits:d,maximumFractionDigits:d});}
+  function r123Company(base){return r117Company(base||getCompanyById(state.selectedCompany)||{});}
+  function r123Styles(){if(document.getElementById('r123-offer-css'))return;const st=document.createElement('style');st.id='r123-offer-css';st.textContent='.r123{width:min(100%,853px);min-height:100vh;background:#010503;color:#f5f7f5;font-family:Arial,sans-serif;padding-bottom:28px}.r123 *{box-sizing:border-box}.r123-top{display:grid;grid-template-columns:120px 1fr 130px;align-items:center;min-height:96px;padding:12px 14px;border-bottom:1px solid #38512b;background:linear-gradient(#08110c,#020604)}.r123-brand{color:#e7a21c;font-size:25px;font-weight:900}.r123-brand small{display:block;color:#7ed328;font-size:10px;letter-spacing:1.5px;margin-top:5px}.r123-title{text-align:center;color:#efa91e;font-size:27px;font-weight:900}.r123-title small{display:block;color:#aeb8b0;font-size:11px;margin-top:5px}.r123-back{min-height:48px;border:1px solid #79bd1d;border-radius:9px;background:#0b160c;color:#fff;font-weight:900}.r123-body{padding:16px}.r123-card{border:1px solid #40542e;border-radius:13px;background:linear-gradient(#07100c,#020806);padding:15px;margin-bottom:14px}.r123-card h2{margin:0 0 13px;padding-bottom:9px;border-bottom:1px solid #263829;color:#a7e73a;font-size:21px}.r123-card h2 span{color:#efa91e}.r123-note{color:#98a49b;font-size:13px;line-height:1.4;margin-bottom:12px}.r123-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.r123-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.r123-field{margin-bottom:10px}.r123-field label{display:block;color:#c7d0c9;font-size:13px;font-weight:900;margin-bottom:5px}.r123-input,.r123-select{width:100%;height:50px;border:1px solid #455d32;border-radius:9px;background:#040b07;color:#fff;padding:0 11px;font-size:17px;font-weight:800}.r123-btn{min-height:58px;border-radius:10px;border:1px solid #5d6f3b;color:#fff;background:linear-gradient(#1b241d,#080d09);font-size:17px;font-weight:900;padding:10px}.r123-btn.green{background:linear-gradient(#79c90a,#397b00);border-color:#8ed51d}.r123-btn.blue{background:linear-gradient(#1696cf,#075d86);border-color:#1ba7e6}.r123-btn.orange{background:linear-gradient(#d2870c,#7a4600);border-color:#e39a1c}.r123-btn.purple{background:linear-gradient(#9a3ace,#4d166a);border-color:#ae55dc}.r123-btn.gray{background:linear-gradient(#303833,#141916)}.r123-wide{width:100%;margin-top:8px}.r123-kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}.r123-kpi{min-height:105px;border:1px solid #354c2d;border-radius:11px;background:#06100b;padding:13px}.r123-kpi span{display:block;color:#9ba69e;font-size:12px;font-weight:900}.r123-kpi b{display:block;font-size:24px;margin-top:8px}.r123-kpi .green{color:#9be735}.r123-kpi .orange{color:#f2aa25}.r123-summary{margin-top:11px;padding:13px;border:1px solid #4c6c31;border-radius:9px;background:#0b160d;font-size:15px;font-weight:800;line-height:1.45}.r123-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.r123-status{margin-top:10px;border:1px solid #2d4329;border-radius:8px;background:#08130b;color:#a7e73f;font-weight:900;padding:10px}.r123-lang{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:13px}.r123-lang button{height:47px;min-width:72px;border:1px solid #50653d;border-radius:9px;background:#101a11;color:#fff;font-weight:900;font-size:15px}.r123-lang button.active{border-color:#8ddb20;background:linear-gradient(#2d5510,#112407);box-shadow:0 0 12px #70cc1638}.r123-live{border:1px solid #4c6039;border-radius:12px;background:#000;padding:7px}.r123-live canvas{display:block;width:100%;height:auto;border-radius:7px}.r123-rec{border:1px solid #34492e;border-radius:9px;background:#06100a;padding:11px;margin-bottom:10px}.r123-rec span{display:block;color:#95a098;font-size:11px}.r123-rec b{display:block;margin-top:3px;font-size:16px}.r123-generator-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}@media(max-width:600px){.r123-top{grid-template-columns:90px 1fr 105px}.r123-title{font-size:22px}.r123-grid2,.r123-grid3{grid-template-columns:1fr}.r123-actions,.r123-generator-actions{grid-template-columns:1fr 1fr}}';document.head.append(st);}
+  function r123Head(title,sub,back){return '<div class="r123-top"><div class="r123-brand">L&M<small>TECHNIC ENERGY</small></div><div class="r123-title">'+title+'<small>'+sub+'</small></div><button class="r123-back" id="r123_back">← WRÓĆ</button></div>';}
+  function r123OfferDefaults(c){const x=r123Read(R123_OFFER_KEY);return {date:x.date||new Date().toISOString().slice(0,16),supplier:c.name||x.supplier||'',pellet:x.pellet||'A1 (ENplus)',diameter:x.diameter||'6 mm',form:x.form||'Luzem',purchase:Number(x.purchase??c.price??1250),sell:Number(x.sell??1580),qty:Number(x.qty??52),distance:Number(x.distance??535),rate:Number(x.rate??4.25),work:Number(x.work??42),bags:Number(x.bags??37.67),pallet:Number(x.pallet??25),other:Number(x.other??0)};}
+  function r123OfferRead(c){return {companyId:String(c.id||state.selectedCompany||''),date:document.getElementById('r123_date').value,supplier:c.name||'',pellet:document.getElementById('r123_pellet').value,diameter:document.getElementById('r123_diam').value,form:document.getElementById('r123_form').value,purchase:r123Num('r123_purchase'),sell:r123Num('r123_sell'),qty:r123Num('r123_qty'),distance:r123Num('r123_distance'),rate:r123Num('r123_rate'),work:r123Num('r123_work'),bags:r123Num('r123_bags'),pallet:r123Num('r123_pallet'),other:r123Num('r123_other')};}
+  function r123Calc(c,show){const x=r123OfferRead(c),trucks=Math.max(1,x.qty/26),transportTruck=x.distance*2*x.rate,transportTotal=transportTruck*trucks,transportT=x.qty?transportTotal/x.qty:0,extras=x.work+x.bags+x.pallet+x.other,full=x.purchase+transportT+extras,margin=x.sell-full,marginPct=x.sell?margin/x.sell*100:0,totalCost=full*x.qty,totalMargin=margin*x.qty;const r={...x,trucks,transportTruck,transportTotal,transportT,extras,full,margin,marginPct,totalCost,totalMargin};localStorage.setItem(R123_OFFER_KEY,JSON.stringify(x));[['r123_cost',r123Fmt(full)+' zł/t'],['r123_sell_k',r123Fmt(x.sell)+' zł/t'],['r123_margin',r123Fmt(margin)+' zł/t'],['r123_pct',r123Fmt(marginPct)+'%']].forEach(a=>{const e=document.getElementById(a[0]);if(e)e.textContent=a[1]});const sum=document.getElementById('r123_summary');if(sum)sum.innerHTML='<strong style="color:#a1e739">'+r123Esc(c.name||'Firma')+'</strong> • '+r123Esc(x.pellet)+' • '+r123Esc(x.diameter)+' • '+r123Esc(x.form)+' • '+r123Fmt(x.qty,0)+' t ('+r123Fmt(trucks,0)+' samoch.)<br>Transport: '+r123Fmt(transportTotal)+' zł łącznie • Koszt całej partii: '+r123Fmt(totalCost)+' zł • Marża całej partii: <strong style="color:#a1e739">'+r123Fmt(totalMargin)+' zł</strong>';if(show){const e=document.getElementById('r123_status');if(e)e.textContent='✓ OFERTA PRZELICZONA — '+new Date().toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'})}return r;}
+  function r123SaveOffer(c){const r=r123Calc(c,false);let h=[];try{h=JSON.parse(localStorage.getItem('crm13_r123_offer_history_v1')||'[]')}catch(e){}h.unshift({...r,savedAt:new Date().toISOString()});localStorage.setItem('crm13_r123_offer_history_v1',JSON.stringify(h.slice(0,100)));document.getElementById('r123_status').textContent='✓ OFERTA ZAKUPU ZAPISANA — '+new Date().toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});toast('Oferta zakupu zapisana.');}
+  function r123OpenOffer(base){r123Styles();const c=r123Company(base),x=r123OfferDefaults(c);const root=document.createElement('div');root.className='r123';root.innerHTML=r123Head('OFERTY ZAKUPU PREMIUM','NOWA OFERTA • OPŁACALNOŚĆ • TRANSPORT • ZAPIS')+'<div class="r123-body"><section class="r123-card"><h2><span>1.</span> NOWA OFERTA ZAKUPU</h2><div class="r123-note">Silnik 1:1 z Kalkulatora Peletu 1.2. Firma jest pobierana automatycznie z aktualnie otwartej karty CRM.</div><div class="r123-grid2"><div class="r123-field"><label>Data / godzina</label><input id="r123_date" class="r123-input" type="datetime-local" value="'+r123Esc(x.date)+'"></div><div class="r123-field"><label>Dostawca / firma</label><input class="r123-input" value="'+r123Esc(c.name||'')+'" disabled></div><div class="r123-field"><label>Rodzaj pelletu</label><select id="r123_pellet" class="r123-select"><option>A1 (ENplus)</option><option>A2 (ENplus)</option><option>Przemysłowy</option></select></div><div class="r123-field"><label>Średnica</label><select id="r123_diam" class="r123-select"><option>6 mm</option><option>8 mm</option></select></div><div class="r123-field"><label>Forma zakupu</label><select id="r123_form" class="r123-select"><option>Luzem</option><option>Worki 15 kg</option><option>Big Bag</option><option>Paleta</option></select></div><div class="r123-field"><label>Ilość</label><select id="r123_qty" class="r123-select">'+Array.from({length:10},(_,i)=>{const q=(i+1)*26;return '<option value="'+q+'" '+(q===x.qty?'selected':'')+'>'+q+' t ('+(i+1)+' samoch.)</option>'}).join('')+'</select></div><div class="r123-field"><label>Cena zakupu netto [PLN/t]</label><input id="r123_purchase" class="r123-input" inputmode="decimal" value="'+x.purchase+'"></div><div class="r123-field"><label>Cena sprzedaży netto [PLN/t]</label><input id="r123_sell" class="r123-input" inputmode="decimal" value="'+x.sell+'"></div></div></section><section class="r123-card"><h2><span>2.</span> TRANSPORT I KOSZTY DO OFERTY</h2><div class="r123-grid2"><div class="r123-field"><label>Odległość w jedną stronę [km]</label><input id="r123_distance" class="r123-input" inputmode="decimal" value="'+x.distance+'"></div><div class="r123-field"><label>Stawka transportu [PLN/km]</label><input id="r123_rate" class="r123-input" inputmode="decimal" value="'+x.rate+'"></div><div class="r123-field"><label>Robocizna [PLN/t]</label><input id="r123_work" class="r123-input" inputmode="decimal" value="'+x.work+'"></div><div class="r123-field"><label>Worki [PLN/t]</label><input id="r123_bags" class="r123-input" inputmode="decimal" value="'+x.bags+'"></div><div class="r123-field"><label>Paleta [PLN/t]</label><input id="r123_pallet" class="r123-input" inputmode="decimal" value="'+x.pallet+'"></div><div class="r123-field"><label>Inne [PLN/t]</label><input id="r123_other" class="r123-input" inputmode="decimal" value="'+x.other+'"></div></div><button class="r123-btn orange r123-wide" id="r123_calc">🧮 OBLICZ OPŁACALNOŚĆ</button></section><section class="r123-card"><h2><span>3.</span> PODSUMOWANIE OFERTY</h2><div class="r123-kpis"><div class="r123-kpi"><span>KOSZT CAŁKOWITY / t</span><b class="orange" id="r123_cost">—</b></div><div class="r123-kpi"><span>CENA SPRZEDAŻY</span><b id="r123_sell_k">—</b></div><div class="r123-kpi"><span>MARŻA NETTO / t</span><b class="green" id="r123_margin">—</b></div><div class="r123-kpi"><span>MARŻA %</span><b class="green" id="r123_pct">—</b></div></div><div class="r123-summary" id="r123_summary">—</div><div class="r123-actions"><button class="r123-btn green" id="r123_save">✓ ZAPISZ OFERTĘ ZAKUPU</button><button class="r123-btn blue" id="r123_generator">📄 GENERATOR OFERTY HANDLOWEJ</button><button class="r123-btn gray" id="r123_return">← WRÓĆ DO KARTY FIRMY</button></div><div class="r123-status" id="r123_status">Gotowy do pracy.</div></section></div>';app.replaceChildren(root);document.getElementById('r123_back').onclick=render;document.getElementById('r123_return').onclick=render;document.getElementById('r123_pellet').value=x.pellet;document.getElementById('r123_diam').value=x.diameter;document.getElementById('r123_form').value=x.form;document.getElementById('r123_calc').onclick=()=>r123Calc(c,true);document.getElementById('r123_save').onclick=()=>r123SaveOffer(c);document.getElementById('r123_generator').onclick=()=>r123OpenGenerator(c);['r123_date','r123_pellet','r123_diam','r123_form','r123_qty','r123_purchase','r123_sell','r123_distance','r123_rate','r123_work','r123_bags','r123_pallet','r123_other'].forEach(id=>document.getElementById(id).addEventListener('change',()=>r123Calc(c,false)));r123Calc(c,false);window.scrollTo(0,0);}
 
-    const img=document.createElement('img');
-    img.className='master';
-    img.src=R121_PRICE_IMG;
-    img.alt='Ceny — MASTER';
-    s.append(img);
-
-    s.append(hotspot({x:0,y:0,w:140,h:145,label:'Wstecz',onClick:render,baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:690,y:0,w:163,h:155,label:'Synchronizuj',onClick:()=>r121PriceSyncStay(c),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:30,y:1550,w:380,h:105,label:'Aktualizuj ceny',onClick:()=>r121PriceSyncStay(c),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:420,y:1550,w:383,h:105,label:'Szukaj cen w Google',onClick:()=>r121PriceGoogle(c),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:30,y:1674,w:773,h:100,label:'Wróć do karty',onClick:render,baseW:853,baseH:1844,z:30}));
-
-    app.replaceChildren(s);
-  }
-
-  async function r122HistorySyncStay(c,detail){
-    const keepId=String((c&&c.id)||state.selectedCompany||'').trim();
-    try{
-      const result=sync();
-      if(result&&typeof result.then==='function') await result;
-    }catch(e){
-      console.warn('R122 sync HISTORIA',e);
-    }finally{
-      if(keepId) state.selectedCompany=keepId;
-      const keepCompany=getCompanyById(keepId)||c;
-      setTimeout(()=>detail?r122OpenHistoryDetail(keepCompany):r122OpenCompanyHistory(keepCompany),120);
-    }
-  }
-
-  function r122HistoryFuture(label){
-    toast(label+' — funkcja zostanie uruchomiona w kolejnym osobnym kroku MASTER');
-  }
-
-  function r122OpenHistoryDetail(base){
-    const c=base||getCompanyById(state.selectedCompany)||{};
-    const s=document.createElement('section');
-    s.className='screen r122-history-detail';
-    s.style.position='relative';
-
-    const img=document.createElement('img');
-    img.className='master';
-    img.src=R122_HISTORY_DETAIL_IMG;
-    img.alt='Szczegół historii — MASTER';
-    s.append(img);
-
-    s.append(hotspot({x:0,y:0,w:140,h:145,label:'Wstecz do historii',onClick:()=>r122OpenCompanyHistory(c),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:690,y:0,w:163,h:155,label:'Synchronizuj',onClick:()=>r122HistorySyncStay(c,true),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:30,y:1505,w:255,h:115,label:'Edytuj wpis',onClick:()=>r122HistoryFuture('EDYTUJ WPIS'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:295,y:1505,w:255,h:115,label:'Dodaj kolejny',onClick:()=>r122HistoryFuture('DODAJ KOLEJNY'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:560,y:1505,w:263,h:115,label:'Zmień status',onClick:()=>r122HistoryFuture('ZMIEŃ STATUS'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:30,y:1645,w:773,h:110,label:'Wróć do historii',onClick:()=>r122OpenCompanyHistory(c),baseW:853,baseH:1844,z:30}));
-
-    app.replaceChildren(s);
-  }
-
-  function r122OpenCompanyHistory(base){
-    const c=base||getCompanyById(state.selectedCompany)||{};
-    const s=document.createElement('section');
-    s.className='screen r122-company-history';
-    s.style.position='relative';
-
-    const img=document.createElement('img');
-    img.className='master';
-    img.src=R122_HISTORY_IMG;
-    img.alt='Historia — MASTER';
-    s.append(img);
-
-    s.append(hotspot({x:0,y:0,w:140,h:145,label:'Wstecz',onClick:render,baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:690,y:0,w:163,h:155,label:'Synchronizuj',onClick:()=>r122HistorySyncStay(c,false),baseW:853,baseH:1844,z:30}));
-
-    s.append(hotspot({x:25,y:390,w:140,h:125,label:'Wszystko',onClick:()=>r122HistoryFuture('FILTR WSZYSTKO'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:170,y:390,w:140,h:125,label:'Statusy',onClick:()=>r122HistoryFuture('FILTR STATUSY'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:315,y:390,w:155,h:125,label:'Korespondencja',onClick:()=>r122HistoryFuture('FILTR KORESPONDENCJA'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:475,y:390,w:130,h:125,label:'Ceny',onClick:()=>r122HistoryFuture('FILTR CENY'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:610,y:390,w:210,h:125,label:'Notatki',onClick:()=>r122HistoryFuture('FILTR NOTATKI'),baseW:853,baseH:1844,z:30}));
-
-    s.append(hotspot({x:30,y:525,w:245,h:85,label:'Ostatnie 7 dni',onClick:()=>r122HistoryFuture('OSTATNIE 7 DNI'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:285,y:525,w:245,h:85,label:'Ostatnie 30 dni',onClick:()=>r122HistoryFuture('OSTATNIE 30 DNI'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:540,y:525,w:280,h:85,label:'Cała historia',onClick:()=>r122HistoryFuture('CAŁA HISTORIA'),baseW:853,baseH:1844,z:30}));
-
-    const rowYs=[625,750,875,1000,1125,1250];
-    rowYs.forEach((y,i)=>s.append(hotspot({x:25,y:y,w:800,h:115,label:'Szczegół historii '+(i+1),onClick:()=>r122OpenHistoryDetail(c),baseW:853,baseH:1844,z:30})));
-
-    s.append(hotspot({x:25,y:1450,w:185,h:110,label:'Dodaj wpis',onClick:()=>r122HistoryFuture('DODAJ WPIS'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:215,y:1450,w:195,h:110,label:'Dodaj korespondencję',onClick:()=>r122HistoryFuture('DODAJ KORESPONDENCJĘ'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:415,y:1450,w:195,h:110,label:'Dodaj cenę',onClick:()=>r122HistoryFuture('DODAJ CENĘ'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:615,y:1450,w:210,h:110,label:'Zmień status',onClick:()=>r122HistoryFuture('ZMIEŃ STATUS'),baseW:853,baseH:1844,z:30}));
-    s.append(hotspot({x:30,y:1590,w:773,h:140,label:'Wróć do karty',onClick:render,baseW:853,baseH:1844,z:30}));
-
-    app.replaceChildren(s);
-  }
+  function r123GenData(){const s=r123Read(R123_GEN_KEY);return {paleta:s.paleta||'2350',worek:s.worek||'35',bigbag:s.bigbag||'2220',from:s.from||new Date().toISOString().slice(0,10),to:s.to||new Date(Date.now()+11*86400000).toISOString().slice(0,10),lang:s.lang||'pl'};}
+  function r123Date(v){if(!v)return '';const a=v.split('-');return a[2]+'.'+a[1]+'.'+a[0];}
+  function r123Canvas(){const c=document.getElementById('r123_canvas');if(!c)return;const ctx=c.getContext('2d'),L=R123_LANGS[R123_ACTIVE_LANG]||R123_LANGS.pl,pal=document.getElementById('r123_g_paleta').value,worek=document.getElementById('r123_g_worek').value,big=document.getElementById('r123_g_bigbag').value,from=r123Date(document.getElementById('r123_g_from').value),to=r123Date(document.getElementById('r123_g_to').value);ctx.clearRect(0,0,1024,1536);const g=ctx.createLinearGradient(0,0,0,1536);g.addColorStop(0,'#06140c');g.addColorStop(.55,'#020805');g.addColorStop(1,'#000');ctx.fillStyle=g;ctx.fillRect(0,0,1024,1536);ctx.strokeStyle='#8c6817';ctx.lineWidth=5;ctx.strokeRect(18,18,988,1500);ctx.textAlign='center';ctx.fillStyle='#e8a521';ctx.font='900 72px Arial';ctx.fillText('L&M TECHNIC',512,105);ctx.fillStyle='#79cf2a';ctx.font='800 30px Arial';ctx.fillText('ENERGY • SPRZEDAŻ I DYSTRYBUCJA PELETU',512,150);ctx.fillStyle='#f2aa24';ctx.font='900 86px Arial';ctx.fillText(L.title,512,260);ctx.fillStyle='#fff';ctx.font='900 54px Arial';ctx.fillText(L.sub,512,330);ctx.fillStyle='#9be735';ctx.font='800 27px Arial';ctx.fillText('NAJLEPSZA JAKOŚĆ • SPRAWDZONE ŹRÓDŁO • REALNE KORZYŚCI',512,385);const cells=[[45,L.palette,pal+' zł'],[356,L.bags,worek+' zł'],[667,L.big,big+' zł']];cells.forEach(a=>{ctx.fillStyle='#07110b';ctx.strokeStyle='#5e7b35';ctx.lineWidth=3;ctx.beginPath();ctx.roundRect(a[0],435,285,205,18);ctx.fill();ctx.stroke();ctx.fillStyle='#fff';ctx.font='900 29px Arial';ctx.fillText(a[1],a[0]+142,485);ctx.fillStyle='#f2aa24';ctx.font='900 48px Arial';ctx.fillText(a[2],a[0]+142,555);ctx.fillStyle='#d8ded8';ctx.font='700 22px Arial';ctx.fillText(L.net,a[0]+142,605)});ctx.fillStyle='#0a170d';ctx.strokeStyle='#496332';ctx.beginPath();ctx.roundRect(45,690,907,390,20);ctx.fill();ctx.stroke();ctx.fillStyle='#9be735';ctx.font='900 42px Arial';ctx.fillText('PELLET PREMIUM A1 • ENplus',512,760);ctx.fillStyle='#fff';ctx.font='700 29px Arial';['100% NATURALNY PRODUKT','CZYSTE SPALANIE • NISKA ZAWARTOŚĆ POPIOŁU','STABILNA JAKOŚĆ I POWTARZALNE PARAMETRY','DOSTAWA NA TERENIE CAŁEJ POLSKI'].forEach((t,i)=>ctx.fillText('✓  '+t,512,835+i*60));ctx.fillStyle='#efa91e';ctx.beginPath();ctx.roundRect(45,1130,907,120,15);ctx.fill();ctx.fillStyle='#111';ctx.font='900 31px Arial';ctx.fillText(L.valid+':',220,1180);ctx.font='900 37px Arial';ctx.fillText(from+' – '+to,625,1180);ctx.fillStyle='#9be735';ctx.font='900 50px Arial';ctx.fillText(L.cta,512,1335);ctx.fillStyle='#fff';ctx.font='900 34px Arial';ctx.fillText('+48 723 588 333 • lmtechnic@wp.pl',512,1395);const company=r123Company();ctx.fillStyle='#aab4ac';ctx.font='700 24px Arial';ctx.fillText('Oferta dla: '+(company.name||'kontrahenta'),512,1460);document.getElementById('r123_live_lang').textContent=L.flag+' '+L.code;}
+  function r123SetLang(k){R123_ACTIVE_LANG=k;document.querySelectorAll('.r123-lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===k));r123Canvas();}
+  function r123CanvasFile(){return new Promise((res,rej)=>{const c=document.getElementById('r123_canvas');c.toBlob(b=>b?res(new File([b],'LM_Oferta_'+R123_ACTIVE_LANG+'_'+Date.now()+'.png',{type:'image/png'})):rej(new Error('blob')),'image/png',.95)})}
+  async function r123Download(){try{const f=await r123CanvasFile(),u=URL.createObjectURL(f),a=document.createElement('a');a.href=u;a.download=f.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);toast('Oferta PNG została przygotowana do pobrania.')}catch(e){toast('Nie udało się przygotować grafiki oferty.')}}
+  async function r123Share(){try{const f=await r123CanvasFile();if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[f]}))){await navigator.share({title:'L&M Technic Energy — oferta Premium A1',text:'Oferta handlowa L&M Technic Energy',files:[f]})}else await r123Download()}catch(e){if(e&&e.name!=='AbortError')toast('Udostępnianie nie zostało uruchomione.')}}
+  function r123WhatsApp(c){const d=r123Company(c),n=String(d.mobile||d.phone||'').replace(/\\D/g,'');if(!n)return toast('Ta firma nie ma numeru telefonu w bazie.');location.href='https://wa.me/'+n+'?text='+encodeURIComponent('Dzień dobry, przesyłam ofertę L&M Technic Energy — Pellet Premium A1.');}
+  async function r123Email(c){const d=r123Company(c);if(!d.email)return toast('Ta firma nie ma adresu e-mail w bazie.');await r123Download();location.href='mailto:'+d.email+'?subject='+encodeURIComponent('L&M Technic Energy — Pellet Premium A1')+'&body='+encodeURIComponent('Dzień dobry,\\n\\nprzesyłam aktualną ofertę L&M Technic Energy. Grafika oferty została pobrana na telefon — proszę dołączyć ją do wiadomości.\\n\\nPozdrawiam,\\nL&M Technic Energy');}
+  function r123OpenGenerator(base){r123Styles();const c=r123Company(base),x=r123GenData();R123_ACTIVE_LANG=x.lang;const root=document.createElement('div');root.className='r123';root.innerHTML=r123Head('GENERATOR OFERTY','LIVE • CENY • JĘZYKI • ODBIORCA • UDOSTĘPNIANIE')+'<div class="r123-body"><section class="r123-card"><h2><span>1.</span> GENERATOR OFERTY — PODGLĄD NA ŻYWO</h2><div class="r123-note">Silnik LIVE przeniesiony z Kalkulatora 1.2. Odbiorca jest automatycznie związany z aktualnie otwartą firmą CRM.</div><div class="r123-lang">'+[['pl','🇵🇱 PL'],['de','🇩🇪 DE'],['de','🇦🇹 AT'],['de','🇨🇭 CH'],['en','🇬🇧 EN'],['cz','🇨🇿 CZ'],['sk','🇸🇰 SK']].map((a,i)=>'<button data-lang="'+a[0]+'" class="'+(a[0]===R123_ACTIVE_LANG&&i<2?'active':'')+'">'+a[1]+'</button>').join('')+'</div><div class="r123-grid3"><div class="r123-field"><label>Cena palety netto</label><input class="r123-input" id="r123_g_paleta" value="'+r123Esc(x.paleta)+'"></div><div class="r123-field"><label>Cena worka 15 kg netto</label><input class="r123-input" id="r123_g_worek" value="'+r123Esc(x.worek)+'"></div><div class="r123-field"><label>Cena Big Bag 1000 kg netto</label><input class="r123-input" id="r123_g_bigbag" value="'+r123Esc(x.bigbag)+'"></div></div><div class="r123-grid2"><div class="r123-field"><label>Oferta ważna od</label><input class="r123-input" type="date" id="r123_g_from" value="'+r123Esc(x.from)+'"></div><div class="r123-field"><label>Oferta ważna do</label><input class="r123-input" type="date" id="r123_g_to" value="'+r123Esc(x.to)+'"></div></div><div class="r123-grid2"><div class="r123-rec"><span>ODBIORCA / KONTRAHENT</span><b>'+r123Esc(c.name||'—')+'</b></div><div><div class="r123-rec"><span>TELEFON</span><b>'+r123Esc(c.mobile||c.phone||'brak telefonu')+'</b></div><div class="r123-rec"><span>E-MAIL</span><b>'+r123Esc(c.email||'brak e-mail')+'</b></div></div></div><button class="r123-btn green r123-wide" id="r123_g_save">✓ ZAPISZ DANE GENERATORA</button><div class="r123-status" id="r123_g_status">Generator LIVE gotowy.</div></section><section class="r123-card"><h2><span>2.</span> OFERTA — PODGLĄD NA ŻYWO <span id="r123_live_lang" style="float:right"></span></h2><div class="r123-live"><canvas id="r123_canvas" width="1024" height="1536"></canvas></div><div class="r123-generator-actions"><button class="r123-btn green" id="r123_dl">⬇ POBIERZ PNG</button><button class="r123-btn blue" id="r123_share">↗ UDOSTĘPNIJ / FACEBOOK</button><button class="r123-btn green" id="r123_wa">💬 WHATSAPP DO ODBIORCY</button><button class="r123-btn orange" id="r123_mail">✉ E-MAIL DO ODBIORCY</button><button class="r123-btn purple" id="r123_sys">📲 UDOSTĘPNIJ SYSTEMOWO</button><button class="r123-btn gray" id="r123_offer_back">← WRÓĆ DO OFERTY</button></div></section></div>';app.replaceChildren(root);document.getElementById('r123_back').onclick=()=>r123OpenOffer(c);document.getElementById('r123_offer_back').onclick=()=>r123OpenOffer(c);document.querySelectorAll('.r123-lang button').forEach(b=>b.onclick=()=>r123SetLang(b.dataset.lang));['r123_g_paleta','r123_g_worek','r123_g_bigbag','r123_g_from','r123_g_to'].forEach(id=>{document.getElementById(id).addEventListener('input',r123Canvas);document.getElementById(id).addEventListener('change',r123Canvas)});document.getElementById('r123_g_save').onclick=()=>{const z={paleta:document.getElementById('r123_g_paleta').value,worek:document.getElementById('r123_g_worek').value,bigbag:document.getElementById('r123_g_bigbag').value,from:document.getElementById('r123_g_from').value,to:document.getElementById('r123_g_to').value,lang:R123_ACTIVE_LANG};localStorage.setItem(R123_GEN_KEY,JSON.stringify(z));document.getElementById('r123_g_status').textContent='✓ DANE GENERATORA ZAPISANE — '+new Date().toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'})};document.getElementById('r123_dl').onclick=r123Download;document.getElementById('r123_share').onclick=r123Share;document.getElementById('r123_sys').onclick=r123Share;document.getElementById('r123_wa').onclick=()=>r123WhatsApp(c);document.getElementById('r123_mail').onclick=()=>r123Email(c);r123Canvas();window.scrollTo(0,0);}
 `;
-    out = out.replace('  function r115RenderCompanyMaster(){',r122Inside+'\n  function r115RenderCompanyMaster(){');
+    out = out.replace('  function r115RenderCompanyMaster(){',r123Inside+'\n  function r115RenderCompanyMaster(){');
   }
 
-  out = out.replace(
-    "s.append(hotspot({x:422,y:786,w:398,h:180,label:'Ceny',onClick:()=>r115NewTile('CENY'),baseW:852,baseH:1846,z:30}));",
-    "s.append(hotspot({x:422,y:786,w:398,h:180,label:'Ceny',onClick:()=>r121OpenCompanyPrices(c),baseW:852,baseH:1846,z:30}));"
-  );
-
-  out = out.replace(
-    "s.append(hotspot({x:12,y:982,w:398,h:180,label:'Historia',onClick:()=>r115NewTile('HISTORIA'),baseW:852,baseH:1846,z:30}));",
-    "s.append(hotspot({x:12,y:982,w:398,h:180,label:'Historia',onClick:()=>r122OpenCompanyHistory(c),baseW:852,baseH:1846,z:30}));"
-  );
-
+  out = out.replace("s.append(hotspot({x:422,y:786,w:398,h:180,label:'Ceny',onClick:()=>r115NewTile('CENY'),baseW:852,baseH:1846,z:30}));","s.append(hotspot({x:422,y:786,w:398,h:180,label:'Ceny',onClick:()=>r121OpenCompanyPrices(c),baseW:852,baseH:1846,z:30}));");
+  out = out.replace("s.append(hotspot({x:12,y:982,w:398,h:180,label:'Historia',onClick:()=>r115NewTile('HISTORIA'),baseW:852,baseH:1846,z:30}));","s.append(hotspot({x:12,y:982,w:398,h:180,label:'Historia',onClick:()=>r122OpenCompanyHistory(c),baseW:852,baseH:1846,z:30}));");
+  out = out.replace("s.append(hotspot({x:418,y:606,w:195,h:144,label:'Oferta',onClick:()=>typeof r17OpenOffer==='function'?r17OpenOffer(c):r115Missing(c,'Oferta'),baseW:852,baseH:1846,z:30}));","s.append(hotspot({x:418,y:606,w:195,h:144,label:'Oferta',onClick:()=>r123OpenOffer(c),baseW:852,baseH:1846,z:30}));");
+  out = out.replace("s.append(hotspot({x:422,y:982,w:398,h:180,label:'Oferta karta',onClick:()=>r115NewTile('OFERTA'),baseW:852,baseH:1846,z:30}));","s.append(hotspot({x:422,y:982,w:398,h:180,label:'Oferta karta',onClick:()=>r123OpenOffer(c),baseW:852,baseH:1846,z:30}));");
   return out;
 };
