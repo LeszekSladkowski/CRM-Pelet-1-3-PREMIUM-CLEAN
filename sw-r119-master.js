@@ -1,9 +1,12 @@
-/* R119 — CRM 1.3 — KAFEL 1 „DANE FIRMY” — SYNC STAY + CENTER MASTER
-   Baza: działający R118 DANE FIRMY — PERFECT ALIGNMENT.
-   Jedyna zmiana: SYNCHRONIZUJ pozostaje w DANE FIRMY + wyśrodkowanie wartości w polach MASTER.
-   Grafika, dane, funkcje R117 i pozostałe 6 kafli OKNA 3 pozostają bez zmian.
+/* R124 — CRM 1.3 — OFERTY: GENERATOR ROUTING SURGICAL FIX
+   Baza: stabilne R120 DANE FIRMY + R121 CENY + R122 HISTORIA + silnik generatora R123.
+   Zmiana wyłącznie architektoniczna:
+   1) kafel OFERTY na Pulpicie uruchamia bezpośrednio GENERATOR OFERTY,
+   2) przycisk OFERTA i kafel nr 4 OFERTA w RYNKI EU uruchamiają ten sam generator,
+   3) ekran OFERTY ZAKUPU / jego magazynowanie pozostają poza routingiem — zaprojektujemy je osobno.
+   Pozostałe MASTER-y i funkcje bez zmian.
 */
-importScripts('./sw-r76-stable.js?v=R119-dane-firmy-sync-center-master');
+importScripts('./sw-r76-stable.js?v=R124-offer-generator-routing');
 
 if(Array.isArray(ASSETS)){
   const r102MaskableDuplicate='./icon-maskable-512.png';
@@ -25,16 +28,22 @@ r48PatchIndexHtml = function(text){
     'Automatyczny backup danych jest tworzony przed aktualizacją. Lokalne kopie danych pozostają w Magazynie Backupów, a zweryfikowane punkty MASTER są zabezpieczone w repozytorium GitHub.'
   );
 
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r119-dane-firmy-sync-center-master');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R119 DANE FIRMY — SYNC STAY + CENTER MASTER');
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r124-offer-generator-routing');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R124 OFERTY — GENERATOR ROUTING');
   out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '08.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '15:09';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R119-dane-firmy-sync-center-master-1509'");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '22:38';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R124-offer-generator-routing-2238'");
+
+  /* R124 — docelowe wejście do GENERATORA OFERT z Pulpitu. */
+  out = out.replace(
+    "'oferty':{label:'Oferty',row:0,col:1,action:()=>openModuleSheet('OFERTY','Gałąź OFERTY jest aktywna jako punkt wejścia. Kolejne karty dołączymy po zatwierdzeniu ich MASTER.')},",
+    "'oferty':{label:'Oferty',row:0,col:1,action:()=>typeof r123OpenGenerator==='function'?r123OpenGenerator(null,'home'):openModuleSheet('OFERTY','Generator oferty jest chwilowo niedostępny.')},"
+  );
 
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R119-1509"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R124-2238"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R119-1509');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R124-2238');
   }
 
   if(!out.includes('r119-dane-firmy-sync-center-master-inside-iife')){
@@ -173,19 +182,49 @@ r48PatchIndexHtml = function(text){
     s.append(hotspot({x:720,y:0,w:132,h:150,label:'Synchronizuj',onClick:sync,baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:22,y:606,w:190,h:144,label:'Telefon',onClick:()=>c.phone?openUrl('tel:'+c.phone):r115Missing(c,'Telefon'),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:220,y:606,w:193,h:144,label:'Mapa',onClick:()=>typeof r19OpenCompanyMap==='function'?r19OpenCompanyMap(c):r115Missing(c,'Mapa'),baseW:852,baseH:1846,z:30}));
-    s.append(hotspot({x:418,y:606,w:195,h:144,label:'Oferta',onClick:()=>typeof r17OpenOffer==='function'?r17OpenOffer(c):r115Missing(c,'Oferta'),baseW:852,baseH:1846,z:30}));
+    s.append(hotspot({x:418,y:606,w:195,h:144,label:'Oferta',onClick:()=>typeof r123OpenGenerator==='function'?r123OpenGenerator(c,'company'):r115Missing(c,'Oferta'),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:618,y:606,w:205,h:144,label:'Email',onClick:()=>c.email?openUrl('mailto:'+c.email):r115Missing(c,'E-mail'),baseW:852,baseH:1846,z:30}));
 
     s.append(hotspot({x:12,y:786,w:398,h:180,label:'Dane firmy',onClick:()=>r117OpenCompanyData(c),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:422,y:786,w:398,h:180,label:'Ceny',onClick:()=>r115NewTile('CENY'),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:12,y:982,w:398,h:180,label:'Historia',onClick:()=>r115NewTile('HISTORIA'),baseW:852,baseH:1846,z:30}));
-    s.append(hotspot({x:422,y:982,w:398,h:180,label:'Oferta karta',onClick:()=>r115NewTile('OFERTA'),baseW:852,baseH:1846,z:30}));
+    s.append(hotspot({x:422,y:982,w:398,h:180,label:'Oferta karta',onClick:()=>typeof r123OpenGenerator==='function'?r123OpenGenerator(c,'company'):r115Missing(c,'Oferta'),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:12,y:1177,w:398,h:180,label:'Notatki o firmie',onClick:()=>r115NewTile('NOTATKI O FIRMIE'),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:422,y:1177,w:398,h:180,label:'Cele asystenta',onClick:()=>r115NewTile('CELE ASYSTENTA'),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:12,y:1374,w:808,h:190,label:'Akcje i status',onClick:()=>r115NewTile('AKCJE I STATUS'),baseW:852,baseH:1846,z:30}));
     return s;
   }
   renderCompany=r115RenderCompanyMaster;
+
+  /* R124 — generator ma jedno miejsce docelowe i dwa wejścia: PULPIT lub RYNKI EU.
+     Nie wracamy już do roboczego ekranu OFERTY ZAKUPU. */
+  if(typeof r123OpenGenerator==='function' && !r123OpenGenerator.r124Routed){
+    const r124GeneratorBase=r123OpenGenerator;
+    const r124GeneratorWrapped=function(base,origin){
+      const company=(base&&typeof base==='object')?base:null;
+      r124GeneratorBase(base);
+      const returnToOrigin=()=>{
+        if(origin==='home'){
+          go('home');
+          return;
+        }
+        if(company&&company.id) state.selectedCompany=company.id;
+        render();
+      };
+      const topBack=document.getElementById('r123_back');
+      const bottomBack=document.getElementById('r123_offer_back');
+      if(topBack){
+        topBack.onclick=returnToOrigin;
+        topBack.textContent=origin==='home'?'← PULPIT':'← WRÓĆ DO KARTY';
+      }
+      if(bottomBack){
+        bottomBack.onclick=returnToOrigin;
+        bottomBack.textContent=origin==='home'?'← WRÓĆ DO PULPITU':'← WRÓĆ DO KARTY FIRMY';
+      }
+    };
+    r124GeneratorWrapped.r124Routed=true;
+    r123OpenGenerator=r124GeneratorWrapped;
+  }
 `;
     const marker='\n})();\n\n</script>';
     const pos=out.lastIndexOf(marker);
