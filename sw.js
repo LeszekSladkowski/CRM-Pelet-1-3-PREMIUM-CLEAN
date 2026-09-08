@@ -1,9 +1,9 @@
-/* R117 — CRM 1.3 — KAFEL 1 „DANE FIRMY” — ACTIVE TEST
-   Baza: bezwzględny MASTER R115 + zatwierdzona grafika DANE FIRMY.
-   Jedyna zmiana: ożywienie pierwszego kafla DANE FIRMY i funkcji jego ekranu.
-   Pozostałe 6 kafli OKNA 3 pozostają dokładnie jak w R115.
+/* R118 — CRM 1.3 — KAFEL 1 „DANE FIRMY” — PERFECT ALIGNMENT
+   Baza: działający R117 DANE FIRMY — ACTIVE TEST.
+   Jedyna zmiana: chirurgiczne ustawienie pól tekstowych na zatwierdzonej grafice MASTER.
+   Funkcje R117 i pozostałe 6 kafli OKNA 3 pozostają bez zmian.
 */
-importScripts('./sw-r76-stable.js?v=R117-dane-firmy-active');
+importScripts('./sw-r76-stable.js?v=R118-dane-firmy-perfect-alignment');
 
 if(Array.isArray(ASSETS)){
   const r102MaskableDuplicate='./icon-maskable-512.png';
@@ -25,21 +25,21 @@ r48PatchIndexHtml = function(text){
     'Automatyczny backup danych jest tworzony przed aktualizacją. Lokalne kopie danych pozostają w Magazynie Backupów, a zweryfikowane punkty MASTER są zabezpieczone w repozytorium GitHub.'
   );
 
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r117-dane-firmy-active');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R117 DANE FIRMY — ACTIVE TEST');
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r118-dane-firmy-perfect-alignment');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R118 DANE FIRMY — PERFECT ALIGNMENT');
   out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '08.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '14:10';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R117-dane-firmy-active-1410'");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '14:24';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R118-dane-firmy-perfect-alignment-1424'");
 
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R117-1410"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R118-1424"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R117-1410');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R118-1424');
   }
 
-  if(!out.includes('r117-dane-firmy-active-inside-iife')){
+  if(!out.includes('r118-dane-firmy-perfect-alignment-inside-iife')){
     const r117Inside = `
-  /* r117-dane-firmy-active-inside-iife */
+  /* r118-dane-firmy-perfect-alignment-inside-iife */
   const R115_COMPANY_IMG='./grafiki/rynki-eu/szczegoly-firmy/master-okno-3-szczegoly-firmy.png';
   const R117_DATA_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_00000000efac81f5a82658b087ae09a7.png';
   const R117_DATA_KEY='crm13_r117_company_data_v1';
@@ -63,13 +63,16 @@ r48PatchIndexHtml = function(text){
     all[id]=Object.assign({},all[id]||{},patch||{});
     localStorage.setItem(R117_DATA_KEY,JSON.stringify(all));
   }
-  function r117Field(s,text,x,y,w,size,color,weight,align){
+  function r117Field(s,text,x,y,w,size,color,weight,align,nowrap){
     if(text===undefined||text===null||String(text).trim()==='') return;
     const e=document.createElement('div'); e.textContent=String(text);
+    const minSize=size<=14?9:12;
     e.style.position='absolute'; e.style.left=(x/8.52)+'%'; e.style.top=(y/18.46)+'%'; e.style.width=(w/8.52)+'%';
-    e.style.fontSize='clamp(12px,'+(size/8.52)+'vw,'+size+'px)'; e.style.lineHeight='1.12'; e.style.color=color||'#fff';
+    e.style.fontSize='clamp('+minSize+'px,'+(size/8.52)+'vw,'+size+'px)'; e.style.lineHeight='1.08'; e.style.color=color||'#fff';
     e.style.fontWeight=weight||'700'; e.style.textAlign=align||'left'; e.style.pointerEvents='none'; e.style.zIndex='24';
-    e.style.textShadow='0 1px 4px #000,0 0 5px #000'; e.style.whiteSpace='normal'; e.style.overflowWrap='anywhere';
+    e.style.textShadow='0 1px 4px #000,0 0 5px #000';
+    e.style.whiteSpace=nowrap?'nowrap':'normal'; e.style.overflowWrap=nowrap?'normal':'anywhere';
+    e.style.overflow='hidden'; e.style.textOverflow=nowrap?'ellipsis':'clip';
     s.append(e);
   }
   function r117DateLabel(v){
@@ -112,21 +115,22 @@ r48PatchIndexHtml = function(text){
     const s=document.createElement('section'); s.className='screen r117-company-data'; s.style.position='relative';
     const img=document.createElement('img'); img.className='master'; img.src=R117_DATA_IMG; img.alt='Dane firmy — MASTER'; s.append(img);
 
-    r117Field(s,c.name,185,226,420,32,'#fff','900');
-    r117Field(s,c.displayId||c.id,690,192,108,18,'#fff','700','right');
-    r117Field(s,c.legalName||c.name,338,410,220,18,'#fff','700');
-    r117Field(s,c.contactPerson,338,504,220,18,'#fff','700');
-    r117Field(s,c.address,338,600,220,18,'#fff','700');
-    r117Field(s,c.phone,338,792,455,18,'#fff','700');
-    r117Field(s,c.mobile,338,885,455,18,'#fff','700');
-    r117Field(s,c.email,338,979,455,17,'#fff','700');
-    r117Field(s,c.website,338,1071,455,17,'#fff','700');
-    r117Field(s,c.nip,338,1163,455,18,'#fff','700');
-    r117Field(s,c.activity||c.type,338,1258,455,16,'#fff','700');
-    r117Field(s,c.foundedYear,338,1355,455,18,'#fff','700');
-    r117Field(s,r117DateLabel(c.addedAt),112,1470,150,14,'#fff','700');
-    r117Field(s,r117DateLabel(c.updatedAt||c.sourceDate),380,1470,160,14,'#fff','700');
-    r117Field(s,c.author||'',655,1470,120,14,'#fff','700');
+    /* R118 — chirurgicznie wycentrowane pola względem linii MASTER 852 x 1846 */
+    r117Field(s,c.name,452,235,165,24,'#fff','900','left',true);
+    r117Field(s,String(c.displayId||c.id||'').toUpperCase(),688,188,120,12,'#fff','700','right',true);
+    r117Field(s,c.legalName||c.name,342,414,225,15,'#fff','700');
+    r117Field(s,c.contactPerson,342,505,225,15,'#fff','700');
+    r117Field(s,c.address,342,598,225,15,'#fff','700');
+    r117Field(s,c.phone,342,798,455,16,'#fff','700',null,true);
+    r117Field(s,c.mobile,342,890,455,16,'#fff','700',null,true);
+    r117Field(s,c.email,342,987,455,15,'#fff','700',null,true);
+    r117Field(s,c.website,342,1083,455,15,'#fff','700',null,true);
+    r117Field(s,c.nip,342,1177,455,16,'#fff','700',null,true);
+    r117Field(s,c.activity||c.type,342,1273,455,14,'#fff','700');
+    r117Field(s,c.foundedYear,342,1407,455,15,'#fff','700',null,true);
+    r117Field(s,r117DateLabel(c.addedAt),72,1513,188,10,'#fff','700','center',true);
+    r117Field(s,r117DateLabel(c.updatedAt||c.sourceDate),325,1513,235,10,'#fff','700','center',true);
+    r117Field(s,c.author||'',605,1513,190,10,'#fff','700','center',true);
 
     if(c.logoData){ const logo=document.createElement('img'); logo.src=c.logoData; logo.alt='Logo firmy'; logo.style.cssText='position:absolute;left:68.5%;top:21.0%;width:24.5%;height:14.2%;object-fit:contain;background:white;border-radius:15px;z-index:23;pointer-events:none'; s.append(logo); }
 
