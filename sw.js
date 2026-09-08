@@ -1,11 +1,11 @@
-/* R102 — CRM 1.3 SURGICAL CLEAN FINAL — BACKUP CATALOG CLEAN
-   Baza funkcjonalna: zweryfikowany R101 / PUNKT 0 R92.
-   Zmiana chirurgiczna: usunięto martwy katalog R38 oraz historyczne oznaczanie go jako AKTUALNA.
-   Ochrona lokalnych backupów z R101 pozostaje aktywna.
-   Lokalne backupy, RYNKI EU, WALUTY, dane CRM i grafiki MASTER pozostają bez zmian.
+/* R113 — CRM 1.3 CLEAN RESET — VERIFIED R102 BASE
+   Baza funkcjonalna: dokładnie zweryfikowany R102 FINAL CLEAN.
+   Zmiana publikacyjna: wyłącznie nowy numer wydania i token Service Workera,
+   aby urządzenie z nowszym R111 mogło pobrać czysty stan R102 jako aktualizację.
+   Brak nowych kart, brak nowych funkcji, brak nowych warstw UI.
    Aktywny łańcuch pozostaje: sw-r54-core.js -> sw-r66-stable.js -> sw-r76-stable.js -> sw.js.
 */
-importScripts('./sw-r76-stable.js?v=R102-final-backup-catalog-clean');
+importScripts('./sw-r76-stable.js?v=R113-clean-reset-r102-base');
 
 if(Array.isArray(ASSETS)){
   const r102MaskableDuplicate='./icon-maskable-512.png';
@@ -28,15 +28,15 @@ r48PatchIndexHtml = function(text){
     'Automatyczny backup danych jest tworzony przed aktualizacją. Lokalne kopie danych pozostają w Magazynie Backupów, a zweryfikowane punkty MASTER są zabezpieczone w repozytorium GitHub.'
   );
 
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r102-final-clean-backup-catalog');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R102 FINAL CLEAN — BACKUP CATALOG CLEAN');
-  out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '07.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '20:00';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R102-final-clean-backup-catalog-2000'");
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r113-clean-reset-r102-base');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R113 CLEAN RESET — R102 BASE');
+  out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '08.09.2026';");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '12:25';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R113-clean-reset-r102-base-1225'");
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R102-2000"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R113-1225"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R102-2000');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R113-1225');
   }
   return out;
 };
