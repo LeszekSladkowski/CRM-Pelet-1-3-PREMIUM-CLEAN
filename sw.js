@@ -1,9 +1,9 @@
-/* R118 — CRM 1.3 — KAFEL 1 „DANE FIRMY” — PERFECT ALIGNMENT
-   Baza: działający R117 DANE FIRMY — ACTIVE TEST.
-   Jedyna zmiana: chirurgiczne ustawienie pól tekstowych na zatwierdzonej grafice MASTER.
-   Funkcje R117 i pozostałe 6 kafli OKNA 3 pozostają bez zmian.
+/* R119 — CRM 1.3 — KAFEL 1 „DANE FIRMY” — SYNC STAY + CENTER MASTER
+   Baza: działający R118 DANE FIRMY — PERFECT ALIGNMENT.
+   Jedyna zmiana: SYNCHRONIZUJ pozostaje w DANE FIRMY + wyśrodkowanie wartości w polach MASTER.
+   Grafika, dane, funkcje R117 i pozostałe 6 kafli OKNA 3 pozostają bez zmian.
 */
-importScripts('./sw-r76-stable.js?v=R118-dane-firmy-perfect-alignment');
+importScripts('./sw-r76-stable.js?v=R119-dane-firmy-sync-center-master');
 
 if(Array.isArray(ASSETS)){
   const r102MaskableDuplicate='./icon-maskable-512.png';
@@ -25,21 +25,21 @@ r48PatchIndexHtml = function(text){
     'Automatyczny backup danych jest tworzony przed aktualizacją. Lokalne kopie danych pozostają w Magazynie Backupów, a zweryfikowane punkty MASTER są zabezpieczone w repozytorium GitHub.'
   );
 
-  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r118-dane-firmy-perfect-alignment');
-  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R118 DANE FIRMY — PERFECT ALIGNMENT');
+  out = out.replaceAll('1.3.0-master-r76-waluty-karta4-surgical-gauge-clean','1.3.0-master-r119-dane-firmy-sync-center-master');
+  out = out.replaceAll('R76 WALUTY KARTA 4 SURGICAL GAUGE CLEAN','R119 DANE FIRMY — SYNC STAY + CENTER MASTER');
   out = out.replace("const BUILD_DATE = '02.09.2026';","const BUILD_DATE = '08.09.2026';");
-  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '14:24';");
-  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R118-dane-firmy-perfect-alignment-1424'");
+  out = out.replace("const BUILD_TIME = '17:58';","const BUILD_TIME = '15:09';");
+  out = out.replace("navigator.serviceWorker.register('./sw.js?v=R76-waluty-karta4-surgical-gauge-clean-1758'","navigator.serviceWorker.register('./sw.js?v=R119-dane-firmy-sync-center-master-1509'");
 
   if(!out.includes('r84-backup-prune.js')){
-    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R118-1424"></script>\n</body>');
+    out = out.replace('</body>','<script src="./r84-backup-prune.js?v=R119-1509"></script>\n</body>');
   }else{
-    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R118-1424');
+    out = out.replace(/r84-backup-prune\.js\?v=[^\"']+/g,'r84-backup-prune.js?v=R119-1509');
   }
 
-  if(!out.includes('r118-dane-firmy-perfect-alignment-inside-iife')){
+  if(!out.includes('r119-dane-firmy-sync-center-master-inside-iife')){
     const r117Inside = `
-  /* r118-dane-firmy-perfect-alignment-inside-iife */
+  /* r119-dane-firmy-sync-center-master-inside-iife */
   const R115_COMPANY_IMG='./grafiki/rynki-eu/szczegoly-firmy/master-okno-3-szczegoly-firmy.png';
   const R117_DATA_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_00000000efac81f5a82658b087ae09a7.png';
   const R117_DATA_KEY='crm13_r117_company_data_v1';
@@ -110,24 +110,39 @@ r48PatchIndexHtml = function(text){
     save.addEventListener('click',()=>{ const patch={}; fields.forEach(([key])=>patch[key]=inputs[key].value.trim()); patch.updatedAt=new Date().toISOString(); patch.author='L&M'; r117SaveCompany(c,patch); dlg.close(); dlg.remove(); r117OpenCompanyData(c); toast('DANE FIRMY — zapisano'); });
     cancel.addEventListener('click',()=>{dlg.close();dlg.remove();}); actions.append(save,cancel); dlg.append(actions); document.body.append(dlg); dlg.showModal();
   }
+  async function r119SyncStay(c){
+    const keepId=r117CompanyId(c);
+    try{
+      const result=sync();
+      if(result&&typeof result.then==='function') await result;
+    }catch(e){
+      console.warn('R119 sync DANE FIRMY',e);
+    }finally{
+      if(keepId) state.selectedCompany=keepId;
+      setTimeout(()=>r117OpenCompanyData(getCompanyById(keepId)||c),120);
+    }
+  }
+  function r119DisplayId(c){
+    return String(c.displayId||c.id||'').replace(/^_+|_+$/g,'').replace(/_/g,'-').toUpperCase();
+  }
   function r117OpenCompanyData(base){
     const c=r117Company(base||getCompanyById(state.selectedCompany)||{});
     const s=document.createElement('section'); s.className='screen r117-company-data'; s.style.position='relative';
     const img=document.createElement('img'); img.className='master'; img.src=R117_DATA_IMG; img.alt='Dane firmy — MASTER'; s.append(img);
 
-    /* R118 — chirurgicznie wycentrowane pola względem linii MASTER 852 x 1846 */
-    r117Field(s,c.name,452,235,165,24,'#fff','900','left',true);
-    r117Field(s,String(c.displayId||c.id||'').toUpperCase(),688,188,120,12,'#fff','700','right',true);
-    r117Field(s,c.legalName||c.name,342,414,225,15,'#fff','700');
-    r117Field(s,c.contactPerson,342,505,225,15,'#fff','700');
-    r117Field(s,c.address,342,598,225,15,'#fff','700');
-    r117Field(s,c.phone,342,798,455,16,'#fff','700',null,true);
-    r117Field(s,c.mobile,342,890,455,16,'#fff','700',null,true);
-    r117Field(s,c.email,342,987,455,15,'#fff','700',null,true);
-    r117Field(s,c.website,342,1083,455,15,'#fff','700',null,true);
-    r117Field(s,c.nip,342,1177,455,16,'#fff','700',null,true);
-    r117Field(s,c.activity||c.type,342,1273,455,14,'#fff','700');
-    r117Field(s,c.foundedYear,342,1407,455,15,'#fff','700',null,true);
+    /* R119 — wartości wyśrodkowane optycznie w polach MASTER 852 x 1846 */
+    r117Field(s,c.name,355,235,285,22,'#fff','900','center',true);
+    r117Field(s,r119DisplayId(c),690,188,118,11,'#fff','700','center',true);
+    r117Field(s,c.legalName||c.name,340,414,228,14,'#fff','700','center');
+    r117Field(s,c.contactPerson,340,505,228,14,'#fff','700','center');
+    r117Field(s,c.address,340,598,228,14,'#fff','700','center');
+    r117Field(s,c.phone,342,798,455,16,'#fff','700','center',true);
+    r117Field(s,c.mobile,342,890,455,16,'#fff','700','center',true);
+    r117Field(s,c.email,342,987,455,15,'#fff','700','center',true);
+    r117Field(s,c.website,342,1083,455,15,'#fff','700','center',true);
+    r117Field(s,c.nip,342,1177,455,16,'#fff','700','center',true);
+    r117Field(s,c.activity||c.type,342,1273,455,14,'#fff','700','center');
+    r117Field(s,c.foundedYear,342,1407,455,15,'#fff','700','center',true);
     r117Field(s,r117DateLabel(c.addedAt),72,1513,188,10,'#fff','700','center',true);
     r117Field(s,r117DateLabel(c.updatedAt||c.sourceDate),325,1513,235,10,'#fff','700','center',true);
     r117Field(s,c.author||'',605,1513,190,10,'#fff','700','center',true);
@@ -135,7 +150,7 @@ r48PatchIndexHtml = function(text){
     if(c.logoData){ const logo=document.createElement('img'); logo.src=c.logoData; logo.alt='Logo firmy'; logo.style.cssText='position:absolute;left:68.5%;top:21.0%;width:24.5%;height:14.2%;object-fit:contain;background:white;border-radius:15px;z-index:23;pointer-events:none'; s.append(logo); }
 
     s.append(hotspot({x:0,y:0,w:140,h:135,label:'Wstecz',onClick:render,baseW:852,baseH:1846,z:30}));
-    s.append(hotspot({x:700,y:0,w:152,h:150,label:'Synchronizuj',onClick:sync,baseW:852,baseH:1846,z:30}));
+    s.append(hotspot({x:700,y:0,w:152,h:150,label:'Synchronizuj',onClick:()=>r119SyncStay(c),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:585,y:386,w:218,h:270,label:'Dodaj logo firmy',onClick:()=>r117PickLogo(c),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:585,y:660,w:218,h:80,label:'Pokaż na mapie',onClick:()=>r117Map(c),baseW:852,baseH:1846,z:30}));
     s.append(hotspot({x:30,y:1546,w:380,h:110,label:'Uaktualnij dane',onClick:()=>r117EditCompany(c),baseW:852,baseH:1846,z:30}));
