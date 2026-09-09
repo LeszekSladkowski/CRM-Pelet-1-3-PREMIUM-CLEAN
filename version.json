@@ -1,16 +1,17 @@
 {
-  "version": "1.3.0-master-r128v2-company-notes-safe-live",
-  "release": "R128 v2 NOTATKI O FIRMIE — SAFE LIVE",
+  "version": "1.3.0-master-r128v3-company-notes-surgical-live",
+  "release": "R128 v3 NOTATKI O FIRMIE — SURGICAL LIVE",
   "buildDate": "09.09.2026",
-  "buildTime": "16:41",
-  "base": "R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER — FINAL VERIFIED.",
+  "buildTime": "17:06",
+  "base": "R128 v2 NOTATKI O FIRMIE — SAFE LIVE / R127 OFERTA — FINAL VERIFIED.",
   "notes": [
-    "Aktywowano wyłącznie kafel nr 5 NOTATKI O FIRMIE w Karcie nr 3 gałęzi RYNKI EU.",
-    "R128 v2 korzysta z bezpiecznej architektury fail-open: moduł NOTATKI jest zewnętrzny i ładowany po głównym silniku R127, więc jego ewentualny błąd nie może wyłączyć całej aplikacji.",
-    "Główna karta i SZCZEGÓŁ NOTATKI O FIRMIE korzystają z dwóch zatwierdzonych czystych grafik MASTER 852×1846.",
-    "Cztery sekcje prowadzą do pełnoekranowego szczegółu; działają powroty, synchronizacja, EDYTUJ, DODAJ NOTATKĘ oraz lokalny zapis per firma.",
-    "PRZEJDŹ DO CELÓW pozostaje bezpiecznym odnośnikiem do następnego osobnego kafla CELE.",
+    "Zachowano działający silnik R128 v2 bez przebudowy routingu i zapisu danych.",
+    "Krytyczna poprawka SZCZEGÓŁU NOTATKI: duże pole ma teraz kolor identyczny z wybraną sekcją z poprzedniej karty — zielony KLUCZOWE FAKTY, niebieski PARAMETRY OFERTY, fioletowy WNIOSKI HANDLOWE, zielony FAKTY DO ROZMOWY.",
+    "W dużym polu szczegółów wyświetla się dokładny opis aktualnie wciśniętej sekcji.",
+    "Znacznie powiększono białe teksty w głównej karcie, szczegółach i oknach EDYTUJ / DODAJ NOTATKĘ.",
+    "Skorygowano pole ŹRÓDŁO tak, aby tekst nie nachodził na ikonę i etykietę; źródła asystenta są prezentowane czytelnie jako analiza asystenta.",
+    "Powiększono odstęp i tekst w sekcji NAJWAŻNIEJSZY WNIOSEK.",
     "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i zamrożony R127 OFERTA nie zostały zmienione.",
-    "Wersja przeznaczona wyłącznie do testu na Samsung Galaxy S24 Ultra przed PASS / MASTER."
+    "Wersja do testu na Samsung Galaxy S24 Ultra przed PASS / MASTER."
   ]
 }
