@@ -1,9 +1,9 @@
 /* R126 — OFERTA: MASTER GRAPHIC RESTORE + LIVE PREVIEW FIX
    Baza: dokładny runtime R124/R125 pozostaje bez zmian.
-   Jedyna naprawa: komplet źródła grafiki oferty 8/8 + podgląd/generowanie PNG na prawdziwym MASTER 1.2.
+   Jedyna naprawa: komplet źródła grafiki oferty + podgląd/generowanie PNG na prawdziwym MASTER 1.2.
    R120 DANE FIRMY, R121 CENY, R122 HISTORIA i pozostałe MASTER-y pozostają nietknięte.
 */
-importScripts('./sw-r125-base.js?v=R126-offer-master-restore');
+importScripts('./sw-r125-base.js?v=R126-offer-master-final');
 
 if(Array.isArray(ASSETS)){
   [
@@ -13,7 +13,10 @@ if(Array.isArray(ASSETS)){
     './r125-offer-master-q8/part-04.b64',
     './r125-offer-master-q8/part-05.b64',
     './r125-offer-master-q8/part-06.b64',
-    './r125-offer-master-q8/part-07.b64',
+    './r126-offer-master-final/p07a.b64',
+    './r126-offer-master-final/p07b.b64',
+    './r126-offer-master-final/p07c.b64',
+    './r126-offer-master-final/p07d.b64',
     './r125-offer-master-q8/part-08.b64'
   ].forEach(a=>{if(!ASSETS.includes(a))ASSETS.push(a)});
 }
@@ -26,29 +29,45 @@ r48PatchIndexHtml=function(text){
   out=out.replaceAll('R124 OFERTY — GENERATOR ROUTING','R126 OFERTA — MASTER GRAPHIC RESTORE LIVE');
   out=out.replace("const BUILD_DATE = '08.09.2026';","const BUILD_DATE = '09.09.2026';");
   out=out.replace("const BUILD_TIME = '22:38';","const BUILD_TIME = '09:35';");
-  out=out.replace(/sw\.js\?v=R124-offer-generator-routing-2238/g,'sw.js?v=R126-offer-master-restore-0935');
-  out=out.replace(/r84-backup-prune\.js\?v=R124-2238/g,'r84-backup-prune.js?v=R126-0935');
+  out=out.replace(/sw\.js\?v=R124-offer-generator-routing-2238/g,'sw.js?v=R126-offer-master-final-2');
+  out=out.replace(/r84-backup-prune\.js\?v=R124-2238/g,'r84-backup-prune.js?v=R126-final-2');
 
   out=out.replace("paleta:s.paleta||'2350',worek:s.worek||'35',bigbag:s.bigbag||'2220'","paleta:s.paleta||'2100',worek:s.worek||'25',bigbag:s.bigbag||'1900'");
 
   if(!out.includes('r126-offer-master-live-fix-inside-iife')){
     const r126Inside=`
   /* r126-offer-master-live-fix-inside-iife */
-  const R126_MASTER_PARTS=Array.from({length:8},function(_,i){return './r125-offer-master-q8/part-'+String(i+1).padStart(2,'0')+'.b64';});
+  const R126_MASTER_PARTS=[
+    ['./r125-offer-master-q8/part-01.b64',20000],
+    ['./r125-offer-master-q8/part-02.b64',20000],
+    ['./r125-offer-master-q8/part-03.b64',20000],
+    ['./r125-offer-master-q8/part-04.b64',20000],
+    ['./r125-offer-master-q8/part-05.b64',20000],
+    ['./r125-offer-master-q8/part-06.b64',20000],
+    ['./r126-offer-master-final/p07a.b64',5000],
+    ['./r126-offer-master-final/p07b.b64',5000],
+    ['./r126-offer-master-final/p07c.b64',5000],
+    ['./r126-offer-master-final/p07d.b64',5000],
+    ['./r125-offer-master-q8/part-08.b64',940]
+  ];
   let R126_MASTER_URL='';
   let R126_MASTER_PROMISE=null;
 
   function r126MasterUrl(){
     if(R126_MASTER_URL)return Promise.resolve(R126_MASTER_URL);
     if(R126_MASTER_PROMISE)return R126_MASTER_PROMISE;
-    R126_MASTER_PROMISE=Promise.all(R126_MASTER_PARTS.map(async function(u,i){
-      const r=await fetch(u+'?v=R126',{cache:'force-cache'});
+    R126_MASTER_PROMISE=Promise.all(R126_MASTER_PARTS.map(async function(row,i){
+      const u=row[0], expected=row[1];
+      const r=await fetch(u+'?v=R126-final-2',{cache:'reload'});
       if(!r.ok)throw new Error('MASTER part '+(i+1)+' HTTP '+r.status);
       let t=(await r.text()).replace(/[^A-Za-z0-9+/=]/g,'');
-      if(i<7)t=t.slice(0,20000);
-      return t;
+      if(t.length<expected)throw new Error('MASTER part '+(i+1)+' length '+t.length+'/'+expected);
+      return t.slice(0,expected);
     })).then(function(parts){
-      const bin=atob(parts.join(''));
+      const joined=parts.join('');
+      if(joined.length!==140940)throw new Error('MASTER base64 length '+joined.length+'/140940');
+      const bin=atob(joined);
+      if(bin.length!==105704)throw new Error('MASTER binary length '+bin.length+'/105704');
       const bytes=new Uint8Array(bin.length);
       for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
       R126_MASTER_URL=URL.createObjectURL(new Blob([bytes],{type:'image/webp'}));
