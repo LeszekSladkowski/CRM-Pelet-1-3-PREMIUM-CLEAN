@@ -1,9 +1,9 @@
-/* R128 v4 — NOTATKI O FIRMIE: CLEAN PNG ENGINE
-   Baza: zweryfikowany R128 v2 / zamrożony R127.
+/* R128 v4.1 — NOTATKI O FIRMIE: CLEAN PNG ENGINE / SURGICAL FIT
+   Baza: zweryfikowany R128 v4 CLEAN PNG / zamrożony R127.
    Grafika = cały wygląd. Kod = dane LIVE + niewidzialne hotspoty.
    R120 / R121 / R122 / R127 pozostają bez zmian.
 */
-importScripts('./sw-r127-language-base.js?v=R128-v4-clean-png');
+importScripts('./sw-r127-language-base.js?v=R128-v4-1-surgical-fit');
 
 if(Array.isArray(ASSETS)){
   [
@@ -25,11 +25,11 @@ r48PatchIndexHtml=function(text){
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
   /* Tylko metadane wydania. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-company-notes-clean-png-engine');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4 NOTATKI O FIRMIE — CLEAN PNG ENGINE');
-  out=out.replace("const BUILD_TIME = '10:30';","const BUILD_TIME = '21:01';");
-  out=out.replace(/sw\.js\?v=R127-offer-language-clean-master-1030/g,'sw.js?v=R128v4-company-notes-clean-png-2101');
-  out=out.replace(/r84-backup-prune\.js\?v=R127-1030/g,'r84-backup-prune.js?v=R128v4-2101');
+  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-1-company-notes-surgical-fit');
+  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.1 NOTATKI O FIRMIE — SURGICAL FIT');
+  out=out.replace("const BUILD_TIME = '10:30';","const BUILD_TIME = '21:39';");
+  out=out.replace(/sw\.js\?v=R127-offer-language-clean-master-1030/g,'sw.js?v=R128v4-1-company-notes-surgical-fit-2139');
+  out=out.replace(/r84-backup-prune\.js\?v=R127-1030/g,'r84-backup-prune.js?v=R128v4-1-2139');
 
   /* Minimalna ekspozycja istniejących helperów do zewnętrznego modułu. */
   if(!out.includes('window.R128_CTX=')){
@@ -46,8 +46,8 @@ r48PatchIndexHtml=function(text){
   );
 
   /* Moduł ładowany po głównym silniku; nie może wyłączyć aplikacji R127. */
-  if(!out.includes('r128-notatki-live.js?v=R128v4')){
-    out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4"></script>\n</body>');
+  if(!out.includes('r128-notatki-live.js?v=R128v4-1')){
+    out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-1"></script>\n</body>');
   }
   return out;
 };
