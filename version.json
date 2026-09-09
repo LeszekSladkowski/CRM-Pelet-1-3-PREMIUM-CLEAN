@@ -1,17 +1,16 @@
 {
-  "version": "1.3.0-master-r127-offer-language-clean-master",
-  "release": "R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER",
+  "version": "1.3.0-master-r128v2-company-notes-safe-live",
+  "release": "R128 v2 NOTATKI O FIRMIE — SAFE LIVE",
   "buildDate": "09.09.2026",
-  "buildTime": "10:30",
-  "base": "R126 OFERTA — pełna grafika MASTER 1.2 i aktywny generator LIVE.",
+  "buildTime": "16:41",
+  "base": "R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER — FINAL VERIFIED.",
   "notes": [
-    "Naprawiono krytyczny błąd języków: PL/DE/AT/CH/EN/CZ/SK zmieniają teraz rzeczywiste napisy na grafice oferty LIVE, a nie tylko flagę.",
-    "AT i CH korzystają z języka niemieckiego, ale zachowują własną flagę i kod rynku.",
-    "Usunięto bałagan w dolnym pasie grafiki: uszkodzony fragment jest chirurgicznie przykrywany czystym, spójnym panelem bez ingerencji w pozostały MASTER.",
-    "Ceny palety, worka i Big Bag oraz okres ważności nadal aktualizują się LIVE.",
-    "Pobieranie PNG i udostępnianie czekają na pełne wyrenderowanie aktualnego języka i danych.",
-    "Routing R124 pozostaje bez zmian: OFERTY z Pulpitu oraz OFERTA z karty firmy otwierają ten sam generator.",
-    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i pozostałe zamrożone MASTER-y pozostają bez zmian.",
-    "R127 jest kandydatem do finalnego testu na Samsung Galaxy S24 Ultra przed zamrożeniem."
+    "Aktywowano wyłącznie kafel nr 5 NOTATKI O FIRMIE w Karcie nr 3 gałęzi RYNKI EU.",
+    "R128 v2 korzysta z bezpiecznej architektury fail-open: moduł NOTATKI jest zewnętrzny i ładowany po głównym silniku R127, więc jego ewentualny błąd nie może wyłączyć całej aplikacji.",
+    "Główna karta i SZCZEGÓŁ NOTATKI O FIRMIE korzystają z dwóch zatwierdzonych czystych grafik MASTER 852×1846.",
+    "Cztery sekcje prowadzą do pełnoekranowego szczegółu; działają powroty, synchronizacja, EDYTUJ, DODAJ NOTATKĘ oraz lokalny zapis per firma.",
+    "PRZEJDŹ DO CELÓW pozostaje bezpiecznym odnośnikiem do następnego osobnego kafla CELE.",
+    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i zamrożony R127 OFERTA nie zostały zmienione.",
+    "Wersja przeznaczona wyłącznie do testu na Samsung Galaxy S24 Ultra przed PASS / MASTER."
   ]
 }
