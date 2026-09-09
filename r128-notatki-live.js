@@ -1,6 +1,7 @@
-/* R128 v4 — NOTATKI O FIRMIE — CLEAN PNG ENGINE
+/* R128 v4.1 — NOTATKI O FIRMIE — CLEAN PNG ENGINE / SURGICAL FIT
    Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
    Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
+   v4.1: wyłącznie chirurgiczne dopasowanie typografii i współrzędnych do zatwierdzonych PNG 1:1.
 */
 (function(){
   'use strict';
@@ -115,17 +116,21 @@
     e.style.textOverflow=opt.nowrap?'ellipsis':'clip';
     px(e,x,y,w,h);root.append(e);return e;
   }
-  function addList(root,items,x,y,w,h,size,max=6){
+  function addList(root,items,x,y,w,h,size,max=6,opt={}){
     const e=document.createElement('div');
-    e.style.cssText='color:#fff;font-weight:750;line-height:1.24;overflow:hidden;pointer-events:none;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;';
+    e.style.cssText='color:#fff;overflow:hidden;pointer-events:none;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;';
+    e.style.fontWeight=opt.weight||'750';
+    e.style.lineHeight=opt.line||'1.24';
     e.style.fontSize=font(size);px(e,x,y,w,h);
-    clean(items).slice(0,max).forEach(t=>{const r=document.createElement('div');r.textContent='•  '+t;r.style.marginBottom='7px';e.append(r)});
+    const gap=opt.margin===undefined?7:opt.margin;
+    clean(items).slice(0,max).forEach(t=>{const r=document.createElement('div');r.textContent='•  '+t;r.style.marginBottom=gap+'px';e.append(r)});
     root.append(e);return e;
   }
   function addLong(root,text,x,y,w,h,size,opt={}){
     const e=document.createElement('div');
     e.textContent=String(text||'');
-    e.style.cssText='color:#fff;font-weight:760;line-height:1.32;white-space:pre-wrap;overflow:auto;padding-right:7px;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;touch-action:pan-y pinch-zoom;';
+    e.style.cssText='color:#fff;font-weight:760;white-space:pre-wrap;overflow:auto;padding-right:7px;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;touch-action:pan-y pinch-zoom;';
+    e.style.lineHeight=opt.line||'1.32';
     e.style.fontSize=font(size);if(opt.color)e.style.color=opt.color;px(e,x,y,w,h);root.append(e);return e;
   }
   function hot(root,x,y,w,h,label,fn){
@@ -149,10 +154,17 @@
   }
 
   function companyHeader(s,c){
-    addText(s,c?.name||'—',190,313,472,70,34,{align:'center',weight:'950',nowrap:true});
-    addText(s,country(c).toUpperCase(),70,397,180,60,19,{align:'center',weight:'850',nowrap:true});
-    addText(s,role(c).toUpperCase(),285,397,282,60,19,{align:'center',weight:'850',nowrap:true});
-    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),563,397,260,60,18,{align:'center',weight:'900',color:'#ffd43b',nowrap:true});
+    addText(s,c?.name||'—',190,313,472,70,32,{align:'center',weight:'950',nowrap:true});
+    addText(s,country(c).toUpperCase(),118,401,126,54,17,{align:'center',weight:'850',nowrap:true});
+    addText(s,role(c).toUpperCase(),350,401,158,54,17,{align:'center',weight:'850',nowrap:true});
+    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),610,401,180,54,16,{align:'center',weight:'900',color:'#ffd43b',nowrap:true});
+  }
+
+  function companyHeaderConclusion(s,c){
+    addText(s,c?.name||'—',190,352,472,62,30,{align:'center',weight:'950',nowrap:true});
+    addText(s,country(c).toUpperCase(),118,441,126,52,17,{align:'center',weight:'850',nowrap:true});
+    addText(s,role(c).toUpperCase(),350,441,158,52,17,{align:'center',weight:'850',nowrap:true});
+    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),610,441,180,52,16,{align:'center',weight:'900',color:'#ffd43b',nowrap:true});
   }
 
   function dialog(c,currentKey,mode){
@@ -194,10 +206,10 @@
     const x=ctx();if(!x)return;
     c=currentCompany(c);const m=model(c),s=screen(IMG.main,'Notatki o firmie — CLEAN PNG MASTER');
     companyHeader(s,c);
-    addList(s,m.facts,248,553,500,130,24,4);
-    addList(s,m.offer,248,800,500,130,24,4);
-    addList(s,m.conclusions,248,1045,500,130,24,4);
-    addList(s,m.talk,248,1282,500,120,24,4);
+    addList(s,m.facts,248,548,500,140,20,3,{line:'1.12',margin:4,weight:'800'});
+    addList(s,m.offer,248,795,500,140,20,3,{line:'1.12',margin:4,weight:'800'});
+    addList(s,m.conclusions,248,1040,500,140,20,3,{line:'1.12',margin:4,weight:'800'});
+    addList(s,m.talk,248,1277,500,132,20,3,{line:'1.12',margin:4,weight:'800'});
 
     hot(s,0,0,145,150,'Wstecz do karty firmy',()=>x.render?.());
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,null,'main'));
@@ -217,8 +229,8 @@
     c=currentCompany(c);if(!SECTIONS.includes(key))key='facts';
     const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
     companyHeader(s,c);
-    addList(s,arr,180,580,590,525,31,10);
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),180,1260,585,105,28);
+    addList(s,arr,180,580,590,525,30,10,{line:'1.20',margin:6,weight:'780'});
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),180,1302,585,88,24,{line:'1.18'});
 
     hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'detail'));
@@ -234,9 +246,9 @@
     const x=ctx();if(!x)return;
     c=currentCompany(c);if(!SECTIONS.includes(key))key='facts';
     const m=model(c),arr=m[key]||[],s=screen(IMG.conclusion,'Najważniejszy Wniosek Handlowy — CLEAN PNG MASTER');
-    companyHeader(s,c);
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,570,290,32);
-    addLong(s,m.nextMove?.[key]||defaultNext(key),190,1135,570,220,30);
+    companyHeaderConclusion(s,c);
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,570,290,30,{line:'1.28'});
+    addLong(s,m.nextMove?.[key]||defaultNext(key),190,1135,570,230,28,{line:'1.28'});
 
     hot(s,0,0,145,150,'Wstecz do szczegółu',()=>openDetail(c,key));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'conclusion'));
@@ -247,5 +259,5 @@
     mount(s);
   }
 
-  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4-clean-png-engine'};
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.1-surgical-fit'};
 })();
