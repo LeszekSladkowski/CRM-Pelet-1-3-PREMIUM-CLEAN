@@ -1,8 +1,8 @@
-/* R128 v2 — NOTATKI O FIRMIE: SAFE EXTERNAL LIVE MODULE
-   Baza: zweryfikowany R127. Minimalny patch routingu + bezpieczny zewnętrzny moduł.
+/* R128 v3 — NOTATKI O FIRMIE: SURGICAL DETAIL COLOR + TYPOGRAPHY
+   Baza: zweryfikowany R128 v2 / zamrożony R127. Minimalny patch routingu + bezpieczny zewnętrzny moduł.
    R120 / R121 / R122 / R127 pozostają bez zmian.
 */
-importScripts('./sw-r127-language-base.js?v=R128-v2-safe-notes');
+importScripts('./sw-r127-language-base.js?v=R128-v3-safe-notes');
 
 if(Array.isArray(ASSETS)){
   [
@@ -12,19 +12,19 @@ if(Array.isArray(ASSETS)){
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
 
-const r128v2BasePatch=r48PatchIndexHtml;
+const r128v3BasePatch=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
-  let out=r128v2BasePatch(text);
+  let out=r128v3BasePatch(text);
 
   /* Zachowujemy sprawdzony hotfix separatora R127. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
   /* Tylko metadane wydania. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v2-company-notes-safe-live');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v2 NOTATKI O FIRMIE — SAFE LIVE');
-  out=out.replace("const BUILD_TIME = '10:30';","const BUILD_TIME = '16:41';");
-  out=out.replace(/sw\.js\?v=R127-offer-language-clean-master-1030/g,'sw.js?v=R128v2-company-notes-safe-live-1641');
-  out=out.replace(/r84-backup-prune\.js\?v=R127-1030/g,'r84-backup-prune.js?v=R128v2-1641');
+  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v3-company-notes-surgical-live');
+  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v3 NOTATKI O FIRMIE — SURGICAL LIVE');
+  out=out.replace("const BUILD_TIME = '10:30';","const BUILD_TIME = '17:06';");
+  out=out.replace(/sw\.js\?v=R127-offer-language-clean-master-1030/g,'sw.js?v=R128v3-company-notes-surgical-live-1706');
+  out=out.replace(/r84-backup-prune\.js\?v=R127-1030/g,'r84-backup-prune.js?v=R128v3-1706');
 
   /* Minimalna ekspozycja istniejących helperów do zewnętrznego modułu. */
   if(!out.includes('window.R128_CTX=')){
@@ -41,8 +41,8 @@ r48PatchIndexHtml=function(text){
   );
 
   /* Moduł ładowany PO głównym skrypcie. Jego ewentualny błąd nie może wyłączyć aplikacji R127. */
-  if(!out.includes('r128-notatki-live.js?v=R128v2')){
-    out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v2"></script>\n</body>');
+  if(!out.includes('r128-notatki-live.js?v=R128v3')){
+    out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v3"></script>\n</body>');
   }
   return out;
 };
