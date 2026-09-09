@@ -1,17 +1,17 @@
 {
-  "version": "1.3.0-master-r128v3-company-notes-surgical-live",
-  "release": "R128 v3 NOTATKI O FIRMIE — SURGICAL LIVE",
+  "version": "1.3.0-master-r128v4-company-notes-clean-png-engine",
+  "release": "R128 v4 NOTATKI O FIRMIE — CLEAN PNG ENGINE",
   "buildDate": "09.09.2026",
-  "buildTime": "17:06",
+  "buildTime": "21:01",
   "base": "R128 v2 NOTATKI O FIRMIE — SAFE LIVE / R127 OFERTA — FINAL VERIFIED.",
   "notes": [
-    "Zachowano działający silnik R128 v2 bez przebudowy routingu i zapisu danych.",
-    "Krytyczna poprawka SZCZEGÓŁU NOTATKI: duże pole ma teraz kolor identyczny z wybraną sekcją z poprzedniej karty — zielony KLUCZOWE FAKTY, niebieski PARAMETRY OFERTY, fioletowy WNIOSKI HANDLOWE, zielony FAKTY DO ROZMOWY.",
-    "W dużym polu szczegółów wyświetla się dokładny opis aktualnie wciśniętej sekcji.",
-    "Znacznie powiększono białe teksty w głównej karcie, szczegółach i oknach EDYTUJ / DODAJ NOTATKĘ.",
-    "Skorygowano pole ŹRÓDŁO tak, aby tekst nie nachodził na ikonę i etykietę; źródła asystenta są prezentowane czytelnie jako analiza asystenta.",
-    "Powiększono odstęp i tekst w sekcji NAJWAŻNIEJSZY WNIOSEK.",
-    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i zamrożony R127 OFERTA nie zostały zmienione.",
-    "Wersja do testu na Samsung Galaxy S24 Ultra przed PASS / MASTER."
+    "Wdrożono zatwierdzoną architekturę CLEAN PNG: grafika odpowiada za cały wygląd, kod dodaje wyłącznie dane LIVE i niewidzialne hotspoty.",
+    "Karta główna NOTATKI O FIRMIE używa nowej czystej grafiki z kolorami: zielony KLUCZOWE FAKTY, niebieski PARAMETRY OFERTY, brudny złoty WNIOSKI HANDLOWE, czerwony FAKTY DO ROZMOWY.",
+    "Każdy z czterech kafli otwiera własną zatwierdzoną czystą grafikę szczegółu 1:1 w odpowiednim kolorze.",
+    "Czerwony przycisk NAJWAŻNIEJSZY WNIOSEK HANDLOWY prowadzi do osobnej końcowej czerwonej karty z wnioskiem i NASTĘPNYM RUCHEM.",
+    "Usunięto programowe kolorowe nakładki i dynamiczne ramki z widoków głównych i szczegółowych.",
+    "Zachowano zapis notatek oddzielnie dla każdej firmy oraz działanie EDYTUJ, DODAJ KOLEJNY, SYNCHRONIZUJ, powrotów i przejścia do CELÓW.",
+    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i zamrożony R127 OFERTA pozostają bez zmian.",
+    "Wersja testowa przed PASS / MASTER na Samsung Galaxy S24 Ultra."
   ]
 }
