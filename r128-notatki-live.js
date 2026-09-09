@@ -1,7 +1,7 @@
-/* R128 v4.2 — NOTATKI O FIRMIE — CLEAN PNG ENGINE / SURGICAL TYPOGRAPHY FIT
+/* R128 v4.3 — NOTATKI O FIRMIE — CLEAN PNG ENGINE / SURGICAL 1:1 SCALE FIT
    Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
    Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
-   v4.2: wyłącznie chirurgiczne dopasowanie typografii i współrzędnych do zatwierdzonych PNG 1:1.
+   v4.3: naprawa źródłowa skali tekstu względem projektu 852×1846 + usunięcie wewnętrznych scrollbarów.
 */
 (function(){
   'use strict';
@@ -100,16 +100,24 @@
     Object.assign(el.style,{position:'absolute',left:(x/W*100)+'%',top:(y/H*100)+'%',width:(w/W*100)+'%',height:(h/H*100)+'%'});
     return el;
   }
-  function font(size,minPx=16){return `clamp(${minPx}px,${(size/W*100).toFixed(3)}vw,${size}px)`;}
-  function fitBlock(e,minPx=12){
+
+  /*
+   * KLUCZOWA POPRAWKA v4.3:
+   * wszystkie wielkości fontu są liczone dokładnie z szerokości projektu MASTER 852 px.
+   * Usunięto poprzedni wysoki dolny clamp 11–16 px, który na Galaxy S24 Ultra
+   * sztucznie powiększał tekst względem grafiki i powodował nachodzenie / obcinanie.
+   */
+  function font(size){return `clamp(6px,${(size/W*100).toFixed(3)}vw,${size}px)`;}
+  function fitBlock(e,minPx=6){
     const run=()=>{
       if(!e.isConnected)return;
-      let fs=parseFloat(getComputedStyle(e).fontSize)||16,guard=0;
-      while((e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)&&fs>minPx&&guard<32){
-        fs=Math.max(minPx,fs-0.5);e.style.fontSize=fs+'px';guard++;
+      let fs=parseFloat(getComputedStyle(e).fontSize)||12,guard=0;
+      const floor=Math.min(Number(minPx)||6,Math.max(6,fs*0.68));
+      while((e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)&&fs>floor&&guard<48){
+        fs=Math.max(floor,fs-0.35);e.style.fontSize=fs+'px';guard++;
       }
     };
-    requestAnimationFrame(run);
+    requestAnimationFrame(()=>requestAnimationFrame(run));
     return e;
   }
   function addText(root,text,x,y,w,h,size,opt={}){
@@ -121,28 +129,28 @@
     e.style.textAlign=opt.align||'left';
     e.style.color=opt.color||'#fff';
     e.style.fontWeight=opt.weight||'800';
-    e.style.fontSize=font(size,opt.minPx||16);
+    e.style.fontSize=font(size);
     e.style.lineHeight=opt.line||'1.15';
     e.style.whiteSpace=opt.nowrap?'nowrap':'normal';
     e.style.textOverflow=opt.nowrap?'ellipsis':'clip';
-    px(e,x,y,w,h);root.append(e);if(opt.fit)fitBlock(e,opt.fitMin||opt.minPx||12);return e;
+    px(e,x,y,w,h);root.append(e);if(opt.fit)fitBlock(e,opt.fitMin||6);return e;
   }
   function addList(root,items,x,y,w,h,size,max=6,opt={}){
     const e=document.createElement('div');
-    e.style.cssText='color:#fff;overflow:hidden;pointer-events:none;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;';
+    e.style.cssText='color:#fff;overflow:hidden;pointer-events:none;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;overflow-wrap:break-word;word-break:normal;';
     e.style.fontWeight=opt.weight||'750';
     e.style.lineHeight=opt.line||'1.24';
-    e.style.fontSize=font(size,opt.minPx||16);px(e,x,y,w,h);
+    e.style.fontSize=font(size);px(e,x,y,w,h);
     const gap=opt.margin===undefined?7:opt.margin;
     clean(items).slice(0,max).forEach(t=>{const r=document.createElement('div');r.textContent='•  '+t;r.style.marginBottom=gap+'px';e.append(r)});
-    root.append(e);if(opt.fit!==false)fitBlock(e,opt.fitMin||opt.minPx||12);return e;
+    root.append(e);if(opt.fit!==false)fitBlock(e,opt.fitMin||6);return e;
   }
   function addLong(root,text,x,y,w,h,size,opt={}){
     const e=document.createElement('div');
     e.textContent=String(text||'');
-    e.style.cssText='color:#fff;font-weight:760;white-space:pre-wrap;overflow:auto;padding-right:7px;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;touch-action:pan-y pinch-zoom;';
+    e.style.cssText='color:#fff;font-weight:760;white-space:pre-wrap;overflow:hidden;padding-right:7px;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;overflow-wrap:break-word;word-break:normal;';
     e.style.lineHeight=opt.line||'1.32';
-    e.style.fontSize=font(size,opt.minPx||16);if(opt.color)e.style.color=opt.color;px(e,x,y,w,h);root.append(e);if(opt.fit)fitBlock(e,opt.fitMin||opt.minPx||12);return e;
+    e.style.fontSize=font(size);if(opt.color)e.style.color=opt.color;px(e,x,y,w,h);root.append(e);if(opt.fit)fitBlock(e,opt.fitMin||6);return e;
   }
   function hot(root,x,y,w,h,label,fn){
     const xctx=ctx();
@@ -165,17 +173,17 @@
   }
 
   function companyHeader(s,c){
-    addText(s,c?.name||'—',190,313,472,70,32,{align:'center',weight:'950',nowrap:true,fit:true,fitMin:18});
-    addText(s,country(c).toUpperCase(),112,401,142,54,16,{align:'center',weight:'850',nowrap:true,minPx:13,fit:true,fitMin:12});
-    addText(s,role(c).toUpperCase(),330,401,196,54,16,{align:'center',weight:'850',nowrap:true,minPx:13,fit:true,fitMin:12});
-    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),586,401,224,54,15,{align:'center',weight:'900',color:'#ffd43b',nowrap:true,minPx:12,fit:true,fitMin:11});
+    addText(s,c?.name||'—',190,313,472,70,34,{align:'center',weight:'950',nowrap:true,fit:true,fitMin:8});
+    addText(s,country(c).toUpperCase(),112,401,142,54,22,{align:'center',weight:'850',nowrap:true,fit:true,fitMin:7});
+    addText(s,role(c).toUpperCase(),330,401,196,54,22,{align:'center',weight:'850',nowrap:true,fit:true,fitMin:7});
+    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),586,401,224,54,20,{align:'center',weight:'900',color:'#ffd43b',nowrap:true,fit:true,fitMin:7});
   }
 
   function companyHeaderConclusion(s,c){
-    addText(s,c?.name||'—',190,352,472,62,30,{align:'center',weight:'950',nowrap:true,fit:true,fitMin:18});
-    addText(s,country(c).toUpperCase(),112,441,142,52,16,{align:'center',weight:'850',nowrap:true,minPx:13,fit:true,fitMin:12});
-    addText(s,role(c).toUpperCase(),330,441,196,52,16,{align:'center',weight:'850',nowrap:true,minPx:13,fit:true,fitMin:12});
-    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),586,441,224,52,15,{align:'center',weight:'900',color:'#ffd43b',nowrap:true,minPx:12,fit:true,fitMin:11});
+    addText(s,c?.name||'—',190,352,472,62,32,{align:'center',weight:'950',nowrap:true,fit:true,fitMin:8});
+    addText(s,country(c).toUpperCase(),112,441,142,52,22,{align:'center',weight:'850',nowrap:true,fit:true,fitMin:7});
+    addText(s,role(c).toUpperCase(),330,441,196,52,22,{align:'center',weight:'850',nowrap:true,fit:true,fitMin:7});
+    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),586,441,224,52,20,{align:'center',weight:'900',color:'#ffd43b',nowrap:true,fit:true,fitMin:7});
   }
 
   function dialog(c,currentKey,mode){
@@ -217,10 +225,10 @@
     const x=ctx();if(!x)return;
     c=currentCompany(c);const m=model(c),s=screen(IMG.main,'Notatki o firmie — CLEAN PNG MASTER');
     companyHeader(s,c);
-    addList(s,m.facts,248,548,500,132,18,3,{line:'1.08',margin:3,weight:'800',minPx:12,fitMin:11});
-    addList(s,m.offer,248,795,500,132,18,3,{line:'1.08',margin:3,weight:'800',minPx:12,fitMin:11});
-    addList(s,m.conclusions,248,1040,500,132,18,3,{line:'1.08',margin:3,weight:'800',minPx:12,fitMin:11});
-    addList(s,m.talk,248,1277,500,122,18,3,{line:'1.08',margin:3,weight:'800',minPx:12,fitMin:11});
+    addList(s,m.facts,248,548,500,132,22,3,{line:'1.10',margin:4,weight:'800',fitMin:7});
+    addList(s,m.offer,248,795,500,132,22,3,{line:'1.10',margin:4,weight:'800',fitMin:7});
+    addList(s,m.conclusions,248,1040,500,132,22,3,{line:'1.10',margin:4,weight:'800',fitMin:7});
+    addList(s,m.talk,248,1277,500,122,22,3,{line:'1.10',margin:4,weight:'800',fitMin:7});
 
     hot(s,0,0,145,150,'Wstecz do karty firmy',()=>x.render?.());
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,null,'main'));
@@ -240,8 +248,8 @@
     c=currentCompany(c);if(!SECTIONS.includes(key))key='facts';
     const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
     companyHeader(s,c);
-    addList(s,arr,180,580,590,525,30,10,{line:'1.20',margin:6,weight:'780',minPx:15,fitMin:14});
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),180,1350,585,74,21,{line:'1.12',minPx:13,fit:true,fitMin:12});
+    addList(s,arr,180,580,590,525,30,10,{line:'1.20',margin:6,weight:'780',fitMin:9});
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),180,1350,585,74,21,{line:'1.12',fit:true,fitMin:7});
 
     hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'detail'));
@@ -258,8 +266,8 @@
     c=currentCompany(c);if(!SECTIONS.includes(key))key='facts';
     const m=model(c),arr=m[key]||[],s=screen(IMG.conclusion,'Najważniejszy Wniosek Handlowy — CLEAN PNG MASTER');
     companyHeaderConclusion(s,c);
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,570,290,30,{line:'1.28',minPx:15,fit:true,fitMin:14});
-    addLong(s,m.nextMove?.[key]||defaultNext(key),190,1135,570,230,28,{line:'1.28',minPx:15,fit:true,fitMin:14});
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,570,290,30,{line:'1.28',fit:true,fitMin:9});
+    addLong(s,m.nextMove?.[key]||defaultNext(key),190,1135,570,230,28,{line:'1.28',fit:true,fitMin:9});
 
     hot(s,0,0,145,150,'Wstecz do szczegółu',()=>openDetail(c,key));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'conclusion'));
@@ -270,5 +278,5 @@
     mount(s);
   }
 
-  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.2-surgical-typography-fit'};
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.3-surgical-1to1-scale-fit'};
 })();
