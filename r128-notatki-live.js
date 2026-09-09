@@ -1,33 +1,43 @@
-/* R128 v3 — NOTATKI O FIRMIE LIVE — SURGICAL DETAIL COLOR + TYPOGRAPHY
-   Fail-safe external module. Does not alter any existing MASTER renderer.
-   Zmiany wyłącznie w module NOTATKI: kolor szczegółu zgodny z wybraną sekcją,
-   większa typografia i korekta pól tekstowych.
+/* R128 v4 — NOTATKI O FIRMIE — CLEAN PNG ENGINE
+   Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
+   Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
 */
 (function(){
   'use strict';
-  const MAIN_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_0000000086cc8211895d9ec103b101c6.png';
-  const DETAIL_IMG='./grafiki/rynki-eu/szczegoly-firmy/file_00000000bd78820abbb3d95fa03deebb.png';
+
+  const BASE='./grafiki/rynki-eu/szczegoly-firmy/';
+  const IMG={
+    main:BASE+'file_00000000c0ac8210a2eab26769101d1e.png',
+    facts:BASE+'file_0000000043ac8207a71d319b6ef15188.png',
+    offer:BASE+'file_00000000a600821083280e45a39d12f3.png',
+    conclusions:BASE+'file_00000000df5c81f69bd362e0ec6b55a9.png',
+    talk:BASE+'file_00000000995c82109a658e01b57fd04f.png',
+    conclusion:BASE+'file_00000000c5ec820eb0d4cff0e6895173.png'
+  };
   const STORE='crm13_r128_company_notes_v2';
   const W=852,H=1846;
   const SECTIONS=['facts','offer','conclusions','talk'];
-  const LABELS={facts:'KLUCZOWE FAKTY',offer:'PARAMETRY OFERTY',conclusions:'WNIOSKI HANDLOWE',talk:'FAKTY DO ROZMOWY'};
-  const SECTION_STYLE={
-    facts:{color:'#50ff63',border:'#24ff52',bg:'#00170d',shadow:'rgba(36,255,82,.72)'},
-    offer:{color:'#1bdcff',border:'#00cfff',bg:'#001521',shadow:'rgba(0,207,255,.72)'},
-    conclusions:{color:'#ed45ff',border:'#df23ff',bg:'#19001e',shadow:'rgba(223,35,255,.72)'},
-    talk:{color:'#50ff63',border:'#24ff52',bg:'#00170d',shadow:'rgba(36,255,82,.72)'}
+  const LABELS={
+    facts:'KLUCZOWE FAKTY',
+    offer:'PARAMETRY OFERTY',
+    conclusions:'WNIOSKI HANDLOWE',
+    talk:'FAKTY DO ROZMOWY'
   };
 
   function ctx(){return window.R128_CTX||null;}
   function read(){try{const x=JSON.parse(localStorage.getItem(STORE)||'{}');return x&&typeof x==='object'?x:{}}catch(_){return {}}}
-  function id(c){return String(c?.id||c?.name||'firma').trim().toLowerCase().replace(/\s+/g,'-')}
-  function write(c,data){const all=read();all[id(c)]={...(all[id(c)]||{}),...data,updatedAt:new Date().toISOString()};localStorage.setItem(STORE,JSON.stringify(all));return all[id(c)]}
-  function saved(c){return read()[id(c)]||{}}
+  function cid(c){return String(c?.id||c?.name||'firma').trim().toLowerCase().replace(/\s+/g,'-')}
+  function saved(c){return read()[cid(c)]||{}}
+  function write(c,data){
+    const all=read();
+    all[cid(c)]={...(all[cid(c)]||{}),...data,updatedAt:new Date().toISOString()};
+    localStorage.setItem(STORE,JSON.stringify(all));
+    return all[cid(c)];
+  }
   function clean(a){return (Array.isArray(a)?a:[]).map(x=>String(x||'').trim()).filter(Boolean)}
   function role(c){const x=ctx();try{return x?.marketRolesFor?.(c)?.[0]||c?.role||c?.type||'KONTRAHENT'}catch(_){return c?.role||c?.type||'KONTRAHENT'}}
   function country(c){const x=ctx();return c?.countryName||x?.countries?.[c?.countryCode]?.name||c?.countryCode||'EUROPA'}
   function datePL(v){const d=v?new Date(v):new Date();return Number.isNaN(d.getTime())?String(v||''):d.toLocaleDateString('pl-PL',{day:'2-digit',month:'2-digit',year:'numeric'})}
-  function sourceShort(v){const s=String(v||'').trim();if(!s)return 'analiza asystenta';if(/chatgpt|asystent/i.test(s))return 'analiza asystenta';return s.length>34?s.slice(0,31)+'…':s}
 
   function defaults(c){
     if(/dokers/i.test(String(c?.name||''))){
@@ -45,17 +55,34 @@
     if(c?.certificate&&!facts.includes(c.certificate))facts.push(c.certificate);
     if(c?.type)facts.push(c.type);
     if(c?.sourceDate)facts.push('dane źródłowe: '+datePL(c.sourceDate));
+
     const offer=[];
     if(c?.priceText)offer.push(c.priceText); else if(c?.price)offer.push(c.price+' €/t');
     if(c?.incoterm)offer.push('Incoterm: '+c.incoterm);
     if(c?.logistics?.fullTruck)offer.push(c.logistics.fullTruck); else if(c?.logistics?.pallet)offer.push(c.logistics.pallet);
     if(c?.payment)offer.push('Płatność: '+c.payment);
+
     const conclusions=['rekord do wykorzystania w kalkulatorze i rozmowie handlowej'];
     if(c?.price||c?.priceText)conclusions.push('porównać warunki z kosztami L&M i docelową marżą');
-    const talk=clean(c?.notes).slice(0,3);
+
+    const talk=clean(c?.notes).slice(0,4);
     if(!talk.length&&c?.nextFollowUp)talk.push(c.nextFollowUp);
     if(!talk.length)talk.push('uzupełnić fakty przed następną rozmową');
     return {facts:clean(facts),offer:clean(offer),conclusions:clean(conclusions),talk:clean(talk),source:c?.sourceLabel||'analiza asystenta'};
+  }
+
+  function defaultImportant(key,arr){
+    if(arr?.length)return arr[0];
+    if(key==='offer')return 'Pozyskać aktualne parametry oferty i warunki zakupu.';
+    if(key==='conclusions')return 'Wybrać najbardziej opłacalny wariant dalszej współpracy.';
+    if(key==='talk')return 'Przygotować najważniejsze argumenty do następnej rozmowy.';
+    return 'Potwierdzić kluczowe fakty o firmie przed dalszym działaniem.';
+  }
+  function defaultNext(key){
+    if(key==='offer')return 'Pozyskać aktualną ofertę FCA/DAP i porównać ją z kosztami oraz docelową marżą L&M.';
+    if(key==='conclusions')return 'Wybrać rekomendowany wariant i przenieść konkretne działanie do karty CELE.';
+    if(key==='talk')return 'Wykorzystać przygotowane fakty podczas następnej rozmowy i zapisać wynik w HISTORII.';
+    return 'Zweryfikować kluczowe dane i uzupełnić brakujące informacje przed następnym kontaktem.';
   }
 
   function model(c){
@@ -63,27 +90,43 @@
     SECTIONS.forEach(k=>{if(Array.isArray(s[k]))d[k]=clean(s[k])});
     d.source=s.source||d.source||'analiza asystenta';
     d.updatedAt=s.updatedAt||c?.updatedAt||c?.sourceDate||new Date().toISOString();
+    d.important=(s.important&&typeof s.important==='object')?s.important:{};
+    d.nextMove=(s.nextMove&&typeof s.nextMove==='object')?s.nextMove:{};
     return d;
   }
 
-  function px(el,x,y,w,h){Object.assign(el.style,{position:'absolute',left:(x/W*100)+'%',top:(y/H*100)+'%',width:(w/W*100)+'%',height:(h/H*100)+'%'});return el}
+  function px(el,x,y,w,h){
+    Object.assign(el.style,{position:'absolute',left:(x/W*100)+'%',top:(y/H*100)+'%',width:(w/W*100)+'%',height:(h/H*100)+'%'});
+    return el;
+  }
+  function font(size){return `clamp(16px,${(size/W*100).toFixed(3)}vw,${size}px)`;}
   function addText(root,text,x,y,w,h,size,opt={}){
     if(text===undefined||text===null||String(text).trim()==='')return null;
-    const e=document.createElement('div');e.textContent=String(text);e.style.cssText='display:flex;align-items:center;overflow:hidden;pointer-events:none;text-shadow:0 1px 4px #000,0 0 6px #000;z-index:24;box-sizing:border-box;';
-    e.style.justifyContent=opt.align==='center'?'center':'flex-start';e.style.textAlign=opt.align||'left';e.style.color=opt.color||'#fff';e.style.fontWeight=opt.weight||'700';e.style.fontSize=`clamp(11px,${size/8.52}vw,${size}px)`;e.style.lineHeight=opt.line||'1.15';e.style.whiteSpace=opt.nowrap?'nowrap':'normal';e.style.textOverflow=opt.nowrap?'ellipsis':'clip';px(e,x,y,w,h);root.append(e);return e;
+    const e=document.createElement('div');
+    e.textContent=String(text);
+    e.style.cssText='display:flex;align-items:center;overflow:hidden;pointer-events:none;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;';
+    e.style.justifyContent=opt.align==='center'?'center':'flex-start';
+    e.style.textAlign=opt.align||'left';
+    e.style.color=opt.color||'#fff';
+    e.style.fontWeight=opt.weight||'800';
+    e.style.fontSize=font(size);
+    e.style.lineHeight=opt.line||'1.15';
+    e.style.whiteSpace=opt.nowrap?'nowrap':'normal';
+    e.style.textOverflow=opt.nowrap?'ellipsis':'clip';
+    px(e,x,y,w,h);root.append(e);return e;
   }
-  function addList(root,items,x,y,w,h,size){
-    const e=document.createElement('div');e.style.cssText='color:#fff;font-weight:650;line-height:1.20;overflow:hidden;pointer-events:none;text-shadow:0 1px 4px #000,0 0 6px #000;z-index:24;box-sizing:border-box;';e.style.fontSize=`clamp(11px,${size/8.52}vw,${size}px)`;px(e,x,y,w,h);
-    clean(items).slice(0,4).forEach(t=>{const r=document.createElement('div');r.textContent='•  '+t;r.style.marginBottom='5px';e.append(r)});root.append(e);return e;
+  function addList(root,items,x,y,w,h,size,max=6){
+    const e=document.createElement('div');
+    e.style.cssText='color:#fff;font-weight:750;line-height:1.24;overflow:hidden;pointer-events:none;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;';
+    e.style.fontSize=font(size);px(e,x,y,w,h);
+    clean(items).slice(0,max).forEach(t=>{const r=document.createElement('div');r.textContent='•  '+t;r.style.marginBottom='7px';e.append(r)});
+    root.append(e);return e;
   }
   function addLong(root,text,x,y,w,h,size,opt={}){
-    const e=document.createElement('div');e.textContent=String(text||'');e.style.cssText='color:#fff;font-weight:650;line-height:1.28;white-space:pre-wrap;overflow:auto;padding-right:6px;text-shadow:0 1px 4px #000,0 0 6px #000;z-index:24;box-sizing:border-box;touch-action:pan-y pinch-zoom;';e.style.fontSize=`clamp(12px,${size/8.52}vw,${size}px)`;if(opt.color)e.style.color=opt.color;px(e,x,y,w,h);root.append(e);return e;
-  }
-  function addDetailPanel(root,key){
-    const st=SECTION_STYLE[key]||SECTION_STYLE.facts;
     const e=document.createElement('div');
-    e.style.cssText=`background:${st.bg};border:3px solid ${st.border};border-radius:18px;box-shadow:0 0 16px ${st.shadow},inset 0 0 26px ${st.shadow};z-index:23;box-sizing:border-box;pointer-events:none;`;
-    px(e,34,655,784,680);root.append(e);return st;
+    e.textContent=String(text||'');
+    e.style.cssText='color:#fff;font-weight:760;line-height:1.32;white-space:pre-wrap;overflow:auto;padding-right:7px;text-shadow:0 2px 5px #000,0 0 7px #000;z-index:24;box-sizing:border-box;touch-action:pan-y pinch-zoom;';
+    e.style.fontSize=font(size);if(opt.color)e.style.color=opt.color;px(e,x,y,w,h);root.append(e);return e;
   }
   function hot(root,x,y,w,h,label,fn){
     const xctx=ctx();
@@ -94,62 +137,115 @@
     const s=document.createElement('section');s.className='screen r128-notes-live';s.style.position='relative';
     const img=document.createElement('img');img.className='master';img.src=imgSrc;img.alt=alt;img.style.width='100%';img.style.display='block';s.append(img);return s;
   }
-  function mount(s){const x=ctx();if(x?.app)x.app.replaceChildren(s);else document.querySelector('#app')?.replaceChildren(s);window.scrollTo({top:0,left:0,behavior:'auto'});}
-  async function syncStay(c,key){const x=ctx();try{const r=x?.sync?.();if(r&&typeof r.then==='function')await r}catch(_){ }finally{setTimeout(()=>key?openDetail(c,key):open(c),100)}}
-  function goals(){const x=ctx();if(x?.r115NewTile)x.r115NewTile('CELE ASYSTENTA');else x?.toast?.('CELE ASYSTENTA — następny osobny krok MASTER')}
+  function mount(s){
+    const x=ctx();if(x?.app)x.app.replaceChildren(s);else document.querySelector('#app')?.replaceChildren(s);
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+  }
+  function currentCompany(c){const x=ctx();return c||x?.getCompanyById?.(x?.state?.selectedCompany)||{};}
+  function goals(){const x=ctx();if(x?.r115NewTile)x.r115NewTile('CELE ASYSTENTA');else x?.toast?.('CELE ASYSTENTA — następny osobny krok MASTER');}
+  async function syncStay(c,key,view){
+    const x=ctx();try{const r=x?.sync?.();if(r&&typeof r.then==='function')await r}catch(_){ }
+    finally{setTimeout(()=>{if(view==='conclusion')openConclusion(c,key);else if(view==='detail')openDetail(c,key);else open(c)},100)}
+  }
+
+  function companyHeader(s,c){
+    addText(s,c?.name||'—',190,313,472,70,34,{align:'center',weight:'950',nowrap:true});
+    addText(s,country(c).toUpperCase(),70,397,180,60,19,{align:'center',weight:'850',nowrap:true});
+    addText(s,role(c).toUpperCase(),285,397,282,60,19,{align:'center',weight:'850',nowrap:true});
+    addText(s,'PRIORYTET '+String(c?.priority||'—').toUpperCase(),563,397,260,60,18,{align:'center',weight:'900',color:'#ffd43b',nowrap:true});
+  }
 
   function dialog(c,currentKey,mode){
-    const m=model(c);const d=document.createElement('dialog');d.style.cssText='width:min(94vw,700px);max-height:88vh;overflow:auto;border:2px solid #d7a514;border-radius:22px;background:#03150f;color:#fff;padding:18px;box-shadow:0 0 28px #d7a51488;z-index:99999';
+    const m=model(c),d=document.createElement('dialog');
+    d.style.cssText='width:min(94vw,700px);max-height:88vh;overflow:auto;border:2px solid #d7a514;border-radius:22px;background:#03150f;color:#fff;padding:18px;box-shadow:0 0 28px #d7a51488;z-index:99999';
     d.innerHTML='<h2 style="margin:0 0 14px;color:#ffd229;text-align:center;font-size:30px">'+(mode==='add'?'DODAJ NOTATKĘ':'EDYTUJ NOTATKI')+'</h2>';
-    const sel=document.createElement('select');sel.style.cssText='width:100%;padding:14px;border:1px solid #9b7814;border-radius:10px;background:#06110d;color:#fff;font-size:19px;margin-bottom:12px';SECTIONS.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=LABELS[k];o.selected=k===currentKey;sel.append(o)});d.append(sel);
-    const ta=document.createElement('textarea');ta.style.cssText='width:100%;min-height:260px;box-sizing:border-box;padding:14px;border:1px solid #9b7814;border-radius:10px;background:#06110d;color:#fff;font-size:20px;line-height:1.4';const fill=()=>ta.value=mode==='add'?'':(m[sel.value]||[]).join('\n');fill();sel.onchange=fill;d.append(ta);
+    const sel=document.createElement('select');sel.style.cssText='width:100%;padding:14px;border:1px solid #9b7814;border-radius:10px;background:#06110d;color:#fff;font-size:19px;margin-bottom:12px';
+    SECTIONS.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=LABELS[k];o.selected=k===currentKey;sel.append(o)});d.append(sel);
+    const ta=document.createElement('textarea');ta.style.cssText='width:100%;min-height:260px;box-sizing:border-box;padding:14px;border:1px solid #9b7814;border-radius:10px;background:#06110d;color:#fff;font-size:20px;line-height:1.4';
+    const fill=()=>ta.value=mode==='add'?'':(m[sel.value]||[]).join('\n');fill();sel.onchange=fill;d.append(ta);
     const bar=document.createElement('div');bar.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px';
     const save=document.createElement('button');save.textContent='ZAPISZ';save.style.cssText='padding:14px;border:2px solid #5dff42;border-radius:12px;background:#073a11;color:#8dff76;font-weight:900;font-size:19px';
     const cancel=document.createElement('button');cancel.textContent='ANULUJ';cancel.style.cssText='padding:14px;border:1px solid #777;border-radius:12px;background:#252525;color:#fff;font-weight:800;font-size:19px';
-    save.onclick=()=>{const k=sel.value,now=model(c),lines=String(ta.value||'').split(/\n+/).map(v=>v.trim()).filter(Boolean);now[k]=mode==='add'?clean((now[k]||[]).concat(lines)):lines;const patch={};SECTIONS.forEach(z=>patch[z]=now[z]||[]);write(c,patch);d.close();d.remove();currentKey?openDetail(c,currentKey):open(c);ctx()?.toast?.('NOTATKI O FIRMIE — zapisano')};
+    save.onclick=()=>{
+      const k=sel.value,now=model(c),lines=String(ta.value||'').split(/\n+/).map(v=>v.trim()).filter(Boolean);
+      now[k]=mode==='add'?clean((now[k]||[]).concat(lines)):lines;
+      const patch={};SECTIONS.forEach(z=>patch[z]=now[z]||[]);patch.important=now.important||{};patch.nextMove=now.nextMove||{};
+      write(c,patch);d.close();d.remove();currentKey?openDetail(c,currentKey):open(c);ctx()?.toast?.('NOTATKI O FIRMIE — zapisano');
+    };
+    cancel.onclick=()=>{d.close();d.remove()};bar.append(save,cancel);d.append(bar);document.body.append(d);d.showModal();
+  }
+
+  function conclusionDialog(c,key){
+    const m=model(c),d=document.createElement('dialog');
+    d.style.cssText='width:min(94vw,700px);max-height:88vh;overflow:auto;border:2px solid #ff3333;border-radius:22px;background:#190505;color:#fff;padding:18px;box-shadow:0 0 28px #ff333388;z-index:99999';
+    d.innerHTML='<h2 style="margin:0 0 14px;color:#ff4b4b;text-align:center;font-size:28px">NAJWAŻNIEJSZY WNIOSEK HANDLOWY</h2>';
+    const lab1=document.createElement('div');lab1.textContent='WNIOSEK';lab1.style.cssText='font-weight:900;color:#ff6666;margin:8px 0';d.append(lab1);
+    const a=document.createElement('textarea');a.style.cssText='width:100%;min-height:170px;box-sizing:border-box;padding:14px;border:1px solid #ff4444;border-radius:10px;background:#170707;color:#fff;font-size:20px;line-height:1.4';a.value=m.important?.[key]||defaultImportant(key,m[key]);d.append(a);
+    const lab2=document.createElement('div');lab2.textContent='NASTĘPNY RUCH';lab2.style.cssText='font-weight:900;color:#ff6666;margin:16px 0 8px';d.append(lab2);
+    const b=document.createElement('textarea');b.style.cssText='width:100%;min-height:170px;box-sizing:border-box;padding:14px;border:1px solid #ff4444;border-radius:10px;background:#170707;color:#fff;font-size:20px;line-height:1.4';b.value=m.nextMove?.[key]||defaultNext(key);d.append(b);
+    const bar=document.createElement('div');bar.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px';
+    const save=document.createElement('button');save.textContent='ZAPISZ';save.style.cssText='padding:14px;border:2px solid #5dff42;border-radius:12px;background:#073a11;color:#8dff76;font-weight:900;font-size:19px';
+    const cancel=document.createElement('button');cancel.textContent='ANULUJ';cancel.style.cssText='padding:14px;border:1px solid #777;border-radius:12px;background:#252525;color:#fff;font-weight:800;font-size:19px';
+    save.onclick=()=>{const imp={...(m.important||{}),[key]:a.value.trim()};const nxt={...(m.nextMove||{}),[key]:b.value.trim()};write(c,{important:imp,nextMove:nxt});d.close();d.remove();openConclusion(c,key);ctx()?.toast?.('NAJWAŻNIEJSZY WNIOSEK — zapisano')};
     cancel.onclick=()=>{d.close();d.remove()};bar.append(save,cancel);d.append(bar);document.body.append(d);d.showModal();
   }
 
   function open(c){
-    const x=ctx();if(!x){return;}
-    c=c||x.getCompanyById?.(x.state?.selectedCompany)||{};const m=model(c),s=screen(MAIN_IMG,'Notatki o firmie — MASTER');
-    addText(s,c.name||'—',205,327,450,62,31,{align:'center',weight:'900',nowrap:true});
-    addText(s,country(c).toUpperCase(),86,415,160,48,17,{align:'center',weight:'750',nowrap:true});
-    addText(s,role(c).toUpperCase(),315,415,220,48,17,{align:'center',weight:'750',nowrap:true});
-    addText(s,'PRIORYTET '+String(c.priority||'—').toUpperCase(),590,415,210,48,16,{align:'center',weight:'850',color:'#ffd43b',nowrap:true});
-    addList(s,m.facts,245,550,500,168,18);addList(s,m.offer,245,802,500,168,18);addList(s,m.conclusions,245,1045,500,168,18);addList(s,m.talk,245,1280,500,156,18);
-    hot(s,0,0,145,150,'Wstecz do karty firmy',()=>x.render?.());hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c));
-    hot(s,25,480,802,238,LABELS.facts,()=>openDetail(c,'facts'));hot(s,25,725,802,238,LABELS.offer,()=>openDetail(c,'offer'));hot(s,25,970,802,238,LABELS.conclusions,()=>openDetail(c,'conclusions'));hot(s,25,1210,802,230,LABELS.talk,()=>openDetail(c,'talk'));
-    hot(s,25,1480,235,125,'Edytuj',()=>dialog(c,'facts','edit'));hot(s,275,1480,285,125,'Dodaj notatkę',()=>dialog(c,'facts','add'));hot(s,575,1480,250,125,'Przejdź do celów',goals);hot(s,25,1640,800,145,'Wróć do karty',()=>x.render?.());
+    const x=ctx();if(!x)return;
+    c=currentCompany(c);const m=model(c),s=screen(IMG.main,'Notatki o firmie — CLEAN PNG MASTER');
+    companyHeader(s,c);
+    addList(s,m.facts,248,553,500,130,24,4);
+    addList(s,m.offer,248,800,500,130,24,4);
+    addList(s,m.conclusions,248,1045,500,130,24,4);
+    addList(s,m.talk,248,1282,500,120,24,4);
+
+    hot(s,0,0,145,150,'Wstecz do karty firmy',()=>x.render?.());
+    hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,null,'main'));
+    hot(s,25,470,802,232,LABELS.facts,()=>openDetail(c,'facts'));
+    hot(s,25,715,802,232,LABELS.offer,()=>openDetail(c,'offer'));
+    hot(s,25,960,802,232,LABELS.conclusions,()=>openDetail(c,'conclusions'));
+    hot(s,25,1205,802,220,LABELS.talk,()=>openDetail(c,'talk'));
+    hot(s,25,1440,245,120,'Edytuj',()=>dialog(c,'facts','edit'));
+    hot(s,280,1440,275,120,'Dodaj notatkę',()=>dialog(c,'facts','add'));
+    hot(s,565,1440,265,120,'Przejdź do celów',goals);
+    hot(s,25,1580,800,150,'Wróć do karty',()=>x.render?.());
     mount(s);
   }
 
-  function sectionConclusion(key,arr){if(arr?.length)return arr[0];return key==='offer'?'Parametry oferty wymagają uzupełnienia.':key==='conclusions'?'Wnioski handlowe są gotowe do rozwijania.':key==='talk'?'Fakty do rozmowy są gotowe.':'Najważniejsze fakty o firmie są zapisane w CRM.'}
   function openDetail(c,key){
-    const m=model(c),s=screen(DETAIL_IMG,'Szczegół notatki o firmie — MASTER'),arr=m[key]||[],st=SECTION_STYLE[key]||SECTION_STYLE.facts;
-    addText(s,c.name||'—',205,305,450,60,30,{align:'center',weight:'900',nowrap:true});
-    addText(s,country(c).toUpperCase(),86,388,160,46,17,{align:'center',weight:'750',nowrap:true});
-    addText(s,role(c).toUpperCase(),315,388,220,46,17,{align:'center',weight:'750',nowrap:true});
-    addText(s,'PRIORYTET '+String(c.priority||'—').toUpperCase(),590,388,210,46,16,{align:'center',weight:'850',color:'#ffd43b',nowrap:true});
+    const x=ctx();if(!x)return;
+    c=currentCompany(c);if(!SECTIONS.includes(key))key='facts';
+    const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
+    companyHeader(s,c);
+    addList(s,arr,180,580,590,525,31,10);
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),180,1260,585,105,28);
 
-    /* Górna tabela: większe wartości i chirurgiczna korekta ŹRÓDŁA. */
-    addText(s,LABELS[key],112,536,245,66,19,{weight:'900',color:st.color});
-    addText(s,sourceShort(m.source),118,625,225,72,17,{weight:'800',line:'1.06'});
-    addText(s,datePL(m.updatedAt),510,536,245,66,18,{weight:'900'});
-    addText(s,(c.name||'FIRMA')+' — '+LABELS[key].toLowerCase(),510,625,250,84,17,{weight:'800',line:'1.08'});
-
-    /* Krytyczna poprawka: duże pole szczegółów ma kolor i opis IDENTYCZNY z wybraną sekcją. */
-    addDetailPanel(s,key);
-    addText(s,LABELS[key],82,674,690,72,27,{weight:'950',color:st.color});
-    addText(s,(c.name||'FIRMA')+' — '+LABELS[key],72,752,710,58,21,{weight:'850'});
-    const body=arr.length?arr.map(v=>'• '+v).join('\n'):'Brak zapisanych danych w tej sekcji.';
-    addLong(s,body,72,815,708,485,21);
-
-    /* Najważniejszy wniosek: większy tekst i większy odstęp od stałego nagłówka. */
-    addLong(s,sectionConclusion(key,arr),180,1448,565,105,20);
-
-    const x=ctx();hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key));hot(s,25,1580,235,115,'Edytuj wpis',()=>dialog(c,key,'edit'));hot(s,275,1580,285,115,'Dodaj kolejny',()=>dialog(c,key,'add'));hot(s,575,1580,250,115,'Przejdź do celów',goals);hot(s,25,1720,800,100,'Wróć do notatek',()=>open(c));mount(s);
+    hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
+    hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'detail'));
+    hot(s,30,1190,790,225,'Najważniejszy Wniosek Handlowy',()=>openConclusion(c,key));
+    hot(s,25,1430,255,125,'Edytuj wpis',()=>dialog(c,key,'edit'));
+    hot(s,285,1430,270,125,'Dodaj kolejny',()=>dialog(c,key,'add'));
+    hot(s,565,1430,265,125,'Przejdź do celów',goals);
+    hot(s,25,1575,800,150,'Wróć do notatek',()=>open(c));
+    mount(s);
   }
 
-  window.R128_NOTES={open,openDetail};
+  function openConclusion(c,key){
+    const x=ctx();if(!x)return;
+    c=currentCompany(c);if(!SECTIONS.includes(key))key='facts';
+    const m=model(c),arr=m[key]||[],s=screen(IMG.conclusion,'Najważniejszy Wniosek Handlowy — CLEAN PNG MASTER');
+    companyHeader(s,c);
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,570,290,32);
+    addLong(s,m.nextMove?.[key]||defaultNext(key),190,1135,570,220,30);
+
+    hot(s,0,0,145,150,'Wstecz do szczegółu',()=>openDetail(c,key));
+    hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'conclusion'));
+    hot(s,25,1440,250,125,'Edytuj wniosek',()=>conclusionDialog(c,key));
+    hot(s,285,1440,270,125,'Dodaj kolejny',()=>dialog(c,key,'add'));
+    hot(s,565,1440,265,125,'Przejdź do celów',goals);
+    hot(s,25,1580,800,150,'Wróć do szczegółu',()=>openDetail(c,key));
+    mount(s);
+  }
+
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4-clean-png-engine'};
 })();
