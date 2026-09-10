@@ -1,16 +1,15 @@
-/* R128 v4.5G — NOTATKI O FIRMIE: ANPOL RESTORE + THINNER BODY TEXT
-   Baza: R128 v4.5F / zamrożony R127.
+/* R128 v4.5H — NOTATKI O FIRMIE: THUMB SCROLL + AUTO CENTER ENGINE
+   Baza: R128 v4.5G / zamrożony R127.
    Grafika = cały wygląd. Kod = dane LIVE + niewidzialne hotspoty.
-   W tym kroku: ANPOL przywrócony do wcześniejszej geometrii, białe opisy odchudzone z 900 do 800.
-   Położenie białych opisów, linia POLSKA/DOSTAWCA/PRIORYTET B, PNG, tytuły kafli, ikony,
-   hotspoty, routing i karty szczegółowe pozostają bez zmian.
+   W tym kroku: cztery białe pola treści głównej karty otrzymują przewijanie kciukiem i auto-centrowanie.
+   ANPOL, linia POLSKA/DOSTAWCA/PRIORYTET B, PNG, tytuły kafli, ikony, routing i karty szczegółowe bez zmian.
 */
-importScripts('./sw-r127-language-base.js?v=R128-v4-5g-anpol-restore-thinner-body');
+importScripts('./sw-r127-language-base.js?v=R128-v4-5h-thumb-scroll-auto-center');
 
 if(Array.isArray(ASSETS)){
   [
     './r128-notatki-live.js',
-    './r128-notatki-main-v45b.js?v=R128v4-5g-anpol-restore-thinner-body',
+    './r128-notatki-main-v45b.js?v=R128v4-5h-thumb-scroll-auto-center',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
@@ -20,31 +19,33 @@ if(Array.isArray(ASSETS)){
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
 
-const r128v45gBasePatch=r48PatchIndexHtml;
+const r128v45hBasePatch=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
-  let out=r128v45gBasePatch(text);
+  let out=r128v45hBasePatch(text);
 
   /* Zachowujemy sprawdzony hotfix separatora R127. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
   /* Metadane wydania. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replaceAll('1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replaceAll('1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replaceAll('1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replaceAll('1.3.0-master-r128v4-5f-company-notes-main-card-final-surgical-baseline','1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body');
-  out=out.replaceAll('R128 v4.5F NOTATKI O FIRMIE — FINAL SURGICAL BASELINE','R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY');
-  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '11:22';");
-  out=out.replace(/sw\.js\?v=R128v4-5[a-z0-9-]*/g,'sw.js?v=R128v4-5g-company-notes-anpol-restore-thinner-body-1122');
-  out=out.replace(/r84-backup-prune\.js\?v=R128v4-5[a-z0-9-]*/g,'r84-backup-prune.js?v=R128v4-5g-1122');
+  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5f-company-notes-main-card-final-surgical-baseline','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5F NOTATKI O FIRMIE — FINAL SURGICAL BASELINE','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replaceAll('1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body','1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center');
+  out=out.replaceAll('R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY','R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER');
+  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '11:51';");
+  out=out.replace(/sw\.js\?v=R128v4-5[a-z0-9-]*/g,'sw.js?v=R128v4-5h-company-notes-thumb-scroll-auto-center-1151');
+  out=out.replace(/r84-backup-prune\.js\?v=R128v4-5[a-z0-9-]*/g,'r84-backup-prune.js?v=R128v4-5h-1151');
 
   /* Minimalna ekspozycja istniejących helperów do zewnętrznego modułu. */
   if(!out.includes('window.R128_CTX=')){
@@ -59,17 +60,17 @@ r48PatchIndexHtml=function(text){
     "onClick:()=>((window.R128_NOTES&&typeof window.R128_NOTES.open==='function')?window.R128_NOTES.open(c):r115NewTile('NOTATKI O FIRMIE'))"
   );
 
-  out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-5[a-g][^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-5g"></script>');
-  if(!out.includes('r128-notatki-live.js?v=R128v4-5g')){
-    out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[0-9a-z-]+"><\/script>\n<\/body>/,'<script src="./r128-notatki-live.js?v=R128v4-5g"></script>\n</body>');
-    if(!out.includes('r128-notatki-live.js?v=R128v4-5g')){
-      out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-5g"></script>\n</body>');
+  out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-5[a-h][^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-5h"></script>');
+  if(!out.includes('r128-notatki-live.js?v=R128v4-5h')){
+    out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[0-9a-z-]+"><\/script>\n<\/body>/,'<script src="./r128-notatki-live.js?v=R128v4-5h"></script>\n</body>');
+    if(!out.includes('r128-notatki-live.js?v=R128v4-5h')){
+      out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-5h"></script>\n</body>');
     }
   }
 
-  out=out.replace(/<script src="\.\/r128-notatki-main-v45b\.js\?v=R128v4-5[b-g][^"]*"><\/script>/g,'<script src="./r128-notatki-main-v45b.js?v=R128v4-5g-anpol-restore-thinner-body"></script>');
-  if(!out.includes('r128-notatki-main-v45b.js?v=R128v4-5g-anpol-restore-thinner-body')){
-    out=out.replace('</body>','<script src="./r128-notatki-main-v45b.js?v=R128v4-5g-anpol-restore-thinner-body"></script>\n</body>');
+  out=out.replace(/<script src="\.\/r128-notatki-main-v45b\.js\?v=R128v4-5[b-h][^"]*"><\/script>/g,'<script src="./r128-notatki-main-v45b.js?v=R128v4-5h-thumb-scroll-auto-center"></script>');
+  if(!out.includes('r128-notatki-main-v45b.js?v=R128v4-5h-thumb-scroll-auto-center')){
+    out=out.replace('</body>','<script src="./r128-notatki-main-v45b.js?v=R128v4-5h-thumb-scroll-auto-center"></script>\n</body>');
   }
   return out;
 };
