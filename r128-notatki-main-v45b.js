@@ -1,7 +1,13 @@
-/* R128 v4.5C — NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT
-   Tylko ekran główny NOTATKI O FIRMIE.
-   Bez nowych ramek, masek i nakładek. Nie rusza PNG, danych, hotspotów ani kart szczegółowych.
-   Zakres: większa nazwa firmy, idealne wycentrowanie linii meta oraz podniesienie białych opisów w 4 kaflach.
+/* R128 v4.5D — NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT
+   TYLKO ekran główny NOTATKI O FIRMIE.
+   Zasada bezwzględna: grafika pozostaje nietknięta; kod ustawia wyłącznie istniejące teksty LIVE.
+   ZERO masek, nakładek, nowych ramek, skracania treści, wielokropków i kasowania wierszy.
+
+   Zakres zatwierdzony 10.09.2026:
+   1) ANPOL — większy, mocniejszy, idealnie centralny w istniejącym polu.
+   2) POLSKA / DOSTAWCA / PRIORYTET B — lekko obniżone i idealnie wycentrowane w swojej ramce.
+   3) Białe opisy kafli 1–4 — wszystkie istniejące pozycje zachowane 1:1 wraz z punktorami;
+      wspólna oś startu tekstu przy dolnej części kółek 1–4; bez ukrywania któregokolwiek wpisu.
 */
 (function(){
   'use strict';
@@ -9,23 +15,23 @@
   const MAIN_BG='file_00000000c0ac8210a2eab26769101d1e.png';
   const W=852,H=1846;
 
-  /* Punkt 1: nazwa firmy — lekko większa i szersza, nadal idealnie centralna. */
-  const NAME={x:170,y:309,w:512,h:78,size:39};
+  /* ANPOL: powiększenie bez zmiany grafiki tła. */
+  const NAME={x:154,y:304,w:544,h:88,size:56};
 
-  /* Punkt 2: POLSKA / DOSTAWCA / PRIORYTET — minimalnie niżej i centralnie w pionie ramki. */
+  /* Linia metadanych: całość odrobinę niżej, każda wartość w środku własnej części ramki. */
   const META=[
-    {x:104,y:407,w:156,h:50,size:22},
-    {x:318,y:407,w:214,h:50,size:22},
-    {x:574,y:407,w:242,h:50,size:20}
+    {x:104,y:413,w:156,h:48,size:22},
+    {x:318,y:413,w:214,h:48,size:22},
+    {x:574,y:413,w:242,h:48,size:20}
   ];
 
-  /* Punkt 3: białe opisy — jeden rytm we wszystkich 4 kaflach.
-     Początek tekstu podniesiony do wysokości końca kółka numeru danego kafla. */
+  /* Białe opisy: wspólny rytm i czytelność. ŻADNE max/line-clamp/ellipsis.
+     Każdy blok ma pełną bezpieczną wysokość wewnątrz swojego istniejącego kafla. */
   const CFG=[
-    {x:250,y:548,w:470,h:126,size:27,max:2,gap:6},
-    {x:250,y:793,w:470,h:126,size:27,max:2,gap:6},
-    {x:250,y:1038,w:470,h:132,size:25,max:2,gap:6},
-    {x:250,y:1283,w:470,h:116,size:27,max:2,gap:6}
+    {x:250,y:548,w:474,h:150,size:27,gap:7},
+    {x:250,y:793,w:474,h:132,size:27,gap:7},
+    {x:250,y:1038,w:474,h:156,size:25,gap:8},
+    {x:250,y:1283,w:474,h:124,size:27,gap:7}
   ];
 
   function pct(v,base){return (v/base*100)+'%'}
@@ -61,12 +67,14 @@
       height:pct(NAME.h,H),
       fontSize:fsize(NAME.size),
       lineHeight:'1',
+      fontWeight:'950',
       display:'flex',
       alignItems:'center',
       justifyContent:'center',
       textAlign:'center',
       whiteSpace:'nowrap',
-      overflow:'hidden'
+      textOverflow:'clip',
+      overflow:'visible'
     });
 
     header.slice(1,4).forEach(function(el,i){
@@ -83,7 +91,8 @@
         justifyContent:'center',
         textAlign:'center',
         whiteSpace:'nowrap',
-        overflow:'hidden'
+        textOverflow:'clip',
+        overflow:'visible'
       });
     });
   }
@@ -91,11 +100,14 @@
   function findLists(s){
     return Array.from(s.children).filter(function(el){
       if(el.tagName!=='DIV')return false;
-      return Array.from(el.children).some(function(ch){return ch.tagName==='DIV'&&/^•\s*/.test((ch.textContent||'').trim())});
+      return Array.from(el.children).some(function(ch){
+        return ch.tagName==='DIV' && /^•\s*/.test((ch.textContent||'').trim());
+      });
     }).slice(0,4);
   }
 
-  function cleanList(el,cfg){
+  function alignList(el,cfg){
+    /* Ruszamy tylko geometrię i typografię kontenera. Treści nie dotykamy. */
     Object.assign(el.style,{
       left:pct(cfg.x,W),
       top:pct(cfg.y,H),
@@ -103,43 +115,45 @@
       height:pct(cfg.h,H),
       fontSize:fsize(cfg.size),
       lineHeight:'1.14',
-      fontWeight:'760',
+      fontWeight:'800',
       letterSpacing:'0',
-      textShadow:'0 1px 2px rgba(0,0,0,.95)',
+      textShadow:'0 2px 5px #000,0 0 7px #000',
       overflow:'hidden',
       color:'#fff',
-      boxSizing:'border-box'
+      boxSizing:'border-box',
+      overflowWrap:'break-word',
+      wordBreak:'normal'
     });
 
-    const rows=Array.from(el.children);
-    rows.forEach(function(r,i){
-      if(i>=cfg.max){r.style.display='none';return;}
-      r.textContent=String(r.textContent||'').replace(/^•\s*/, '').trim();
+    /* Każdy istniejący wiersz zostaje widoczny i zachowuje oryginalny punktor „•”. */
+    Array.from(el.children).forEach(function(r){
       Object.assign(r.style,{
-        display:'-webkit-box',
-        WebkitBoxOrient:'vertical',
-        WebkitLineClamp:'2',
-        overflow:'hidden',
+        display:'block',
         margin:'0 0 '+cfg.gap+'px 0',
         padding:'0',
         lineHeight:'1.14',
-        fontWeight:'760'
+        fontWeight:'800',
+        whiteSpace:'normal',
+        overflow:'visible',
+        textOverflow:'clip',
+        WebkitLineClamp:'unset',
+        WebkitBoxOrient:'initial'
       });
     });
   }
 
   function apply(){
     const s=document.querySelector('.r128-notes-live');
-    if(!s||!isMainScreen(s)||s.dataset.v45cMainAlign==='1')return;
+    if(!s||!isMainScreen(s)||s.dataset.v45dMainAlign==='1')return;
 
     adjustHeader(s);
 
     const lists=findLists(s);
     if(lists.length!==4)return;
-    lists.forEach(function(el,i){cleanList(el,CFG[i])});
+    lists.forEach(function(el,i){alignList(el,CFG[i])});
 
-    s.dataset.v45cMainAlign='1';
-    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5C-main-card-surgical-alignment';
+    s.dataset.v45dMainAlign='1';
+    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5D-main-card-final-surgical-alignment';
   }
 
   function schedule(){requestAnimationFrame(function(){requestAnimationFrame(apply)})}
