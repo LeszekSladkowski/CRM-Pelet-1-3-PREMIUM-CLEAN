@@ -1,18 +1,21 @@
 {
-  "version": "1.3.0-master-r129v1-0b-cele-asystenta-surgical-1to1",
-  "release": "R129 v1.0B CELE ASYSTENTA — SURGICAL 1:1 LIVE",
+  "version": "1.3.0-master-r130v1-0a-actions-status-full-live",
+  "release": "R130 v1.0A AKCJE I STATUS — FULL LIVE TEST",
   "buildDate": "10.09.2026",
-  "buildTime": "15:46",
-  "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R128 v4.6E FAKTY DO ROZMOWY — zachowane bez zmian.",
-  "status": "MASTER BEZWZGLĘDNY / BEZAPELACYJNY / FINAL — KARTA CELE ASYSTENTA ZAMROŻONA",
+  "buildTime": "18:39",
+  "base": "R129 v1.0B CELE ASYSTENTA — FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / wcześniejsze MASTER-y bez zmian.",
+  "status": "TEST LIVE — GRAFIKA AKCJE I STATUS MASTER ZAMROŻONA; SILNIK FUNKCJONALNY DO TESTU UŻYTKOWNIKA",
   "notes": [
-    "Karta CELE ASYSTENTA została zatwierdzona przez użytkownika jako FINAL MASTER.",
-    "Usunięto zbędny napis: konkretne zadania, priorytety i plan działania.",
-    "Zachowano bez zmian zamrożony raster MASTER 852 x 1846 i całą jego geometrię 1:1.",
-    "Dane firmy, LISTA CELÓW, CEL PRIORYTETOWY i NASTĘPNY KROK pozostają warstwą LIVE.",
-    "Aktywne i zamrożone pozostają: POWRÓT, SYNCHRONIZUJ, EDYTUJ CEL, DODAJ CEL, DO STATUSU CRM oraz WRÓĆ DO SZCZEGÓŁU.",
-    "Lista celów zachowuje działające przewijanie pionowe oraz zapis osobny dla każdej firmy.",
-    "Bez nowego jednoznacznego polecenia użytkownika nie wolno zmieniać grafiki, geometrii, warstw LIVE, hotspotów ani logiki tej karty.",
-    "Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER i wszystkie wcześniejsze MASTER-y pozostają nietknięte."
+    "Uruchomiono przycisk nr 7 AKCJE I STATUS z karty firmy.",
+    "Użyto wyłącznie zatwierdzonego czystego rastra MASTER 852 x 1846: file_00000000d4dc820e99d86989f5522858.png.",
+    "Raster MASTER nie został zmieniony; dane i przyciski działają jako warstwa LIVE.",
+    "AKTUALNY STATUS jest zsynchronizowany z dotychczasowym magazynem statusów crm13_company_statuses.",
+    "Dodano trwały NASTĘPNY KONTAKT z edycją daty, formy kontaktu i osoby lub działu.",
+    "HISTORIA STATUSÓW oraz pięć przycisków szybkiej zmiany statusu są aktywne.",
+    "Alerty są wyliczane z terminów planowanych akcji; przycisk WYKONAJ zamyka zadanie.",
+    "PLANOWANE AKCJE są zapisywane osobno dla każdej firmy i przy pierwszym uruchomieniu pobierają cele z CELE ASYSTENTA.",
+    "Aktywne są: dodawanie, edycja, usuwanie, wykonanie, zmiana terminu, menu oraz filtr Pokaż tylko otwarte.",
+    "Aktywne są przejścia do CEN I OFERTY, NOTATEK, POWRÓT oraz SYNCHRONIZUJ.",
+    "Pozostałe zamrożone karty R128 i R129 pozostają nietknięte."
   ]
 }
