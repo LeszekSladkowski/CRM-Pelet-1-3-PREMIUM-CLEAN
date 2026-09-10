@@ -1,13 +1,14 @@
-/* R128 v4.5E — NOTATKI O FIRMIE — MAIN CARD TRUE 1:1 ALIGNMENT
+/* R128 v4.5F — NOTATKI O FIRMIE — FINAL SURGICAL BASELINE ALIGNMENT
    TYLKO ekran główny NOTATKI O FIRMIE.
    Grafika CLEAN PNG pozostaje nietknięta. Kod ustawia wyłącznie istniejące dane LIVE.
    ZERO masek, nakładek, nowych ramek, skrótów, wielokropków i ukrywania wierszy.
 
    Zakres 10.09.2026:
-   1) ANPOL — wyraźnie większy, mocniejszy i centralny w istniejącym polu.
-   2) POLSKA / DOSTAWCA / PRIORYTET B — zachowana wspólna, centralna oś w istniejącej ramce.
-   3) Białe opisy kafli 1–4 — początek każdego bloku ustawiony względem końca kółka numeru,
-      pełna treść i wspólny rytm typografii; bez samoczynnego przypadkowego kurczenia między kaflami.
+   1) ANPOL pozostaje bez zmian — użytkownik zaakceptował jego położenie i wielkość.
+   2) POLSKA / DOSTAWCA / PRIORYTET B pozostają na wspólnej osi w swojej ramce.
+   3) Białe opisy kafli 1–4 mają identyczny rytm: jedna wspólna oś X, jedna typografia,
+      a pierwszy biały wiersz każdego kafla jest opuszczony do poziomu końca kółka z numerem 1–4.
+   4) Pełna treść zostaje zachowana; poprawka nie dotyka PNG, tytułów kafli, ikon, hotspotów ani routingu.
 */
 (function(){
   'use strict';
@@ -15,23 +16,25 @@
   const MAIN_BG='file_00000000c0ac8210a2eab26769101d1e.png';
   const W=852,H=1846;
 
-  /* ANPOL — większy i optycznie szerszy, bez ruszania ramki. */
+  /* ANPOL — ZAMROŻONE w zaakceptowanej pozycji. */
   const NAME={x:146,y:280,w:560,h:92,size:66,scaleX:1.08};
 
-  /* Jedna wspólna oś metadanych. */
+  /* Linia metadanych — wspólna oś w istniejącej ramce. */
   const META=[
     {x:104,y:413,w:156,h:48,size:22},
     {x:318,y:413,w:214,h:48,size:22},
     {x:574,y:413,w:242,h:48,size:20}
   ];
 
-  /* Punkty bazowe odpowiadają geometrii czystej karty PNG.
-     Każdy biały blok zaczyna się na osi końca kółka 1–4. */
+  /* FINALNA SIATKA BIAŁYCH OPISÓW.
+     X jest identyczne w każdym kaflu. Y zostało opuszczone o 20 px względem v4.5E,
+     tak aby biały opis nie wchodził w kolorowy tytuł i zaczynał się przy dolnej osi kółka numeru.
+     Typografia jest wspólna dla wszystkich czterech kafli. */
   const CFG=[
-    {x:250,y:540,w:474,h:162,size:31,gap:5,line:'1.08'},
-    {x:250,y:786,w:474,h:150,size:31,gap:5,line:'1.08'},
-    {x:250,y:1030,w:474,h:162,size:29,gap:5,line:'1.08'},
-    {x:250,y:1282,w:474,h:126,size:31,gap:5,line:'1.08'}
+    {x:250,y:560,w:474,h:162,size:31,gap:5,line:'1.08'},
+    {x:250,y:806,w:474,h:150,size:31,gap:5,line:'1.08'},
+    {x:250,y:1050,w:474,h:162,size:31,gap:5,line:'1.08'},
+    {x:250,y:1302,w:474,h:126,size:31,gap:5,line:'1.08'}
   ];
 
   function pct(v,base){return (v/base*100)+'%'}
@@ -116,14 +119,16 @@
       height:pct(cfg.h,H),
       fontSize:fsize(cfg.size),
       lineHeight:cfg.line,
-      fontWeight:'850',
+      fontWeight:'900',
       letterSpacing:'0',
       textShadow:'0 2px 5px #000,0 0 7px #000',
       overflow:'hidden',
       color:'#fff',
       boxSizing:'border-box',
       overflowWrap:'break-word',
-      wordBreak:'normal'
+      wordBreak:'normal',
+      padding:'0',
+      margin:'0'
     });
 
     Array.from(el.children).forEach(function(r){
@@ -133,7 +138,7 @@
         padding:'0',
         fontSize:'inherit',
         lineHeight:cfg.line,
-        fontWeight:'850',
+        fontWeight:'900',
         whiteSpace:'normal',
         overflow:'visible',
         textOverflow:'clip',
@@ -152,14 +157,16 @@
     if(lists.length!==4)return;
     lists.forEach(function(el,i){alignList(el,CFG[i])});
 
-    s.dataset.v45eMainAlign='1';
-    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5E-main-card-true-1to1-alignment';
+    s.dataset.v45fMainAlign='1';
+    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5F-main-card-final-surgical-baseline';
   }
 
   function schedule(){
     requestAnimationFrame(function(){requestAnimationFrame(apply)});
     setTimeout(apply,90);
     setTimeout(apply,220);
+    setTimeout(apply,500);
+    setTimeout(apply,900);
   }
 
   const app=document.querySelector('#app');
