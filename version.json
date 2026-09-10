@@ -1,16 +1,18 @@
 {
-  "version": "1.3.0-master-r130v1-0f-reference-geometry-restore",
-  "release": "R130 v1.0F AKCJE I STATUS — REFERENCE GEOMETRY RESTORE",
+  "version": "1.3.0-master-r130v1-0g-pixel-reference-alignment-1to1",
+  "release": "R130 v1.0G AKCJE I STATUS — PIXEL REFERENCE ALIGNMENT 1:1",
   "buildDate": "10.09.2026",
-  "buildTime": "21:08",
-  "base": "R130 v1.0A AKCJE I STATUS — FULL LIVE / raster MASTER 852 x 1846 / R129 v1.0B CELE ASYSTENTA — FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER.",
-  "status": "TEST LIVE — PRZYWRÓCONA REFERENCYJNA GEOMETRIA 1:1; USUNIĘTE WYŁĄCZNIE BŁĘDNE PÓŹNIEJSZE PRZESUNIĘCIA WARSTWY LIVE",
+  "buildTime": "21:43",
+  "base": "R130 v1.0F REFERENCE GEOMETRY RESTORE / R130 v1.0A FULL LIVE / raster MASTER 852 x 1846 / R129 v1.0B CELE ASYSTENTA FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE FINAL MASTER.",
+  "status": "TEST LIVE — CHIRURGICZNE DOPASOWANIE WARSTWY LIVE DO JEDYNEGO WZORCA REFERENCYJNEGO 852x1846; SILNIK I RASTER MASTER BEZ ZMIAN",
   "notes": [
-    "Warstwa r130-akcje-status-layout-fix.js nie przepisuje już współrzędnych elementów LIVE.",
-    "Karta R130 otrzymuje pełną szerokość viewportu na urządzeniu referencyjnym i dokładną proporcję 852:1846.",
-    "Oryginalne współrzędne LIVE silnika R130 v1.0A pozostają źródłem geometrii.",
-    "Raster MASTER 852 x 1846 pozostaje całkowicie nietknięty.",
-    "Silnik R130, dane, statusy, alerty, następny kontakt, zadania, localStorage i hotspoty pozostają nietknięte.",
-    "R128 NOTATKI O FIRMIE, R129 CELE ASYSTENTA i wszystkie wcześniejsze MASTER-y pozostają bezwzględnie zamrożone."
+    "Wycofano błędne wymuszenie szerokości 100vw z R130 v1.0F; karta ponownie korzysta z zamrożonej geometrii .screen aplikacji.",
+    "Nazwa firmy, ID, opis klasyfikacji i pasek klasyfikacji zostały osadzone na osiach wzorca referencyjnego.",
+    "AKTUALNY STATUS otrzymał osobną korektę osi X/Y, aby tekst nie nachodził na ikonę i ramki.",
+    "NASTĘPNY KONTAKT, POWIADOMIENIA / ALERTY i HISTORIA STATUSÓW zostały wyrównane do swoich pól wzorca.",
+    "SZYBKA ZMIANA STATUSU zachowuje silnik i hotspoty; poprawiono wyłącznie pionowe osie tytułów i opisów.",
+    "PLANOWANE AKCJE / ZADANIA mają pięć stałych osi wierszy zgodnych z wzorcem: 1178, 1225, 1271, 1318, 1365 px w bazie 852x1846.",
+    "Dolne metryki, dwa przejścia i WRÓĆ DO KARTY zostały ustawione według wzorca 1:1.",
+    "Raster MASTER, silnik R130, dane, localStorage, statusy, alerty, zadania, hotspoty oraz R128/R129 pozostają nietknięte."
   ]
 }
