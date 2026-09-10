@@ -1,18 +1,16 @@
 {
-  "version": "1.3.0-master-r128v4-6c-company-notes-detail-white-1x-enter-start",
-  "release": "R128 v4.6C NOTATKI O FIRMIE — DETAIL WHITE TEXT 1x ENTER START",
+  "version": "1.3.0-master-r128v4-6d-talk-detail-one-enter-fix",
+  "release": "R128 v4.6D FAKTY DO ROZMOWY — WHITE TEXT 1 ENTER FIX",
   "buildDate": "10.09.2026",
-  "buildTime": "13:13",
+  "buildTime": "13:49",
   "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R127 OFERTA — FINAL VERIFIED.",
   "status": "TEST — DO OCENY UŻYTKOWNIKA",
   "notes": [
-    "Poprawka wykonana wyłącznie w GitHubie i dotyczy tylko białego argumentu w czerwonym polu NAJWAŻNIEJSZY WNIOSEK HANDLOWY na czterech kartach szczegółowych.",
-    "MASTER-em jest początek białego tekstu, a nie środek ani wysokość całego bloku.",
-    "Biały tekst zaczyna się dokładnie jeden ENTER pod czerwonym tytułem kafla.",
-    "Teksty krótsze i dłuższe zaczynają się w tym samym miejscu względem tytułu i rozwijają wyłącznie w dół; nie są pionowo centrowane.",
-    "Punkt startowy został podniesiony z Y=1328 do Y=1293; dolna granica pozostała bez zmian.",
-    "Główna karta NOTATKI O FIRMIE R128 v4.5I FINAL MASTER pozostaje nietknięta.",
-    "Nie zmieniono ANPOL, linii POLSKA/DOSTAWCA/PRIORYTET B, PNG, kolorów, ikon, tytułów, ramek, hotspotów, routingu ani karty końcowej.",
+    "Poprawka dotyczy wyłącznie karty szczegółowej FAKTY DO ROZMOWY.",
+    "Biały tekst w czerwonym polu NAJWAŻNIEJSZY WNIOSEK HANDLOWY został przeniesiony pod czerwony tytuł kafla.",
+    "Początek białego tekstu jest ustawiony z odstępem jednego wiersza/ENTERA od czerwonego tytułu i rozwija się wyłącznie w dół.",
+    "Nie zmieniono głównej karty NOTATKI O FIRMIE R128 v4.5I MASTER ani pozostałych kart szczegółowych.",
+    "Nie zmieniono ANPOL, linii POLSKA/DOSTAWCA/PRIORYTET B, PNG, kolorów, ikon, ramek, hotspotów, routingu ani karty końcowej.",
     "To jest build testowy do oceny na Samsung Galaxy S24 Ultra; MASTER dopiero po akceptacji użytkownika."
   ]
 }
