@@ -1,15 +1,15 @@
 {
-  "version": "1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit",
-  "release": "R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT",
+  "version": "1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography",
+  "release": "R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY",
   "buildDate": "10.09.2026",
-  "buildTime": "08:23",
-  "base": "R128 v4.4 test state / R127 OFERTA — FINAL VERIFIED.",
+  "buildTime": "08:45",
+  "base": "R128 v4.5A test state / R127 OFERTA — FINAL VERIFIED.",
   "notes": [
-    "Ten krok dotyczy wyłącznie głównej karty NOTATKI O FIRMIE.",
-    "Każdy z czterech kolorowych kafli otrzymał własną bezpieczną strefę białego tekstu dopasowaną do czystej grafiki 852×1846.",
-    "Tekst został przesunięty pod kolorowe nagłówki, otrzymał większą czytelność, ciaśniejszy kontrolowany rytm linii i zapas przed dolnymi ramkami oraz chevronami.",
-    "Nie zmieniono żadnego PNG, nie dodano masek, paneli ani kolorowych nakładek.",
-    "Nie zmieniono kart szczegółowych ani końcowej karty NAJWAŻNIEJSZY WNIOSEK HANDLOWY — będą poprawiane dopiero po teście tego ekranu.",
+    "Poprawka dotyczy wyłącznie białych tekstów na głównej karcie NOTATKI O FIRMIE.",
+    "Usunięto z widoku głównego ciężkie punktory i ograniczono podgląd do dwóch najważniejszych wpisów na kafel; pełna treść pozostaje w kartach szczegółowych.",
+    "Teksty zaczynają się dopiero pod kolorowymi tytułami i mają własne strefy pionowe, bez wchodzenia w nagłówki, dolne ramki i złote chevrony.",
+    "Zmniejszono nadmierną grubość i ciężki cień tekstu; wprowadzono spokojniejszą, czytelniejszą typografię z większym oddechem między informacjami.",
+    "Nie zmieniono żadnego PNG, danych, hotspotów, routingu ani kart szczegółowych.",
     "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i R127 OFERTA pozostają bez zmian.",
     "Wersja testowa do oceny na Samsung Galaxy S24 Ultra; nie jest MASTER-em przed akceptacją użytkownika."
   ]
