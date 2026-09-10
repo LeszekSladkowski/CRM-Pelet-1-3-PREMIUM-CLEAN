@@ -1,9 +1,9 @@
-/* R130 v1.0B — AKCJE I STATUS — SURGICAL LAYOUT FIT
-   Baza: R130 v1.0A FULL LIVE + zamrożone R128 NOTATKI O FIRMIE + R129 CELE ASYSTENTA.
-   Zakres R130 v1.0B: wyłącznie chirurgiczne dopasowanie warstwy tekstowej do zamrożonego
-   rastra MASTER 852x1846. Silnik, dane, hotspoty i wcześniejsze MASTER-y pozostają nietknięte.
+/* R130 v1.0E — AKCJE I STATUS — UPDATE ENGINE SYNC HOTFIX
+   Baza wizualna: R130 v1.0D PIXEL MASTER FIT 1:1.
+   Cel: zsynchronizować Service Worker, cache-busting, wersję aplikacji i loader warstwy LIVE.
+   Raster MASTER 852x1846, silnik, dane, hotspoty oraz wcześniejsze MASTER-y pozostają nietknięte.
 */
-importScripts('./sw-r127-language-base.js?v=R130-v1-0b-actions-status-surgical-layout-fit');
+importScripts('./sw-r127-language-base.js?v=R130-v1-0e-update-engine-sync-hotfix');
 
 if(Array.isArray(ASSETS)){
   [
@@ -11,8 +11,8 @@ if(Array.isArray(ASSETS)){
     './r128-notatki-main-v45b.js?v=R128v4-5i-soft-kinetic-thumb-scroll',
     './r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix',
     './r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1',
-    './r130-akcje-status-live.js?v=R130-v1-0b-actions-status-surgical-layout-fit',
-    './r130-akcje-status-layout-fix.js?v=R130-v1-0b-surgical-layout-fit',
+    './r130-akcje-status-live.js?v=R130-v1-0e-update-engine-sync-hotfix',
+    './r130-akcje-status-layout-fix.js?v=R130-v1-0e-pixel-master-fit-1to1',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
@@ -20,7 +20,7 @@ if(Array.isArray(ASSETS)){
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000995c82109a658e01b57fd04f.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c5ec820eb0d4cff0e6895173.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_000000001e34820a89f54a69f0269506.png?v=R129-v1-0b',
-    './grafiki/rynki-eu/szczegoly-firmy/file_00000000d4dc820e99d86989f5522858.png?v=R130-v1-0b'
+    './grafiki/rynki-eu/szczegoly-firmy/file_00000000d4dc820e99d86989f5522858.png?v=R130-v1-0e'
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
 
@@ -31,15 +31,25 @@ r48PatchIndexHtml=function(text){
   /* Stabilny hotfix separatora zachowany. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
-  /* Jednoznaczna wersja końcowa R130 v1.0B. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r130v1-0b-actions-status-surgical-layout-fit');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R130 v1.0B AKCJE I STATUS — SURGICAL LAYOUT FIT');
-  out=out.replaceAll('1.3.0-master-r130v1-0a-actions-status-full-live','1.3.0-master-r130v1-0b-actions-status-surgical-layout-fit');
-  out=out.replaceAll('R130 v1.0A AKCJE I STATUS — FULL LIVE TEST','R130 v1.0B AKCJE I STATUS — SURGICAL LAYOUT FIT');
+  /* Jednoznaczna synchronizacja wersji — niezależnie czy klient startuje z R127, v1.0A/B/C/D. */
+  [
+    '1.3.0-master-r127-offer-language-clean-master',
+    '1.3.0-master-r130v1-0a-actions-status-full-live',
+    '1.3.0-master-r130v1-0b-actions-status-surgical-layout-fit',
+    '1.3.0-master-r130v1-0c-actions-status-surgical-live-alignment-1to1',
+    '1.3.0-master-r130v1-0d-actions-status-pixel-master-fit-1to1'
+  ].forEach(function(v){out=out.replaceAll(v,'1.3.0-master-r130v1-0e-update-engine-sync-hotfix');});
+  [
+    'R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER',
+    'R130 v1.0A AKCJE I STATUS — FULL LIVE TEST',
+    'R130 v1.0B AKCJE I STATUS — SURGICAL LAYOUT FIT',
+    'R130 v1.0C AKCJE I STATUS — SURGICAL LIVE ALIGNMENT 1:1',
+    'R130 v1.0D AKCJE I STATUS — PIXEL MASTER FIT 1:1'
+  ].forEach(function(v){out=out.replaceAll(v,'R130 v1.0E AKCJE I STATUS — UPDATE ENGINE SYNC HOTFIX');});
   out=out.replace(/const BUILD_DATE = '[^']*';/,"const BUILD_DATE = '10.09.2026';");
-  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '18:57';");
-  out=out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R130-v1-0b-actions-status-surgical-layout-fit-1857');
-  out=out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R130-v1-0b-1857');
+  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '20:20';");
+  out=out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R130-v1-0e-update-engine-sync-hotfix-2020');
+  out=out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R130-v1-0e-2020');
 
   /* Wspólny kontekst LIVE dla zamrożonych kart R128/R129 i R130. */
   if(!out.includes('window.R128_CTX=')){
@@ -65,7 +75,7 @@ r48PatchIndexHtml=function(text){
     "onClick:()=>((window.R130_ACTIONS&&typeof window.R130_ACTIONS.open==='function')?window.R130_ACTIONS.open():r115NewTile('AKCJE I STATUS'))"
   );
 
-  /* Skrypty LIVE — warstwy funkcjonalne nad zatwierdzonymi rastrami. */
+  /* Skrypty LIVE — wymuszony cache-busting dla aktualnej warstwy R130 v1.0D. */
   out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start"></script>');
   if(!out.includes('r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start'))out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start"></script>\n</body>');
 
@@ -78,11 +88,11 @@ r48PatchIndexHtml=function(text){
   out=out.replace(/<script src="\.\/r129-cele-asystenta-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1"></script>');
   if(!out.includes('r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1'))out=out.replace('</body>','<script src="./r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1"></script>\n</body>');
 
-  out=out.replace(/<script src="\.\/r130-akcje-status-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r130-akcje-status-live.js?v=R130-v1-0b-actions-status-surgical-layout-fit"></script>');
-  if(!out.includes('r130-akcje-status-live.js?v=R130-v1-0b-actions-status-surgical-layout-fit'))out=out.replace('</body>','<script src="./r130-akcje-status-live.js?v=R130-v1-0b-actions-status-surgical-layout-fit"></script>\n</body>');
+  out=out.replace(/<script src="\.\/r130-akcje-status-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r130-akcje-status-live.js?v=R130-v1-0e-update-engine-sync-hotfix"></script>');
+  if(!out.includes('r130-akcje-status-live.js?v=R130-v1-0e-update-engine-sync-hotfix'))out=out.replace('</body>','<script src="./r130-akcje-status-live.js?v=R130-v1-0e-update-engine-sync-hotfix"></script>\n</body>');
 
-  out=out.replace(/<script src="\.\/r130-akcje-status-layout-fix\.js\?v=[^"]*"><\/script>/g,'<script src="./r130-akcje-status-layout-fix.js?v=R130-v1-0b-surgical-layout-fit"></script>');
-  if(!out.includes('r130-akcje-status-layout-fix.js?v=R130-v1-0b-surgical-layout-fit'))out=out.replace('</body>','<script src="./r130-akcje-status-layout-fix.js?v=R130-v1-0b-surgical-layout-fit"></script>\n</body>');
+  out=out.replace(/<script src="\.\/r130-akcje-status-layout-fix\.js\?v=[^"]*"><\/script>/g,'<script src="./r130-akcje-status-layout-fix.js?v=R130-v1-0e-pixel-master-fit-1to1"></script>');
+  if(!out.includes('r130-akcje-status-layout-fix.js?v=R130-v1-0e-pixel-master-fit-1to1'))out=out.replace('</body>','<script src="./r130-akcje-status-layout-fix.js?v=R130-v1-0e-pixel-master-fit-1to1"></script>\n</body>');
 
   return out;
 };
