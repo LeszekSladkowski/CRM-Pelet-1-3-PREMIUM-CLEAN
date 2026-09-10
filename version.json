@@ -1,21 +1,17 @@
 {
-  "version": "1.3.0-master-r128v4-5i-company-notes-soft-kinetic-thumb-scroll",
-  "release": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER",
+  "version": "1.3.0-master-r128v4-6a-company-notes-detail-white-baseline",
+  "release": "R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE",
   "buildDate": "10.09.2026",
-  "buildTime": "12:11",
-  "base": "R128 v4.5I — USER ACCEPTED FINAL MASTER / R127 OFERTA — FINAL VERIFIED.",
-  "status": "MASTER BEZAPELACYJNY / 100% ZAMROŻONY",
+  "buildTime": "12:43",
+  "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R127 OFERTA — FINAL VERIFIED.",
+  "status": "TEST — DO OCENY UŻYTKOWNIKA",
   "notes": [
-    "Użytkownik zatwierdził R128 v4.5I jako idealny i nadał karcie NOTATKI O FIRMIE status FINAL MASTER.",
-    "ANPOL pozostaje zamrożony w zaakceptowanej geometrii.",
-    "Linia POLSKA / DOSTAWCA / PRIORYTET B pozostaje zamrożona.",
-    "Pozycje tekstu, rozmiary czcionek, wspólna oś X, PNG, kolory, ikony i tytuły kafli są zamrożone.",
-    "Przewijanie pojedynczym kciukiem działa płynnie z łagodną bezwładnością i naturalnym wyhamowaniem — zamrożone.",
-    "Każdy z czterech kafli przewija wyłącznie własny biały tekst góra/dół — zamrożone.",
-    "Krótka treść centruje się pionowo; dłuższa zachowuje pełny rozmiar czcionki i może być przewijana — zamrożone.",
-    "Pasek przewijania pozostaje niewidoczny, a treść nie wychodzi poza obszar kafla — zamrożone.",
-    "Nieruchome dotknięcie tekstu otwiera właściwą kartę szczegółową; ruch palca przewija treść — zamrożone.",
-    "Nie wolno zmieniać tego MASTER-a bez jednoznacznego polecenia użytkownika.",
-    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i R127 OFERTA pozostają bez zmian."
+    "Poprawka dotyczy wyłącznie czerwonego pola NAJWAŻNIEJSZY WNIOSEK HANDLOWY na czterech kartach szczegółowych.",
+    "Pierwsza linia białego opisu ma teraz jeden wspólny stały punkt MASTER, odpowiadający dwóm odstępom poniżej czerwonego tytułu.",
+    "Usunięto pionowe automatyczne centrowanie tego białego opisu, które powodowało różne położenie zależnie od długości tekstu.",
+    "KLUCZOWE FAKTY, PARAMETRY OFERTY, WNIOSKI HANDLOWE i FAKTY DO ROZMOWY używają dokładnie tej samej osi Y początku białego opisu.",
+    "Główna karta NOTATKI O FIRMIE R128 v4.5I FINAL MASTER pozostaje nietknięta.",
+    "Nie zmieniono PNG, kolorów, ikon, tytułów, ramek, hotspotów, routingu ani karty końcowej NAJWAŻNIEJSZY WNIOSEK HANDLOWY.",
+    "To jest build testowy do oceny na Samsung Galaxy S24 Ultra; MASTER dopiero po akceptacji użytkownika."
   ]
 }
