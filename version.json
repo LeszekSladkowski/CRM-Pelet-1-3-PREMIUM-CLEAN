@@ -1,23 +1,21 @@
 {
   "version": "1.3.0-master-r128v4-5i-company-notes-soft-kinetic-thumb-scroll",
-  "release": "R128 v4.5I NOTATKI O FIRMIE — SOFT KINETIC THUMB SCROLL",
+  "release": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER",
   "buildDate": "10.09.2026",
   "buildTime": "12:11",
-  "base": "R128 v4.5H test state / R127 OFERTA — FINAL VERIFIED.",
+  "base": "R128 v4.5I — USER ACCEPTED FINAL MASTER / R127 OFERTA — FINAL VERIFIED.",
+  "status": "MASTER BEZAPELACYJNY / 100% ZAMROŻONY",
   "notes": [
-    "Poprawka dotyczy wyłącznie mechaniki przewijania białych pól treści na głównej karcie NOTATKI O FIRMIE.",
-    "ANPOL pozostaje bez zmian.",
-    "Linia POLSKA / DOSTAWCA / PRIORYTET B pozostaje bez zmian.",
-    "Pozycje tekstu, rozmiary czcionek, wspólna oś X, PNG, kolory, ikony i tytuły kafli pozostają bez zmian względem R128 v4.5H.",
-    "Przewijanie pojedynczym kciukiem ma teraz własną łagodną bezwładność i płynne wyhamowanie zamiast twardego zatrzymania.",
-    "Każdy z czterech kafli przewija wyłącznie własny biały tekst góra/dół.",
-    "Krótka treść nadal centruje się pionowo; dłuższa zachowuje pełny rozmiar czcionki i może być przewijana.",
-    "Pasek przewijania pozostaje niewidoczny, a treść nie wychodzi poza obszar kafla.",
-    "Nieruchome dotknięcie tekstu nadal otwiera właściwą kartę szczegółową; ruch palca przewija treść.",
-    "Gest szczypania pozostaje dostępny; zmieniono wyłącznie obsługę pojedynczego palca wewnątrz pól tekstowych.",
-    "Nie dodano masek, nakładek ani nowych widocznych ramek.",
-    "Kanał aktualizacji i cache-key podniesiono do R128 v4.5I.",
-    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i R127 OFERTA pozostają bez zmian.",
-    "Wersja testowa do oceny na Samsung Galaxy S24 Ultra; nie jest MASTER-em przed akceptacją użytkownika."
+    "Użytkownik zatwierdził R128 v4.5I jako idealny i nadał karcie NOTATKI O FIRMIE status FINAL MASTER.",
+    "ANPOL pozostaje zamrożony w zaakceptowanej geometrii.",
+    "Linia POLSKA / DOSTAWCA / PRIORYTET B pozostaje zamrożona.",
+    "Pozycje tekstu, rozmiary czcionek, wspólna oś X, PNG, kolory, ikony i tytuły kafli są zamrożone.",
+    "Przewijanie pojedynczym kciukiem działa płynnie z łagodną bezwładnością i naturalnym wyhamowaniem — zamrożone.",
+    "Każdy z czterech kafli przewija wyłącznie własny biały tekst góra/dół — zamrożone.",
+    "Krótka treść centruje się pionowo; dłuższa zachowuje pełny rozmiar czcionki i może być przewijana — zamrożone.",
+    "Pasek przewijania pozostaje niewidoczny, a treść nie wychodzi poza obszar kafla — zamrożone.",
+    "Nieruchome dotknięcie tekstu otwiera właściwą kartę szczegółową; ruch palca przewija treść — zamrożone.",
+    "Nie wolno zmieniać tego MASTER-a bez jednoznacznego polecenia użytkownika.",
+    "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i R127 OFERTA pozostają bez zmian."
   ]
 }
