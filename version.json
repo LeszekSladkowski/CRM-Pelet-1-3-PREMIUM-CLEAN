@@ -1,18 +1,16 @@
 {
-  "version": "1.3.0-master-r128v4-4-company-notes-surgical-readability-grid-fit",
-  "release": "R128 v4.4 NOTATKI O FIRMIE — SURGICAL READABILITY GRID FIT",
-  "buildDate": "09.09.2026",
-  "buildTime": "22:46",
-  "base": "R128 v4.3 NOTATKI O FIRMIE — SURGICAL 1:1 SCALE FIT / R127 OFERTA — FINAL VERIFIED.",
+  "version": "1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit",
+  "release": "R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT",
+  "buildDate": "10.09.2026",
+  "buildTime": "08:23",
+  "base": "R128 v4.4 test state / R127 OFERTA — FINAL VERIFIED.",
   "notes": [
-    "Zwiększono czytelność wszystkich białych tekstów LIVE i ujednolicono ich rozmiary, line-height oraz odstępy na karcie głównej i kartach szczegółowych.",
-    "Wprowadzono stałą siatkę bezpiecznych stref tekstowych względem czystych grafik MASTER 852×1846, tak aby treść nie nachodziła na kolorowe nagłówki ani ikony.",
-    "Naprawiono mechanizm fit: tekst może zmniejszyć się tylko nieznacznie i nie może już spaść do mikroskopijnego rozmiaru.",
-    "Skalowanie fontu jest liczone względem rzeczywistej szerokości karty przy użyciu container query units, z fallbackiem do vw.",
-    "Dolny czerwony blok NAJWAŻNIEJSZY WNIOSEK HANDLOWY ma własną strefę treści pod stałym tytułem z grafiki PNG.",
-    "Końcowa czerwona karta otrzymała większe fonty dla WNIOSKU i NASTĘPNEGO RUCHU przy zachowaniu istniejącej grafiki i routingu.",
-    "Nie zmieniono żadnego PNG, nie dodano nakładek, masek ani programowych ramek.",
+    "Ten krok dotyczy wyłącznie głównej karty NOTATKI O FIRMIE.",
+    "Każdy z czterech kolorowych kafli otrzymał własną bezpieczną strefę białego tekstu dopasowaną do czystej grafiki 852×1846.",
+    "Tekst został przesunięty pod kolorowe nagłówki, otrzymał większą czytelność, ciaśniejszy kontrolowany rytm linii i zapas przed dolnymi ramkami oraz chevronami.",
+    "Nie zmieniono żadnego PNG, nie dodano masek, paneli ani kolorowych nakładek.",
+    "Nie zmieniono kart szczegółowych ani końcowej karty NAJWAŻNIEJSZY WNIOSEK HANDLOWY — będą poprawiane dopiero po teście tego ekranu.",
     "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i R127 OFERTA pozostają bez zmian.",
-    "Wersja testowa do oceny na Samsung Galaxy S24 Ultra przed PASS / MASTER."
+    "Wersja testowa do oceny na Samsung Galaxy S24 Ultra; nie jest MASTER-em przed akceptacją użytkownika."
   ]
 }
