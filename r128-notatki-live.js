@@ -1,7 +1,7 @@
-/* R128 v4.6A — NOTATKI O FIRMIE — DETAIL IMPORTANT TEXT FIXED BASELINE
+/* R128 v4.6B — NOTATKI O FIRMIE — DETAIL IMPORTANT TEXT 2x ENTER BASELINE
    Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
    Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
-   v4.6A: wyłącznie czerwone pole NAJWAŻNIEJSZY WNIOSEK HANDLOWY na 4 kartach szczegółowych.
+   v4.6B: wyłącznie czerwone pole NAJWAŻNIEJSZY WNIOSEK HANDLOWY na 4 kartach szczegółowych.
    Pierwsza linia białego opisu ma jeden stały punkt MASTER — dwa odstępy poniżej tytułu PNG.
    Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER pozostaje nietknięta.
 */
@@ -254,11 +254,10 @@
     const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
     companyHeader(s,c);
 
-    /* v4.6A — chirurgiczny wspólny MASTER pierwszej linii białego opisu w czerwonym kaflu.
-       Tekst nie jest już pionowo centrowany zależnie od długości. Każda z 4 kart szczegółowych
-       startuje dokładnie z tej samej osi Y = 1388, odpowiadającej dwóm odstępom pod tytułem PNG. */
+    /* v4.6B — wspólny punkt MASTER białego opisu: dokładnie dwa odstępy pod czerwonym tytułem.
+       Jedna identyczna oś Y dla wszystkich 4 kart szczegółowych. Bez pionowego centrowania. */
     addList(s,arr,188,585,560,520,36,10,{line:'1.26',margin:10,weight:'800',fitMin:24,fitRatio:0.82});
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),188,1388,552,86,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84});
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),188,1328,552,100,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84});
 
     hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'detail'));
@@ -289,5 +288,5 @@
     mount(s);
   }
 
-  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.6A-detail-important-fixed-baseline'};
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.6B-detail-important-2x-enter-baseline'};
 })();
