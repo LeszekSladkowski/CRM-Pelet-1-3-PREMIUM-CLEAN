@@ -1,14 +1,15 @@
 {
-  "version": "1.3.0-master-r128v4-6d-talk-detail-one-enter-fix",
-  "release": "R128 v4.6D FAKTY DO ROZMOWY — WHITE TEXT 1 ENTER FIX",
+  "version": "1.3.0-master-r128v4-6e-talk-detail-true-one-enter-fix",
+  "release": "R128 v4.6E FAKTY DO ROZMOWY — TRUE 1 ENTER FIX",
   "buildDate": "10.09.2026",
-  "buildTime": "13:49",
+  "buildTime": "13:56",
   "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R127 OFERTA — FINAL VERIFIED.",
   "status": "TEST — DO OCENY UŻYTKOWNIKA",
   "notes": [
     "Poprawka dotyczy wyłącznie karty szczegółowej FAKTY DO ROZMOWY.",
-    "Biały tekst w czerwonym polu NAJWAŻNIEJSZY WNIOSEK HANDLOWY został przeniesiony pod czerwony tytuł kafla.",
-    "Początek białego tekstu jest ustawiony z odstępem jednego wiersza/ENTERA od czerwonego tytułu i rozwija się wyłącznie w dół.",
+    "Na podstawie testu na Samsung Galaxy S24 Ultra biały tekst w czerwonym kaflu był nadal wizualnie za nisko i druga linia dochodziła do dolnej krawędzi.",
+    "Cały biały blok został przesunięty dokładnie o 36 px w górę w bazowej geometrii 852x1846, bez zmiany jego rozmiaru i bez zmiany treści.",
+    "Początek białego tekstu ma teraz odpowiadać jednemu realnemu wierszowi odstępu od czerwonego tytułu, a druga linia ma pozostać w całości wewnątrz czerwonego kafla.",
     "Nie zmieniono głównej karty NOTATKI O FIRMIE R128 v4.5I MASTER ani pozostałych kart szczegółowych.",
     "Nie zmieniono ANPOL, linii POLSKA/DOSTAWCA/PRIORYTET B, PNG, kolorów, ikon, ramek, hotspotów, routingu ani karty końcowej.",
     "To jest build testowy do oceny na Samsung Galaxy S24 Ultra; MASTER dopiero po akceptacji użytkownika."
