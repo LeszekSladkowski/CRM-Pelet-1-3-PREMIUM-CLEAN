@@ -4,14 +4,15 @@
   "buildDate": "10.09.2026",
   "buildTime": "15:46",
   "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R128 v4.6E FAKTY DO ROZMOWY — zachowane bez zmian.",
-  "status": "TEST — DO OCENY UŻYTKOWNIKA NA SAMSUNG GALAXY S24 ULTRA",
+  "status": "MASTER BEZWZGLĘDNY / BEZAPELACYJNY / FINAL — KARTA CELE ASYSTENTA ZAMROŻONA",
   "notes": [
-    "Zmiana dotyczy wyłącznie karty CELE ASYSTENTA.",
+    "Karta CELE ASYSTENTA została zatwierdzona przez użytkownika jako FINAL MASTER.",
     "Usunięto zbędny napis: konkretne zadania, priorytety i plan działania.",
     "Zachowano bez zmian zamrożony raster MASTER 852 x 1846 i całą jego geometrię 1:1.",
     "Dane firmy, LISTA CELÓW, CEL PRIORYTETOWY i NASTĘPNY KROK pozostają warstwą LIVE.",
-    "Aktywne pozostają: POWRÓT, SYNCHRONIZUJ, EDYTUJ CEL, DODAJ CEL, DO STATUSU CRM oraz WRÓĆ DO SZCZEGÓŁU.",
+    "Aktywne i zamrożone pozostają: POWRÓT, SYNCHRONIZUJ, EDYTUJ CEL, DODAJ CEL, DO STATUSU CRM oraz WRÓĆ DO SZCZEGÓŁU.",
     "Lista celów zachowuje działające przewijanie pionowe oraz zapis osobny dla każdej firmy.",
+    "Bez nowego jednoznacznego polecenia użytkownika nie wolno zmieniać grafiki, geometrii, warstw LIVE, hotspotów ani logiki tej karty.",
     "Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER i wszystkie wcześniejsze MASTER-y pozostają nietknięte."
   ]
 }
