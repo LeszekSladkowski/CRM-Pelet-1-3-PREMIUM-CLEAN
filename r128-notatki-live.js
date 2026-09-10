@@ -1,8 +1,9 @@
-/* R128 v4.5A — NOTATKI O FIRMIE — CLEAN PNG ENGINE / MAIN CARD SURGICAL TEXT FIT
+/* R128 v4.6A — NOTATKI O FIRMIE — DETAIL IMPORTANT TEXT FIXED BASELINE
    Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
    Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
-   v4.5A: wyłącznie karta główna NOTATKI O FIRMIE — osobne bezpieczne strefy i rytm tekstu dla 4 kafli.
-   Karty szczegółowe i końcowa pozostają bez zmian względem v4.4 do osobnego testu.
+   v4.6A: wyłącznie czerwone pole NAJWAŻNIEJSZY WNIOSEK HANDLOWY na 4 kartach szczegółowych.
+   Pierwsza linia białego opisu ma jeden stały punkt MASTER — dwa odstępy poniżej tytułu PNG.
+   Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER pozostaje nietknięta.
 */
 (function(){
   'use strict';
@@ -228,9 +229,7 @@
     c=currentCompany(c);const m=model(c),s=screen(IMG.main,'Notatki o firmie — CLEAN PNG MASTER');
     companyHeader(s,c);
 
-    /* v4.5A — tylko karta główna. Każdy kafel ma własną bezpieczną strefę tekstu.
-       Tekst zaczyna się tuż pod stałym kolorowym nagłówkiem PNG, kończy przed dolną ramką
-       i zachowuje prawy margines przed złotym chevronem. */
+    /* v4.5A — bazowa karta główna; wygląd właściwy przejmuje zamrożony silnik v4.5I. */
     addList(s,m.facts,250,540,470,150,32,3,{line:'1.08',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
     addList(s,m.offer,250,786,470,145,32,3,{line:'1.10',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
     addList(s,m.conclusions,250,1030,470,150,31,3,{line:'1.10',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
@@ -255,9 +254,11 @@
     const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
     companyHeader(s,c);
 
-    /* v4.4 pozostawione bez zmian — następny osobny test po akceptacji karty głównej. */
+    /* v4.6A — chirurgiczny wspólny MASTER pierwszej linii białego opisu w czerwonym kaflu.
+       Tekst nie jest już pionowo centrowany zależnie od długości. Każda z 4 kart szczegółowych
+       startuje dokładnie z tej samej osi Y = 1388, odpowiadającej dwóm odstępom pod tytułem PNG. */
     addList(s,arr,188,585,560,520,36,10,{line:'1.26',margin:10,weight:'800',fitMin:24,fitRatio:0.82});
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),188,1388,552,86,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84,vcenter:true});
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),188,1388,552,86,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84});
 
     hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'detail'));
@@ -275,7 +276,7 @@
     const m=model(c),arr=m[key]||[],s=screen(IMG.conclusion,'Najważniejszy Wniosek Handlowy — CLEAN PNG MASTER');
     companyHeaderConclusion(s,c);
 
-    /* v4.4 pozostawione bez zmian — karta końcowa nie jest ruszana w tym kroku. */
+    /* Karta końcowa pozostaje bez zmian — nie należy do tej poprawki. */
     addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,565,300,38,{line:'1.24',weight:'840',fit:true,fitMin:26,fitRatio:0.82});
     addLong(s,m.nextMove?.[key]||defaultNext(key),190,1138,565,245,36,{line:'1.24',weight:'840',fit:true,fitMin:24,fitRatio:0.82});
 
@@ -288,5 +289,5 @@
     mount(s);
   }
 
-  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.5A-main-card-surgical-text-fit'};
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.6A-detail-important-fixed-baseline'};
 })();
