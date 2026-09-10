@@ -1,19 +1,16 @@
 {
-  "version": "1.3.0-master-r130v1-0d-actions-status-pixel-master-fit-1to1",
-  "release": "R130 v1.0D AKCJE I STATUS — PIXEL MASTER FIT 1:1",
+  "version": "1.3.0-master-r130v1-0e-update-engine-sync-hotfix",
+  "release": "R130 v1.0E AKCJE I STATUS — UPDATE ENGINE SYNC HOTFIX",
   "buildDate": "10.09.2026",
-  "buildTime": "20:05",
-  "base": "R130 v1.0C AKCJE I STATUS — SURGICAL LIVE ALIGNMENT 1:1 / R129 v1.0B CELE ASYSTENTA — FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER.",
-  "status": "TEST LIVE — PIXELOWE DOPASOWANIE WARSTWY LIVE DO ZATWIERDZONEGO WZORCA; RASTER MASTER, SILNIK, DANE I HOTSPOTY BEZ ZMIAN",
+  "buildTime": "20:20",
+  "base": "R130 v1.0D AKCJE I STATUS — PIXEL MASTER FIT 1:1 / R129 v1.0B CELE ASYSTENTA — FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER.",
+  "status": "TEST LIVE — NAPRAWIONA SYNCHRONIZACJA SERVICE WORKERA I CACHE-BUSTING; WIZUALNY MASTER R130 v1.0D ORAZ SILNIK POZOSTAJĄ NIETKNIĘTE",
   "notes": [
-    "Zmieniono wyłącznie geometrię i typografię warstwy LIVE karty AKCJE I STATUS.",
+    "Naprawiono rozjazd między version.json a sw.js, który blokował prawidłowe przejęcie aktualizacji.",
+    "Service Worker otrzymał jednoznaczną wersję R130 v1.0E oraz nowy cache-busting.",
+    "Warstwa r130-akcje-status-layout-fix.js ładuje aktualny układ PIXEL MASTER FIT 1:1.",
     "Raster MASTER 852 x 1846 pozostaje całkowicie nietknięty.",
-    "Silnik R130 v1.0A, statusy, alerty, następny kontakt, zadania, localStorage i wszystkie hotspoty pozostają nietknięte.",
-    "Nazwa firmy, identyfikator, opis klasyfikacji oraz cztery pola klasyfikacji zostały powiększone i osadzone na osiach wzorca.",
-    "AKTUALNY STATUS, HISTORIA STATUSÓW, NASTĘPNY KONTAKT i POWIADOMIENIA / ALERTY otrzymały docelowe osie i czytelniejszą typografię.",
-    "Pięć kafli SZYBKA ZMIANA STATUSU ma wspólną linię tytułów i opisów zgodną ze wzorcem.",
-    "PLANOWANE AKCJE / ZADANIA przesunięto na docelową wysokość i ustawiono w stałych kolumnach: opis, data, status.",
-    "Dolne metryki oraz przyciski CENY I OFERTA, NOTATKI i WRÓĆ DO KARTY zostały ustawione na docelowych osiach wzorca.",
+    "Silnik R130, dane, statusy, alerty, następny kontakt, zadania, localStorage i hotspoty pozostają nietknięte.",
     "R128 NOTATKI O FIRMIE, R129 CELE ASYSTENTA i wszystkie wcześniejsze MASTER-y pozostają bezwzględnie zamrożone."
   ]
 }
