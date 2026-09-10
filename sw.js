@@ -1,16 +1,16 @@
-/* R129 v1.0A — CELE ASYSTENTA: GRAPHIC MASTER + LIVE
+/* R129 v1.0B — CELE ASYSTENTA: GRAPHIC MASTER + LIVE — SURGICAL 1:1
    Baza: R128 v4.5I NOTATKI O FIRMIE FINAL MASTER + R128 v4.6E FAKTY DO ROZMOWY FIX.
-   Zakres R129: uruchomienie wyłącznie kafla CELE ASYSTENTA na zatwierdzonym czystym rastrze 852x1846.
+   Zakres R129: wyłącznie chirurgiczna korekta warstwy LIVE karty CELE ASYSTENTA na zatwierdzonym czystym rastrze 852x1846.
    NOTATKI O FIRMIE i wszystkie wcześniejsze MASTER-y pozostają nietknięte.
 */
-importScripts('./sw-r127-language-base.js?v=R129-v1-0a-cele-asystenta-live');
+importScripts('./sw-r127-language-base.js?v=R129-v1-0b-cele-asystenta-surgical-1to1');
 
 if(Array.isArray(ASSETS)){
   [
     './r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start',
     './r128-notatki-main-v45b.js?v=R128v4-5i-soft-kinetic-thumb-scroll',
     './r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix',
-    './r129-cele-asystenta-live.js?v=R129-v1-0a-cele-asystenta-live',
+    './r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
@@ -58,13 +58,15 @@ r48PatchIndexHtml=function(text){
   out=out.replaceAll('1.3.0-master-r128v4-6d-talk-detail-one-enter-fix','1.3.0-master-r128v4-6e-talk-detail-true-one-enter-fix');
   out=out.replaceAll('R128 v4.6D FAKTY DO ROZMOWY — WHITE TEXT 1 ENTER FIX','R128 v4.6E FAKTY DO ROZMOWY — TRUE 1 ENTER FIX');
 
-  /* R129 — tylko nowa gałąź CELE ASYSTENTA. */
-  out=out.replaceAll('1.3.0-master-r128v4-6e-talk-detail-true-one-enter-fix','1.3.0-master-r129v1-0a-cele-asystenta-live');
-  out=out.replaceAll('R128 v4.6E FAKTY DO ROZMOWY — TRUE 1 ENTER FIX','R129 v1.0A CELE ASYSTENTA — GRAPHIC MASTER + LIVE');
+  /* R129 — tylko gałąź CELE ASYSTENTA. */
+  out=out.replaceAll('1.3.0-master-r128v4-6e-talk-detail-true-one-enter-fix','1.3.0-master-r129v1-0b-cele-asystenta-surgical-1to1');
+  out=out.replaceAll('R128 v4.6E FAKTY DO ROZMOWY — TRUE 1 ENTER FIX','R129 v1.0B CELE ASYSTENTA — SURGICAL 1:1 LIVE');
+  out=out.replaceAll('1.3.0-master-r129v1-0a-cele-asystenta-live','1.3.0-master-r129v1-0b-cele-asystenta-surgical-1to1');
+  out=out.replaceAll('R129 v1.0A CELE ASYSTENTA — GRAPHIC MASTER + LIVE','R129 v1.0B CELE ASYSTENTA — SURGICAL 1:1 LIVE');
   out=out.replace(/const BUILD_DATE = '[^']*';/,"const BUILD_DATE = '10.09.2026';");
-  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '15:07';");
-  out=out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R129-v1-0a-cele-asystenta-live-1507');
-  out=out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R129-v1-0a-1507');
+  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '15:46';");
+  out=out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R129-v1-0b-cele-asystenta-surgical-1to1-1546');
+  out=out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R129-v1-0b-1546');
 
   /* Minimalna ekspozycja istniejących helperów. Dodajemy tylko wejście do istniejącego STATUS CRM. */
   if(!out.includes('window.R128_CTX=')){
@@ -111,10 +113,10 @@ r48PatchIndexHtml=function(text){
     out=out.replace('</body>','<script src="./r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix"></script>\n</body>');
   }
 
-  /* R129 — nowy silnik CELE ASYSTENTA. */
-  out=out.replace(/<script src="\.\/r129-cele-asystenta-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r129-cele-asystenta-live.js?v=R129-v1-0a-cele-asystenta-live"></script>');
-  if(!out.includes('r129-cele-asystenta-live.js?v=R129-v1-0a-cele-asystenta-live')){
-    out=out.replace('</body>','<script src="./r129-cele-asystenta-live.js?v=R129-v1-0a-cele-asystenta-live"></script>\n</body>');
+  /* R129 — silnik CELE ASYSTENTA. */
+  out=out.replace(/<script src="\.\/r129-cele-asystenta-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1"></script>');
+  if(!out.includes('r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1')){
+    out=out.replace('</body>','<script src="./r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1"></script>\n</body>');
   }
   return out;
 };
