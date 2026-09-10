@@ -1,17 +1,17 @@
-/* R128 v4.5D — NOTATKI O FIRMIE: MAIN CARD FINAL SURGICAL ALIGNMENT
-   Baza: R128 v4.5C / zamrożony R127.
+/* R128 v4.5E — NOTATKI O FIRMIE: TRUE 1:1 TEXT ALIGNMENT
+   Baza: R128 v4.5D / zamrożony R127.
    Grafika = cały wygląd. Kod = dane LIVE + niewidzialne hotspoty.
    W tym kroku ruszone wyłącznie trzy uzgodnione elementy głównej karty NOTATKI O FIRMIE:
-   1) ANPOL większy, 2) linia POLSKA/DOSTAWCA/PRIORYTET idealnie wycentrowana niżej,
-   3) pełne białe opisy czterech kafli z zachowaniem wszystkich punktorów i treści.
+   1) ANPOL większy i mocniejszy, 2) linia POLSKA/DOSTAWCA/PRIORYTET zachowuje wspólną oś,
+   3) białe opisy czterech kafli ustawione względem końca kółek 1–4 i ujednolicone typograficznie.
    Bez nowych ramek, masek, nakładek, skrótów, wielokropków i kasowania wierszy.
 */
-importScripts('./sw-r127-language-base.js?v=R128-v4-5d-main-card-final-surgical-alignment');
+importScripts('./sw-r127-language-base.js?v=R128-v4-5e-main-card-true-1to1-alignment');
 
 if(Array.isArray(ASSETS)){
   [
     './r128-notatki-live.js',
-    './r128-notatki-main-v45b.js?v=R128v4-5d-main-card-final-surgical-alignment',
+    './r128-notatki-main-v45b.js?v=R128v4-5e-main-card-true-1to1-alignment',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
@@ -21,25 +21,27 @@ if(Array.isArray(ASSETS)){
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
 
-const r128v45dBasePatch=r48PatchIndexHtml;
+const r128v45eBasePatch=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
-  let out=r128v45dBasePatch(text);
+  let out=r128v45eBasePatch(text);
 
   /* Zachowujemy sprawdzony hotfix separatora R127. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
   /* Metadane wydania. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT');
-  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment');
-  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT');
-  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment');
-  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT');
-  out=out.replaceAll('1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment','1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment');
-  out=out.replaceAll('R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT','R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT');
-  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '09:52';");
-  out=out.replace(/sw\.js\?v=R128v4-5[a-z0-9-]*/g,'sw.js?v=R128v4-5d-company-notes-main-card-final-surgical-alignment-0952');
-  out=out.replace(/r84-backup-prune\.js\?v=R128v4-5[a-z0-9-]*/g,'r84-backup-prune.js?v=R128v4-5d-0952');
+  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment');
+  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT');
+  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment');
+  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT');
+  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment');
+  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT');
+  out=out.replaceAll('1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment','1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment');
+  out=out.replaceAll('R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT','R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT');
+  out=out.replaceAll('1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment','1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment');
+  out=out.replaceAll('R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT','R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT');
+  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '10:20';");
+  out=out.replace(/sw\.js\?v=R128v4-5[a-z0-9-]*/g,'sw.js?v=R128v4-5e-company-notes-main-card-true-1to1-alignment-1020');
+  out=out.replace(/r84-backup-prune\.js\?v=R128v4-5[a-z0-9-]*/g,'r84-backup-prune.js?v=R128v4-5e-1020');
 
   /* Minimalna ekspozycja istniejących helperów do zewnętrznego modułu. */
   if(!out.includes('window.R128_CTX=')){
@@ -55,19 +57,19 @@ r48PatchIndexHtml=function(text){
     "onClick:()=>((window.R128_NOTES&&typeof window.R128_NOTES.open==='function')?window.R128_NOTES.open(c):r115NewTile('NOTATKI O FIRMIE'))"
   );
 
-  /* Bazowy moduł R128 pozostaje bez zmian. */
-  out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-4"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-5a"></script>');
-  if(!out.includes('r128-notatki-live.js?v=R128v4-5a')){
-    out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-3"><\/script>\n<\/body>/,'<script src="./r128-notatki-live.js?v=R128v4-5a"></script>\n</body>');
-    if(!out.includes('r128-notatki-live.js?v=R128v4-5a')){
-      out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-5a"></script>\n</body>');
+  /* Bazowy moduł R128 pozostaje bez zmian funkcjonalnych. */
+  out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-5[a-e][^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-5e"></script>');
+  if(!out.includes('r128-notatki-live.js?v=R128v4-5e')){
+    out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[0-9a-z-]+"><\/script>\n<\/body>/,'<script src="./r128-notatki-live.js?v=R128v4-5e"></script>\n</body>');
+    if(!out.includes('r128-notatki-live.js?v=R128v4-5e')){
+      out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-5e"></script>\n</body>');
     }
   }
 
-  /* v4.5D: wyłącznie finalny moduł geometrii i czytelności głównej karty. */
-  out=out.replace(/<script src="\.\/r128-notatki-main-v45b\.js\?v=R128v4-5[bcd][^"]*"><\/script>/g,'<script src="./r128-notatki-main-v45b.js?v=R128v4-5d-main-card-final-surgical-alignment"></script>');
-  if(!out.includes('r128-notatki-main-v45b.js?v=R128v4-5d-main-card-final-surgical-alignment')){
-    out=out.replace('</body>','<script src="./r128-notatki-main-v45b.js?v=R128v4-5d-main-card-final-surgical-alignment"></script>\n</body>');
+  /* v4.5E: jeden moduł geometrii głównej karty, nowy cache-key. */
+  out=out.replace(/<script src="\.\/r128-notatki-main-v45b\.js\?v=R128v4-5[b-e][^"]*"><\/script>/g,'<script src="./r128-notatki-main-v45b.js?v=R128v4-5e-main-card-true-1to1-alignment"></script>');
+  if(!out.includes('r128-notatki-main-v45b.js?v=R128v4-5e-main-card-true-1to1-alignment')){
+    out=out.replace('</body>','<script src="./r128-notatki-main-v45b.js?v=R128v4-5e-main-card-true-1to1-alignment"></script>\n</body>');
   }
   return out;
 };
