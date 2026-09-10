@@ -1,14 +1,13 @@
-/* R128 v4.5F — NOTATKI O FIRMIE — FINAL SURGICAL BASELINE ALIGNMENT
+/* R128 v4.5G — NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY TEXT
    TYLKO ekran główny NOTATKI O FIRMIE.
    Grafika CLEAN PNG pozostaje nietknięta. Kod ustawia wyłącznie istniejące dane LIVE.
    ZERO masek, nakładek, nowych ramek, skrótów, wielokropków i ukrywania wierszy.
 
    Zakres 10.09.2026:
-   1) ANPOL pozostaje bez zmian — użytkownik zaakceptował jego położenie i wielkość.
-   2) POLSKA / DOSTAWCA / PRIORYTET B pozostają na wspólnej osi w swojej ramce.
-   3) Białe opisy kafli 1–4 mają identyczny rytm: jedna wspólna oś X, jedna typografia,
-      a pierwszy biały wiersz każdego kafla jest opuszczony do poziomu końca kółka z numerem 1–4.
-   4) Pełna treść zostaje zachowana; poprawka nie dotyka PNG, tytułów kafli, ikon, hotspotów ani routingu.
+   1) ANPOL przywrócony dokładnie do wcześniejszej, niższej i mniejszej geometrii.
+   2) POLSKA / DOSTAWCA / PRIORYTET B bez zmian.
+   3) Geometria białych opisów kafli 1–4 bez zmian względem v4.5F.
+   4) Białe opisy odchudzone z wagi 900 do 800; rozmiary i położenie bez zmian.
 */
 (function(){
   'use strict';
@@ -16,20 +15,17 @@
   const MAIN_BG='file_00000000c0ac8210a2eab26769101d1e.png';
   const W=852,H=1846;
 
-  /* ANPOL — ZAMROŻONE w zaakceptowanej pozycji. */
-  const NAME={x:146,y:280,w:560,h:92,size:66,scaleX:1.08};
+  /* ANPOL — przywrócenie wcześniejszej zaakceptowanej geometrii. */
+  const NAME={x:154,y:304,w:544,h:88,size:56,scaleX:1};
 
-  /* Linia metadanych — wspólna oś w istniejącej ramce. */
+  /* Linia metadanych — bez zmian. */
   const META=[
     {x:104,y:413,w:156,h:48,size:22},
     {x:318,y:413,w:214,h:48,size:22},
     {x:574,y:413,w:242,h:48,size:20}
   ];
 
-  /* FINALNA SIATKA BIAŁYCH OPISÓW.
-     X jest identyczne w każdym kaflu. Y zostało opuszczone o 20 px względem v4.5E,
-     tak aby biały opis nie wchodził w kolorowy tytuł i zaczynał się przy dolnej osi kółka numeru.
-     Typografia jest wspólna dla wszystkich czterech kafli. */
+  /* Geometria białych opisów pozostaje dokładnie jak w v4.5F. */
   const CFG=[
     {x:250,y:560,w:474,h:162,size:31,gap:5,line:'1.08'},
     {x:250,y:806,w:474,h:150,size:31,gap:5,line:'1.08'},
@@ -119,7 +115,7 @@
       height:pct(cfg.h,H),
       fontSize:fsize(cfg.size),
       lineHeight:cfg.line,
-      fontWeight:'900',
+      fontWeight:'800',
       letterSpacing:'0',
       textShadow:'0 2px 5px #000,0 0 7px #000',
       overflow:'hidden',
@@ -138,7 +134,7 @@
         padding:'0',
         fontSize:'inherit',
         lineHeight:cfg.line,
-        fontWeight:'900',
+        fontWeight:'800',
         whiteSpace:'normal',
         overflow:'visible',
         textOverflow:'clip',
@@ -157,8 +153,8 @@
     if(lists.length!==4)return;
     lists.forEach(function(el,i){alignList(el,CFG[i])});
 
-    s.dataset.v45fMainAlign='1';
-    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5F-main-card-final-surgical-baseline';
+    s.dataset.v45gMainAlign='1';
+    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5G-anpol-restore-thinner-body';
   }
 
   function schedule(){
