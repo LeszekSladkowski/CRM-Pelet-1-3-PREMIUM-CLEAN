@@ -1,17 +1,17 @@
 {
-  "version": "1.3.0-master-r128v4-6a-company-notes-detail-white-baseline",
-  "release": "R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE",
+  "version": "1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline",
+  "release": "R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE",
   "buildDate": "10.09.2026",
-  "buildTime": "12:43",
+  "buildTime": "12:55",
   "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R127 OFERTA — FINAL VERIFIED.",
   "status": "TEST — DO OCENY UŻYTKOWNIKA",
   "notes": [
-    "Poprawka dotyczy wyłącznie czerwonego pola NAJWAŻNIEJSZY WNIOSEK HANDLOWY na czterech kartach szczegółowych.",
-    "Pierwsza linia białego opisu ma teraz jeden wspólny stały punkt MASTER, odpowiadający dwóm odstępom poniżej czerwonego tytułu.",
-    "Usunięto pionowe automatyczne centrowanie tego białego opisu, które powodowało różne położenie zależnie od długości tekstu.",
-    "KLUCZOWE FAKTY, PARAMETRY OFERTY, WNIOSKI HANDLOWE i FAKTY DO ROZMOWY używają dokładnie tej samej osi Y początku białego opisu.",
+    "Poprawka wykonana wyłącznie w GitHubie i dotyczy tylko czerwonego pola NAJWAŻNIEJSZY WNIOSEK HANDLOWY na czterech kartach szczegółowych.",
+    "Biały opis został podniesiony i ma jeden wspólny stały punkt startu odpowiadający dwóm odstępom poniżej czerwonego tytułu.",
+    "Wspólna oś początku białego tekstu na wszystkich czterech kartach: Y=1328.",
+    "KLUCZOWE FAKTY, PARAMETRY OFERTY, WNIOSKI HANDLOWE i FAKTY DO ROZMOWY korzystają z identycznego ustawienia.",
     "Główna karta NOTATKI O FIRMIE R128 v4.5I FINAL MASTER pozostaje nietknięta.",
-    "Nie zmieniono PNG, kolorów, ikon, tytułów, ramek, hotspotów, routingu ani karty końcowej NAJWAŻNIEJSZY WNIOSEK HANDLOWY.",
+    "Nie zmieniono ANPOL, linii POLSKA/DOSTAWCA/PRIORYTET B, PNG, kolorów, ikon, tytułów, ramek, hotspotów, routingu ani karty końcowej.",
     "To jest build testowy do oceny na Samsung Galaxy S24 Ultra; MASTER dopiero po akceptacji użytkownika."
   ]
 }
