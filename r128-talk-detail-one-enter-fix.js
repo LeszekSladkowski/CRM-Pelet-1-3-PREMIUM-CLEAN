@@ -1,15 +1,20 @@
-/* R128 v4.6D — TALK DETAIL RED TILE — 1 ENTER WHITE TEXT START
+/* R128 v4.6E — TALK DETAIL RED TILE — TRUE 1 ENTER WHITE TEXT START
    Zakres chirurgiczny: wyłącznie karta szczegółowa FAKTY DO ROZMOWY.
    Główna karta NOTATKI O FIRMIE v4.5I MASTER oraz pozostałe karty szczegółowe pozostają nietknięte.
-   Biały tekst NAJWAŻNIEJSZEGO WNIOSKU zaczyna się dokładnie pod czerwonym tytułem z odstępem jednego wiersza i rośnie w dół.
+   Korekta po teście na Samsung Galaxy S24 Ultra: poprzedni start był wizualnie za niski.
+   Biały tekst NAJWAŻNIEJSZEGO WNIOSKU zaczyna się jeden realny wiersz pod czerwonym tytułem,
+   a druga linia pozostaje wewnątrz czerwonego kafla z bezpiecznym dolnym marginesem.
 */
 (function(){
   'use strict';
 
   const TALK_BG='file_00000000995c82109a658e01b57fd04f.png';
   const H=1846;
-  const START_Y=1432;
-  const BOTTOM_Y=1512;
+
+  /* v4.6E: przesunięcie całego białego bloku o 36 px w górę względem v4.6D.
+     Zachowujemy identyczną wysokość 80 px — zmienia się wyłącznie pozycja Y. */
+  const START_Y=1396;
+  const BOTTOM_Y=1476;
 
   function pct(v){return (v/H*100)+'%';}
 
@@ -38,7 +43,7 @@
       overflow:'hidden',
       whiteSpace:'normal'
     });
-    target.dataset.r128TalkDetailOneEnter='1';
+    target.dataset.r128TalkDetailOneEnter='v46e';
   }
 
   function schedule(){
