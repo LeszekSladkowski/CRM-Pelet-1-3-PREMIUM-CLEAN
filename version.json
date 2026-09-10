@@ -1,18 +1,17 @@
 {
-  "version": "1.3.0-master-r129v1-0a-cele-asystenta-live",
-  "release": "R129 v1.0A CELE ASYSTENTA — GRAPHIC MASTER + LIVE",
+  "version": "1.3.0-master-r129v1-0b-cele-asystenta-surgical-1to1",
+  "release": "R129 v1.0B CELE ASYSTENTA — SURGICAL 1:1 LIVE",
   "buildDate": "10.09.2026",
-  "buildTime": "15:07",
+  "buildTime": "15:46",
   "base": "R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER / R128 v4.6E FAKTY DO ROZMOWY — zachowane bez zmian.",
   "status": "TEST — DO OCENY UŻYTKOWNIKA NA SAMSUNG GALAXY S24 ULTRA",
   "notes": [
-    "Uruchomiono wyłącznie nowy moduł CELE ASYSTENTA z przycisku nr 6 w karcie szczegółów firmy.",
-    "Użyto zatwierdzonej i zamrożonej czystej grafiki MASTER 852 x 1846: grafiki/rynki-eu/szczegoly-firmy/file_000000001e34820a89f54a69f0269506.png.",
-    "Dane firmy, LISTA CELÓW, CEL PRIORYTETOWY i NASTĘPNY KROK są nanoszone jako warstwa LIVE na czysty raster.",
-    "Aktywne są: POWRÓT, SYNCHRONIZUJ, EDYTUJ CEL, DODAJ CEL, DO STATUSU CRM oraz WRÓĆ DO SZCZEGÓŁU.",
-    "Cele są zapisywane osobno dla każdej firmy w pamięci lokalnej aplikacji.",
-    "Lista celów ma własne przewijanie pionowe bez widocznego scrollbara, gdy treści jest więcej niż mieści kafel.",
-    "Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER, wszystkie jej teksty, geometria i fizyka przewijania pozostają nietknięte.",
-    "Pozostałe zatwierdzone MASTER-y, grafiki, routing i dane nie zostały zmienione."
+    "Zmiana dotyczy wyłącznie karty CELE ASYSTENTA.",
+    "Usunięto zbędny napis: konkretne zadania, priorytety i plan działania.",
+    "Zachowano bez zmian zamrożony raster MASTER 852 x 1846 i całą jego geometrię 1:1.",
+    "Dane firmy, LISTA CELÓW, CEL PRIORYTETOWY i NASTĘPNY KROK pozostają warstwą LIVE.",
+    "Aktywne pozostają: POWRÓT, SYNCHRONIZUJ, EDYTUJ CEL, DODAJ CEL, DO STATUSU CRM oraz WRÓĆ DO SZCZEGÓŁU.",
+    "Lista celów zachowuje działające przewijanie pionowe oraz zapis osobny dla każdej firmy.",
+    "Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER i wszystkie wcześniejsze MASTER-y pozostają nietknięte."
   ]
 }
