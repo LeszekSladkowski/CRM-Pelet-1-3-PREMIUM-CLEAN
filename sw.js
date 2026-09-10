@@ -1,15 +1,17 @@
-/* R128 v4.5B — NOTATKI O FIRMIE: MAIN CARD CLEAN TYPOGRAPHY
-   Baza: R128 v4.5A test state / zamrożony R127.
+/* R128 v4.5C — NOTATKI O FIRMIE: MAIN CARD SURGICAL ALIGNMENT
+   Baza: R128 v4.5B test state / zamrożony R127.
    Grafika = cały wygląd. Kod = dane LIVE + niewidzialne hotspoty.
-   W tym kroku ruszona wyłącznie prezentacja białych tekstów na głównej karcie NOTATKI O FIRMIE.
-   R120 / R121 / R122 / R127 oraz karty szczegółowe R128 pozostają bez zmian.
+   W tym kroku ruszone wyłącznie trzy uzgodnione elementy głównej karty NOTATKI O FIRMIE:
+   1) nazwa firmy większa, 2) linia POLSKA/DOSTAWCA/PRIORYTET wycentrowana niżej,
+   3) białe opisy czterech kafli podniesione do wspólnej osi względem kółek 1–4.
+   Bez nowych ramek, masek i nakładek. Karty szczegółowe R128 pozostają bez zmian.
 */
-importScripts('./sw-r127-language-base.js?v=R128-v4-5b-main-card-clean-typography');
+importScripts('./sw-r127-language-base.js?v=R128-v4-5c-main-card-surgical-alignment');
 
 if(Array.isArray(ASSETS)){
   [
     './r128-notatki-live.js',
-    './r128-notatki-main-v45b.js',
+    './r128-notatki-main-v45b.js?v=R128v4-5c-main-card-surgical-alignment',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
@@ -19,21 +21,23 @@ if(Array.isArray(ASSETS)){
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
 
-const r128v45bBasePatch=r48PatchIndexHtml;
+const r128v45cBasePatch=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
-  let out=r128v45bBasePatch(text);
+  let out=r128v45cBasePatch(text);
 
   /* Zachowujemy sprawdzony hotfix separatora R127. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
   /* Metadane wydania. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY');
-  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography');
-  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY');
-  out=out.replace("const BUILD_TIME = '08:23';","const BUILD_TIME = '08:45';");
-  out=out.replace(/sw\.js\?v=R128v4-5a-company-notes-main-card-surgical-text-fit-0823/g,'sw.js?v=R128v4-5b-company-notes-main-card-clean-typography-0845');
-  out=out.replace(/r84-backup-prune\.js\?v=R128v4-5a-0823/g,'r84-backup-prune.js?v=R128v4-5b-0845');
+  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment');
+  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT');
+  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment');
+  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT');
+  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment');
+  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT');
+  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '09:28';");
+  out=out.replace(/sw\.js\?v=R128v4-5[a-z0-9-]*/g,'sw.js?v=R128v4-5c-company-notes-main-card-surgical-alignment-0928');
+  out=out.replace(/r84-backup-prune\.js\?v=R128v4-5[a-z0-9-]*/g,'r84-backup-prune.js?v=R128v4-5c-0928');
 
   /* Minimalna ekspozycja istniejących helperów do zewnętrznego modułu. */
   if(!out.includes('window.R128_CTX=')){
@@ -58,9 +62,10 @@ r48PatchIndexHtml=function(text){
     }
   }
 
-  /* v4.5B: mały, odseparowany patch typografii ładowany PO bazowym module. */
-  if(!out.includes('r128-notatki-main-v45b.js?v=R128v4-5b')){
-    out=out.replace('</body>','<script src="./r128-notatki-main-v45b.js?v=R128v4-5b"></script>\n</body>');
+  /* v4.5C: ten sam mały moduł typografii, ale wymuszony nowym query-stringiem. */
+  out=out.replace(/<script src="\.\/r128-notatki-main-v45b\.js\?v=R128v4-5b"><\/script>/g,'<script src="./r128-notatki-main-v45b.js?v=R128v4-5c-main-card-surgical-alignment"></script>');
+  if(!out.includes('r128-notatki-main-v45b.js?v=R128v4-5c-main-card-surgical-alignment')){
+    out=out.replace('</body>','<script src="./r128-notatki-main-v45b.js?v=R128v4-5c-main-card-surgical-alignment"></script>\n</body>');
   }
   return out;
 };
