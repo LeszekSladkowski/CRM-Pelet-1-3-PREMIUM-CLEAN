@@ -1,8 +1,9 @@
-/* R128 v4.6B — NOTATKI O FIRMIE — DETAIL IMPORTANT TEXT 2x ENTER BASELINE
+/* R128 v4.6C — NOTATKI O FIRMIE — DETAIL IMPORTANT TEXT 1x ENTER START
    Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
    Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
-   v4.6B: wyłącznie czerwone pole NAJWAŻNIEJSZY WNIOSEK HANDLOWY na 4 kartach szczegółowych.
-   Pierwsza linia białego opisu ma jeden stały punkt MASTER — dwa odstępy poniżej tytułu PNG.
+   v4.6C: wyłącznie czerwone pole NAJWAŻNIEJSZY WNIOSEK HANDLOWY na 4 kartach szczegółowych.
+   MASTER-em jest POCZĄTEK białego opisu: dokładnie jeden odstęp/ENTER pod czerwonym tytułem PNG.
+   Długość tekstu może być różna — blok zawsze rośnie w dół od tego samego punktu startowego, bez pionowego centrowania.
    Główna karta NOTATKI O FIRMIE R128 v4.5I MASTER pozostaje nietknięta.
 */
 (function(){
@@ -254,10 +255,15 @@
     const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
     companyHeader(s,c);
 
-    /* v4.6B — wspólny punkt MASTER białego opisu: dokładnie dwa odstępy pod czerwonym tytułem.
-       Jedna identyczna oś Y dla wszystkich 4 kart szczegółowych. Bez pionowego centrowania. */
+    /* v4.6C — MASTER-em nie jest środek ani wysokość całego tekstu, tylko jego POCZĄTEK.
+       Czerwony tytuł PNG kończy się na Y=1258. Jeden ENTER = 35 px, więc biała treść startuje na Y=1293.
+       Każdy tekst, niezależnie czy krótki czy długi, zaczyna się dokładnie tutaj i rozwija wyłącznie w dół. */
+    const importantTitleBottomY=1258;
+    const oneEnterGap=35;
+    const importantStartY=importantTitleBottomY+oneEnterGap;
+    const importantBottomY=1428;
     addList(s,arr,188,585,560,520,36,10,{line:'1.26',margin:10,weight:'800',fitMin:24,fitRatio:0.82});
-    addLong(s,m.important?.[key]||defaultImportant(key,arr),188,1328,552,100,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84});
+    addLong(s,m.important?.[key]||defaultImportant(key,arr),188,importantStartY,552,importantBottomY-importantStartY,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84});
 
     hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,key,'detail'));
@@ -288,5 +294,5 @@
     mount(s);
   }
 
-  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.6B-detail-important-2x-enter-baseline'};
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.6C-detail-important-1x-enter-start'};
 })();
