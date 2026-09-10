@@ -1,7 +1,8 @@
-/* R128 v4.4 — NOTATKI O FIRMIE — CLEAN PNG ENGINE / SURGICAL READABILITY GRID FIT
+/* R128 v4.5A — NOTATKI O FIRMIE — CLEAN PNG ENGINE / MAIN CARD SURGICAL TEXT FIT
    Zasada MASTER: grafika = 100% wyglądu. Kod dodaje tylko dane LIVE i niewidzialne hotspoty.
    Zero programowych ramek, masek, paneli i nakładek kolorystycznych.
-   v4.4: spójna siatka typografii, większa czytelność białych tekstów i osobne bezpieczne strefy dla treści.
+   v4.5A: wyłącznie karta główna NOTATKI O FIRMIE — osobne bezpieczne strefy i rytm tekstu dla 4 kafli.
+   Karty szczegółowe i końcowa pozostają bez zmian względem v4.4 do osobnego testu.
 */
 (function(){
   'use strict';
@@ -101,10 +102,6 @@
     return el;
   }
 
-  /*
-   * v4.4 — font skaluje się do rzeczywistej szerokości karty, nie do całego viewportu.
-   * Fit może zmniejszyć tekst tylko nieznacznie; nie wolno już zejść do mikroskopijnego fontu.
-   */
   function font(size){
     const unit=(window.CSS&&CSS.supports&&CSS.supports('font-size','1cqw'))?'cqw':'vw';
     return `${(size/W*100).toFixed(3)}${unit}`;
@@ -231,11 +228,13 @@
     c=currentCompany(c);const m=model(c),s=screen(IMG.main,'Notatki o firmie — CLEAN PNG MASTER');
     companyHeader(s,c);
 
-    /* Jedna siatka typografii: duży, czytelny tekst i stałe odstępy od nagłówków PNG. */
-    addList(s,m.facts,250,552,478,134,31,3,{line:'1.16',margin:4,weight:'820',fitMin:20,fitRatio:0.84});
-    addList(s,m.offer,250,800,478,128,31,3,{line:'1.16',margin:4,weight:'820',fitMin:20,fitRatio:0.84});
-    addList(s,m.conclusions,250,1045,478,138,29,3,{line:'1.18',margin:5,weight:'820',fitMin:19,fitRatio:0.84});
-    addList(s,m.talk,250,1303,478,92,31,3,{line:'1.16',margin:4,weight:'820',fitMin:20,fitRatio:0.84});
+    /* v4.5A — tylko karta główna. Każdy kafel ma własną bezpieczną strefę tekstu.
+       Tekst zaczyna się tuż pod stałym kolorowym nagłówkiem PNG, kończy przed dolną ramką
+       i zachowuje prawy margines przed złotym chevronem. */
+    addList(s,m.facts,250,540,470,150,32,3,{line:'1.08',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
+    addList(s,m.offer,250,786,470,145,32,3,{line:'1.10',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
+    addList(s,m.conclusions,250,1030,470,150,31,3,{line:'1.10',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
+    addList(s,m.talk,250,1282,470,120,32,3,{line:'1.08',margin:2,weight:'860',fitMin:20,fitRatio:0.90});
 
     hot(s,0,0,145,150,'Wstecz do karty firmy',()=>x.render?.());
     hot(s,690,0,162,160,'Synchronizuj',()=>syncStay(c,null,'main'));
@@ -256,10 +255,8 @@
     const m=model(c),arr=m[key]||[],s=screen(IMG[key],LABELS[key]+' — CLEAN PNG MASTER');
     companyHeader(s,c);
 
-    /* Duże pole = duży font. Nie zmniejszamy treści do mikroskopijnego rozmiaru. */
+    /* v4.4 pozostawione bez zmian — następny osobny test po akceptacji karty głównej. */
     addList(s,arr,188,585,560,520,36,10,{line:'1.26',margin:10,weight:'800',fitMin:24,fitRatio:0.82});
-
-    /* Dolny czerwony blok ma osobną strefę treści pod stałym czerwonym tytułem z PNG. */
     addLong(s,m.important?.[key]||defaultImportant(key,arr),188,1388,552,86,30,{line:'1.18',weight:'840',fit:true,fitMin:21,fitRatio:0.84,vcenter:true});
 
     hot(s,0,0,145,150,'Wstecz do notatek',()=>open(c));
@@ -278,7 +275,7 @@
     const m=model(c),arr=m[key]||[],s=screen(IMG.conclusion,'Najważniejszy Wniosek Handlowy — CLEAN PNG MASTER');
     companyHeaderConclusion(s,c);
 
-    /* Końcowa karta: duży tekst do czytania bez okularów, z zachowaniem stałych stref tytułów PNG. */
+    /* v4.4 pozostawione bez zmian — karta końcowa nie jest ruszana w tym kroku. */
     addLong(s,m.important?.[key]||defaultImportant(key,arr),190,650,565,300,38,{line:'1.24',weight:'840',fit:true,fitMin:26,fitRatio:0.82});
     addLong(s,m.nextMove?.[key]||defaultNext(key),190,1138,565,245,36,{line:'1.24',weight:'840',fit:true,fitMin:24,fitRatio:0.82});
 
@@ -291,5 +288,5 @@
     mount(s);
   }
 
-  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.4-surgical-readability-grid-fit'};
+  window.R128_NOTES={open,openDetail,openConclusion,version:'R128-v4.5A-main-card-surgical-text-fit'};
 })();
