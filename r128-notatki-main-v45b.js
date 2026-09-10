@@ -1,4 +1,4 @@
-/* R128 v4.5H — NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER ENGINE
+/* R128 v4.5I — NOTATKI O FIRMIE — SOFT KINETIC THUMB SCROLL
    TYLKO ekran główny NOTATKI O FIRMIE.
    Grafika CLEAN PNG pozostaje nietknięta. Kod ustawia wyłącznie istniejące dane LIVE.
    ZERO masek, nakładek, nowych ramek, skrótów, wielokropków i ukrywania wierszy.
@@ -9,7 +9,8 @@
    3) Cztery białe pola treści zachowują wspólną oś X od końca kółek 1–4.
    4) Krótka treść centruje się pionowo w swojej bezpiecznej strefie.
    5) Dłuższa treść NIE zmniejsza czcionki — jest przewijana kciukiem góra/dół wewnątrz kafla.
-   6) Scrollbar jest niewidoczny; brak zmian PNG, ikon, tytułów, kolorów, routingu i kart szczegółowych.
+   6) Ruch palca ma własną łagodną bezwładność: lekki gest = płynne wyhamowanie, bez twardego zatrzymania.
+   7) Scrollbar jest niewidoczny; brak zmian PNG, ikon, tytułów, kolorów, routingu i kart szczegółowych.
 */
 (function(){
   'use strict';
@@ -36,6 +37,8 @@
     {x:250,y:1288,w:474,h:128,size:31,gap:7,line:'1.12'}
   ];
 
+  const kineticState=new WeakMap();
+
   function pct(v,base){return (v/base*100)+'%'}
   function fsize(v){
     const unit=(window.CSS&&CSS.supports&&CSS.supports('font-size','1cqw'))?'cqw':'vw';
@@ -43,10 +46,10 @@
   }
 
   function ensureScrollCss(){
-    if(document.getElementById('r128-v45h-scroll-css'))return;
+    if(document.getElementById('r128-v45i-scroll-css'))return;
     const st=document.createElement('style');
-    st.id='r128-v45h-scroll-css';
-    st.textContent='.r128-note-thumb-scroll::-webkit-scrollbar{width:0!important;height:0!important;display:none!important;}';
+    st.id='r128-v45i-scroll-css';
+    st.textContent='\n      .r128-note-thumb-scroll::-webkit-scrollbar{width:0!important;height:0!important;display:none!important;}\n      .r128-note-thumb-scroll{scrollbar-width:none!important;-ms-overflow-style:none!important;}\n    ';
     document.head.append(st);
   }
 
@@ -121,7 +124,7 @@
   function setVerticalMode(el){
     if(!el||!el.isConnected)return;
 
-    /* Najpierw naturalny układ od góry, żeby pomiar scrollHeight był prawdziwy. */
+    /* Naturalny układ od góry daje prawdziwy pomiar scrollHeight. */
     el.style.justifyContent='flex-start';
 
     requestAnimationFrame(function(){
@@ -129,24 +132,120 @@
       const fits=el.scrollHeight<=el.clientHeight+2;
       el.style.justifyContent=fits?'center':'flex-start';
       if(fits)el.scrollTop=0;
+      else el.scrollTop=Math.max(0,Math.min(el.scrollTop,el.scrollHeight-el.clientHeight));
       el.dataset.scrollNeeded=fits?'0':'1';
     });
   }
 
-  function bindTapOpen(el,s,index){
-    if(el.dataset.tapOpenBound==='1')return;
-    el.dataset.tapOpenBound='1';
-    let sx=0,sy=0,st=0;
-    el.addEventListener('pointerdown',function(ev){sx=ev.clientX;sy=ev.clientY;st=el.scrollTop;},{passive:true});
-    el.addEventListener('pointerup',function(ev){
-      const moved=Math.hypot(ev.clientX-sx,ev.clientY-sy);
-      const scrolled=Math.abs(el.scrollTop-st);
-      if(moved>8||scrolled>3)return;
-      const label=MAIN_LABELS[index];
-      const targets=Array.from(s.querySelectorAll('[aria-label]'));
-      const target=targets.find(function(node){return node.getAttribute('aria-label')===label;});
-      if(target&&typeof target.click==='function')target.click();
+  function stopKinetic(el){
+    const st=kineticState.get(el);
+    if(!st)return;
+    if(st.raf){cancelAnimationFrame(st.raf);st.raf=0;}
+    st.velocity=0;
+  }
+
+  function maxScroll(el){return Math.max(0,el.scrollHeight-el.clientHeight)}
+
+  function startInertia(el){
+    const st=kineticState.get(el);
+    if(!st||Math.abs(st.velocity)<0.025||maxScroll(el)<=0)return;
+    let last=performance.now();
+
+    const frame=function(now){
+      if(!el.isConnected){st.raf=0;return;}
+      const dt=Math.min(32,Math.max(1,now-last));
+      last=now;
+
+      const max=maxScroll(el);
+      const next=el.scrollTop+st.velocity*dt;
+      if(next<=0){
+        el.scrollTop=0;
+        st.velocity*=0.30;
+      }else if(next>=max){
+        el.scrollTop=max;
+        st.velocity*=0.30;
+      }else{
+        el.scrollTop=next;
+      }
+
+      /* Miękkie, dłuższe wyhamowanie — ok. 6% utraty prędkości na klatkę 60 Hz. */
+      st.velocity*=Math.pow(0.94,dt/16.667);
+
+      if(Math.abs(st.velocity)<0.018){st.velocity=0;st.raf=0;return;}
+      st.raf=requestAnimationFrame(frame);
+    };
+
+    st.raf=requestAnimationFrame(frame);
+  }
+
+  function bindSoftScrollAndTap(el,s,index){
+    if(el.dataset.softScrollBound==='1')return;
+    el.dataset.softScrollBound='1';
+
+    const st={pointerId:null,lastY:0,lastT:0,startX:0,startY:0,startScroll:0,velocity:0,moved:false,raf:0};
+    kineticState.set(el,st);
+
+    el.addEventListener('pointerdown',function(ev){
+      if(ev.pointerType==='mouse'&&ev.button!==0)return;
+      stopKinetic(el);
+      st.pointerId=ev.pointerId;
+      st.lastY=ev.clientY;
+      st.lastT=performance.now();
+      st.startX=ev.clientX;
+      st.startY=ev.clientY;
+      st.startScroll=el.scrollTop;
+      st.velocity=0;
+      st.moved=false;
+      try{el.setPointerCapture(ev.pointerId)}catch(_){ }
     },{passive:true});
+
+    el.addEventListener('pointermove',function(ev){
+      if(st.pointerId!==ev.pointerId)return;
+      if(ev.pointerType==='touch'&&ev.isPrimary===false)return;
+      const now=performance.now();
+      const dy=ev.clientY-st.lastY;
+      const dt=Math.max(1,now-st.lastT);
+      const totalMove=Math.hypot(ev.clientX-st.startX,ev.clientY-st.startY);
+
+      if(totalMove>5)st.moved=true;
+      if(st.moved&&maxScroll(el)>0){
+        const before=el.scrollTop;
+        const target=Math.max(0,Math.min(maxScroll(el),before-dy));
+        el.scrollTop=target;
+
+        /* Wygładzona prędkość palca, dodatnia = treść jedzie w dół. */
+        const instant=(st.lastY-ev.clientY)/dt;
+        st.velocity=st.velocity*0.66+instant*0.34;
+        if(ev.cancelable)ev.preventDefault();
+      }
+
+      st.lastY=ev.clientY;
+      st.lastT=now;
+    },{passive:false});
+
+    function finish(ev,cancelled){
+      if(st.pointerId!==ev.pointerId)return;
+      try{el.releasePointerCapture(ev.pointerId)}catch(_){ }
+      st.pointerId=null;
+
+      const moved=Math.hypot(ev.clientX-st.startX,ev.clientY-st.startY);
+      const scrolled=Math.abs(el.scrollTop-st.startScroll);
+
+      if(!cancelled&&st.moved&&scrolled>1){
+        startInertia(el);
+        return;
+      }
+
+      if(!cancelled&&moved<=8&&scrolled<=3){
+        const label=MAIN_LABELS[index];
+        const targets=Array.from(s.querySelectorAll('[aria-label]'));
+        const target=targets.find(function(node){return node.getAttribute('aria-label')===label;});
+        if(target&&typeof target.click==='function')target.click();
+      }
+    }
+
+    el.addEventListener('pointerup',function(ev){finish(ev,false)},{passive:true});
+    el.addEventListener('pointercancel',function(ev){finish(ev,true)},{passive:true});
   }
 
   function alignList(el,cfg,s,index){
@@ -175,10 +274,11 @@
       flexDirection:'column',
       justifyContent:'flex-start',
       WebkitOverflowScrolling:'touch',
-      overscrollBehavior:'contain',
-      touchAction:'pan-y',
+      overscrollBehavior:'none',
+      touchAction:'pinch-zoom',
       scrollbarWidth:'none',
       msOverflowStyle:'none',
+      scrollBehavior:'auto',
       pointerEvents:'auto',
       zIndex:'45'
     });
@@ -201,7 +301,7 @@
     });
 
     setVerticalMode(el);
-    bindTapOpen(el,s,index);
+    bindSoftScrollAndTap(el,s,index);
   }
 
   function apply(){
@@ -213,8 +313,8 @@
     if(lists.length!==4)return;
     lists.forEach(function(el,i){alignList(el,CFG[i],s,i)});
 
-    s.dataset.v45hMainScroll='1';
-    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5H-thumb-scroll-auto-center';
+    s.dataset.v45iMainScroll='1';
+    if(window.R128_NOTES)window.R128_NOTES.version='R128-v4.5I-soft-kinetic-thumb-scroll';
   }
 
   function schedule(){
