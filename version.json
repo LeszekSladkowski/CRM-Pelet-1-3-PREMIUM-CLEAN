@@ -1,14 +1,14 @@
 {
-  "version": "1.3.0-master-r130v1-0e-update-engine-sync-hotfix",
-  "release": "R130 v1.0E AKCJE I STATUS — UPDATE ENGINE SYNC HOTFIX",
+  "version": "1.3.0-master-r130v1-0f-reference-geometry-restore",
+  "release": "R130 v1.0F AKCJE I STATUS — REFERENCE GEOMETRY RESTORE",
   "buildDate": "10.09.2026",
-  "buildTime": "20:20",
-  "base": "R130 v1.0D AKCJE I STATUS — PIXEL MASTER FIT 1:1 / R129 v1.0B CELE ASYSTENTA — FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER.",
-  "status": "TEST LIVE — NAPRAWIONA SYNCHRONIZACJA SERVICE WORKERA I CACHE-BUSTING; WIZUALNY MASTER R130 v1.0D ORAZ SILNIK POZOSTAJĄ NIETKNIĘTE",
+  "buildTime": "21:08",
+  "base": "R130 v1.0A AKCJE I STATUS — FULL LIVE / raster MASTER 852 x 1846 / R129 v1.0B CELE ASYSTENTA — FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE — FINAL MASTER.",
+  "status": "TEST LIVE — PRZYWRÓCONA REFERENCYJNA GEOMETRIA 1:1; USUNIĘTE WYŁĄCZNIE BŁĘDNE PÓŹNIEJSZE PRZESUNIĘCIA WARSTWY LIVE",
   "notes": [
-    "Naprawiono rozjazd między version.json a sw.js, który blokował prawidłowe przejęcie aktualizacji.",
-    "Service Worker otrzymał jednoznaczną wersję R130 v1.0E oraz nowy cache-busting.",
-    "Warstwa r130-akcje-status-layout-fix.js ładuje aktualny układ PIXEL MASTER FIT 1:1.",
+    "Warstwa r130-akcje-status-layout-fix.js nie przepisuje już współrzędnych elementów LIVE.",
+    "Karta R130 otrzymuje pełną szerokość viewportu na urządzeniu referencyjnym i dokładną proporcję 852:1846.",
+    "Oryginalne współrzędne LIVE silnika R130 v1.0A pozostają źródłem geometrii.",
     "Raster MASTER 852 x 1846 pozostaje całkowicie nietknięty.",
     "Silnik R130, dane, statusy, alerty, następny kontakt, zadania, localStorage i hotspoty pozostają nietknięte.",
     "R128 NOTATKI O FIRMIE, R129 CELE ASYSTENTA i wszystkie wcześniejsze MASTER-y pozostają bezwzględnie zamrożone."
