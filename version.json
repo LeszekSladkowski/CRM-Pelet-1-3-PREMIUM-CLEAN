@@ -1,18 +1,18 @@
 {
-  "version": "1.3.0-master-r128v4-5f-company-notes-main-card-final-surgical-baseline",
-  "release": "R128 v4.5F NOTATKI O FIRMIE — FINAL SURGICAL BASELINE",
+  "version": "1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body",
+  "release": "R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY",
   "buildDate": "10.09.2026",
-  "buildTime": "11:08",
-  "base": "R128 v4.5E test state / R127 OFERTA — FINAL VERIFIED.",
+  "buildTime": "11:22",
+  "base": "R128 v4.5F test state / R127 OFERTA — FINAL VERIFIED.",
   "notes": [
     "Poprawka dotyczy wyłącznie głównej karty NOTATKI O FIRMIE.",
-    "ANPOL pozostaje bez zmian w zaakceptowanej pozycji i wielkości.",
-    "Linia POLSKA / DOSTAWCA / PRIORYTET B pozostaje na wspólnej osi w istniejącej ramce.",
-    "Białe opisy czterech kolorowych kafli 1–4 zostały ustawione na jednej wspólnej osi X i opuszczone do poziomu końca kółek z numerami.",
-    "Wszystkie cztery kafle używają tej samej typografii białego tekstu: rozmiar 31, waga 900, line-height 1.08.",
+    "ANPOL przywrócono do wcześniejszej geometrii: niżej, mniejszy i bez poziomego rozciągania.",
+    "Linia POLSKA / DOSTAWCA / PRIORYTET B pozostaje bez zmian.",
+    "Położenie białych opisów kafli 1–4 pozostaje bez zmian względem v4.5F.",
+    "Białe opisy odchudzono z font-weight 900 do 800 bez zmiany rozmiaru czcionki.",
     "Pełna treść, punktory, kolory, PNG, tytuły kafli, ikony, hotspoty, routing i karty szczegółowe pozostają bez zmian.",
     "Nie użyto masek, nakładek, nowych ramek, skrótów, wielokropków ani ukrywania wierszy.",
-    "Kanał aktualizacji i cache-key podniesiono do R128 v4.5F.",
+    "Kanał aktualizacji i cache-key podniesiono do R128 v4.5G.",
     "R120 DANE FIRMY, R121 CENY, R122 HISTORIA i R127 OFERTA pozostają bez zmian.",
     "Wersja testowa do oceny na Samsung Galaxy S24 Ultra; nie jest MASTER-em przed akceptacją użytkownika."
   ]
