@@ -1,14 +1,14 @@
-/* R128 v4.6A — NOTATKI O FIRMIE: DETAIL WHITE TEXT FIXED BASELINE
+/* R128 v4.6B — NOTATKI O FIRMIE: DETAIL WHITE TEXT 2x ENTER BASELINE
    Baza: R128 v4.5I — główna karta NOTATKI O FIRMIE FINAL MASTER.
    Grafika = cały wygląd. Kod = dane LIVE + niewidzialne hotspoty.
    W tym kroku: wyłącznie pozycja pierwszej białej linii w czerwonym polu NAJWAŻNIEJSZY WNIOSEK HANDLOWY na 4 kartach szczegółowych.
    ANPOL, linia POLSKA/DOSTAWCA/PRIORYTET B, główna karta v4.5I, PNG, tytuły, ikony, routing i karta końcowa bez zmian.
 */
-importScripts('./sw-r127-language-base.js?v=R128-v4-6a-detail-white-baseline');
+importScripts('./sw-r127-language-base.js?v=R128-v4-6b-detail-white-2x-enter-baseline');
 
 if(Array.isArray(ASSETS)){
   [
-    './r128-notatki-live.js?v=R128v4-6a-detail-white-baseline',
+    './r128-notatki-live.js?v=R128v4-6b-detail-white-2x-enter-baseline',
     './r128-notatki-main-v45b.js?v=R128v4-5i-soft-kinetic-thumb-scroll',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
@@ -19,37 +19,39 @@ if(Array.isArray(ASSETS)){
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
 
-const r128v46aBasePatch=r48PatchIndexHtml;
+const r128v46bBasePatch=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
-  let out=r128v46aBasePatch(text);
+  let out=r128v46bBasePatch(text);
 
   /* Zachowujemy sprawdzony hotfix separatora R127. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
   /* Metadane wydania — nowy build testowy, bez naruszania MASTER-a głównej karty v4.5I. */
-  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5f-company-notes-main-card-final-surgical-baseline','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5F NOTATKI O FIRMIE — FINAL SURGICAL BASELINE','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replaceAll('1.3.0-master-r128v4-5i-company-notes-soft-kinetic-thumb-scroll','1.3.0-master-r128v4-6a-company-notes-detail-white-baseline');
-  out=out.replaceAll('R128 v4.5I NOTATKI O FIRMIE — SOFT KINETIC THUMB SCROLL','R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE');
-  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '12:43';");
-  out=out.replace(/sw\.js\?v=R128v4-[0-9a-z-]*/g,'sw.js?v=R128v4-6a-company-notes-detail-white-baseline-1243');
-  out=out.replace(/r84-backup-prune\.js\?v=R128v4-[0-9a-z-]*/g,'r84-backup-prune.js?v=R128v4-6a-1243');
+  out=out.replaceAll('1.3.0-master-r127-offer-language-clean-master','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R127 OFERTA — LANGUAGE LIVE + CLEAN MASTER','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5a-company-notes-main-card-surgical-text-fit','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5A NOTATKI O FIRMIE — MAIN CARD SURGICAL TEXT FIT','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5b-company-notes-main-card-clean-typography','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5B NOTATKI O FIRMIE — MAIN CARD CLEAN TYPOGRAPHY','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5c-company-notes-main-card-surgical-alignment','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5C NOTATKI O FIRMIE — MAIN CARD SURGICAL ALIGNMENT','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5d-company-notes-main-card-final-surgical-alignment','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5D NOTATKI O FIRMIE — MAIN CARD FINAL SURGICAL ALIGNMENT','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5e-company-notes-main-card-true-1to1-alignment','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5E NOTATKI O FIRMIE — TRUE 1:1 TEXT ALIGNMENT','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5f-company-notes-main-card-final-surgical-baseline','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5F NOTATKI O FIRMIE — FINAL SURGICAL BASELINE','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5g-company-notes-anpol-restore-thinner-body','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5G NOTATKI O FIRMIE — ANPOL RESTORE + THINNER BODY','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5h-company-notes-thumb-scroll-auto-center','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5H NOTATKI O FIRMIE — THUMB SCROLL + AUTO CENTER','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-5i-company-notes-soft-kinetic-thumb-scroll','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.5I NOTATKI O FIRMIE — SOFT KINETIC THUMB SCROLL','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replaceAll('1.3.0-master-r128v4-6a-company-notes-detail-white-baseline','1.3.0-master-r128v4-6b-company-notes-detail-white-2x-enter-baseline');
+  out=out.replaceAll('R128 v4.6A NOTATKI O FIRMIE — DETAIL WHITE TEXT BASELINE','R128 v4.6B NOTATKI O FIRMIE — DETAIL WHITE TEXT 2x ENTER BASELINE');
+  out=out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '12:55';");
+  out=out.replace(/sw\.js\?v=R128v4-[0-9a-z-]*/g,'sw.js?v=R128v4-6b-company-notes-detail-white-2x-enter-baseline-1255');
+  out=out.replace(/r84-backup-prune\.js\?v=R128v4-[0-9a-z-]*/g,'r84-backup-prune.js?v=R128v4-6b-1255');
 
   /* Minimalna ekspozycja istniejących helperów do zewnętrznego modułu. */
   if(!out.includes('window.R128_CTX=')){
@@ -64,11 +66,11 @@ r48PatchIndexHtml=function(text){
     "onClick:()=>((window.R128_NOTES&&typeof window.R128_NOTES.open==='function')?window.R128_NOTES.open(c):r115NewTile('NOTATKI O FIRMIE'))"
   );
 
-  out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-6a-detail-white-baseline"></script>');
-  if(!out.includes('r128-notatki-live.js?v=R128v4-6a-detail-white-baseline')){
-    out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[0-9a-z-]+"><\/script>\n<\/body>/,'<script src="./r128-notatki-live.js?v=R128v4-6a-detail-white-baseline"></script>\n</body>');
-    if(!out.includes('r128-notatki-live.js?v=R128v4-6a-detail-white-baseline')){
-      out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-6a-detail-white-baseline"></script>\n</body>');
+  out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-6b-detail-white-2x-enter-baseline"></script>');
+  if(!out.includes('r128-notatki-live.js?v=R128v4-6b-detail-white-2x-enter-baseline')){
+    out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=R128v4-[0-9a-z-]+"><\/script>\n<\/body>/,'<script src="./r128-notatki-live.js?v=R128v4-6b-detail-white-2x-enter-baseline"></script>\n</body>');
+    if(!out.includes('r128-notatki-live.js?v=R128v4-6b-detail-white-2x-enter-baseline')){
+      out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-6b-detail-white-2x-enter-baseline"></script>\n</body>');
     }
   }
 
