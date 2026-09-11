@@ -1,17 +1,17 @@
 {
-  "version": "1.3.0-test-r138-cele-mathematical-centering-1to1",
-  "release": "R138 TEST 1 — CELE ASYSTENTA MATHEMATICAL CENTERING 1:1",
+  "version": "1.3.0-test-r139-cele-single-layer-centering-1to1",
+  "release": "R139 TEST 1 — CELE ASYSTENTA SINGLE LAYER CENTERING 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "19:14",
-  "base": "R129 FINAL MASTER raster + R133 priority colors; R137 hard-lock wycofany jako końcowa warstwa po teście użytkownika.",
-  "status": "TEST CHIRURGICZNY — napisy pozycjonowane względem matematycznych środków rzeczywistych ramek/kafli rastra MASTER 852x1846",
+  "buildTime": "19:55",
+  "base": "R129 FINAL MASTER raster 852x1846; jedna końcowa warstwa LIVE bez konfliktujących observerów R132–R138.",
+  "status": "TEST CHIRURGICZNY — powrót do jednego źródła geometrii i matematyczne centrowanie wyłącznie wskazanych pól",
   "notes": [
-    "R137 został wycofany jako warstwa końcowa; jego plik jest teraz wyłącznie mostem zgodności do R138.",
-    "Nazwa firmy jest osadzona w pełnym prostokącie jej ramki i centrowana względem środka ramki.",
-    "META otrzymało wspólną pionową oś środka rzeczywistej ramki.",
-    "Zielony kafel NASTĘPNY KROK został ustawiony symetrycznie do czerwonego kafla według rzeczywistych granic ramek.",
-    "EDYTUJ CEL, DODAJ CEL i DO STATUSU CRM są centrowane w pełnych prostokątach swoich przycisków, a nie względem wcześniejszych ręcznych przesunięć.",
-    "WRÓĆ DO SZCZEGÓŁU jest centrowane w pełnym zielonym kaflu względem jego matematycznego środka.",
-    "Raster MASTER, ikony, hotspoty, dane, localStorage, synchronizacja i inne karty pozostają bez zmian."
+    "Usunięto z runtime konfliktujące nakładki R132, R133, R134, R135, R136 i R138 dla karty CELE ASYSTENTA.",
+    "Raster R129 MASTER, LISTA CELÓW, CEL PRIORYTETOWY, NASTĘPNY KROK, ikony, hotspoty, dane, localStorage, synchronizacja i pozostałe karty pozostają bez zmian.",
+    "Nazwa firmy jest centrowana w pełnej rzeczywistej ramce nazwy.",
+    "Kraj, rola i priorytet są centrowane w swoich rzeczywistych prostokątach META; etykieta PRIORYTET jest biała, wartość zachowuje kolor priorytetu.",
+    "EDYTUJ CEL, DODAJ CEL i DO STATUSU CRM są centrowane w pełnych rzeczywistych prostokątach swoich przycisków.",
+    "WRÓĆ DO SZCZEGÓŁU jest centrowane w pełnym zielonym kaflu.",
+    "Naprawiono błąd, w którym starszy observer mógł przenieść napis DO STATUSU CRM do zielonego kafla NASTĘPNY KROK."
   ]
 }
