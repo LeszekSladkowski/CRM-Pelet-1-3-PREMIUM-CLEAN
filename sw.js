@@ -106,3 +106,6 @@ importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-pr
 
 /* R132 TEST 2 — szerokie pole + idealne optyczne centrowanie nazwy firmy w CELE ASYSTENTA. */
 importScripts('./r132-cele-asystenta-company-name-center-test2.js?v=R132-test2-cele-company-name-center-1629');
+
+/* R133 TEST 1 — typografia i kolory priorytetu na karcie CELE ASYSTENTA. */
+importScripts('./r133-cele-asystenta-typography-priority-test1.js?v=R133-test1-cele-typography-priority-1701');
