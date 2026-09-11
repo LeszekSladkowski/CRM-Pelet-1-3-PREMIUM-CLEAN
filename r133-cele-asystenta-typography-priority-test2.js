@@ -11,7 +11,9 @@ r48PatchIndexHtml = function(text){
   let out = r133Test2BasePatchIndexHtml(text);
   if(typeof out !== 'string' || !out) return out;
 
+  out = out.replaceAll('1.3.0-test-r132-cele-company-name-center-1to1','1.3.0-test-r133-cele-typography-priority-surgical-1to1');
   out = out.replaceAll('1.3.0-test-r133-cele-typography-priority-1to1','1.3.0-test-r133-cele-typography-priority-surgical-1to1');
+  out = out.replaceAll('R132 TEST 2 — CELE ASYSTENTA COMPANY NAME CENTER 1:1','R133 TEST 2 — CELE ASYSTENTA TYPOGRAPHY SURGICAL ALIGNMENT 1:1');
   out = out.replaceAll('R133 TEST 1 — CELE ASYSTENTA TYPOGRAPHY + PRIORITY COLORS 1:1','R133 TEST 2 — CELE ASYSTENTA TYPOGRAPHY SURGICAL ALIGNMENT 1:1');
   out = out.replace(/const BUILD_DATE = '[^']*';/,"const BUILD_DATE = '11.09.2026';");
   out = out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '17:24';");
@@ -82,7 +84,7 @@ r48PatchIndexHtml = function(text){
       pEl.style.color='#fff';
     }
 
-    /* LISTA CELÓW — wracamy dokładnie na referencyjną oś x=205 i szerokość 555 z R129 MASTER. */
+    /* LISTA CELÓW — dokładna oś referencyjna x=205 i szerokość 555 z R129 MASTER. */
     const list=root.querySelector('.r129-goals-scroll');
     if(list){
       setBox(list,205,570,555,430);
