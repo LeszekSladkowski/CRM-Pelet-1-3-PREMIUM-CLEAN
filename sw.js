@@ -104,5 +104,5 @@ r48PatchIndexHtml=function(text){
 /* R131 TEST 2 — tylko fazowany feedback naciśnięcia WALUTY K1. */
 importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-press-chamfer-1519');
 
-/* R132 TEST 1 — tylko bezpieczne dopasowanie długiej nazwy firmy w CELE ASYSTENTA. */
-importScripts('./r132-cele-asystenta-company-name-fit-test1.js?v=R132-test1-cele-company-name-fit-1612');
+/* R132 TEST 2 — szerokie pole + idealne optyczne centrowanie nazwy firmy w CELE ASYSTENTA. */
+importScripts('./r132-cele-asystenta-company-name-center-test2.js?v=R132-test2-cele-company-name-center-1629');
