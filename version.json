@@ -1,17 +1,16 @@
 {
-  "version": "1.3.0-test-r133-cele-typography-priority-surgical-1to1",
-  "release": "R133 TEST 2 — CELE ASYSTENTA TYPOGRAPHY SURGICAL ALIGNMENT 1:1",
+  "version": "1.3.0-test-r133-cele-typography-priority-1to1",
+  "release": "R133 TEST 1 — CELE ASYSTENTA TYPOGRAPHY + PRIORITY COLORS 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "17:24",
+  "buildTime": "17:01",
   "base": "R132 TEST 2 CELE ASYSTENTA COMPANY NAME CENTER 1:1 / R131 TEST 2 WALUTY K1 PRESS CHAMFER 1:1 / R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1 / R129 v1.0B CELE ASYSTENTA FINAL MASTER.",
-  "status": "TEST WARSTWY LIVE — CELE ASYSTENTA: chirurgiczne osie wszystkich opisów względem rastra MASTER 852x1846; grafika, hotspoty, dane i logika bez zmian",
+  "status": "ROLLBACK DO TEST 1 PO REGRESJI R133 TEST 2 — zachowane kolory priorytetu i łagodniejsze korekty typografii; raster MASTER, hotspoty, dane i logika bez zmian",
   "notes": [
-    "R132 TEST 2 — szerokie pole i idealne centrowanie nazwy firmy pozostaje zachowane 1:1.",
-    "LISTA CELÓW wraca dokładnie na referencyjną oś x=205 i szerokość 555 z R129 MASTER.",
-    "Nagłówki i białe treści CEL PRIORYTETOWY oraz NASTĘPNY KROK mają wspólną oś x=205 oraz referencyjne pozycje Y z R129.",
-    "Podpisy EDYTUJ CEL, DODAJ CEL i DO STATUSU CRM są centrowane matematycznie względem pełnych kafli/hotspotów.",
-    "WRÓĆ DO SZCZEGÓŁU jest osadzony w geometrycznym środku dolnego kafla.",
-    "Pasek META: PRIORYTET biały, A+ czerwony, A zielony, B niebieski; kraj i rola pozostają białe.",
-    "Rollback: rollback/pre-R133-test2-R133-test1-2026-09-11 zabezpiecza poprzedni stan TEST 1."
+    "R133 TEST 2 został wycofany po potwierdzonej regresji skali i pozycjonowania tekstów na Samsung Galaxy S24 Ultra.",
+    "Przywrócono dokładną zawartość R133 TEST 1 sprzed regresji.",
+    "R132 TEST 2 — szerokie pole i centrowanie nazwy firmy pozostaje zachowane.",
+    "PRIORYTET pozostaje biały, wartości: A+ czerwony, A zielony, B niebieski.",
+    "Dalsze poprawki typografii będą wykonywane pojedynczo, bez globalnego nadpisywania osi całej karty.",
+    "Punkt bezpieczeństwa: rollback/pre-R133-test2-R133-test1-2026-09-11."
   ]
 }
