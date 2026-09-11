@@ -1,17 +1,17 @@
 {
-  "version": "1.3.0-test-r136-cele-master-geometry-restore-1to1",
-  "release": "R136 TEST 1 — CELE ASYSTENTA MASTER GEOMETRY RESTORE 1:1",
+  "version": "1.3.0-test-r137-cele-master-hard-lock-1to1",
+  "release": "R137 TEST 1 — CELE ASYSTENTA MASTER HARD LOCK 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "18:30",
-  "base": "R129 FINAL MASTER geometry + R132 TEST 2 COMPANY NAME CENTER 1:1 + priority color rule from R133; R131 WALUTY and R130 AKCJE I STATUS untouched.",
-  "status": "TEST CHIRURGICZNY — powrót wszystkich napisów CELE ASYSTENTA do zatwierdzonej geometrii R129 MASTER, bez dalszego zgadywania położenia",
+  "buildTime": "19:03",
+  "base": "R129 FINAL MASTER visual reference + R133 priority colors; R137 hard-lock overrides layout conflicts from R133/R134/R135/R136 without changing raster or functions.",
+  "status": "TEST CHIRURGICZNY — końcowa geometria warstwy LIVE wymuszona stylem !important zgodnie z oryginalnym wzorcem MASTER użytkownika",
   "notes": [
-    "Źródłem prawdy jest zatwierdzony raster i geometria R129 FINAL MASTER 852x1846.",
-    "Zachowano wyłącznie później zaakceptowane szerokie i wycentrowane pole nazwy firmy z R132 TEST 2.",
-    "META KRAJ / ROLA wraca do współrzędnych R129; PRIORYTET zachowuje białą etykietę i kolor wartości: A+ czerwony, A zielony, B niebieski.",
-    "LISTA CELÓW, CEL PRIORYTETOWY, NASTĘPNY KROK, podpisy akcji i WRÓĆ DO SZCZEGÓŁU wracają do dokładnych współrzędnych, wymiarów i bazowej typografii R129.",
-    "R133/R134/R135 pozostają w historii jako testy; R136 jest ostatnią warstwą korekcyjną i przywraca MASTER 1:1.",
-    "Raster MASTER, hotspoty, dane, localStorage, logika, WALUTY i pozostałe karty nie są zmieniane.",
-    "Punkt bezpieczeństwa: commit poprzedzający R136 = 10044899fb45b787d24ecea5f46ad232b73eedda."
+    "Naprawiono realną przyczynę rozjazdów: kilka kolejnych MutationObserverów modyfikowało równocześnie te same napisy CELE ASYSTENTA.",
+    "R137 nie zgaduje kolejności observerów — wymusza jedną końcową geometrię przez style !important.",
+    "Nazwa firmy, META, LISTA CELÓW, CEL PRIORYTETOWY, NASTĘPNY KROK, trzy podpisy akcji i WRÓĆ DO SZCZEGÓŁU otrzymały końcowe pozycje i skalę oparte bezpośrednio na zatwierdzonym obrazie MASTER.",
+    "PRIORYTET: etykieta biała; A+ czerwony, A zielony, B niebieski.",
+    "DO STATUSU CRM jest ponownie układane w dwóch wierszach jak we wzorcu MASTER.",
+    "Raster MASTER, hotspoty, dane firm, localStorage, synchronizacja i pozostałe karty nie zostały zmienione.",
+    "Punkt bezpieczeństwa przed R137: commit 759431008211ff2d406390646d738537fa37c845."
   ]
 }
