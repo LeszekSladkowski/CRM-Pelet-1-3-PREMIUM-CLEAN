@@ -28,10 +28,8 @@ const r130BasePatch=r48PatchIndexHtml;
 r48PatchIndexHtml=function(text){
   let out=r130BasePatch(text);
 
-  /* Stabilny hotfix separatora zachowany. */
   out=out.replace("\\n  function r115RenderCompanyMaster(){","\n  function r115RenderCompanyMaster(){");
 
-  /* Jednoznaczna synchronizacja wersji z każdego wcześniejszego stanu R127/R130 do R130 v1.0G. */
   [
     '1.3.0-master-r127-offer-language-clean-master',
     '1.3.0-master-r130v1-0a-actions-status-full-live',
@@ -55,7 +53,6 @@ r48PatchIndexHtml=function(text){
   out=out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R130-v1-0g-pixel-reference-alignment-1to1-2143');
   out=out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R130-v1-0g-2143');
 
-  /* Wspólny kontekst LIVE dla zamrożonych kart R128/R129 i R130. */
   if(!out.includes('window.R128_CTX=')){
     out=out.replace(
       '  renderCompany=r115RenderCompanyMaster;',
@@ -63,7 +60,6 @@ r48PatchIndexHtml=function(text){
     );
   }
 
-  /* Zamrożone wejścia R128 i R129 pozostają dokładnie aktywne. */
   out=out.replaceAll(
     "onClick:()=>r115NewTile('NOTATKI O FIRMIE')",
     "onClick:()=>((window.R128_NOTES&&typeof window.R128_NOTES.open==='function')?window.R128_NOTES.open(c):r115NewTile('NOTATKI O FIRMIE'))"
@@ -73,13 +69,11 @@ r48PatchIndexHtml=function(text){
     "onClick:()=>((window.R129_GOALS&&typeof window.R129_GOALS.open==='function')?window.R129_GOALS.open():r115NewTile('CELE ASYSTENTA'))"
   );
 
-  /* R130 — aktywne wejście przycisku nr 7 AKCJE I STATUS. */
   out=out.replaceAll(
     "onClick:()=>r115NewTile('AKCJE I STATUS')",
     "onClick:()=>((window.R130_ACTIONS&&typeof window.R130_ACTIONS.open==='function')?window.R130_ACTIONS.open():r115NewTile('AKCJE I STATUS'))"
   );
 
-  /* Skrypty LIVE — wymuszony cache-busting R130 v1.0G. */
   out=out.replace(/<script src="\.\/r128-notatki-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start"></script>');
   if(!out.includes('r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start'))out=out.replace('</body>','<script src="./r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start"></script>\n</body>');
 
@@ -109,3 +103,6 @@ importScripts('./r132-cele-asystenta-company-name-center-test2.js?v=R132-test2-c
 
 /* R133 TEST 1 — typografia i kolory priorytetu na karcie CELE ASYSTENTA. */
 importScripts('./r133-cele-asystenta-typography-priority-test1.js?v=R133-test1-cele-typography-priority-1701');
+
+/* R134 TEST 1 — mikrotypografia: osadzenie nagłówków, opisów i podpisów akcji bez zmiany skali całej karty. */
+importScripts('./r134-cele-asystenta-micro-typography-test1.js?v=R134-test1-cele-micro-typography-1803');
