@@ -1,16 +1,17 @@
 {
-  "version": "1.3.0-test-r132-cele-company-name-fit-1to1",
-  "release": "R132 TEST 1 — CELE ASYSTENTA COMPANY NAME FIT 1:1",
+  "version": "1.3.0-test-r132-cele-company-name-center-1to1",
+  "release": "R132 TEST 2 — CELE ASYSTENTA COMPANY NAME CENTER 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "16:12",
+  "buildTime": "16:29",
   "base": "R131 TEST 2 WALUTY K1 PRESS CHAMFER 1:1 / R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1 / R129 v1.0B CELE ASYSTENTA FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE FINAL MASTER.",
-  "status": "TEST JEDNEJ ZMIANY — CELE ASYSTENTA: wyłącznie bezpieczne dopasowanie długiej nazwy firmy w istniejącym polu nazwy; raster MASTER, teksty, hotspoty, dane i funkcje bez zmian",
+  "status": "TEST JEDNEJ ZMIANY — CELE ASYSTENTA: zachowany bezpieczny fit długiej nazwy + wyłącznie optyczne wycentrowanie nazwy w pionie; pozostałe elementy bez zmian",
   "notes": [
-    "Stan R131 WALUTY K1 został wcześniej zabezpieczony jako MASTER/R131-WALUTY-K1-PRESS-CHAMFER-VERIFIED.",
-    "R129 CELE ASYSTENTA FINAL MASTER nie został zmodyfikowany — test jest osobną nakładką R132.",
-    "HRANEX i SCO Trade s.r.o. pozostają bez zmian wizualnych.",
-    "Dla długiej nazwy zwiększono wyłącznie bezpieczny obszar warstwy LIVE wewnątrz istniejącego pola nazwy i dodano automatyczne zmniejszanie fontu do pełnego dopasowania.",
-    "Nie zmieniono LISTY CELÓW, CELU PRIORYTETOWEGO, NASTĘPNEGO KROKU, przycisków, hotspotów ani logiki danych.",
-    "Rollback: branch rollback/pre-R132-test1-R131-verified-2026-09-11-1612 wskazuje stan sprzed tego testu."
+    "Stan R131 WALUTY K1 pozostaje zamrożony jako MASTER/R131-WALUTY-K1-PRESS-CHAMFER-VERIFIED.",
+    "R129 CELE ASYSTENTA FINAL MASTER pozostaje nietknięty — R132 jest osobną nakładką.",
+    "Szerokość pola nazwy pozostaje dokładnie taka jak w zatwierdzonym R132 TEST 1: X=80, W=692 w bazie 852.",
+    "Poziome centrowanie pozostaje 1:1; dodano wyłącznie optyczne przesunięcie nazwy o 14 px w dół w bazie 1846, skalowane do wysokości ekranu.",
+    "Długie nazwy nadal automatycznie zmniejszają font do pełnego dopasowania bez przycinania.",
+    "Nie zmieniono LISTY CELÓW, CELU PRIORYTETOWEGO, NASTĘPNEGO KROKU, przycisków, hotspotów ani danych.",
+    "Rollback testu R132 TEST 2: branch rollback/pre-R132-test2-R132-test1-verified-2026-09-11-1629 wskazuje zatwierdzony stan R132 TEST 1."
   ]
 }
