@@ -113,5 +113,8 @@ importScripts('./r135-cele-asystenta-optical-alignment-test1.js?v=R135-test1-cel
 /* R136 TEST 1 — świeży import: ta wersja NIE importuje już R137, więc R138 nie jest wykonywany podwójnie. */
 importScripts('./r136-cele-asystenta-master-geometry-restore-test1.js?v=R136-test1-r138-delivery-hardfix-1938');
 
-/* R138 TEST 1 — jedyna końcowa warstwa CELE ASYSTENTA. Unikalny fingerprint wymusza świeży import po naprawie Service Workera. */
+/* R138 TEST 1 — warstwa historyczna; R139 usuwa jej runtime z wygenerowanego HTML i zastępuje jedną stabilną warstwą. */
 importScripts('./r138-cele-asystenta-mathematical-centering-test1.js?v=R138-test1-cele-mathematical-centering-1938-hardfix');
+
+/* R139 TEST 1 — JEDYNA końcowa warstwa CELE ASYSTENTA. */
+importScripts('./r139-cele-asystenta-single-layer-centering-test1.js?v=R139-test1-cele-single-layer-centering-1955');
