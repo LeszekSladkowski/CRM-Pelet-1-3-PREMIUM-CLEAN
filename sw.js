@@ -98,23 +98,5 @@ r48PatchIndexHtml=function(text){
 /* R131 TEST 2 — tylko fazowany feedback naciśnięcia WALUTY K1. */
 importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-press-chamfer-1519');
 
-/* R132 TEST 2 — szerokie pole + idealne optyczne centrowanie nazwy firmy w CELE ASYSTENTA. */
-importScripts('./r132-cele-asystenta-company-name-center-test2.js?v=R132-test2-cele-company-name-center-1629');
-
-/* R133 TEST 1 — typografia i kolory priorytetu na karcie CELE ASYSTENTA. */
-importScripts('./r133-cele-asystenta-typography-priority-test1.js?v=R133-test1-cele-typography-priority-1701');
-
-/* R134 TEST 1 — mikrotypografia: osadzenie nagłówków, opisów i podpisów akcji bez zmiany skali całej karty. */
-importScripts('./r134-cele-asystenta-micro-typography-test1.js?v=R134-test1-cele-micro-typography-1803');
-
-/* R135 TEST 1 — optyczne dopasowanie META, opisów, akcji i dolnego powrotu na S24 Ultra. */
-importScripts('./r135-cele-asystenta-optical-alignment-test1.js?v=R135-test1-cele-optical-alignment-1818');
-
-/* R136 TEST 1 — świeży import: ta wersja NIE importuje już R137, więc R138 nie jest wykonywany podwójnie. */
-importScripts('./r136-cele-asystenta-master-geometry-restore-test1.js?v=R136-test1-r138-delivery-hardfix-1938');
-
-/* R138 TEST 1 — warstwa historyczna; R139 usuwa jej runtime z wygenerowanego HTML i zastępuje jedną stabilną warstwą. */
-importScripts('./r138-cele-asystenta-mathematical-centering-test1.js?v=R138-test1-cele-mathematical-centering-1938-hardfix');
-
-/* R139 TEST 1 — JEDYNA końcowa warstwa CELE ASYSTENTA. */
-importScripts('./r139-cele-asystenta-single-layer-centering-test1.js?v=R139-test1-cele-single-layer-centering-1955');
+/* R140 TEST 1 — CELE ASYSTENTA wraca do źródłowej geometrii R129 MASTER; bez warstw R132–R139. */
+importScripts('./r140-cele-asystenta-master-source-restore-test1.js?v=R140-test1-cele-master-source-restore-2112');
