@@ -1,8 +1,7 @@
-/* R141 TEST 1 — CELE ASYSTENTA — USER MASTER REFERENCE RESTORE
+/* R141 v1.0B — CELE ASYSTENTA — USER MASTER + VERSION SYNC HOTFIX
    Źródło prawdy: przesłana przez użytkownika karta MASTER z 11.09.2026.
-   Cel: wrócić do źródłowego R129 v1.0A (z podtytułem) i odciąć wszystkie
-   pozostałości eksperymentalnych warstw R132–R140, które mogły zostać w cache.
-   Raster MASTER pozostaje ten sam i nie jest modyfikowany.
+   Cel główny pozostaje bez zmian: karta CELE ASYSTENTA wraca do źródłowego R129 v1.0A.
+   Hotfix v1.0B naprawia wyłącznie końcową synchronizację numeru wersji po aktywnej warstwie R131 WALUTY.
 */
 
 const r141UserMasterBasePatchIndexHtml = r48PatchIndexHtml;
@@ -46,20 +45,31 @@ r48PatchIndexHtml = function(text){
     out = out.replace('</head>', style+'\n</head>');
   }
 
-  /* Wersja testowa i cache-busting. */
+  /*
+     FINAL VERSION SYNC HOTFIX:
+     aktywna warstwa R131 jest wykonywana przed R141 i zmienia identyfikator R130 -> R131.
+     R141 v1.0A nie obejmowała R131 w tablicy zamian, dlatego aplikacja po poprawnym
+     pobraniu nowego Service Workera nadal raportowała R131 i bez końca widziała R141 jako aktualizację.
+     v1.0B synchronizuje wszystkie realne stany wejściowe do jednego identyfikatora końcowego.
+  */
   [
+    '1.3.0-master-r130v1-0g-pixel-reference-alignment-1to1',
+    '1.3.0-test-r131-waluty-k1-press-chamfer-1to1',
     '1.3.0-test-r140-cele-master-source-restore-1to1',
-    '1.3.0-master-r130v1-0g-pixel-reference-alignment-1to1'
-  ].forEach(v=>{out=out.replaceAll(v,'1.3.0-test-r141-cele-user-master-v1-0a-restore');});
+    '1.3.0-test-r141-cele-user-master-v1-0a-restore'
+  ].forEach(v=>{out=out.replaceAll(v,'1.3.0-test-r141v1-0b-cele-user-master-version-sync-hotfix');});
+
   [
+    'R130 v1.0G AKCJE I STATUS — PIXEL REFERENCE ALIGNMENT 1:1',
+    'R131 TEST 2 — WALUTY K1 PRESS CHAMFER 1:1',
     'R140 TEST 1 — CELE ASYSTENTA MASTER SOURCE RESTORE 1:1',
-    'R130 v1.0G AKCJE I STATUS — PIXEL REFERENCE ALIGNMENT 1:1'
-  ].forEach(v=>{out=out.replaceAll(v,'R141 TEST 1 — CELE ASYSTENTA USER MASTER v1.0A RESTORE');});
+    'R141 TEST 1 — CELE ASYSTENTA USER MASTER v1.0A RESTORE'
+  ].forEach(v=>{out=out.replaceAll(v,'R141 v1.0B — CELE ASYSTENTA VERSION SYNC HOTFIX');});
 
   out = out.replace(/const BUILD_DATE = '[^']*';/,"const BUILD_DATE = '11.09.2026';");
-  out = out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '21:49';");
-  out = out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R141-test1-cele-user-master-v1a-2149');
-  out = out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R141-test1-2149');
+  out = out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '22:06';");
+  out = out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R141-v1-0b-version-sync-hotfix-2206');
+  out = out.replace(/r84-backup-prune\.js\?v=[^'\"]+/g,'r84-backup-prune.js?v=R141-v1-0b-2206');
 
   return out;
 };
