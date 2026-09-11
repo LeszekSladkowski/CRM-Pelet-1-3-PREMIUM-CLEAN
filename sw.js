@@ -110,8 +110,8 @@ importScripts('./r134-cele-asystenta-micro-typography-test1.js?v=R134-test1-cele
 /* R135 TEST 1 — optyczne dopasowanie META, opisów, akcji i dolnego powrotu na S24 Ultra. */
 importScripts('./r135-cele-asystenta-optical-alignment-test1.js?v=R135-test1-cele-optical-alignment-1818');
 
-/* R136 TEST 1 — przywrócenie geometrii i typografii zatwierdzonego R129 MASTER 1:1; zachowane R132 oraz kolory priorytetu. */
-importScripts('./r136-cele-asystenta-master-geometry-restore-test1.js?v=R136-test1-cele-master-geometry-restore-1830');
+/* R136 TEST 1 — świeży import: ta wersja NIE importuje już R137, więc R138 nie jest wykonywany podwójnie. */
+importScripts('./r136-cele-asystenta-master-geometry-restore-test1.js?v=R136-test1-r138-delivery-hardfix-1938');
 
-/* R138 HOTFIX DELIVERY — bezpośredni import z unikalnym fingerprintem. Ta zmiana celowo zmienia główny sw.js, aby Chrome/PWA wykrył nowego Service Workera zamiast zatrzymać się na R137. */
-importScripts('./r138-cele-asystenta-mathematical-centering-test1.js?v=R138-test1-cele-mathematical-centering-1927-hotfix');
+/* R138 TEST 1 — jedyna końcowa warstwa CELE ASYSTENTA. Unikalny fingerprint wymusza świeży import po naprawie Service Workera. */
+importScripts('./r138-cele-asystenta-mathematical-centering-test1.js?v=R138-test1-cele-mathematical-centering-1938-hardfix');
