@@ -1,1 +1,0 @@
-Rollback bazowy przed R133 TEST 1: commit c9e6a9b9c2d007ccd0861cf51d688f204ef8b7b9 (R132 TEST 2 — CELE ASYSTENTA COMPANY NAME CENTER 1:1).
