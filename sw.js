@@ -112,3 +112,6 @@ importScripts('./r135-cele-asystenta-optical-alignment-test1.js?v=R135-test1-cel
 
 /* R136 TEST 1 — przywrócenie geometrii i typografii zatwierdzonego R129 MASTER 1:1; zachowane R132 oraz kolory priorytetu. */
 importScripts('./r136-cele-asystenta-master-geometry-restore-test1.js?v=R136-test1-cele-master-geometry-restore-1830');
+
+/* R138 HOTFIX DELIVERY — bezpośredni import z unikalnym fingerprintem. Ta zmiana celowo zmienia główny sw.js, aby Chrome/PWA wykrył nowego Service Workera zamiast zatrzymać się na R137. */
+importScripts('./r138-cele-asystenta-mathematical-centering-test1.js?v=R138-test1-cele-mathematical-centering-1927-hotfix');
