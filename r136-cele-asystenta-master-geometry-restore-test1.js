@@ -152,3 +152,6 @@ r48PatchIndexHtml = function(text){
 
   return out;
 };
+
+/* R137 TEST 1 — końcowa twarda blokada geometrii wg obrazu MASTER; style !important wygrywają z wcześniejszymi testami. */
+importScripts('./r137-cele-asystenta-master-hard-lock-test1.js?v=R137-test1-cele-master-hard-lock-1903');
