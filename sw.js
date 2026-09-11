@@ -106,3 +106,6 @@ importScripts('./r133-cele-asystenta-typography-priority-test1.js?v=R133-test1-c
 
 /* R134 TEST 1 — mikrotypografia: osadzenie nagłówków, opisów i podpisów akcji bez zmiany skali całej karty. */
 importScripts('./r134-cele-asystenta-micro-typography-test1.js?v=R134-test1-cele-micro-typography-1803');
+
+/* R135 TEST 1 — optyczne dopasowanie META, opisów, akcji i dolnego powrotu na S24 Ultra. */
+importScripts('./r135-cele-asystenta-optical-alignment-test1.js?v=R135-test1-cele-optical-alignment-1818');
