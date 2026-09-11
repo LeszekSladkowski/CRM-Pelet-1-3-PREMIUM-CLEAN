@@ -1,17 +1,15 @@
 {
-  "version": "1.3.0-test-r139-cele-single-layer-centering-1to1",
-  "release": "R139 TEST 1 — CELE ASYSTENTA SINGLE LAYER CENTERING 1:1",
+  "version": "1.3.0-test-r140-cele-master-source-restore-1to1",
+  "release": "R140 TEST 1 — CELE ASYSTENTA MASTER SOURCE RESTORE 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "19:55",
-  "base": "R129 FINAL MASTER raster 852x1846; jedna końcowa warstwa LIVE bez konfliktujących observerów R132–R138.",
-  "status": "TEST CHIRURGICZNY — powrót do jednego źródła geometrii i matematyczne centrowanie wyłącznie wskazanych pól",
+  "buildTime": "21:12",
+  "base": "R129 FINAL MASTER — źródłowa geometria 852x1846 bez nakładek pozycjonujących R132–R139.",
+  "status": "TEST CHIRURGICZNY — pełny powrót warstwy CELE ASYSTENTA do zatwierdzonego R129 MASTER",
   "notes": [
-    "Usunięto z runtime konfliktujące nakładki R132, R133, R134, R135, R136 i R138 dla karty CELE ASYSTENTA.",
-    "Raster R129 MASTER, LISTA CELÓW, CEL PRIORYTETOWY, NASTĘPNY KROK, ikony, hotspoty, dane, localStorage, synchronizacja i pozostałe karty pozostają bez zmian.",
-    "Nazwa firmy jest centrowana w pełnej rzeczywistej ramce nazwy.",
-    "Kraj, rola i priorytet są centrowane w swoich rzeczywistych prostokątach META; etykieta PRIORYTET jest biała, wartość zachowuje kolor priorytetu.",
-    "EDYTUJ CEL, DODAJ CEL i DO STATUSU CRM są centrowane w pełnych rzeczywistych prostokątach swoich przycisków.",
-    "WRÓĆ DO SZCZEGÓŁU jest centrowane w pełnym zielonym kaflu.",
-    "Naprawiono błąd, w którym starszy observer mógł przenieść napis DO STATUSU CRM do zielonego kafla NASTĘPNY KROK."
+    "Usunięto z łańcucha Service Workera importy R132, R133, R134, R135, R136, R138 i R139 dotyczące CELE ASYSTENTA.",
+    "Pozycje nazwy firmy, META, LISTY CELÓW, CELU PRIORYTETOWEGO, NASTĘPNEGO KROKU, trzech przycisków akcyjnych i WRÓĆ DO SZCZEGÓŁU pochodzą ponownie bezpośrednio z R129 MASTER.",
+    "Nie ma już żadnego setBox, transform ani wtórnego centrowania dla elementów karty CELE ASYSTENTA.",
+    "Zachowano wyłącznie ustaloną korektę koloru priorytetu: napis PRIORYTET biały; A+ czerwony, A zielony, B niebieski.",
+    "Raster MASTER, ikony, ramki, poświaty, hotspoty, dane, localStorage, synchronizacja oraz pozostałe karty pozostają bez zmian."
   ]
 }
