@@ -10,16 +10,17 @@ if(Array.isArray(ASSETS)){
     './r128-notatki-live.js?v=R128v4-6c-detail-white-1x-enter-start',
     './r128-notatki-main-v45b.js?v=R128v4-5i-soft-kinetic-thumb-scroll',
     './r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix',
-    './r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1',
+    './r129-cele-asystenta-live.js?v=R141-user-master-v1a-2149',
     './r130-akcje-status-live.js?v=R130-v1-0g-pixel-reference-alignment-1to1',
     './r130-akcje-status-layout-fix.js?v=R130-v1-0g-pixel-reference-alignment-1to1',
+    './r141-cele-asystenta-user-master-restore.js?v=R141-user-master-v1a-2149',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000df5c81f69bd362e0ec6b55a9.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000995c82109a658e01b57fd04f.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c5ec820eb0d4cff0e6895173.png',
-    './grafiki/rynki-eu/szczegoly-firmy/file_000000001e34820a89f54a69f0269506.png?v=R129-v1-0b',
+    './grafiki/rynki-eu/szczegoly-firmy/file_000000001e34820a89f54a69f0269506.png?v=R141-user-master-v1a-2149',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000d4dc820e99d86989f5522858.png?v=R130-v1-0g'
   ].forEach(function(a){if(!ASSETS.includes(a))ASSETS.push(a);});
 }
@@ -83,8 +84,8 @@ r48PatchIndexHtml=function(text){
   out=out.replace(/<script src="\.\/r128-talk-detail-one-enter-fix\.js\?v=[^"]*"><\/script>/g,'<script src="./r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix"></script>');
   if(!out.includes('r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix'))out=out.replace('</body>','<script src="./r128-talk-detail-one-enter-fix.js?v=R128v4-6e-talk-detail-true-one-enter-fix"></script>\n</body>');
 
-  out=out.replace(/<script src="\.\/r129-cele-asystenta-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1"></script>');
-  if(!out.includes('r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1'))out=out.replace('</body>','<script src="./r129-cele-asystenta-live.js?v=R129-v1-0b-cele-asystenta-surgical-1to1"></script>\n</body>');
+  out=out.replace(/<script src="\.\/r129-cele-asystenta-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r129-cele-asystenta-live.js?v=R141-user-master-v1a-2149"></script>');
+  if(!out.includes('r129-cele-asystenta-live.js?v=R141-user-master-v1a-2149'))out=out.replace('</body>','<script src="./r129-cele-asystenta-live.js?v=R141-user-master-v1a-2149"></script>\n</body>');
 
   out=out.replace(/<script src="\.\/r130-akcje-status-live\.js\?v=[^"]*"><\/script>/g,'<script src="./r130-akcje-status-live.js?v=R130-v1-0g-pixel-reference-alignment-1to1"></script>');
   if(!out.includes('r130-akcje-status-live.js?v=R130-v1-0g-pixel-reference-alignment-1to1'))out=out.replace('</body>','<script src="./r130-akcje-status-live.js?v=R130-v1-0g-pixel-reference-alignment-1to1"></script>\n</body>');
@@ -98,5 +99,5 @@ r48PatchIndexHtml=function(text){
 /* R131 TEST 2 — tylko fazowany feedback naciśnięcia WALUTY K1. */
 importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-press-chamfer-1519');
 
-/* R140 TEST 1 — CELE ASYSTENTA wraca do źródłowej geometrii R129 MASTER; bez warstw R132–R139. */
-importScripts('./r140-cele-asystenta-master-source-restore-test1.js?v=R140-test1-cele-master-source-restore-2112');
+/* R141 TEST 1 — CELE ASYSTENTA zgodnie z najnowszą referencją MASTER użytkownika. */
+importScripts('./r141-cele-asystenta-user-master-restore.js?v=R141-user-master-v1a-2149');

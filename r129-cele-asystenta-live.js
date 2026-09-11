@@ -1,9 +1,8 @@
-/* R129 v1.0B — CELE ASYSTENTA — GRAPHIC MASTER + LIVE — SURGICAL 1:1
+/* R129 v1.0A — CELE ASYSTENTA — GRAPHIC MASTER + LIVE
    MASTER graficzny: grafiki/rynki-eu/szczegoly-firmy/file_000000001e34820a89f54a69f0269506.png
    Referencja: Samsung Galaxy S24 Ultra, 852 x 1846.
    Zasada: raster = wygląd. Kod dodaje wyłącznie tekst LIVE, dane, hotspoty i edycję celów.
    R128 NOTATKI O FIRMIE pozostaje nietknięty i zamrożony.
-   R129 v1.0B: usunięto wyłącznie zbędny podtytuł pod CELE ASYSTENTA; geometria MASTER i funkcje pozostają 1:1.
 */
 (function(){
   'use strict';
@@ -104,6 +103,7 @@
     const c=company();if(!c||!Object.keys(c).length){ctx()?.toast?.('CELE ASYSTENTA — brak wybranej firmy');return;}
     const m=defaults(c),s=screen();
 
+    text(s,'konkretne zadania, priorytety i plan działania',160,258,560,42,23,{center:true,weight:'500',color:'#e7e7e7',nowrap:true,min:18});
     text(s,c.name||'—',150,311,552,76,47,{center:true,weight:'950',nowrap:true,min:24});
     text(s,country(c).toUpperCase(),105,404,150,50,22,{center:true,weight:'850',nowrap:true,min:15});
     text(s,role(c).toUpperCase(),320,404,200,50,22,{center:true,weight:'850',nowrap:true,min:15});
@@ -139,7 +139,7 @@
     x.__r129GoalsBridge=true;
   }
 
-  window.R129_GOALS={open,version:'R129-v1.0B-cele-asystenta-surgical-1to1'};
+  window.R129_GOALS={open,version:'R129-v1.0A-cele-asystenta-graphic-master-live'};
   installBridge();
   setTimeout(installBridge,80);setTimeout(installBridge,300);setTimeout(installBridge,900);
 })();

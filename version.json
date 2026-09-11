@@ -1,15 +1,16 @@
 {
-  "version": "1.3.0-test-r140-cele-master-source-restore-1to1",
-  "release": "R140 TEST 1 — CELE ASYSTENTA MASTER SOURCE RESTORE 1:1",
+  "version": "1.3.0-test-r141-cele-user-master-v1-0a-restore",
+  "release": "R141 TEST 1 — CELE ASYSTENTA USER MASTER v1.0A RESTORE",
   "buildDate": "11.09.2026",
-  "buildTime": "21:12",
-  "base": "R129 FINAL MASTER — źródłowa geometria 852x1846 bez nakładek pozycjonujących R132–R139.",
-  "status": "TEST CHIRURGICZNY — pełny powrót warstwy CELE ASYSTENTA do zatwierdzonego R129 MASTER",
+  "buildTime": "21:49",
+  "base": "R129 v1.0A GRAPHIC MASTER + LIVE / raster MASTER 852x1846 / aktualny runtime R130 + WALUTY R131 bez zmian.",
+  "status": "TEST JEDNEGO CELU — przywrócenie CELE ASYSTENTA do najnowszej referencji MASTER przekazanej przez użytkownika",
   "notes": [
-    "Usunięto z łańcucha Service Workera importy R132, R133, R134, R135, R136, R138 i R139 dotyczące CELE ASYSTENTA.",
-    "Pozycje nazwy firmy, META, LISTY CELÓW, CELU PRIORYTETOWEGO, NASTĘPNEGO KROKU, trzech przycisków akcyjnych i WRÓĆ DO SZCZEGÓŁU pochodzą ponownie bezpośrednio z R129 MASTER.",
-    "Nie ma już żadnego setBox, transform ani wtórnego centrowania dla elementów karty CELE ASYSTENTA.",
-    "Zachowano wyłącznie ustaloną korektę koloru priorytetu: napis PRIORYTET biały; A+ czerwony, A zielony, B niebieski.",
-    "Raster MASTER, ikony, ramki, poświaty, hotspoty, dane, localStorage, synchronizacja oraz pozostałe karty pozostają bez zmian."
+    "Przywrócono źródłowy plik r129-cele-asystenta-live.js dokładnie z R129 v1.0A, czyli z podtytułem: konkretne zadania, priorytety i plan działania.",
+    "Usunięto z aktywnego łańcucha korektę R140 zmieniającą wygląd PRIORYTET; karta wraca do wyglądu źródłowego R129 v1.0A.",
+    "Nowa warstwa R141 usuwa z HTML ewentualne pozostałości eksperymentalnych R132–R140, które mogły zostać utrwalone w cache po wcześniejszych testach.",
+    "R141 blokuje dla tej karty transformacje i wtórne skalowanie, zachowując historyczną geometrię ekranu oraz raster MASTER bez retuszu.",
+    "Nie zmieniono danych CRM, localStorage, synchronizacji, hotspotów, NOTATEK O FIRMIE, AKCJI I STATUS ani kart WALUTY.",
+    "Rollback: rollback/pre-R141-cele-user-master-2026-09-11-2149."
   ]
 }
