@@ -1,18 +1,16 @@
 {
-  "version": "1.3.0-test-r131-waluty-k1-press-chamfer-1to1",
-  "release": "R131 TEST 2 — WALUTY K1 PRESS CHAMFER 1:1",
+  "version": "1.3.0-test-r132-cele-company-name-fit-1to1",
+  "release": "R132 TEST 1 — CELE ASYSTENTA COMPANY NAME FIT 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "15:19",
-  "base": "R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1 / WALUTY K1 R57 FINAL MASTER / R129 v1.0B CELE ASYSTENTA FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE FINAL MASTER.",
-  "status": "TEST JEDNEJ ZMIANY — WALUTY KARTA 1: wyłącznie geometria zielonego feedbacku naciśnięcia pięciu głównych kafli; raster, hotspoty, funkcje i pozostałe karty bez zmian",
+  "buildTime": "16:12",
+  "base": "R131 TEST 2 WALUTY K1 PRESS CHAMFER 1:1 / R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1 / R129 v1.0B CELE ASYSTENTA FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE FINAL MASTER.",
+  "status": "TEST JEDNEJ ZMIANY — CELE ASYSTENTA: wyłącznie bezpieczne dopasowanie długiej nazwy firmy w istniejącym polu nazwy; raster MASTER, teksty, hotspoty, dane i funkcje bez zmian",
   "notes": [
-    "Bazą pozostaje dokładnie R130 v1.0G.",
-    "Nie zmieniono rastra master-waluty-karta1.png.",
-    "Nie zmieniono pięciu geometrii hotspotów zatwierdzonych w R57.",
-    "Wyłączono historyczny zaokrąglony wm-pressed tylko na KARCIE 1.",
-    "Pięć głównych kafli K1 otrzymało jeden skalowalny fazowany kontur SVG zgodny z geometrią złotej ramki.",
-    "Przycisk POWRÓT, LIVE i dolna nawigacja K1 nie dostają już przypadkowego prostokątnego zielonego obrysu.",
-    "KARTY WALUTY 2, 3 i 4 oraz pozostałe moduły nie są objęte tym testem.",
-    "Rollback: branch rollback/pre-R131-test2-R130-v1.0G-2026-09-11-1519 wskazuje stan R130 v1.0G sprzed testu."
+    "Stan R131 WALUTY K1 został wcześniej zabezpieczony jako MASTER/R131-WALUTY-K1-PRESS-CHAMFER-VERIFIED.",
+    "R129 CELE ASYSTENTA FINAL MASTER nie został zmodyfikowany — test jest osobną nakładką R132.",
+    "HRANEX i SCO Trade s.r.o. pozostają bez zmian wizualnych.",
+    "Dla długiej nazwy zwiększono wyłącznie bezpieczny obszar warstwy LIVE wewnątrz istniejącego pola nazwy i dodano automatyczne zmniejszanie fontu do pełnego dopasowania.",
+    "Nie zmieniono LISTY CELÓW, CELU PRIORYTETOWEGO, NASTĘPNEGO KROKU, przycisków, hotspotów ani logiki danych.",
+    "Rollback: branch rollback/pre-R132-test1-R131-verified-2026-09-11-1612 wskazuje stan sprzed tego testu."
   ]
 }
