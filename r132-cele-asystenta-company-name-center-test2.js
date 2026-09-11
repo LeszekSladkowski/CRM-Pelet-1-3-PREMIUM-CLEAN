@@ -11,7 +11,9 @@ r48PatchIndexHtml = function(text){
   if(typeof out !== 'string' || !out) return out;
 
   out = out.replaceAll('1.3.0-test-r131-waluty-k1-press-chamfer-1to1','1.3.0-test-r132-cele-company-name-center-1to1');
+  out = out.replaceAll('1.3.0-test-r132-cele-company-name-fit-1to1','1.3.0-test-r132-cele-company-name-center-1to1');
   out = out.replaceAll('R131 TEST 2 — WALUTY K1 PRESS CHAMFER 1:1','R132 TEST 2 — CELE ASYSTENTA COMPANY NAME CENTER 1:1');
+  out = out.replaceAll('R132 TEST 1 — CELE ASYSTENTA COMPANY NAME FIT 1:1','R132 TEST 2 — CELE ASYSTENTA COMPANY NAME CENTER 1:1');
   out = out.replace(/const BUILD_DATE = '[^']*';/,"const BUILD_DATE = '11.09.2026';");
   out = out.replace(/const BUILD_TIME = '[^']*';/,"const BUILD_TIME = '16:29';");
   out = out.replace(/sw\.js\?v=[^'\"]+/g,'sw.js?v=R132-test2-cele-company-name-center-1629');
