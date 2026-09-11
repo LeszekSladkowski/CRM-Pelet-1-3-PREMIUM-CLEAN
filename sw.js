@@ -109,3 +109,6 @@ importScripts('./r134-cele-asystenta-micro-typography-test1.js?v=R134-test1-cele
 
 /* R135 TEST 1 — optyczne dopasowanie META, opisów, akcji i dolnego powrotu na S24 Ultra. */
 importScripts('./r135-cele-asystenta-optical-alignment-test1.js?v=R135-test1-cele-optical-alignment-1818');
+
+/* R136 TEST 1 — przywrócenie geometrii i typografii zatwierdzonego R129 MASTER 1:1; zachowane R132 oraz kolory priorytetu. */
+importScripts('./r136-cele-asystenta-master-geometry-restore-test1.js?v=R136-test1-cele-master-geometry-restore-1830');

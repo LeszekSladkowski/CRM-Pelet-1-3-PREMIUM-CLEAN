@@ -1,18 +1,17 @@
 {
-  "version": "1.3.0-test-r135-cele-optical-alignment-1to1",
-  "release": "R135 TEST 1 — CELE ASYSTENTA OPTICAL ALIGNMENT 1:1",
+  "version": "1.3.0-test-r136-cele-master-geometry-restore-1to1",
+  "release": "R136 TEST 1 — CELE ASYSTENTA MASTER GEOMETRY RESTORE 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "18:18",
-  "base": "R134 TEST 1 MICRO TYPOGRAPHY ALIGNMENT 1:1 / R133 TEST 1 TYPOGRAPHY + PRIORITY COLORS 1:1 / R132 TEST 2 COMPANY NAME CENTER 1:1 / R131 TEST 2 WALUTY K1 PRESS CHAMFER 1:1 / R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1.",
-  "status": "TEST CHIRURGICZNY — optyczne dopasowanie warstwy tekstowej CELE ASYSTENTA po analizie testu R134 na Samsung Galaxy S24 Ultra",
+  "buildTime": "18:30",
+  "base": "R129 FINAL MASTER geometry + R132 TEST 2 COMPANY NAME CENTER 1:1 + priority color rule from R133; R131 WALUTY and R130 AKCJE I STATUS untouched.",
+  "status": "TEST CHIRURGICZNY — powrót wszystkich napisów CELE ASYSTENTA do zatwierdzonej geometrii R129 MASTER, bez dalszego zgadywania położenia",
   "notes": [
-    "META KRAJ / ROLA / PRIORYTET: usunięto wcześniejsze przesunięcie transform i ustawiono wspólną oś pionową.",
-    "LISTA CELÓW: zachowano font i szerokość MASTER, poprawiono rytm pionowy wpisów bez globalnego skalowania.",
-    "CEL PRIORYTETOWY i NASTĘPNY KROK: tytuły i białe opisy otrzymały wspólną oś optyczną i bezpieczny odstęp od pionowego separatora.",
-    "EDYTUJ CEL / DODAJ CEL / DO STATUSU CRM: podpisy przesunięto kilka pikseli w dół z górnej ramki i ustawiono na jednej osi.",
-    "WRÓĆ DO SZCZEGÓŁU: wykonano optyczną korektę pionową względem strzałki w rastrze bez zmiany hotspotu.",
-    "Kolory priorytetu pozostają bez zmian: etykieta PRIORYTET biała, A+ czerwony, A zielony, B niebieski.",
-    "Raster MASTER, dane, funkcje, hotspoty i pozostałe karty pozostają nietknięte.",
-    "Punkt bezpieczeństwa: rollback/pre-R135-test1-R134-test1-2026-09-11-1818."
+    "Źródłem prawdy jest zatwierdzony raster i geometria R129 FINAL MASTER 852x1846.",
+    "Zachowano wyłącznie później zaakceptowane szerokie i wycentrowane pole nazwy firmy z R132 TEST 2.",
+    "META KRAJ / ROLA wraca do współrzędnych R129; PRIORYTET zachowuje białą etykietę i kolor wartości: A+ czerwony, A zielony, B niebieski.",
+    "LISTA CELÓW, CEL PRIORYTETOWY, NASTĘPNY KROK, podpisy akcji i WRÓĆ DO SZCZEGÓŁU wracają do dokładnych współrzędnych, wymiarów i bazowej typografii R129.",
+    "R133/R134/R135 pozostają w historii jako testy; R136 jest ostatnią warstwą korekcyjną i przywraca MASTER 1:1.",
+    "Raster MASTER, hotspoty, dane, localStorage, logika, WALUTY i pozostałe karty nie są zmieniane.",
+    "Punkt bezpieczeństwa: commit poprzedzający R136 = 10044899fb45b787d24ecea5f46ad232b73eedda."
   ]
 }
