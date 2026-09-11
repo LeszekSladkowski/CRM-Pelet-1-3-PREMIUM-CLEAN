@@ -100,3 +100,6 @@ r48PatchIndexHtml=function(text){
 
   return out;
 };
+
+/* R131 TEST 2 — tylko fazowany feedback naciśnięcia WALUTY K1. */
+importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-press-chamfer-1519');
