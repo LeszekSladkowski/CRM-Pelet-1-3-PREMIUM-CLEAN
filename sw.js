@@ -100,6 +100,3 @@ r48PatchIndexHtml=function(text){
 
   return out;
 };
-
-/* R131 TEST 1 — pojedyncza, izolowana poprawka WALUTY KARTA 1. */
-importScripts('./r131-waluty-k1-press-test.js?v=R131-test1-waluty-k1-press-radius-1030');
