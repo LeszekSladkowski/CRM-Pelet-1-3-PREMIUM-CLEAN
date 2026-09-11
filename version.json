@@ -1,17 +1,18 @@
 {
-  "version": "1.3.0-test-r132-cele-company-name-center-1to1",
-  "release": "R132 TEST 2 — CELE ASYSTENTA COMPANY NAME CENTER 1:1",
+  "version": "1.3.0-test-r133-cele-typography-priority-1to1",
+  "release": "R133 TEST 1 — CELE ASYSTENTA TYPOGRAPHY + PRIORITY COLORS 1:1",
   "buildDate": "11.09.2026",
-  "buildTime": "16:29",
-  "base": "R131 TEST 2 WALUTY K1 PRESS CHAMFER 1:1 / R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1 / R129 v1.0B CELE ASYSTENTA FINAL MASTER / R128 v4.5I NOTATKI O FIRMIE FINAL MASTER.",
-  "status": "TEST JEDNEJ ZMIANY — CELE ASYSTENTA: zachowany bezpieczny fit długiej nazwy + wyłącznie optyczne wycentrowanie nazwy w pionie; pozostałe elementy bez zmian",
+  "buildTime": "17:01",
+  "base": "R132 TEST 2 CELE ASYSTENTA COMPANY NAME CENTER 1:1 / R131 TEST 2 WALUTY K1 PRESS CHAMFER 1:1 / R130 v1.0G PIXEL REFERENCE ALIGNMENT 1:1 / R129 v1.0B CELE ASYSTENTA FINAL MASTER.",
+  "status": "TEST WARSTWY LIVE — CELE ASYSTENTA: chirurgiczne dopasowanie białych opisów i podpisów przycisków oraz czytelne kolory wartości priorytetu; raster MASTER, hotspoty, dane i logika bez zmian",
   "notes": [
-    "Stan R131 WALUTY K1 pozostaje zamrożony jako MASTER/R131-WALUTY-K1-PRESS-CHAMFER-VERIFIED.",
-    "R129 CELE ASYSTENTA FINAL MASTER pozostaje nietknięty — R132 jest osobną nakładką.",
-    "Szerokość pola nazwy pozostaje dokładnie taka jak w zatwierdzonym R132 TEST 1: X=80, W=692 w bazie 852.",
-    "Poziome centrowanie pozostaje 1:1; dodano wyłącznie optyczne przesunięcie nazwy o 14 px w dół w bazie 1846, skalowane do wysokości ekranu.",
-    "Długie nazwy nadal automatycznie zmniejszają font do pełnego dopasowania bez przycinania.",
-    "Nie zmieniono LISTY CELÓW, CELU PRIORYTETOWEGO, NASTĘPNEGO KROKU, przycisków, hotspotów ani danych.",
-    "Rollback testu R132 TEST 2: branch rollback/pre-R132-test2-R132-test1-verified-2026-09-11-1629 wskazuje zatwierdzony stan R132 TEST 1."
+    "R132 TEST 2 — szerokie pole i idealne centrowanie nazwy firmy pozostaje zachowane 1:1.",
+    "LISTA CELÓW otrzymała wspólną oś lewego marginesu i uporządkowany rytm wierszy.",
+    "Białe opisy CEL PRIORYTETOWY i NASTĘPNY KROK zostały osadzone na jednej osi i optycznie wycentrowane w swoich polach.",
+    "Podpisy EDYTUJ CEL, DODAJ CEL i DO STATUSU CRM zostały wyrównane do wspólnej linii i środków swoich kafli.",
+    "WRÓĆ DO SZCZEGÓŁU został ustawiony w matematycznym środku zielonego kafla.",
+    "W pasku META słowo PRIORYTET jest białe, a wartość: A+ = czerwony, A = zielony, B = niebieski.",
+    "Kraj i rola pozostają białe i otrzymały jedynie korektę optycznego osadzenia w pionie.",
+    "Rollback: branch rollback/pre-R133-test1-R132-test2-verified-2026-09-11-1701 wskazuje zatwierdzony stan R132 TEST 2."
   ]
 }
