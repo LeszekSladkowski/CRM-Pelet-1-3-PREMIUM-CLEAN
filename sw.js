@@ -101,3 +101,6 @@ importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-pr
 
 /* R141 v1.0B — CELE ASYSTENTA + końcowy hotfix synchronizacji wersji po aktywnej warstwie R131. */
 importScripts('./r141-cele-asystenta-user-master-restore.js?v=R141-v1-0b-version-sync-hotfix-2206');
+
+/* R144 — HISTORIA FIRMY LIVE bez programowych nakładek. */
+importScripts('./r144-history-live-no-overlay.js?v=R144-history-live-no-overlay-0927');
