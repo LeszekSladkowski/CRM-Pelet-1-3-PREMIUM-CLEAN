@@ -1,16 +1,15 @@
 {
-  "version": "1.3.0-test-r141v1-0b-cele-user-master-version-sync-hotfix",
-  "release": "R141 v1.0B — CELE ASYSTENTA VERSION SYNC HOTFIX",
-  "buildDate": "11.09.2026",
-  "buildTime": "22:06",
-  "base": "R141 TEST 1 CELE ASYSTENTA USER MASTER v1.0A RESTORE / aktywna warstwa WALUTY R131 TEST 2 bez zmian.",
-  "status": "TEST JEDNEJ NAPRAWY — końcowa synchronizacja wersji po aktywnej warstwie R131, aby aktualizator prawidłowo zakończył przejście do R141",
+  "version": "1.3.0-test-r144-history-live-no-overlay",
+  "release": "R144 — HISTORIA LIVE NO-OVERLAY",
+  "buildDate": "12.09.2026",
+  "buildTime": "09:27",
+  "base": "PUNKT 1 po chirurgicznym cleanupie + R141 CELE ASYSTENTA bez zmian.",
+  "status": "TEST JEDNEJ NAPRAWY — karta HISTORIA zachowuje raster MASTER 1:1; kod dodaje wyłącznie dane LIVE bez tła/ramek oraz niewidzialne hotspoty.",
   "notes": [
-    "Nie zmieniono wyglądu ani działania WALUTY, CELE ASYSTENTA ani pozostałych modułów.",
-    "Naprawiono błąd kolejności patchy: R131 zmieniała identyfikator R130 na R131 przed wykonaniem R141, a R141 v1.0A nie synchronizowała tego stanu do własnej wersji.",
-    "Skutek błędu: Service Worker mógł być już nowszy, ale aplikacja nadal raportowała R131 i bez końca pokazywała R141 jako dostępną aktualizację.",
-    "R141 v1.0B synchronizuje R130, R131, R140 i R141 v1.0A do jednego końcowego identyfikatora wersji.",
-    "Zmieniono fingerprint importu R141 w sw.js, aby Chrome/PWA wykonał świeżą aktualizację Service Workera.",
-    "Rollback: rollback/pre-R141-v1-0b-version-sync-2026-09-11-2206."
+    "KRYTYCZNA ZASADA: zero programowych kafli, ramek, masek, paneli i kolorowych nakładek na karcie HISTORIA.",
+    "Filtry, zakresy czasu i dolne akcje są aktywne przez niewidzialne hotspoty dokładnie nad istniejącymi elementami grafiki MASTER.",
+    "Lista historii używa wyłącznie tekstu LIVE bez własnego tła i bez własnych ramek.",
+    "R128 NOTATKI, R129 CELE, R130 AKCJE I STATUS, R131 WALUTY, OFERTY i crm-data.json pozostają bez zmian.",
+    "Natychmiast wycofano wcześniejszy R143 z widocznymi nakładkami; rollback bezpieczeństwa: restore-point-1-2026-09-12-cleanup."
   ]
 }
