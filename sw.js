@@ -14,6 +14,7 @@ if(Array.isArray(ASSETS)){
     './r130-akcje-status-live.js?v=R130-v1-0g-pixel-reference-alignment-1to1',
     './r130-akcje-status-layout-fix.js?v=R130-v1-0g-pixel-reference-alignment-1to1',
     './r141-cele-asystenta-user-master-restore.js?v=R141-v1-0b-version-sync-hotfix-2206',
+    './r145-history-buttons-live.js?v=R145-history-buttons-live-0945',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000c0ac8210a2eab26769101d1e.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_0000000043ac8207a71d319b6ef15188.png',
     './grafiki/rynki-eu/szczegoly-firmy/file_00000000a600821083280e45a39d12f3.png',
@@ -101,3 +102,6 @@ importScripts('./r131-waluty-k1-press-chamfer-test2.js?v=R131-test2-waluty-k1-pr
 
 /* R141 v1.0B — CELE ASYSTENTA + końcowy hotfix synchronizacji wersji po aktywnej warstwie R131. */
 importScripts('./r141-cele-asystenta-user-master-restore.js?v=R141-v1-0b-version-sync-hotfix-2206');
+
+/* R145 — wyłącznie aktywacja funkcji istniejących przycisków karty HISTORIA. Zero zmian stałej grafiki MASTER. */
+importScripts('./r145-history-buttons-live.js?v=R145-history-buttons-live-0945');
